@@ -1,0 +1,76 @@
+{
+  "name": "property-manager",
+  "description": "make it easier to manage the properties/attributes of your class.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/snowyu/property-manager.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/snowyu/property-manager.js.git"
+  },
+  "main": "lib/",
+  "files": [
+    "README.md",
+    "LICENSE-MIT",
+    "*.js",
+    "*.coffee",
+    "test",
+    "src",
+    "lib"
+  ],
+  "keywords": [
+    "file",
+    "fs",
+    "dir",
+    "directory",
+    "folder",
+    "abstract",
+    "class",
+    "klass"
+  ],
+  "dependencies": {
+    "deep-equal": "^1.0.0",
+    "inherits-ex": "^1.0.7",
+    "util-ex": "^0.3.4"
+  },
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-coffee": "~0.12.0",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-mocha-test": "~0.12.6",
+    "grunt-newer": "~0.8.0",
+    "grunt-release": "~0.9.0",
+    "mocha": "~2.1.0",
+    "pre-commit": "~1.0.2",
+    "rimraf": "~2.2.8",
+    "shasum": "1.0.0",
+    "sinon": "~1.12.2",
+    "sinon-chai": "~2.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "contributors": [
+    {
+      "name": "Riceball LEE",
+      "email": "snowyu.lee@gmail.com",
+      "url": "https://github.com/snowyu"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Riceball LEE",
+      "email": "snowyu.lee@gmail.com"
+    }
+  ],
+  "pre-commit": [
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/snowyu/property-manager.js/issues"
+  },
+  "license": "MIT",
+  "stability": "unstable"
+}
