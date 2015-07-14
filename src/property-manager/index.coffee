@@ -32,11 +32,12 @@ module.export   = getPropertyManagerClass = (aOptions)->
     # the non-enumerable property can not be injected directly:
     defineProperty @::, '$initialize', ->
       options = arugments[gOptPos]
+      that = @
       if @super and @self
         inherited = @super
-        @ = @self
-        inherited.call(@, options)
-      @_initialize.call @, options if isFunction @_initialize
-      @assign(options)
+        that = @self
+        inherited.call(that, options)
+      that._initialize options if isFunction that._initialize
+      that.assign(options)
     
 
