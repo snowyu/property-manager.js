@@ -7,6 +7,7 @@ assert          = chai.assert
 chai.use(sinonChai)
 
 inherits        = require 'inherits-ex/lib/inherits'
+createObject    = require 'inherits-ex/lib/createObject'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
 PropertyManager = require '../src/property-manager/simple'
@@ -25,6 +26,7 @@ module.exports = (name, ManagerClass)->
       value: 123
     
   defaultValueSupport = false
+  assignmentSupport = false
 
   describe name, ->
     class PM
@@ -33,6 +35,7 @@ module.exports = (name, ManagerClass)->
       if ManagerClass.defineProperties
         ManagerClass.defineProperties PM, classAttrs
         defaultValueSupport = true
+        assignmentSupport = true
       else
         @::_initialize = (options)->
           @defineProperties classAttrs
@@ -78,6 +81,22 @@ module.exports = (name, ManagerClass)->
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
     describe '#assignTo()', ->
+      if assignmentSupport
+        it 'should assign to a plain object via custom assignment property', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'assign1':
+                  assign: (dest, src, value, name)->extend {hi:'world'}, value
+              , classAttrs
+          result = createObject SPM, prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          obj = {prop1:222}
+          result.assignTo(obj)
+          obj.should.be.deep.equal
+            prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
+            prop6: 'defaultValue'
+            assign1: sd:91, hi: 'world'
       it 'should assign itself to another plain object', ->
         result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {prop1:222}

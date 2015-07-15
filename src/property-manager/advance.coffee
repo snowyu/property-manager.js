@@ -33,7 +33,7 @@ module.exports  = class AdvancePropertyManager
 
   getProperties: -> @[gAttrsName]
 
-  @defineProperties: defineObjectProperties = (aTarget, aProperties)->
+  @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
     if isFunction aTarget
       vPrototype = aTarget::
     else if isObject aTarget
@@ -42,12 +42,12 @@ module.exports  = class AdvancePropertyManager
       throw new TypeError 'the target should be a ctor or object!'
     vAttrs = vPrototype[gAttrsName]
 
-    if not (vAttrs instanceof Properties)
+    if recreate or not (vAttrs instanceof Properties)
       vPrototype[gAttrsName] = vAttrs = Properties()
     vAttrs.merge aProperties if aProperties
     vAttrs
   defineProperties: (aProperties) ->
-    vAttrs = defineObjectProperties @, aProperties
+    vAttrs = defineObjectProperties @, aProperties, false
     vAttrs.initializeTo @
     @
 

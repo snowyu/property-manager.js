@@ -35,7 +35,7 @@ module.exports  = class NormalPropertyManager
 
   getProperties: -> @[gAttrsName]
 
-  @defineProperties: defineObjectProperties = (aTarget, aProperties)->
+  @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
     if isFunction aTarget
       vPrototype = aTarget::
     else if isObject aTarget
@@ -43,7 +43,7 @@ module.exports  = class NormalPropertyManager
     else
       throw new TypeError 'the target should be a ctor or object!'
     vAttrs = vPrototype[gAttrsName]
-    vAttrs = vPrototype[gAttrsName] = {} unless isObject vAttrs
+    vAttrs = vPrototype[gAttrsName] = {} if recreate or !isObject vAttrs
     if aProperties
       for k,v of aProperties
         v = value:v unless isObject v
@@ -52,7 +52,7 @@ module.exports  = class NormalPropertyManager
     vAttrs
 
   defineProperties: (aProperties) ->
-    vAttrs = defineObjectProperties @, aProperties
+    vAttrs = defineObjectProperties @, aProperties, false
     for k, v of vAttrs
       defineProperty @, k, v.value, v
     return
