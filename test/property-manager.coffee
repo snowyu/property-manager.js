@@ -107,3 +107,11 @@ module.exports = (name, ManagerClass)->
         result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = new PM prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
         obj.isSame(result).should.be.false
+        result.isSame(obj).should.be.false
+        obj =
+          prop1: 121, prop2: 453, hidden:399, notExi:111
+          prop3: undefined
+          prop4: null
+          $prop5: 'nonExport'
+          prop6: 'defaultValue'
+        result.isSame(obj).should.be.true
