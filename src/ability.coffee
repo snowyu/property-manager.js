@@ -13,14 +13,14 @@ getkeys         = Object.keys
 
 getPropertyManagerClass = (aClass, aOptions)->
   if isString aOptions
-    aOptions = manager: aOptions
+    aOptions = name: aOptions
   else if isNumber aOptions
     aOptions = optionsPosition: aOptions
   else if !aOptions
     aOptions = {}
   gOptPos = aOptions.optionsPosition || 0
   # it could be null(Simple), ctor(complex attributes), object
-  gManager  = String(aOptions.manager)
+  gManager  = String(aOptions.name)
 
   class PropertyManager
     constructor: ->@initialize.call @, arguments[gOptPos]
