@@ -9,7 +9,7 @@ chai.use(sinonChai)
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
-Manager         = require '../src/property-manager/normal'
+Manager         = require '../src/normal'
 test            = require './property-manager'
 setImmediate    = setImmediate || process.nextTick
 

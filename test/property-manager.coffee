@@ -11,7 +11,6 @@ createObject    = require 'inherits-ex/lib/createObject'
 createObjectWith= require 'inherits-ex/lib/createObjectWith'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
-PropertyManager = require '../src/property-manager/simple'
 setImmediate    = setImmediate || process.nextTick
 
 module.exports = (name, ManagerClass, optsPos = 0)->
