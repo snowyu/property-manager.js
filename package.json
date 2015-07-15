@@ -29,8 +29,8 @@
   ],
   "dependencies": {
     "deep-equal": "^1.0.0",
-    "inherits-ex": "^1.0.7",
-    "util-ex": "^0.3.4"
+    "inherits-ex": "^1.0.8",
+    "util-ex": "^0.3.8"
   },
   "devDependencies": {
     "chai": "~1.10.0",

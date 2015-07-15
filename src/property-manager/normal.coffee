@@ -3,11 +3,14 @@ isFunction      = require 'util-ex/lib/is/type/function'
 isObject        = require 'util-ex/lib/is/type/object'
 isString        = require 'util-ex/lib/is/type/string'
 extend          = require 'util-ex/lib/_extend'
-deepEqual       = require 'deep-equal'
+getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
+getAllOwnKeys   = Object.getOwnPropertyNames
+defineProperties= Object.defineProperties
+getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
 
-module.exports  = class PropertyManager
+module.exports  = class NormalPropertyManager
   gAttrsName = '$attributes'
 
   getRealAttrName = (attrs, name)->
@@ -21,37 +24,46 @@ module.exports  = class PropertyManager
   # merge the methods on the PropertyManager.prototype.
   extend @::, PropertyManager::
 
+  @::[gAttrsName] = {}
+
+  defineProperty @, gAttrsName,
+    get: -> NormalPropertyManager::[gAttrsName]
+
   defineProperty @, 'attrsName', undefined,
     get: -> gAttrsName
     set: (value)-> gAttrsName = value
 
-  @::[gAttrsName] = {}
+  getProperties: -> @[gAttrsName]
 
-  getRealAttrName: (name)->getRealAttrName @[gAttrsName], name
+  @defineProperties: defineObjectProperties = (aTarget, aProperties)->
+    if isFunction aTarget
+      vPrototype = aTarget::
+    else if isObject aTarget
+      vPrototype = getPrototypeOf aTarget
+    else
+      throw new TypeError 'the target should be a ctor or object!'
+    vAttrs = vPrototype[gAttrsName]
+    vAttrs = vPrototype[gAttrsName] = {} unless isObject vAttrs
+    if aProperties
+      for k,v of aProperties
+        v = value:v unless isObject v
+        v.enumerable = v.enumerable isnt false
+        vAttrs[k]= v
+    vAttrs
 
-  assignProperty: (options, name, value, skipDefaultValue)->
-    @assignPropertyTo(@, options, name, value, skipDefaultValue)
+  defineProperties: (aProperties) ->
+    vAttrs = defineObjectProperties @, aProperties
+    for k, v of vAttrs
+      defineProperty @, k, v.value, v
     return
 
-  defineProperty @, gAttrsName,
-    get: -> AttributeManager::[gAttrsName]
-
-  _initialize: (options)->
-    vAttrs = @[gAttrsName]
-    for k,v of vAttrs
-      if v.enumerable is false and not @hasOwnProperty k
-        defineProperty @, k, v.value, v
-      else if v.value isnt undefined
-        @[k] = v.value
-    return
-
-  assignPropertyTo: (dest, src, name, value, skipDefaultValue, isExported)->
-    vAttrs = @[gAttrsName]
-    name = getRealAttrName vAttrs, name
+  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+    attrs = @getProperties() unless attrs
+    name = getRealAttrName attrs, name
     if name
-      vAttr = vAttrs[name]
-      return if skipDefaultValue and vAttr.value isnt undefined and
-         vAttr.value == value
+      vAttr = attrs[name]
+      return unless vAttr.enumerable
+      return if skipDefaultValue and vAttr.value == value
       value = vAttr.assign(dest, src, value, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
       dest[name] = value if !isExported or value isnt undefined

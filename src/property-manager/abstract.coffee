@@ -11,11 +11,14 @@ module.exports  = class AbstractPropertyManager
   constrcutor: ->
     @initialize.apply @, arguments
 
-  assignPropertyTo: (dest, src, name, value, skipDefaultValue, isExported)->
-  getAttributes: ->
+  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+  getProperties: ->
+  defineProperties: (aProperties)->
 
   initialize: (options)->
+    options?={}
     @_initialize options if isFunction @_initialize
+    @defineProperties(options.attributes)
     @assign(options)
 
   clone: (options)->
@@ -28,14 +31,15 @@ module.exports  = class AbstractPropertyManager
     else if not isArray aExclude
       aExclude = []
 
+    vAttrs = @getProperties()
     for k,v of options
       continue if k in aExclude
-      @assignProperty options, k, v
+      @assignProperty options, k, v, vAttrs
     @_assign(options) if isFunction @_assign
     @
 
-  assignProperty: (options, name, value, skipDefaultValue)->
-    @assignPropertyTo(@, options, name, value, skipDefaultValue)
+  assignProperty: (options, name, value, attrs, skipDefaultValue)->
+    @assignPropertyTo(@, options, name, value, attrs, skipDefaultValue)
     return
 
   mergeTo: (dest, aExclude)->
@@ -45,11 +49,12 @@ module.exports  = class AbstractPropertyManager
     else if not isArray aExclude
       aExclude = []
 
-    for k,v of @getAttributes()
+    vAttrs = @getProperties()
+    for k,v of vAttrs
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       if !dest.hasOwnProperty(k)
-        @assignPropertyTo(dest, @, k, @[k], true)
+        @assignPropertyTo(dest, @, k, @[k], vAttrs, true)
     dest
 
   exportTo: (dest, aExclude)->
@@ -59,12 +64,13 @@ module.exports  = class AbstractPropertyManager
     else if not isArray aExclude
       aExclude = []
 
-    for k,v of @getAttributes()
+    vAttrs = @getProperties()
+    for k,v of vAttrs
       continue if k[0] is '$'
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       if !dest.hasOwnProperty(k)
-        @assignPropertyTo(dest, @, k, @[k], true, true)
+        @assignPropertyTo(dest, @, k, @[k], vAttrs, true, true)
     dest
 
   toObject: (options)->
@@ -78,10 +84,11 @@ module.exports  = class AbstractPropertyManager
     else if not isArray aExclude
       aExclude = []
 
-    for k,v of @getAttributes()
-      continue if k in aExclude
+    vAttrs = @getProperties()
+    for k,v of vAttrs
+      continue if !vAttrs.hasOwnProperty(k) or (k in aExclude)
       continue if v and v.name and (v.name in aExclude)
-      @assignPropertyTo(dest, @, k, @[k])
+      @assignPropertyTo(dest, @, k, @[k], vAttrs)
     dest._assign(@) if isFunction dest._assign
     dest
 
