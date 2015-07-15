@@ -45,6 +45,13 @@ describe 'PropertyManagerAbility', ->
     checkBasicProperty A
     checkBasicIsSame A, Simple
 
+  it 'should choose simple manager to a class with name option', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      PropertyManager A, name:'simple'
+    checkBasicProperty A
+    checkBasicIsSame A, Simple
+
   it 'should choose normal manager to a class', ->
     class A
       constructor: ->@initialize.apply @, arguments
