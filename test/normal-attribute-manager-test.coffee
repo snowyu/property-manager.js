@@ -6,8 +6,6 @@ expect          = chai.expect
 assert          = chai.assert
 chai.use(sinonChai)
 
-fs              = require 'fs'
-path            = require 'path.js'
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'

@@ -6,8 +6,6 @@ expect          = chai.expect
 assert          = chai.assert
 chai.use(sinonChai)
 
-fs              = require 'fs'
-path            = require 'path.js'
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
@@ -41,7 +39,6 @@ module.exports = (name, ManagerClass)->
 
       constructor: ->super
 
-      
     describe '.contructor', ->
       it 'should create an object', ->
         result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
@@ -104,3 +101,9 @@ module.exports = (name, ManagerClass)->
 
         obj._assign.should.be.callOnce
         obj._assign.should.be.calledWith result
+
+    describe '#isSame()', ->
+      it 'should compare itself to another object', ->
+        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = new PM prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
+        obj.isSame(result).should.be.false
