@@ -137,15 +137,67 @@ Note: you should specify the position of the argument if the first argument is n
 
 ## Usage
 
+### class usage
+
+
+there are three PropertyManager class, the default is NormalPropertyManager.
 
 ```coffee
+inherits = require 'inherits-ex/lib/inherits'
+PropertyManager = require 'property-manager'
+PropertyManager = require 'property-manager/lib/normal'
+SimplePropertyManager = require 'property-manager/lib/simple'
+AdvancePropertyManager = require 'property-manager/lib/advance'
 
-PropertyManager = require 'property-manager/lib/'
 class MyClass
+  inherits MyClass, PropertyManager
+  # if you use normal or advance property manager
+  # you can define your properties here to:
+  ProperManager.defineProperties MyClass, {
+    'attr1': {value:123, enumerable: true}
+  }
+  constructor: (options)->
+    # if you use the SimplePropertyManager
+    # you should define your properties here:
+    #@defineProperties {
+    #  'attr1': {value:123, enumerable: true}
+    #}
+    super
 
 ```
 
+### ability usage
 
+```coffee
+propertyManager = require 'property-manager/ability'
+
+class MyClass
+  # add the property manager ability to MyClass
+  # the default is normal property manager
+  #   propertyManager MyClass
+  # you can specified the property manager 'simple', 'advance', 'normal':
+  #   propertyManager MyClass, 'simple'
+  #   propertyManager MyClass, name: 'simple'
+  # and you can specified the options position in the arguments
+  propertyManager MyClass, optionsPosition: 1
+
+  # if you use normal or advance property manager
+  # you can define your properties here to:
+  MyClass.defineProperties MyClass, {
+    'attr1': {value:123, enumerable: true}
+  }
+  constructor: (name, options)->
+    # if you use the SimplePropertyManager
+    # you should define your properties here:
+    #@defineProperties {
+    #  'attr1': {value:123, enumerable: true}
+    #}
+    @initialize.apply @, arguments
+  initialize: (name, options)->
+    console.log 'name=',name
+
+
+```
 
 ## API
 
