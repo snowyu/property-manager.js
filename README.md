@@ -106,7 +106,7 @@ The `key` name is the property name. the value is the property descriptor:
 ```
 
 
-or inject it as an ability(not ready yet):
+or inject it as an ability:
 
 these methods will be added(replaced):
 
@@ -137,7 +137,23 @@ Note: you should specify the position of the argument if the first argument is n
 
 ## Usage
 
-### class usage
+
+### Make your class manage the properties
+
+there are two ways to make your class manage the attributes.
+
+* Class inherits from
+  * inherits from PropertyManager directly.
+* Ability to hook on any class
+  * You need confirm these method names are not be used.
+    1. assign
+    2. assignPropertyTo
+    3. getProperties
+    4. defineProperties
+    5. clone (optional)
+    6. 
+
+#### Class Inherits
 
 
 there are three PropertyManager class, the default is NormalPropertyManager.
@@ -166,7 +182,7 @@ class MyClass
 
 ```
 
-### ability usage
+#### Ability to hook on any class
 
 ```coffee
 propertyManager = require 'property-manager/ability'
