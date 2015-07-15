@@ -30,10 +30,9 @@ We often need to manage the attributes of an object, consider the following:
   * `JSON.stringify(myObj)`
 
 1. Problem: how to assign an object value of an attribute?
-  * call `clone()` if this object has a `clone` method
-  * replace the standard `assignProperty()` method.
-  * define the attribute's `assign(dest, src, value)` method on the `$attributes`.
-    * the custom attribute's` assign` the value. if return not true, means use the default assignment.
+  * replace the standard `assignPropertyTo()` method.
+  * define the attribute's `assign(dest, src, value, name)` method on the `$attributes`.
+    * the custom attribute's` assign` the value. return the changed value.
 2. Problem: howto decide which attriubte should be assign or get default value of an attribute?
   1. define all attriubtes on this object even though the value is null.
     * no default value feature.
