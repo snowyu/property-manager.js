@@ -38,8 +38,7 @@ We often need to manage the attributes of an object, consider the following:
     * no default value feature.
   2. define a simple `$attributes` property to manage this:
     * {attrName: {value:'defaultValue'}, ...}
-    * {attrName: true, ...} if no default value
-  3. define a complex `$attributes`(use Attributes class) to manage attibutes.
+  3. define a complex `$attributes`(use `Properties` class) to manage attibutes.
 
 So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.
 
