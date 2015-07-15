@@ -8,12 +8,13 @@ chai.use(sinonChai)
 
 inherits        = require 'inherits-ex/lib/inherits'
 createObject    = require 'inherits-ex/lib/createObject'
+createObjectWith= require 'inherits-ex/lib/createObjectWith'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
 PropertyManager = require '../src/property-manager/simple'
 setImmediate    = setImmediate || process.nextTick
 
-module.exports = (name, ManagerClass)->
+module.exports = (name, ManagerClass, optsPos = 0)->
   classAttrs =
     prop1: 432
     prop2: "233"
@@ -33,18 +34,24 @@ module.exports = (name, ManagerClass)->
       inherits PM, ManagerClass
 
       if ManagerClass.defineProperties
-        ManagerClass.defineProperties PM, classAttrs
         defaultValueSupport = true
         assignmentSupport = true
-      else
-        @::_initialize = (options)->
-          @defineProperties classAttrs
 
-      constructor: ->super
+      constructor: ->
+        @defineProperties classAttrs
+        super
+
+    makeArgs = (options)->
+      args = []
+      if optsPos
+        for i in [1..optsPos]
+          args.push i
+      args.push options
+      args
 
     describe '.contructor', ->
       it 'should create an object', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
         result.should.have.property 'hidden', 123
         result.should.have.property 'prop1', 121
         result.should.have.property 'prop2', 453
@@ -56,27 +63,27 @@ module.exports = (name, ManagerClass)->
 
     describe '#toObject', ->
       it 'should convert to a plain object', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
         result.toObject().should.be.deep.equal prop1: 121, prop2: 453, prop4: 234
       it 'should convert to a plain object with options', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111, prop6:undefined
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop6:undefined
         result.toObject(prop1: 333, prop4:5).should.be.deep.equal prop1: 333, prop2: 453, prop4: 5
       if defaultValueSupport
         it 'should convert to a plain object with defaults', ->
-          result = new PM prop1: 432, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs prop1: 432, prop2: 453, hidden:399, notExi:111
           result.toObject().should.be.deep.equal prop2: 453
         it 'should convert to a plain object with options and defaults', ->
-          result = new PM prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs prop2: 453, hidden:399, notExi:111
           result.toObject(prop3: 333, prop4:5).should.be.deep.equal prop3: 333, prop2: 453, prop4: 5
     describe '#toJSON', ->
       it 'should JSON.stringify()', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111, prop4: 1, prop6:undefined
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4: 1, prop6:undefined
         result = JSON.stringify(result)
         result = JSON.parse(result)
         result.should.be.deep.equal prop1: 121, prop2: 453, prop4: 1
       if defaultValueSupport
         it 'should JSON.stringify() with defaults', ->
-          result = new PM prop1: 432, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs prop1: 432, prop2: 453, hidden:399, notExi:111
           result = JSON.stringify(result)
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
@@ -90,7 +97,7 @@ module.exports = (name, ManagerClass)->
                 'assign1':
                   assign: (dest, src, value, name)->extend {hi:'world'}, value
               , classAttrs
-          result = createObject SPM, prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          result = createObjectWith SPM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
           obj = {prop1:222}
           result.assignTo(obj)
           obj.should.be.deep.equal
@@ -98,7 +105,7 @@ module.exports = (name, ManagerClass)->
             prop6: 'defaultValue'
             assign1: sd:91, hi: 'world'
       it 'should assign itself to another plain object', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {prop1:222}
         result.assignTo(obj)
         obj.should.be.deep.equal
@@ -106,8 +113,8 @@ module.exports = (name, ManagerClass)->
           prop6: 'defaultValue'
 
       it 'should assign itself to another object', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
-        obj = new PM prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = createObjectWith PM, makeArgs prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
         obj._assign = sinon.spy()
         result.assignTo(obj)
         obj.should.have.property 'hidden', 123
@@ -123,8 +130,8 @@ module.exports = (name, ManagerClass)->
 
     describe '#isSame()', ->
       it 'should compare itself to another object', ->
-        result = new PM prop1: 121, prop2: 453, hidden:399, notExi:111
-        obj = new PM prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = createObjectWith PM, makeArgs prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
         obj.isSame(result).should.be.false
         result.isSame(obj).should.be.false
         obj =

@@ -50,17 +50,17 @@ first the rules of the attributes:
 
 You can inherit from it.
 
-* SimplePropertyManager: /lib/property-manager/simple
+* SimplePropertyManager: /lib/simple
   * use the object's property descriptor directly.
   * so do not support default value.
   * do not support object value assignment hook function.
   * do not support non-english name.
-* NormalPropertyManager: /lib/property-manager/normal
+* NormalPropertyManager: /lib/normal
   * use the `$attributes` plain object to hold the declaration properties
   * support default value.
   * support object value assignment hook function.
   * support non-english name.
-* AdvancePropertyManager: /lib/property-manager/advance
+* AdvancePropertyManager: /lib/advance
   * use the `$attributes` to hold the declaration properties
   * the `$attributes` is an instance of `Properties` class.
   * so you can custom your `Properties` class inherited from.
@@ -135,8 +135,16 @@ these methods will be added(replaced):
 
 Note: you should specify the position of the argument if the first argument is not the options
 
-
 ## Usage
+
+
+```coffee
+
+PropertyManager = require 'property-manager/lib/'
+class MyClass
+
+```
+
 
 
 ## API

@@ -17,7 +17,6 @@ module.exports  = class AbstractPropertyManager
 
   initialize: (options)->
     options?={}
-    @_initialize options if isFunction @_initialize
     @defineProperties(options.attributes)
     @assign(options)
 
@@ -34,7 +33,7 @@ module.exports  = class AbstractPropertyManager
     vAttrs = @getProperties()
     for k,v of options
       continue if k in aExclude
-      @assignProperty options, k, v, vAttrs
+      @assignPropertyTo @, options, k, v, vAttrs
     @_assign(options) if isFunction @_assign
     @
 
