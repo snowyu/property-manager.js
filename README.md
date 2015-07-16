@@ -45,8 +45,8 @@ So we have these classes: SimplePropertyManager,NormalPropertyManager and Advanc
 first the rules of the attributes:
 
 * exported attributes means they are the JSON.stringify(aObj) attributes only.
-* The non-enumrable attributes can not be exported and assigned.
-* The attributes beginning with '$' can not be exported. but can be assigned.
+* The non-enumerable attributes can not be exported and assigned.
+* The enumerable attributes beginning with '$' can not be exported. but can be assigned.
 
 You can inherit from it.
 
