@@ -34,11 +34,11 @@ We often need to manage the attributes of an object, consider the following:
    * define the attribute's `assign(dest, src, value, name)` method on the `$attributes`.
      * the custom attribute's` assign` the value. return the changed value.
 2. Problem: howto decide which attriubte should be assign or get default value of an attribute?
-  1. define all attriubtes on this object even though the value is null.
-     * no default value feature.
-  2. define a simple `$attributes` property to manage this:
-     * {attrName: {value:'defaultValue'}, ...}
-  3. define a complex `$attributes`(use `Properties` class) to manage attibutes.
+   1. define all attriubtes on this object even though the value is null.
+      * no default value feature.
+   2. define a simple `$attributes` property to manage this:
+      * {attrName: {value:'defaultValue'}, ...}
+   3. define a complex `$attributes`(use `Properties` class) to manage attibutes.
 
 So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.
 
