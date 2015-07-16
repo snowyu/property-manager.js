@@ -146,8 +146,10 @@ there are two ways to make your class manage the attributes.
   * inherits from PropertyManager directly.
 * Ability to hook on any class
   * You need confirm these method names are not be used.
+    The `$attributes` is used via normal and advance PropertyManager.
     The first four methods must be exist. others are optional.
     But be care of their dependencies.
+    0. $attributes (unless use simple PropertyManager)
     1. assign
     2. assignPropertyTo
     3. getProperties
