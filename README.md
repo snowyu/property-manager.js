@@ -31,7 +31,7 @@ We often need to manage the attributes of an object, consider the following:
 
 1. Problem: how to assign an object value of an attribute?
    * replace the standard `assignPropertyTo()` method.
-   * define the attribute's `assign(dest, src, value, name)` method on the `$attributes`.
+   * define the attribute's `assign(value, dest, src, name)` method on the `$attributes`.
      * the custom attribute's` assign` the value. return the changed value.
 2. Problem: howto decide which attriubte should be assign or get default value of an attribute?
    1. define all attriubtes on this object even though the value is null.
@@ -85,7 +85,7 @@ The `key` name is the property name. the value is the property descriptor:
 * writable *(Boolean)*: defaults to true
   * true if and only if the value associated with the property may be changed
     with an assignment operator.
-* assign *(Function(dest, src, value, name))*:the custom attribute assignment function.
+* assign *(Function(value, dest, src, name))*:the custom attribute assignment function.
   just `return` the changed value. defaults to undefined.
 
 ```js
@@ -98,7 +98,7 @@ The `key` name is the property name. the value is the property descriptor:
     type: 'String',
     configurable: true,
     writable: true,
-    assign: function(dest, src, value, name) // 
+    assign: function(value, dest, src, name)
     get: ...,
     set: ....
   }
@@ -121,7 +121,6 @@ these methods will be added(replaced):
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
   * you can override it to determine howto assign an object value.
 * `assignTo(dest)` : assign the attributes to this `dest`  object.
-  * = `@assign.call dest, @`
 * `mergeTo(dest)`: merge the attributes itself to `dest` object.
   * do not overwrite the already exist attributes of the `dest`.
 * `isSame(obj)`: compare the `obj`'s attributes whether is the same value with itself.
@@ -198,7 +197,7 @@ class MyClass
     '$dontExport': {value:3, enumerable: true}
     'custom': 
       value:{}
-      assign:(dest, src, value, name)->
+      assign:(value, dest, src, name)->
         value?={}
         value.exta = 123
         return value
@@ -244,7 +243,7 @@ ProperManager.defineProperties(MyClass, {
     '$dontExport': {value:3, enumerable: true},
     'custom': {
       value: {},
-      assign: function(dest, src, value, name) {
+      assign: function(value, dest, src, name) {
         if (value == null) {
           value = {};
         }
@@ -280,7 +279,7 @@ class MyClass
     '$dontExport': {value:3, enumerable: true}
     'custom': 
       value:{}
-      assign:(dest, src, value, name)->
+      assign:(value, dest, src, name)->
         value?={}
         value.exta = 123
         return value
@@ -323,7 +322,7 @@ MyClass.defineProperties(MyClass, {
   '$dontExport': {value: 3, enumerable: true},
   'custom': {
     value: {},
-    assign: function(dest, src, value, name) {
+    assign: function(value, dest, src, name) {
       if (value == null) {
         value = {};
       }

@@ -64,7 +64,7 @@ module.exports  = class NormalPropertyManager
       vAttr = attrs[name]
       return unless vAttr.enumerable
       return if skipDefaultValue and vAttr.value == value
-      value = vAttr.assign(dest, src, value, name) if isFunction(vAttr.assign)
+      value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
       dest[name] = value if !isExported or value isnt undefined
     return

@@ -97,7 +97,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             ManagerClass.defineProperties SPM,
               extend
                 'assign1':
-                  assign: (dest, src, value, name)->extend {hi:'world'}, value
+                  assign: (value, dest, src, name)->extend {hi:'world'}, value
               , classAttrs
           result = createObjectWith SPM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
           obj = {prop1:222}
