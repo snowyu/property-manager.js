@@ -237,7 +237,7 @@ function MyClass(name, options) {
 inherits(MyClass, PropertyManager);
 
 //only for normal, advance property manager
-ProperManager.defineProperties(MyClass, {
+PropertyManager.defineProperties(MyClass, {
     'attr1': {value:123},
     'hidden': {value:1, enumerable: false},
     '$dontExport': {value:3, enumerable: true},
