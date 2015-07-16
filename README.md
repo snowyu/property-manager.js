@@ -404,6 +404,28 @@ assert.deepEqual(obj.mergeTo(), {
 ## API
 
 
+
+## Changes
+
+
+### TODO
+
+* Normal, Advance
+  + ! add the property writable check.
+  + ! add the assigned, exported *(Boolean)* to property descriptor directly.
+    * `assigned`: enumerable isnt false and (writable isnt false or isFunction(set)).
+    * `exported`: enumerable isnt false and the first char isnt "$"
++ [Advance Properties] `firstCharsOfNonExported` *(Char|ArrayOf Char)*, defaults to '$'
+  * note: the `exported` descriptor is higher prior than `firstCharsOfNonExported`.
+
+
+### v0.7.0
+
+* **broken** the arguments order of assign function in property descriptor are changed:
+  * attr.assign(value, dest, src, name) instead of assign(dest, src, value, name)
+
+### 
+
 ## License
 
 MIT
