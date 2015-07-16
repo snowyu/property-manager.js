@@ -59,6 +59,9 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result.should.have.property '$prop5', 'nonExport'
         result.should.have.property 'prop6', 'defaultValue'
         result.should.not.have.property 'notExi'
+      it 'should create an object and assign options', ->
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, $prop5:111
+        result.should.have.property '$prop5', 111
 
     describe '#toObject', ->
       it 'should convert to a plain object', ->
@@ -140,3 +143,37 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           $prop5: 'nonExport'
           prop6: 'defaultValue'
         result.isSame(obj).should.be.true
+
+    describe '#mergeTo()', ->
+      it 'should merge to itself to another object', ->
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = {test: 123, prop4:4}
+        result.mergeTo obj
+        obj.should.be.deep.equal 
+          test: 123
+          prop1: 121
+          prop2: 453
+          prop3: undefined
+          prop4: 4
+          '$prop5': 'nonExport'
+          prop6: 'defaultValue'
+      it 'should merge to itself as a new plain object', ->
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = result.mergeTo()
+        obj.should.be.deep.equal 
+        obj.should.be.deep.equal 
+          prop1: 121
+          prop2: 453
+          prop3: undefined
+          prop4: null
+          '$prop5': 'nonExport'
+          prop6: 'defaultValue'
+
+      if defaultValueSupport
+        it 'should merge to itself and skip default value', ->
+          result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+          obj = result.mergeTo(true)
+          obj.should.be.deep.equal 
+          obj.should.be.deep.equal 
+            prop1: 121
+            prop2: 453

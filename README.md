@@ -70,7 +70,7 @@ You can inherit from it.
   * support type check if possible.
 
 
-The `$attributes` holds all attributes of an object, like the property descriptor.
+The `$attributes` holds all attributes(like the property descriptor) of an object.
 The `key` name is the property name. the value is the property descriptor:
 
 * name *(String)*: the non-english name to export, Defaults to the `key` name.
@@ -146,21 +146,42 @@ there are two ways to make your class manage the attributes.
   * inherits from PropertyManager directly.
 * Ability to hook on any class
   * You need confirm these method names are not be used.
+    The first four methods must be exist. others are optional.
+    But be care of their dependencies.
     1. assign
     2. assignPropertyTo
     3. getProperties
     4. defineProperties
     5. clone (optional)
-    6. 
+       * mergeTo
+    6. initialize (optional)
+       * getProperties
+       * assign
+    7. assignProperty (optional)
+       * assignPropertyTo
+    8. mergeTo (optional)
+       * getProperties
+       * assignPropertyTo
+    9. exportTo (optional)
+       * getProperties
+       * assignPropertyTo
+    10. assignTo (optional)
+        * getProperties
+        * assignPropertyTo
+    11. toObject (optional)
+        * exportTo
+    12. toJSON (optional)
+        * toObject
+    13. isSame (optional)
+        * mergeTo
 
 #### Class Inherits
 
-
-there are three PropertyManager class, the default is NormalPropertyManager.
+there are three PropertyManager class to use, the default is NormalPropertyManager.
 
 ```coffee
 inherits = require 'inherits-ex/lib/inherits'
-PropertyManager = require 'property-manager'
+PropertyManager = require 'property-manager' # the default is normal
 PropertyManager = require 'property-manager/lib/normal'
 SimplePropertyManager = require 'property-manager/lib/simple'
 AdvancePropertyManager = require 'property-manager/lib/advance'
@@ -170,15 +191,66 @@ class MyClass
   # if you use normal or advance property manager
   # you can define your properties here to:
   ProperManager.defineProperties MyClass, {
-    'attr1': {value:123, enumerable: true}
+    'attr1': {value:123}
+    'hidden': {value:1, enumerable: false}
+    '$dontExport': {value:3, enumerable: true}
+    'custom': 
+      value:{}
+      assign:(dest, src, value, name)->
+        value?={}
+        value.exta = 123
+        return value
   }
-  constructor: (options)->
+  constructor: (@name, options)->
     # if you use the SimplePropertyManager
     # you should define your properties here:
     #@defineProperties {
-    #  'attr1': {value:123, enumerable: true}
+    #  'attr1': {value:123}
+    #  'hidden': {value:1, enumerable: false}
+    #  '$dontExport': {value:3, enumerable: true}
     #}
-    super
+    super options
+
+```
+the following is javascript:
+
+```js
+var inherits = require('inherits-ex/lib/inherits');
+var PropertyManager = require('property-manager');
+var PropertyManager = require('property-manager/lib/normal');
+var SimplePropertyManager = require('property-manager/lib/simple');
+var AdvancePropertyManager = require('property-manager/lib/advance');
+
+function MyClass(name, options) {
+  this.name = name;
+  // if you use the SimplePropertyManager
+  // you should define your properties here:
+  //this.defineProperties({
+  //  'attr1': {value:123}
+  //  'hidden': {value:1, enumerable: false},
+  //  '$dontExport': {value:3, enumerable: true}
+  //})
+  PropertyManager.call(this, options);
+}
+
+inherits(MyClass, PropertyManager);
+
+//only for normal, advance property manager
+ProperManager.defineProperties(MyClass, {
+    'attr1': {value:123},
+    'hidden': {value:1, enumerable: false},
+    '$dontExport': {value:3, enumerable: true},
+    'custom': {
+      value: {},
+      assign: function(dest, src, value, name) {
+        if (value == null) {
+          value = {};
+        }
+        value.exta = 123;
+        return value;
+      }
+    }
+});
 
 ```
 
@@ -196,23 +268,136 @@ class MyClass
   #   propertyManager MyClass, name: 'simple'
   # and you can specified the options position in the arguments
   propertyManager MyClass, optionsPosition: 1
+  # you can exclude some methods
 
   # if you use normal or advance property manager
   # you can define your properties here to:
   MyClass.defineProperties MyClass, {
-    'attr1': {value:123, enumerable: true}
+    'attr1': {value:123}
+    'hidden': {value:1, enumerable: false}
+    '$dontExport': {value:3, enumerable: true}
+    'custom': 
+      value:{}
+      assign:(dest, src, value, name)->
+        value?={}
+        value.exta = 123
+        return value
   }
-  constructor: (name, options)->
+  constructor: (@name, options)->
     # if you use the SimplePropertyManager
     # you should define your properties here:
     #@defineProperties {
     #  'attr1': {value:123, enumerable: true}
+    # 'hidden': {value:1, enumerable: false}
+    # '$dontExport': {value:3, enumerable: false}
     #}
     @initialize.apply @, arguments
-  initialize: (name, options)->
-    console.log 'name=',name
+
+```
+
+the following is javascript:
+
+```js
+var propertyManager = require('property-manager/ability');
+
+function MyClass(name, options) {
+  // if you use the SimplePropertyManager
+  // you should define your properties here:
+  //this.defineProperties({
+  //  'attr1': {value:123}
+  //  'hidden': {value:1, enumerable: false},
+  //  '$dontExport': {value:3, enumerable: false}
+  //})
+  this.name = name;
+  this.initialize.apply(this, arguments);
+}
+
+propertyManager(MyClass, {optionsPosition: 1});
+
+//only for normal, advance property manager
+MyClass.defineProperties(MyClass, {
+  'attr1': {value: 123},
+  'hidden': {value: 1, enumerable: false},
+  '$dontExport': {value: 3, enumerable: true},
+  'custom': {
+    value: {},
+    assign: function(dest, src, value, name) {
+      if (value == null) {
+        value = {};
+      }
+      value.exta = 123;
+      return value;
+    }
+  }
+});
+
+```
+
+### Use the Property Manager
+
+Now the `MyClass` class should have four attributes
+
+* attr1: can be exported and assigned
+* hidden: can not be exported and assigned
+* $dontExport: can be assigned, can not be exported.
+* custom: can be exported and assigned, the value be changed by
+  `assign` function in the property descriptor.
 
 
+```coffee
+assert = require 'assert'
+my = new MyClass 'aName', attr1: 3, hidden:11222, $dontExport: 1, custom:{b:12}
+assert.deepEqual my.mergeTo(), attr1:3, $dontExport:1, custom:{b:12, exta: 123}
+assert.equal my.hidden, 1 # the `hidden` can not be assigned and exported
+assert.deepEqual my.toObject(), attr1:3 # the `$dontExport` can not be exported
+assert.equal JSON.stringify(my), '{"attr1":3,"custom":{"b":12,"exta":123}}'
+
+obj = my.clone()
+assert.ok obj.isSame(my) # compare each assigned properties.
+assert.deepEqual obj.mergeTo(), attr1:3, $dontExport:1, custom:{b:12, exta: 123}
+```
+
+```js
+var assert = require('assert');
+
+var my = new MyClass('aName', {
+  attr1: 3,
+  hidden: 11222,
+  $dontExport: 1,
+  custom: {
+    b: 12
+  }
+});
+
+assert.deepEqual(my.mergeTo(), {
+  attr1: 3,
+  $dontExport: 1,
+  custom: {
+    b: 12,
+    exta: 123
+  }
+});
+
+assert.equal(my.hidden, 1);
+
+assert.deepEqual(my.toObject(), {
+  attr1: 3
+});
+
+assert.equal(JSON.stringify(my), '{"attr1":3,"custom":{"b":12,"exta":123}}');
+
+var obj = my.clone();
+
+assert.ok(obj.isSame(my));
+
+assert.deepEqual(obj.mergeTo(), {
+  attr1: 3,
+  $dontExport: 1,
+  custom: {
+    b: 12,
+    exta: 123
+  }
+});
 ```
 
 ## API
