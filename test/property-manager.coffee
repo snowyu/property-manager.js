@@ -120,7 +120,6 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           obj.should.be.deep.equal
             prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
             prop6: 'defaultValue'
-            prop7:719
             assign1: sd:91, hi: 'world'
       it 'should assign itself to another plain object', ->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
@@ -129,7 +128,6 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         obj.should.be.deep.equal
           prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
           prop6: 'defaultValue'
-          prop7:719
 
       it 'should assign itself to another object', ->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
@@ -159,7 +157,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop4: null
           $prop5: 'nonExport'
           prop6: 'defaultValue'
-          prop7:719
+          prop7:719 # will be ignore
+          extra:222 # will be ignore
         result.isSame(obj).should.be.true
 
     describe '#mergeTo()', ->
@@ -175,11 +174,9 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop4: 4
           '$prop5': 'nonExport'
           prop6: 'defaultValue'
-          prop7:719
       it 'should merge to itself as a new plain object', ->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = result.mergeTo()
-        obj.should.be.deep.equal 
         obj.should.be.deep.equal 
           prop1: 121
           prop2: 453
@@ -187,15 +184,51 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop4: null
           '$prop5': 'nonExport'
           prop6: 'defaultValue'
-          prop7:719
 
       if defaultValueSupport
         it 'should merge to itself and skip default value', ->
           result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
           obj = result.mergeTo(true)
-          obj.should.be.deep.equal 
+          obj.should.be.deep.equal
             prop1: 121
             prop2: 453
+        it 'should merge the assigned property descriptor', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'propA':
+                  enumerable: false
+                  assigned: true
+                  value: 123
+              , classAttrs
+          result = createObjectWith SPM, makeArgs propA: 121
+          obj = result.mergeTo(true)
+          obj.should.be.deep.equal
+            propA: 121
+        it 'should merge the exported property descriptor', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                '$propE':
+                  enumerable: false
+                  exported: true
+                  value: 123
+                '$propA':
+                  enumerable: false
+                  exported: true
+                  assigned: true
+                  value: 12
+              , classAttrs
+          result = createObjectWith SPM, makeArgs $propE: 121, $propA:1
+          obj = result.mergeTo(true, null, true)
+          obj.should.be.deep.equal $propA:1
+          obj = result.mergeTo(false, null, true)
+          obj.should.have.property '$propE', 123
+          obj.should.have.property '$propA', 1
+          
+
     describe '#exportTo()', ->
       it 'should exportTo a object and skip readonly property', ->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
@@ -210,3 +243,26 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             prop2: 453
             prop4: 234
             prop6: 'defaultValue'
+    describe '#nonExported1stChar', ->
+      after ->
+        ManagerClass::nonExported1stChar = '$'
+      it 'should get nonExported1stChar', ->
+        ManagerClass::should.have.property 'nonExported1stChar', '$'
+      it 'should set nonExported1stChar', ->
+        ManagerClass::nonExported1stChar = '_'
+        class SPM1
+          inherits SPM1, PM
+          constructor: ->
+            @defineProperties
+              '_propE': value: 123
+              '_propA': value: 12
+            super
+        result = createObjectWith SPM1, makeArgs _propE: 121, _propA:1
+        # skipDefault, skipReadOnly, isExported
+        obj = result.mergeTo(true, null, false)
+        obj.should.have.property '_propA', 1
+        obj.should.have.property '_propE', 121
+        obj = result.mergeTo(true, null, true)
+        obj.should.not.have.property '_propA'
+        obj.should.not.have.property '_propE'
+        ManagerClass::nonExported1stChar = '$'

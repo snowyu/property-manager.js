@@ -66,23 +66,77 @@ describe 'PropertyManagerAbility', ->
     checkProperty A
     checkIsSame A, Advance
 
-  it 'should apply the ability to a class', ->
+  it 'should use nonExported1stChar options', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      PropertyManager A, nonExported1stChar: '_'
+    checkProperty A
+    checkBasicIsSame A, Normal
+    A::should.be.have.property 'nonExported1stChar', '_'
+
+
+  it 'should apply the simple ability to a class', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      PropertyManager A, 'simple'
+    checkBasicProperty A
+    checkBasicIsSame A, Simple
+    test('SimpleAbilityA', A)
+
+
+  it 'should apply the simple ability to a class with optionsPosition', ->
+    class B
+      constructor: ->@initialize.apply @, arguments
+      initialize: (my, sec)->
+      PropertyManager B, optionsPosition:2, name:'simple'
+    checkBasicProperty B
+    checkBasicIsSame B, Simple
+
+    test('SimpleAbilityB', B, 2)
+
+  it 'should apply the normal ability to a class', ->
     class A
       constructor: ->@initialize.apply @, arguments
       PropertyManager A
     checkProperty A
-    test('AbilityPropertyManagerA', A)
+    checkIsSame A, Normal
+    test('NormalAbilityA', A)
 
 
-  it 'should apply the ability to a class with optionsPosition', ->
+  it 'should apply the normal ability to a class with optionsPosition', ->
     class B
       constructor: ->@initialize.apply @, arguments
       initialize: (@my, @sec)->
       PropertyManager B, optionsPosition:2
     checkProperty B
+    checkIsSame B, Normal
 
     b = new B 'hi', 1222
     b.should.have.property 'my', 'hi'
     b.should.have.property 'sec', 1222
 
-    test('AbilityPropertyManagerB', B, 2)
+    test('NormalAbilityB', B, 2)
+
+
+  it 'should apply the advance ability to a class', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      PropertyManager A, 'advance'
+    checkProperty A
+    checkIsSame A, Advance
+    test('advanceAbilityA', A)
+
+
+  it 'should apply the advance ability to a class with optionsPosition', ->
+    class B
+      constructor: ->@initialize.apply @, arguments
+      initialize: (@my, @sec)->
+      PropertyManager B, optionsPosition:2, name:'advance'
+    checkProperty B
+    checkIsSame B, Advance
+
+    b = new B 'hi', 1222
+    b.should.have.property 'my', 'hi'
+    b.should.have.property 'sec', 1222
+
+    test('advanceAbilityB', B, 2)
