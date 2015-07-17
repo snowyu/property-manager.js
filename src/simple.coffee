@@ -6,6 +6,7 @@ extend          = require 'util-ex/lib/_extend'
 deepEqual       = require 'deep-equal'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
+getAllOwnKeys   = Object.getOwnPropertyNames
 getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports  = class SimplePropertyManager
@@ -16,7 +17,11 @@ module.exports  = class SimplePropertyManager
   # merge the methods on the PropertyManager.prototype.
   extend @::, PropertyManager::
 
-  getProperties: ->@
+  getProperties: ->
+    result = {}
+    for k in getAllOwnKeys(@)
+      result[k] = getOwnPropertyDescriptor(@, k)
+    result
   defineProperties: (aProperties) ->
     for k,v of aProperties
       v = value:v unless isObject v
@@ -24,7 +29,11 @@ module.exports  = class SimplePropertyManager
       defineProperty @, k, v.value, v
     return
   assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
-    vPropertyDesc = getOwnPropertyDescriptor @, name
-    if vPropertyDesc and vPropertyDesc.enumerable and (!isExported or value isnt undefined)
+    attrs = @getProperties() unless attrs
+    vAttr = attrs[name]
+    #vAttr = getOwnPropertyDescriptor @, name
+    if vAttr and vAttr.enumerable and ((
+          !isExported and (vAttr.writable isnt false or vAttr.set)
+        ) or value isnt undefined)
       dest[name] = value
     return
