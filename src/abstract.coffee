@@ -9,6 +9,8 @@ getkeys         = Object.keys
 
 module.exports  = class AbstractPropertyManager
 
+  nonExported1stChar: '$'
+
   constrcutor: ->
     @initialize.apply @, arguments
 
@@ -42,54 +44,41 @@ module.exports  = class AbstractPropertyManager
     @assignPropertyTo(@, options, name, value, attrs, skipDefaultValue)
     return
 
-  mergeTo: (dest, aExclude, skipDefaultValue)->
+  mergeTo: (dest, aExclude, skipDefault, skipReadOnly, isExported)->
     if isArray dest
       aExclude = dest
       dest = {}
     else if isBoolean dest
-      skipDefaultValue = dest
+      isExported = skipDefault
+      skipReadOnly = aExclude
+      skipDefault = dest
       aExclude = []
       dest = {}
 
     if isString aExclude
       aExclude = [aExclude]
     else if isBoolean aExclude
-      skipDefaultValue = aExclude
-      aExclude = []
-    else if not isArray aExclude
-      aExclude = []
-
-    dest?= {}
-
-    vAttrs = @getProperties()
-    for k,v of vAttrs
-      continue if k in aExclude
-      continue if v and v.name and (v.name in aExclude)
-      if !dest.hasOwnProperty(k)
-        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefaultValue)
-    dest
-
-  exportTo: (dest, aExclude, skipDefault, skipReadOnly)->
-    if isString aExclude
-      aExclude = [aExclude]
-    else if isBoolean aExclude
+      isExported = skipReadOnly
       skipReadOnly = skipDefault
       skipDefault = aExclude
       aExclude = []
     else if not isArray aExclude
       aExclude = []
+
     dest?= {}
-    skipDefault?= true
 
     vAttrs = @getProperties()
     for k,v of vAttrs
-      continue if k[0] is '$'
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       continue if skipReadOnly and v.writable is false and !v.set
       if !dest.hasOwnProperty(k)
-        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, true)
+        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, isExported)
     dest
+
+  exportTo: (dest, aExclude, skipDefault, skipReadOnly)->
+    skipDefault?=true
+    @mergeTo(dest, aExclude, skipDefault, skipReadOnly, true)
 
   toObject: (options)->
     @exportTo(options)
@@ -104,7 +93,7 @@ module.exports  = class AbstractPropertyManager
 
     vAttrs = @getProperties()
     for k,v of vAttrs
-      continue if !vAttrs.hasOwnProperty(k) or (k in aExclude)
+      continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       @assignPropertyTo(dest, @, k, @[k], vAttrs)
     dest._assign(@) if isFunction dest._assign
