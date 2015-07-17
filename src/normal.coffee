@@ -24,7 +24,7 @@ module.exports  = class NormalPropertyManager
   # merge the methods on the PropertyManager.prototype.
   extend @::, PropertyManager::
 
-  @::[gAttrsName] = {}
+  @::[gAttrsName] = null
 
   defineProperty @, gAttrsName,
     get: -> NormalPropertyManager::[gAttrsName]
@@ -38,16 +38,21 @@ module.exports  = class NormalPropertyManager
   @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
     if isFunction aTarget
       vPrototype = aTarget::
+      nonExported1stChar = vPrototype.nonExported1stChar
     else if isObject aTarget
       vPrototype = getPrototypeOf aTarget
+      nonExported1stChar = aTarget.nonExported1stChar
     else
       throw new TypeError 'the target should be a ctor or object!'
+    nonExported1stChar?= NormalPropertyManager::nonExported1stChar
     vAttrs = vPrototype[gAttrsName]
     vAttrs = vPrototype[gAttrsName] = {} if recreate or !isObject vAttrs
     if aProperties
       for k,v of aProperties
         v = value:v unless isObject v
         v.enumerable = v.enumerable isnt false
+        v.assigned?= v.enumerable and (v.writable isnt false or isFunction(v.set))
+        v.exported?= v.enumerable and k[0] isnt nonExported1stChar
         vAttrs[k]= v
     vAttrs
 
@@ -62,13 +67,12 @@ module.exports  = class NormalPropertyManager
     name = getRealAttrName attrs, name
     if name
       vAttr = attrs[name]
-      return unless vAttr.enumerable
+      return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
       return if skipDefaultValue and vAttr.value == value
+      vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
       value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
-      dest[name] = value if (
-          !isExported and (vAttr.writable isnt false or vAttr.set)
-        ) or value isnt undefined
+      dest[name] = value if vCanAssign
     return
 
