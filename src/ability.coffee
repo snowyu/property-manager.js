@@ -21,6 +21,7 @@ getPropertyManagerClass = (aClass, aOptions)->
   gOptPos = aOptions.optionsPosition || 0
   # it could be null(Simple), ctor(complex attributes), object
   gManager  = String(aOptions.name)
+  nonExported1stChar = aOptions.nonExported1stChar
 
   class PropertyManager
     constructor: ->@initialize.call @, arguments[gOptPos]
@@ -38,6 +39,9 @@ getPropertyManagerClass = (aClass, aOptions)->
         extend @, Default
         extend @::, Default::
 
+    if isString(nonExported1stChar) and nonExported1stChar.length is 1
+      @::nonExported1stChar = nonExported1stChar
+
     # the non-enumerable property can not be replaced in an ability,
     # but beginning with '$' will be injected to `initialize` method.
     defineProperty @::, '$initialize', ->
@@ -54,6 +58,7 @@ getPropertyManagerClass = (aClass, aOptions)->
 coreMethods = [
   'assign', 'assignPropertyTo', 'getProperties'
   'defineProperties'
+  'nonExported1stChar'
 ]
 module.exports = customAbility getPropertyManagerClass, coreMethods,  true
 
