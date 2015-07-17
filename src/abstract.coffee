@@ -69,24 +69,26 @@ module.exports  = class AbstractPropertyManager
         @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefaultValue)
     dest
 
-  exportTo: (dest, aExclude, skipDefaultValue)->
+  exportTo: (dest, aExclude, skipDefault, skipReadOnly)->
     if isString aExclude
       aExclude = [aExclude]
     else if isBoolean aExclude
-      skipDefaultValue = aExclude
+      skipReadOnly = skipDefault
+      skipDefault = aExclude
       aExclude = []
     else if not isArray aExclude
       aExclude = []
     dest?= {}
-    skipDefaultValue?= true 
+    skipDefault?= true
 
     vAttrs = @getProperties()
     for k,v of vAttrs
       continue if k[0] is '$'
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
+      continue if skipReadOnly and v.writable is false and !v.set
       if !dest.hasOwnProperty(k)
-        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefaultValue, true)
+        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, true)
     dest
 
   toObject: (options)->
