@@ -425,7 +425,7 @@ assert.deepEqual(obj.mergeTo(), {
 
 + add the property writable check: do not assign the readonly property.
 * Normal, Advance
-  + ! add the `assigned`, `exported` *(Boolean)* to property descriptor directly.
+  + add the `assigned`, `exported` *(Boolean)* to property descriptor directly.
     * `assigned`: enumerable isnt false and (writable isnt false or isFunction(set)).
     * `exported`: enumerable isnt false and the first char isnt "$"
 + `PropertyManager::nonExported1stChar` *(Char)*, defaults to '$'
