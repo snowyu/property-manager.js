@@ -8,29 +8,35 @@ getObjectKeys   = Object.keys
 getOwnPropertyNames = Object.getOwnPropertyNames
 
 module.exports = class Properties
+  nonExported1stChar: '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
-    mergePropertyTo = Properties.mergePropertyTo
     for name, attr of attrs
-      mergePropertyTo dest, name, attr
+      @mergePropertyTo dest, name, attr
     dest.updateNames() if dest.updateNames
     return dest
-  @mergePropertyTo: (dest, name, attr)->
+  mergePropertyTo: (dest, name, attr)->
     #attr = type:attr if isString attr
     attr = value:attr unless isObject attr
+    vEnumerable = attr.enumerable isnt false
+    attr.assigned?= vEnumerable and (attr.writable isnt false or attr.set)
+    attr.exported?= vEnumerable and name[0] isnt @nonExported1stChar
     vAttr = dest[name]
     if vAttr is undefined
       dest[name] = attr
     else
       vAttr[k] = v for k, v of attr
+    return
   _initialize: (aOptions)-> @merge(aOptions)
   initialize: (aOptions)->
     @_initialize(aOptions)
     return
-  constructor: (aOptions)->
+  constructor: (aOptions, nonExported1stChar)->
     if not (this instanceof Properties)
-      return new Properties aOptions
+      return new Properties aOptions, nonExported1stChar
     defineProperty @, 'names', {}
+    if isString(nonExported1stChar) and nonExported1stChar.length is 1
+      @nonExported1stChar = nonExported1stChar
     @initialize(aOptions)
 
   updateNames: ->
@@ -69,18 +75,17 @@ module.exports = class Properties
     name = @getRealAttrName name
     if name
       vAttr = @[name]
-      return unless vAttr.enumerable isnt false
+      return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
       return if skipDefaultValue and vAttr.value == value
-      if name is 'name'
-        dest.name = value if value and value isnt dest.name
+      vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
+      if name is 'name' and vCanAssign and value isnt dest.name
+        dest.name = value
         return
       @validatePropertyValue name, value, vAttr if !isExported
       value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
-      dest[name] = value if (
-          !isExported and (vAttr.writable isnt false or vAttr.set)
-        ) or value isnt undefined
+      dest[name] = value if vCanAssign
     return
   assignTo: (dest, src, aExclude)->
     vNames = @names
