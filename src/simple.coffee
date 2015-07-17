@@ -31,9 +31,8 @@ module.exports  = class SimplePropertyManager
   assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
     attrs = @getProperties() unless attrs
     vAttr = attrs[name]
-    #vAttr = getOwnPropertyDescriptor @, name
-    if vAttr and vAttr.enumerable and ((
-          !isExported and (vAttr.writable isnt false or vAttr.set)
-        ) or value isnt undefined)
-      dest[name] = value
+    if vAttr and vAttr.enumerable
+      vCanAssign = (!isExported and (vAttr.writable or vAttr.set)) or
+        (isExported and value isnt undefined and name[0] isnt @nonExported1stChar)
+      dest[name] = value if vCanAssign
     return
