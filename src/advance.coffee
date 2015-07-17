@@ -18,7 +18,7 @@ module.exports  = class AdvancePropertyManager
       return
     name
 
-  @::[gAttrsName] = Properties()
+  @::[gAttrsName] = null
 
   defineProperty @, gAttrsName,
     get: -> AdvancePropertyManager::[gAttrsName]
@@ -36,14 +36,18 @@ module.exports  = class AdvancePropertyManager
   @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
     if isFunction aTarget
       vPrototype = aTarget::
+      nonExported1stChar = vPrototype.nonExported1stChar
     else if isObject aTarget
       vPrototype = getPrototypeOf aTarget
+      nonExported1stChar = aTarget.nonExported1stChar
     else
       throw new TypeError 'the target should be a ctor or object!'
     vAttrs = vPrototype[gAttrsName]
+    nonExported1stChar?= AdvancePropertyManager::nonExported1stChar
 
     if recreate or not (vAttrs instanceof Properties)
       vPrototype[gAttrsName] = vAttrs = Properties()
+    vAttrs.nonExported1stChar = nonExported1stChar
     vAttrs.merge aProperties if aProperties
     vAttrs
   defineProperties: (aProperties) ->
