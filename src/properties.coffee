@@ -77,7 +77,10 @@ module.exports = class Properties
       @validatePropertyValue name, value, vAttr if !isExported
       value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
-      dest[name] = value if !isExported or value isnt undefined
+      value = vAttr.value if value is undefined and vAttr.value != undefined
+      dest[name] = value if (
+          !isExported and (vAttr.writable isnt false or vAttr.set)
+        ) or value isnt undefined
     return
   assignTo: (dest, src, aExclude)->
     vNames = @names
