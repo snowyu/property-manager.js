@@ -50,7 +50,10 @@ module.exports  = class NormalPropertyManager
     if aProperties
       for k,v of aProperties
         v = value:v unless isObject v
-        v.enumerable = v.enumerable isnt false
+        if !v.enumerable? and v.assigned is false and v.exported is false
+          v.enumerable = false
+        else
+          v.enumerable = v.enumerable isnt false
         v.assigned?= v.enumerable and (v.writable isnt false or isFunction(v.set))
         v.exported?= v.enumerable and k[0] isnt nonExported1stChar
         vAttrs[k]= v

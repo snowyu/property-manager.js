@@ -18,6 +18,10 @@ module.exports = class Properties
   mergePropertyTo: (dest, name, attr)->
     #attr = type:attr if isString attr
     attr = value:attr unless isObject attr
+    if !attr.enumerable? and attr.assigned is false and attr.exported is false
+      attr.enumerable = false
+    else
+      attr.enumerable = attr.enumerable isnt false
     vEnumerable = attr.enumerable isnt false
     attr.assigned?= vEnumerable and (attr.writable isnt false or attr.set)
     attr.exported?= vEnumerable and name[0] isnt @nonExported1stChar

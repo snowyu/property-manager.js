@@ -11,6 +11,7 @@ createObject    = require 'inherits-ex/lib/createObject'
 createObjectWith= require 'inherits-ex/lib/createObjectWith'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
+getPropertyDescriptor = Object.getOwnPropertyDescriptor
 setImmediate    = setImmediate || process.nextTick
 
 module.exports = (name, ManagerClass, optsPos = 0)->
@@ -27,7 +28,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
     prop7:
       writable: false
       value: 719
-    
+
   defaultValueSupport = false
   assignmentSupport = false
 
@@ -166,7 +167,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {test: 123, prop4:4}
         result.mergeTo obj
-        obj.should.be.deep.equal 
+        obj.should.be.deep.equal
           test: 123
           prop1: 121
           prop2: 453
@@ -177,7 +178,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       it 'should merge to itself as a new plain object', ->
         result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = result.mergeTo()
-        obj.should.be.deep.equal 
+        obj.should.be.deep.equal
           prop1: 121
           prop2: 453
           prop3: undefined
@@ -227,7 +228,28 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           obj = result.mergeTo(false, null, true)
           obj.should.have.property '$propE', 123
           obj.should.have.property '$propA', 1
-          
+        it 'should test not assigned and exported property descriptor', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                '$propE':
+                  enumerable: false
+                  exported: true
+                  value: 123
+                '$propA':
+                  exported: false
+                  assigned: false
+                  value: 12
+              , classAttrs
+          result = createObjectWith SPM, makeArgs $propE: 121, $propA:1
+          attr = getPropertyDescriptor result, '$propA'
+          attr.should.have.property 'enumerable', false
+          obj = result.mergeTo(true, null, true)
+          obj.should.be.deep.equal {}
+          obj = result.mergeTo(false, null, true)
+          obj.should.have.property '$propE', 123
+
 
     describe '#exportTo()', ->
       it 'should exportTo a object and skip readonly property', ->
