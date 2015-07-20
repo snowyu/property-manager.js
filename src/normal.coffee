@@ -3,6 +3,7 @@ isFunction      = require 'util-ex/lib/is/type/function'
 isObject        = require 'util-ex/lib/is/type/object'
 isString        = require 'util-ex/lib/is/type/string'
 extend          = require 'util-ex/lib/_extend'
+cloneObject     = require 'util-ex/lib/clone-object'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
@@ -59,10 +60,13 @@ module.exports  = class NormalPropertyManager
         vAttrs[k]= v
     vAttrs
 
-  defineProperties: (aProperties) ->
-    vAttrs = defineObjectProperties @, aProperties, false
+  defineProperties: (aProperties, recreate = false) ->
+    vAttrs = defineObjectProperties @, aProperties, recreate
     for k, v of vAttrs
-      defineProperty @, k, v.value, v
+      value = v.value
+      if !v.get and !v.set and v.clone isnt false and isObject(value)
+        value = cloneObject value
+      defineProperty @, k, value, v
     return
 
   assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
