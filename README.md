@@ -49,6 +49,7 @@ first the rules of the attributes:
 * The enumerable attributes beginning with '$' can not be exported. but can be assigned.
 * `undefined` value can not be exported.
 * the readonly(writable is false) attributes can not be assigned.
+* the assignment order of properties is the order of defined properties.
 
 You can inherit from it.
 

@@ -34,9 +34,19 @@ module.exports  = class AbstractPropertyManager
       aExclude = []
 
     vAttrs = @getProperties()
-    for k,v of options
+    # sometime the assignment order is very important
+    # so we must use the defined properties as the assignment order.
+    for k,v of vAttrs
       continue if k in aExclude
-      @assignPropertyTo @, options, k, v, vAttrs
+      if options.hasOwnProperty(k)
+        vName = k
+      else if (vName = v.name) and
+          (!options.hasOwnProperty(vName) or (vName in aExclude))
+        vName = null
+      continue unless vName
+      v = options[vName]
+      @assignPropertyTo(@, options, k, v, vAttrs)
+
     @_assign(options) if isFunction @_assign
     @
 
