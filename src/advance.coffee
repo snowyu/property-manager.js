@@ -50,8 +50,9 @@ module.exports  = class AdvancePropertyManager
     vAttrs.nonExported1stChar = nonExported1stChar
     vAttrs.merge aProperties if aProperties
     vAttrs
-  defineProperties: (aProperties) ->
-    vAttrs = defineObjectProperties @, aProperties, false
+
+  defineProperties: (aProperties, recreate = false) ->
+    vAttrs = defineObjectProperties @, aProperties, recreate
     vAttrs.initializeTo @
     @
 
