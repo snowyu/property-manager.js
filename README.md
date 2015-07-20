@@ -427,26 +427,31 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
-### TODO
+### v0.9.0
 
 * the object instances will share the same one of property value if the default value of property is an object.
   * howto create a new object instance when initializing default value.
   * Solution 1: the `value` descriptor could be a function to create new object instance:
-    * Problem: it will be only available for normal and advance property manager
+    * Problem1: it will be only available for normal and advance property manager
       * `value: function (){return Object.create()}`
-    * Problem: the value can not be a function now.
+    * Problem2: the value can not be a function now.
   * Solution 2: check the value whether is object. if so, clone it when initializing.
     * use this solution. but if someone wish all instance share the same value.
     * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
       + `clone` *(Boolean)*: defaults to true.
-* assign property descriptor *(Function(value, dest, src, name))*:the custom attribute assignment function.
-  just `return` the changed value. defaults to undefined.
-  * **Note**: It only used on assign the options from another object.
-  * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
-  * maybe I should wrap it:
-    * add a hidden internal property with prefix
-    * add descriptor `get` function to read the property
-    * add descriptor `set` function to assign the property(call the `assign` descriptor).
++ Smart assignment property supports:
+  * assign property descriptor *(Function(value, dest, src, name))*:
+    * It only used to assign the options from another object.
+    * It's no effect if the assign the property individually. should use the property descriptor `set` to do so.
+    * maybe I should wrap it:
+      * add a hidden internal property with prefix(`nonExported1stChar`)
+      * add descriptor `get` function to read the property
+      * add descriptor `set` function to assign the property(call the `assign` descriptor).
+    * need a descriptor to control whethe enable this.
+      + `assigned`: AdvancePropertyManager::SMART_ASSIGN = 2
+      * enabled: `!get and !set and assigned is AdvancePropertyManager::SMART_ASSIGN`
+    * only available for advance property manager.
+    * **note**: only `value` argument is passed into `assign` descriptor when assignment the property individually.
 
 ### v0.8.0
 

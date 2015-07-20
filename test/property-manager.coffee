@@ -11,6 +11,7 @@ createObject    = require 'inherits-ex/lib/createObject'
 createObjectWith= require 'inherits-ex/lib/createObjectWith'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
+Properties      = require '../src/properties'
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
 setImmediate    = setImmediate || process.nextTick
 
@@ -31,14 +32,17 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
   defaultValueSupport = false
   assignmentSupport = false
+  smartAssignSupport = false
+
+  if ManagerClass.defineProperties
+    defaultValueSupport = true
+    assignmentSupport = true
+  if ManagerClass::$attributes instanceof Properties
+    smartAssignSupport = true
 
   describe name, ->
     class PM
       inherits PM, ManagerClass
-
-      if ManagerClass.defineProperties
-        defaultValueSupport = true
-        assignmentSupport = true
 
       constructor: ->
         @defineProperties classAttrs
@@ -134,6 +138,23 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
     describe '#assignTo()', ->
+      if smartAssignSupport
+        it 'should assign to a plain object via smart assignment property', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'assign1':
+                  assigned: Properties.SMART_ASSIGN
+                  assign: (value, dest, src, name)->extend {hi:'world'}, value
+              , classAttrs
+          result = createObjectWith SPM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          obj = {prop1:222}
+          result.assignTo(obj)
+          obj.should.be.deep.equal
+            prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
+            prop6: 'defaultValue'
+            assign1: sd:91, hi: 'world'
       if assignmentSupport
         it 'should assign to a plain object via custom assignment property', ->
           class SPM

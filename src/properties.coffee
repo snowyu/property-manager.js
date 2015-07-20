@@ -7,8 +7,10 @@ defineProperty  = require 'util-ex/lib/defineProperty'
 cloneObject     = require 'util-ex/lib/clone-object'
 getObjectKeys   = Object.keys
 getOwnPropertyNames = Object.getOwnPropertyNames
+getPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports = class Properties
+  @SMART_ASSIGN: SMART_ASSIGN = 2
   nonExported1stChar: '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
@@ -48,6 +50,7 @@ module.exports = class Properties
     @names = @getNames()
     return
   initializeTo: (dest)->
+    nonExported1stChar = @nonExported1stChar
     for k,v of @names
       continue if k is 'name'
       vAttr = @[k]
@@ -55,6 +58,14 @@ module.exports = class Properties
       if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
          isObject(value)
         value = cloneObject(value)
+      if vAttr.assigned is SMART_ASSIGN and !vAttr.get and !vAttr.set and
+         isFunction(vAttr.assign)
+        vAttr = cloneObject(vAttr)
+        defineProperty dest, nonExported1stChar+k, value
+        ((name, assign, dest)->
+          vAttr.get = ->@[name]
+          vAttr.set = (v)->@[name] = assign(v) #problem: twice called when assign from other object.
+        )(nonExported1stChar+k, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
     name = @names[name] unless @hasOwnProperty name
@@ -93,7 +104,13 @@ module.exports = class Properties
       value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
-      dest[name] = value if vCanAssign
+      if vCanAssign
+        if vAttr.assigned is SMART_ASSIGN and !vAttr.get and !vAttr.set and
+         dest.hasOwnProperty(@nonExported1stChar+name) and isFunction(vAttr.assign)
+         # avoid duplication assignment.
+          dest[@nonExported1stChar+name] = value
+        else
+          dest[name] = value
     return
   assignTo: (dest, src, aExclude)->
     vNames = @names

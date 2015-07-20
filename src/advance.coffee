@@ -19,6 +19,7 @@ module.exports  = class AdvancePropertyManager
     name
 
   @::[gAttrsName] = null
+  @::SMART_ASSIGN = Properties.SMART_ASSIGN
 
   defineProperty @, gAttrsName,
     get: -> AdvancePropertyManager::[gAttrsName]
