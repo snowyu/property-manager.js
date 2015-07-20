@@ -429,6 +429,15 @@ assert.deepEqual(obj.mergeTo(), {
 
 ### TODO
 
+* the object instances will share the same one of property value if the default value of property is an object.
+  * howto create a new object instance when initializing default value.
+  * Solution 1: the `value` descriptor could be a function to create new object instance:
+    * Problem: it will be only available for normal and advance property manager
+      * `value: function (){return Object.create()}`
+    * Problem: the value can not be a function now.
+  * Solution 2: check the value whether is object. if so, clone it when initializing.
+    * use this solution. but if someone wish all instance share the same value.
+    * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
 * assign property descriptor *(Function(value, dest, src, name))*:the custom attribute assignment function.
   just `return` the changed value. defaults to undefined.
   * **Note**: It only used on assign the options from another object.
