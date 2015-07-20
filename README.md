@@ -438,6 +438,7 @@ assert.deepEqual(obj.mergeTo(), {
   * Solution 2: check the value whether is object. if so, clone it when initializing.
     * use this solution. but if someone wish all instance share the same value.
     * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
+      + `clone` *(Boolean)*: defaults to true.
 * assign property descriptor *(Function(value, dest, src, name))*:the custom attribute assignment function.
   just `return` the changed value. defaults to undefined.
   * **Note**: It only used on assign the options from another object.
