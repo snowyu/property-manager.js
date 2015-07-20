@@ -89,6 +89,12 @@ The `key` is the property name. the value is the property descriptor:
     with an assignment operator.
 * assign *(Function(value, dest, src, name))*:the custom attribute assignment function.
   just `return` the changed value. defaults to undefined.
+  * **Note**: It only used on assign the options from another object.
+  * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
+  * maybe I should wrap it:
+    * add a hidden internal property with prefix
+    * add descriptor `get` function to read the property
+    * add descriptor `set` function to assign the property(call the `assign` descriptor).
 * only available on Normal and Advance Property Manager:
   * `assigned` *(Boolean)*: whether the property can be assigned. defaults: undefined
     * if undefined then `=enumerable isnt false and (writable isnt false or isFunction(set))`
@@ -204,7 +210,7 @@ class MyClass
     'attr1': {value:123}
     'hidden': {value:1, enumerable: false}
     '$dontExport': {value:3, enumerable: true}
-    'custom': 
+    'custom':
       value:{}
       assign:(value, dest, src, name)->
         value?={}
@@ -286,7 +292,7 @@ class MyClass
     'attr1': {value:123}
     'hidden': {value:1, enumerable: false}
     '$dontExport': {value:3, enumerable: true}
-    'custom': 
+    'custom':
       value:{}
       assign:(value, dest, src, name)->
         value?={}
@@ -420,6 +426,16 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
+### TODO
+
+* assign property descriptor *(Function(value, dest, src, name))*:the custom attribute assignment function.
+  just `return` the changed value. defaults to undefined.
+  * **Note**: It only used on assign the options from another object.
+  * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
+  * maybe I should wrap it:
+    * add a hidden internal property with prefix
+    * add descriptor `get` function to read the property
+    * add descriptor `set` function to assign the property(call the `assign` descriptor).
 
 ### v0.8.0
 
@@ -437,7 +453,7 @@ assert.deepEqual(obj.mergeTo(), {
 * **broken** the arguments order of assign function in property descriptor are changed:
   * attr.assign(value, dest, src, name) instead of assign(dest, src, value, name)
 
-### 
+###
 
 ## License
 
