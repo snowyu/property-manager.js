@@ -69,6 +69,34 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       it 'should create an object and not assign readonly', ->
         result = createObjectWith PM, makeArgs prop7: 121
         result.should.have.property 'prop7', 719
+      it 'should create an object with an default value array property', ->
+        defaultArr = []
+        class SPM2
+          inherits SPM2, PM
+          constructor: ->
+            @defineProperties
+              'arr':
+                type: 'Array'
+                value: defaultArr
+            , true
+            super
+        result = createObjectWith SPM2, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result.arr.should.not.be.equal defaultArr
+      if defaultValueSupport
+        it 'should create an object with an disable clone default array property', ->
+          defaultArr = []
+          class SPM2
+            inherits SPM2, PM
+            constructor: ->
+              @defineProperties
+                'arr':
+                  type: 'Array'
+                  value: defaultArr
+                  clone:false
+              , true
+              super
+          result = createObjectWith SPM2, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+          result.arr.should.be.equal defaultArr
 
     describe '#toObject', ->
       it 'should convert to a plain object', ->
@@ -278,6 +306,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             @defineProperties
               '_propE': value: 123
               '_propA': value: 12
+            , true
             super
         result = createObjectWith SPM1, makeArgs _propE: 121, _propA:1
         # skipDefault, skipReadOnly, isExported
