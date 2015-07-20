@@ -4,6 +4,7 @@ isBoolean       = require 'util-ex/lib/is/type/boolean'
 isFunction      = require 'util-ex/lib/is/type/function'
 isObject        = require 'util-ex/lib/is/type/object'
 defineProperty  = require 'util-ex/lib/defineProperty'
+cloneObject     = require 'util-ex/lib/clone-object'
 getObjectKeys   = Object.keys
 getOwnPropertyNames = Object.getOwnPropertyNames
 
@@ -51,6 +52,9 @@ module.exports = class Properties
       continue if k is 'name'
       vAttr = @[k]
       value = vAttr.value
+      if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
+         isObject(value)
+        value = cloneObject(value)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
     name = @names[name] unless @hasOwnProperty name
