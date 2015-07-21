@@ -430,6 +430,9 @@ assert.deepEqual(obj.mergeTo(), {
 
 ### TODO
 
++ add the alias property descriptor:
+  * You can define one or more aliases to assign from other object(options)
+  * `alias` *(String|ArrayOf String)*
 * Smart assignment property supports:
   * **broken**: SMART_ASSIGN constant deprecated.
   * `assigned` descriptor *(Boolean|String)*:
