@@ -427,18 +427,29 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
+
+### TODO
+
+* Smart assignment property supports:
+  * **broken**: SMART_ASSIGN constant deprecated.
+  * `assigned` descriptor *(Boolean|String)*:
+    * it's the internal property name of the smart assignment if it's string
+    * the internal property name is the property name with prefix(`nonExported1stChar`)
+      if it's an empty string
+
 ### v0.9.0
 
-* the object instances will share the same one of property value if the default value of property is an object.
-  * howto create a new object instance when initializing default value.
-  * Solution 1: the `value` descriptor could be a function to create new object instance:
-    * Problem1: it will be only available for normal and advance property manager
-      * `value: function (){return Object.create()}`
-    * Problem2: the value can not be a function now.
-  * Solution 2: check the value whether is object. if so, clone it when initializing.
-    * use this solution. but if someone wish all instance share the same value.
-    * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
-      + `clone` *(Boolean)*: defaults to true.
+* clone default property value if the value is an object when initializing
+  * the object instances will share the same one of property value if the default value of property is an object.
+    * howto create a new object instance when initializing default value.
+    * Solution 1: the `value` descriptor could be a function to create new object instance:
+      * Problem1: it will be only available for normal and advance property manager
+        * `value: function (){return Object.create()}`
+      * Problem2: the value can not be a function now.
+    * Solution 2: check the value whether is object. if so, clone it when initializing.
+      * use this solution. but if someone wish all instance share the same value.
+      * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
+        + `clone` *(Boolean)*: defaults to true.
 + Smart assignment property supports:
   * assign property descriptor *(Function(value, dest, src, name))*:
     * It only used to assign the options from another object.
