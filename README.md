@@ -2,17 +2,18 @@
 ## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
 [![Build Status][trvais]](http://travis-ci.org/snowyu/property-manager.js)
-[![Test Coverage][codeClimate]](https://codeclimate.com/github/snowyu/property-manager.js/coverage)
+[![Test Coverage][codeClimateTest]](https://codeclimate.com/github/snowyu/property-manager.js/coverage)
+[![Code Climate][codeClimate]](https://codeclimate.com/github/snowyu/property-manager.js)
 [![downloads][downloads]](https://npmjs.org/package/property-manager)
 [![license][license]](https://npmjs.org/package/property-manager)
-[![Coverage Status][coveralls]](https://coveralls.io/github/snowyu/property-manager.js?branch=master)
 
 [npm]:https://img.shields.io/npm/v/property-manager.svg
 [trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
 [coveralls]:https://coveralls.io/repos/snowyu/property-manager.js/badge.svg?branch=master&service=github
-[codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
+[codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
+[codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
 
 make it easier to manage the properties/attributes of your class.
 
