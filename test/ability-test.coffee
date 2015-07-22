@@ -21,7 +21,7 @@ describe 'PropertyManagerAbility', ->
   checkProperty = (aClass)->
     aClass.should.have.ownProperty 'defineProperties'
     checkBasicProperty(aClass)
-    
+
   checkBasicProperty = (aClass)->
     aClass::should.have.ownProperty 'assign'
     aClass::should.have.ownProperty 'assignPropertyTo'
@@ -37,7 +37,7 @@ describe 'PropertyManagerAbility', ->
     aClass::should.be.have.property 'getProperties', aManager::getProperties
     aClass::should.be.have.property 'assignPropertyTo', aManager::assignPropertyTo
     aClass::should.be.have.property 'defineProperties', aManager::defineProperties
-    
+
   it 'should choose simple manager to a class', ->
     class A
       constructor: ->@initialize.apply @, arguments

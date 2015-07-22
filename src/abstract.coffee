@@ -4,6 +4,7 @@ isObject        = require 'util-ex/lib/is/type/object'
 isString        = require 'util-ex/lib/is/type/string'
 isBoolean       = require 'util-ex/lib/is/type/boolean'
 isArray         = require 'util-ex/lib/is/type/array'
+createObject    = require 'inherits-ex/lib/createObject'
 deepEqual       = require 'deep-equal'
 getkeys         = Object.keys
 
@@ -24,8 +25,9 @@ module.exports  = class AbstractPropertyManager
     @assign(options)
 
   clone: (options)->
-    @mergeTo(options)
-    new @constructor(options)
+    options = @mergeTo(options)
+    result = createObject @Class
+    result.assign(options)
 
   assign: (options, aExclude)->
     if isString aExclude

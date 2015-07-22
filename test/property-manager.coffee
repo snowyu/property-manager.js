@@ -338,3 +338,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         obj.should.not.have.property '_propA'
         obj.should.not.have.property '_propE'
         ManagerClass::nonExported1stChar = '$'
+    describe '#clone', ->
+      it 'should clone object', ->
+        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        o = result.clone()
+        o.isSame(result).should.be.true
