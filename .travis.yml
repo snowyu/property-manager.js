@@ -14,7 +14,7 @@ before_install:
 before_script: grunt build
 script: npm run-script test-cov
 after_success:
-  - "test -e ./coverage/lcov.info && npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+  - "test -e ./coverage/lcov.info && npm install coveralls && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
 notifications:
   email:
     - snowyu.lee@gmail.com
