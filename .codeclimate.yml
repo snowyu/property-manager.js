@@ -35,6 +35,5 @@ ratings:
 
 exclude_paths:
   - test/**/*
-  - Gruntfile*.coffee
 #- spec/**/*
 #- vendor/**/*
