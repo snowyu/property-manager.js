@@ -11,13 +11,6 @@ getkeys         = Object.keys
 module.exports  = class AdvancePropertyManager
   gAttrsName = '$attributes'
 
-  getRealAttrName = (attrs, name)->
-    if not attrs.hasOwnProperty name
-      for k,v of attrs
-        return k if v.name is name
-      return
-    name
-
   @::[gAttrsName] = null
   @::SMART_ASSIGN = Properties.SMART_ASSIGN
 
