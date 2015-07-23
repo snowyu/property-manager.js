@@ -82,4 +82,3 @@ module.exports  = class NormalPropertyManager
       value = vAttr.value if value is undefined and vAttr.value != undefined
       dest[name] = value if vCanAssign
     return
-
