@@ -58,7 +58,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
     describe '.contructor', ->
       it 'should create an object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         result.should.have.property 'hidden', 123
         result.should.have.property 'prop1', 121
         result.should.have.property 'prop2', 453
@@ -68,7 +69,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result.should.have.property 'prop6', 'defaultValue'
         result.should.not.have.property 'notExi'
       it 'should create an object and assign options', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, $prop5:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, $prop5:111
         result.should.have.property '$prop5', 111
       it 'should create an object and not assign readonly', ->
         result = createObjectWith PM, makeArgs prop7: 121
@@ -84,7 +86,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
                 value: defaultArr
             , true
             super
-        result = createObjectWith SPM2, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith SPM2, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         result.arr.should.not.be.equal defaultArr
       if defaultValueSupport
         it 'should create an object with an disable clone default array property', ->
@@ -99,7 +102,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
                   clone:false
               , true
               super
-          result = createObjectWith SPM2, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith SPM2, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111
           result.arr.should.be.equal defaultArr
         it 'should create an object via meaningful name', ->
           class SPM
@@ -114,24 +118,31 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
     describe '#toObject', ->
       it 'should convert to a plain object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
         if not defaultValueSupport
-          result.toObject().should.be.deep.equal prop1: 121, prop2: 453, prop4: 234, prop7:719
+          result.toObject().should.be.deep.equal
+            prop1: 121, prop2: 453, prop4: 234, prop7:719
         else
           result.toObject().should.be.deep.equal prop1: 121, prop2: 453, prop4: 234
       it 'should convert to a plain object with options', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop6:undefined
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop6:undefined
         if not defaultValueSupport
-          result.toObject(prop1: 333, prop4:5).should.be.deep.equal prop1: 333, prop2: 453, prop4: 5, prop7:719
+          result.toObject(prop1: 333, prop4:5).should.be.deep.equal
+            prop1: 333, prop2: 453, prop4: 5, prop7:719
         else
-          result.toObject(prop1: 333, prop4:5).should.be.deep.equal prop1: 333, prop2: 453, prop4: 5
+          result.toObject(prop1: 333, prop4:5).should.be.deep.equal
+            prop1: 333, prop2: 453, prop4: 5
       if defaultValueSupport
         it 'should convert to a plain object with defaults', ->
-          result = createObjectWith PM, makeArgs prop1: 432, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs
+            prop1: 432, prop2: 453, hidden:399, notExi:111
           result.toObject().should.be.deep.equal prop2: 453
         it 'should convert to a plain object with options and defaults', ->
           result = createObjectWith PM, makeArgs prop2: 453, hidden:399, notExi:111
-          result.toObject(prop3: 333, prop4:5).should.be.deep.equal prop3: 333, prop2: 453, prop4: 5
+          result.toObject(prop3: 333, prop4:5).should.be.deep.equal
+            prop3: 333, prop2: 453, prop4: 5
         it 'should convert to a plain object via meaningful name', ->
           class SPM
             inherits SPM, PM
@@ -146,7 +157,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           obj.should.be.deep.equal meaning: 121, prop1: 222
     describe '#toJSON', ->
       it 'should JSON.stringify()', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4: 1, prop6:undefined
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4: 1, prop6:undefined
         result = JSON.stringify(result)
         result = JSON.parse(result)
         if not defaultValueSupport
@@ -155,7 +167,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           result.should.be.deep.equal prop1: 121, prop2: 453, prop4: 1
       if defaultValueSupport
         it 'should JSON.stringify() with defaults', ->
-          result = createObjectWith PM, makeArgs prop1: 432, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs
+            prop1: 432, prop2: 453, hidden:399, notExi:111
           result = JSON.stringify(result)
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
@@ -170,7 +183,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
                   assigned: Properties.SMART_ASSIGN
                   assign: (value, dest, src, name)->extend {hi:'world'}, value
               , classAttrs
-          result = createObjectWith SPM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
           obj = {prop1:222}
           result.assignTo(obj)
           obj.should.be.deep.equal
@@ -186,7 +200,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
                 'assign1':
                   assign: (value, dest, src, name)->extend {hi:'world'}, value
               , classAttrs
-          result = createObjectWith SPM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
           obj = {prop1:222}
           result.assignTo(obj)
           obj.should.be.deep.equal
@@ -194,29 +209,34 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             prop6: 'defaultValue'
             assign1: sd:91, hi: 'world'
       it 'should assign itself to another plain object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {prop1:222}
         result.assignTo(obj)
         obj.should.be.deep.equal
           prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
           prop6: 'defaultValue'
       it 'should assign itself to another plain object with exclude one', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {prop1:222}
         result.assignTo(obj, 'prop2')
         obj.should.be.deep.equal
           prop1: 121, prop3:undefined, prop4: null, $prop5: 'nonExport'
           prop6: 'defaultValue'
       it 'should assign a plain object with exclude one', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {prop1:222, prop2:91883}
         result.assign(obj, 'prop2')
         result.should.have.property 'prop1',222
         result.should.have.property 'prop2',453
 
       it 'should assign itself to another object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
-        obj = createObjectWith PM, makeArgs prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = createObjectWith PM, makeArgs
+          prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
         obj._assign = sinon.spy()
         result.assignTo(obj)
         obj.should.have.property 'hidden', 123
@@ -232,8 +252,10 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
     describe '#isSame()', ->
       it 'should compare itself to another object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
-        obj = createObjectWith PM, makeArgs prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = createObjectWith PM, makeArgs
+          prop1: 1, prop2: 4, hidden:9, notExi:11, prop3: 11, prop4:11, $prop5: 'dd'
         obj.isSame(result).should.be.false
         result.isSame(obj).should.be.false
         obj =
@@ -248,7 +270,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
     describe '#mergeTo()', ->
       it 'should merge to itself to another object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {test: 123, prop4:4}
         result.mergeTo obj
         obj.should.be.deep.equal
@@ -260,7 +283,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           '$prop5': 'nonExport'
           prop6: 'defaultValue'
       it 'should merge to itself as a new plain object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = result.mergeTo()
         obj.should.be.deep.equal
           prop1: 121
@@ -270,7 +294,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           '$prop5': 'nonExport'
           prop6: 'defaultValue'
       it 'should merge to itself to another object with exclude one property.', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {test: 123, prop4:4}
         result.mergeTo obj, 'prop1'
         obj.should.be.deep.equal
@@ -282,7 +307,8 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop6: 'defaultValue'
 
       it 'should merge to itself to another object with exclude multi properties.', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
         obj = {test: 123, prop4:4}
         result.mergeTo obj, ['prop1', 'prop3']
         obj.should.be.deep.equal
@@ -294,13 +320,15 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
       if defaultValueSupport
         it 'should merge to itself and skip default value', ->
-          result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111
           obj = result.mergeTo(true)
           obj.should.be.deep.equal
             prop1: 121
             prop2: 453
         it 'should merge to an object and skip default value', ->
-          result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111
+          result = createObjectWith PM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111
           obj = test:123,prop4:4
           result.mergeTo(obj, true)
           obj.should.be.deep.equal
@@ -368,12 +396,15 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
     describe '#exportTo()', ->
       it 'should exportTo a object and skip readonly property', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
-        result.exportTo(null, null, null, true).should.be.deep.equal prop1: 121, prop2: 453, prop4: 234
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        result.exportTo(null, null, null, true).should.be.deep.equal
+          prop1: 121, prop2: 453, prop4: 234
 
       if defaultValueSupport
-        it 'should exportTo a object and skip readonly property and not skip default value', ->
-          result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        it 'should exportTo a object and skip readonly and not skip default value', ->
+          result = createObjectWith PM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
           result = result.exportTo(null, null, false, true)
           result.should.be.deep.equal
             prop1: 121
@@ -406,6 +437,22 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         ManagerClass::nonExported1stChar = '$'
     describe '#clone', ->
       it 'should clone object', ->
-        result = createObjectWith PM, makeArgs prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
         o = result.clone()
         o.isSame(result).should.be.true
+    describe '#assignPropertyTo', ->
+      if defaultValueSupport
+        it 'should assignPropertyTo', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'propName':
+                  name: 'meaning'
+              , classAttrs
+          result = createObjectWith SPM, makeArgs meaning: 1221
+          result.should.have.property 'propName', 1221
+          obj = {}
+          result.assignPropertyTo(obj, result, 'meaning', 123, null,true)
+          obj.should.have.property 'propName', 123
