@@ -66,7 +66,7 @@ module.exports = class Properties
         defineProperty dest, nonExported1stChar+k, value
         ((name, assign, dest)->
           vAttr.get = ->@[name]
-          vAttr.set = (v)->@[name] = assign(v) #problem: twice called when assign from other object.
+          vAttr.set = (v)->@[name] = assign(v)
         )(nonExported1stChar+k, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
@@ -81,17 +81,17 @@ module.exports = class Properties
     raiseError ?= true
     throw new TypeError('no such property name:'+name) unless result
     if @Type and value? and attr.type? and value isnt attr.value
-        vType = @Type attr.type
-        if vType
-          result = vType.isValid value
-          if !result and raiseError
-            k = "assign attribute '#{v}' error"
-            if vType.errors.length
-              k += ": the value #{vValue}"
-              for v in vType.errors
-                k += "\n #{v.name}: #{v.message}"
-              dest.errors = vType.errors if dest.errors
-            throw new TypeError k
+      vType = @Type attr.type
+      if vType
+        result = vType.isValid value
+        if !result and raiseError
+          k = "assign attribute '#{v}' error"
+          if vType.errors.length
+            k += ": the value #{vValue}"
+            for v in vType.errors
+              k += "\n #{v.name}: #{v.message}"
+            dest.errors = vType.errors if dest.errors
+          throw new TypeError k
     result
   assignPropertyTo: (dest, src, name, value, skipDefaultValue, isExported)->
     name = @getRealAttrName name
@@ -109,7 +109,7 @@ module.exports = class Properties
       value = vAttr.value if value is undefined and vAttr.value != undefined
       if vCanAssign
         if vAttr.assigned is SMART_ASSIGN and !vAttr.get and !vAttr.set and
-         dest.hasOwnProperty(@nonExported1stChar+name) and isFunction(vAttr.assign)
+           dest.hasOwnProperty(@nonExported1stChar+name) and isFunction(vAttr.assign)
          # avoid duplication assignment.
           dest[@nonExported1stChar+name] = value
         else
