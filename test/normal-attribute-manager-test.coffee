@@ -15,4 +15,3 @@ setImmediate    = setImmediate || process.nextTick
 
 
 test('NormalPropertyManager', Manager)
-
