@@ -14,7 +14,9 @@ module.exports = class Properties
   nonExported1stChar: '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
-    for name, attr of attrs
+    return dest unless attrs
+    for name in getObjectKeys attrs
+      attr = attrs[name]
       @mergePropertyTo dest, name, attr
     dest.updateNames() if dest.updateNames
     return dest
@@ -43,7 +45,7 @@ module.exports = class Properties
       return new Properties aOptions, nonExported1stChar
     defineProperty @, 'names', {}
     if isString(nonExported1stChar) and nonExported1stChar.length is 1
-      @nonExported1stChar = nonExported1stChar
+      defineProperty @ , 'nonExported1stChar', nonExported1stChar
     @initialize(aOptions)
 
   updateNames: ->
@@ -76,6 +78,7 @@ module.exports = class Properties
       attr = null
     attr = @[name] unless attr
     result = attr?
+    raiseError ?= true
     throw new TypeError('no such property name:'+name) unless result
     if @Type and value? and attr.type? and value isnt attr.value
         vType = @Type attr.type
@@ -124,18 +127,14 @@ module.exports = class Properties
       vValue = src[v] || src[k]
       @assignPropertyTo dest, src, k, vValue
     return dest
-  toObject: ->
-    result = {}
-    for k,v of @names
-      result[v.name || k] = v
-    result
   isDefaultObject: (aObject)->
     result = true
     for k,v of @names
-      continue if k is 'name'
-      value = aObject[k] or aObject[v]
+      attr = @[k]
+      continue if k is 'name' or attr.writable is false or attr.enumerable is false
+      value = aObject[k] || aObject[v]
       #continue unless aObject.hasOwnProperty(k) or aObject.hasOwnProperty(v)
-      unless value is undefined or value is @[k].value
+      unless value is undefined or value is attr.value
         result = false
         break
     result
