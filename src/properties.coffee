@@ -44,12 +44,18 @@ module.exports = class Properties
     if not (this instanceof Properties)
       return new Properties aOptions, nonExported1stChar
     defineProperty @, 'names', {}
+    defineProperty @, 'ixNames', {}
     if isString(nonExported1stChar) and nonExported1stChar.length is 1
       defineProperty @ , 'nonExported1stChar', nonExported1stChar
     @initialize(aOptions)
 
   updateNames: ->
-    @names = @getNames()
+    @names = {}
+    @ixNames = {}
+    for k in getObjectKeys @
+      v = @[k]
+      @names[k] = v.name || k
+      @ixNames[v.name|| k] = k
     return
   initializeTo: (dest)->
     nonExported1stChar = @nonExported1stChar
@@ -70,7 +76,7 @@ module.exports = class Properties
         )(nonExported1stChar+k, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
-    name = @names[name] unless @hasOwnProperty name
+    name = @ixNames[name] unless @hasOwnProperty name
     name
   validatePropertyValue: (name, value, attr, raiseError)->
     if isBoolean attr
@@ -116,13 +122,13 @@ module.exports = class Properties
           dest[name] = value
     return
   assignTo: (dest, src, aExclude)->
-    vNames = @names
     if isString aExclude
       aExclude = [aExclude]
     else if not isArray aExclude
       aExclude = []
+    vNames = @names
     for k, v of vNames
-      continue if v in aExclude
+      continue if (v in aExclude) or (k in aExclude)
       vAttr = @[k]
       vValue = src[v] || src[k]
       @assignPropertyTo dest, src, k, vValue
@@ -138,9 +144,9 @@ module.exports = class Properties
         result = false
         break
     result
-  getNames: ->
-    result = {}
-    for k in getObjectKeys @
-      v = @[k]
-      result[k] = v.name || k
-    result
+  # getNames: ->
+  #   result = {}
+  #   for k in getObjectKeys @
+  #     v = @[k]
+  #     result[k] = v.name || k
+  #   result
