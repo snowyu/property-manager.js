@@ -267,6 +267,13 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop7:719 # will be ignore
           extra:222 # will be ignore
         result.isSame(obj).should.be.true
+      it 'should compare itself to another object with skip some keys', ->
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
+        obj = result.clone(prop4:1211)
+        result.isSame(obj).should.be.false
+        result.isSame(obj,'prop4').should.be.true
+        result.isSame(obj,['prop4']).should.be.true
 
     describe '#mergeTo()', ->
       it 'should merge to itself to another object', ->

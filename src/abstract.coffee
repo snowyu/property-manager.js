@@ -114,7 +114,12 @@ module.exports  = class AbstractPropertyManager
   # TODO: deeply compare options
   #   need ignore redundant properties in aOptions,
   #   skip some properties, custom filter.
-  isSame: (aOptions)->
+  isSame: (aOptions, aExclude)->
+    if isString aExclude
+      aExclude = [aExclude]
+    else if not isArray aExclude
+      aExclude = []
     for k,v of @mergeTo()
+      continue if k in aExclude
       return false unless deepEqual aOptions[k], v
     return true
