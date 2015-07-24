@@ -1,24 +1,27 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "0.11"
-  - "0.12"
-  - "1.0"
-  - "1.8"
-  - "2.0"
-  - "2.2"
-  - "2.3"
+- '0.10'
+- '0.11'
+- '0.12'
+- '1.0'
+- '1.8'
+- '2.0'
+- '2.2'
+- '2.3'
 before_install:
-  - npm install -g grunt-cli
-  - npm install coffee-script
+- npm install -g grunt-cli
+- npm install coffee-script
 before_script: grunt build
 script: npm run-script test-cov
 after_success:
-  - "test -e ./coverage/lcov.info && npm install coveralls && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
-  - "test -e ./coverage/lcov.info && npm install codeclimate-test-reporter && codeclimate-test-reporter < ./coverage/lcov.info"
+- test -e ./coverage/lcov.info && npm install coveralls && cat ./coverage/lcov.info
+  | ./node_modules/.bin/coveralls
+- test -e ./coverage/lcov.info && npm install codeclimate-test-reporter && codeclimate-test-reporter
+  < ./coverage/lcov.info
 notifications:
   email:
-    - snowyu.lee@gmail.com
+  - snowyu.lee@gmail.com
 addons:
   code_climate:
-    repo_token: 7350bf705c34afdbd58e1104794bfd290972073a4c6db203c9993c95c19cca11
+    repo_token:
+      secure: NNrbfA70denB4ovdl/GLrtk7snFXg2cd7pcc8ebWCgH4BEy3myVUCUDoHLTl8XHGxl8W+cDlyTd8h/e9myBJ+8IvoxP0U8Pzbc8Um7g8PsrrsKgSYOdoff7BLlEr1iC0F6i5Zrs+BtUFTMrmdXDJVyg0pccQpu0auIz662+n/3bK+g9lWiIfKMARrIXERcAn6251NLj8UsS4LP6EKyDPbWzJcS11E4plqX3w+bKrXdMJikjmgN0yPe2s+nzWn0Ej/0FUtdsXT9Nvrb8qD+wPO0DOB6pyc5LvN0htioAkAqjYiIproY2Dhn1zz5g6KoTezhZfCuq5l1pAqDoWHIXtDooaWxjk48gr5TTBKY4n9Cqaf8cMQbllGgLQDkoMfwqRMxoTY3jmhICnBPeq42wMlnryVV4eqL7PBFrc7UaP9cnoICCMwT1VTfcu/PWJZrlKuuszEM4/tO8Ko16P8g9CIu/k0P38PE3cHFUUmGqH8f+K/bdfJrPceVm7D+FmDuIwNfQi5mxpUluY5FYlJhTWKEaMBN0kmXeGrRQz0zL7LSsCUC8xUtjIxosWOpwqdlDwu50zxirYJYYlo6j208iUMa2doYxRnoos5xSS9lG6Ac/WhgH/z3IzuTxQR5AIQtTVBl4qx3KArFBUG6f0oyanWPHee+f5cJjLpeIzy+zFjF4=
