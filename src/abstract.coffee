@@ -26,7 +26,7 @@ module.exports  = class AbstractPropertyManager
 
   clone: (options)->
     options = @mergeTo(options)
-    result = createObject @Class
+    result = createObject @Class || @constructor
     result.assign(options)
 
   assign: (options, aExclude)->
