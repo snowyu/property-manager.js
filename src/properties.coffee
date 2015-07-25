@@ -72,7 +72,7 @@ module.exports = class Properties
         defineProperty dest, nonExported1stChar+k, value
         ((name, assign, dest)->
           vAttr.get = ->@[name]
-          vAttr.set = (v)->@[name] = assign(v)
+          vAttr.set = (v)->@[name] = assign(v, @, @, name)
         )(nonExported1stChar+k, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
