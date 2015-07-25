@@ -1,6 +1,8 @@
 
 ## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
+[![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status][trvais]](http://travis-ci.org/snowyu/property-manager.js)
 [![Test Coverage][codeClimateTest]](https://codeclimate.com/github/snowyu/property-manager.js/coverage)
 [![Code Climate][codeClimate]](https://codeclimate.com/github/snowyu/property-manager.js)
