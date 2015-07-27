@@ -1,7 +1,7 @@
 {
   "name": "property-manager",
   "description": "make it easier to manage the properties/attributes of your class.",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "homepage": "https://github.com/snowyu/property-manager.js",
   "repository": {
     "type": "git",
@@ -29,10 +29,10 @@
     "klass"
   ],
   "dependencies": {
-    "custom-ability": "^1.3.4",
+    "custom-ability": "^1.4.2",
     "deep-equal": "^1.0.0",
-    "inherits-ex": "^1.0.8",
-    "util-ex": "^0.3.9"
+    "inherits-ex": "^1.1.3",
+    "util-ex": "^0.3.10"
   },
   "devDependencies": {
     "chai": "~1.10.0",
