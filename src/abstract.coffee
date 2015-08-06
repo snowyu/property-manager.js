@@ -49,7 +49,7 @@ module.exports  = class AbstractPropertyManager
       v = options[vName]
       @assignPropertyTo(@, options, k, v, vAttrs)
 
-    @_assign(options) if isFunction @_assign
+    @_assign(options, aExclude) if isFunction @_assign
     @
 
   assignProperty: (options, name, value, attrs, skipDefaultValue)->
@@ -108,7 +108,7 @@ module.exports  = class AbstractPropertyManager
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       @assignPropertyTo(dest, @, k, @[k], vAttrs)
-    dest._assign(@) if isFunction dest._assign
+    dest._assign(@, aExclude) if isFunction dest._assign
     dest
 
   # TODO: deeply compare options

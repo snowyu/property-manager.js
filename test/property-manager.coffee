@@ -173,6 +173,25 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
     describe '#assignTo()', ->
+      it 'should call _assign if it is exists', ->
+        _assignFn = sinon.spy()
+        class SPM
+          inherits SPM, PM
+          _assign: _assignFn
+        result = createObjectWith SPM
+        _assignFn.should.be.callOnce
+        attrs = {prop1:1, prop2:13}
+        vExcludes = ['prop1']
+        result.assign attrs, vExcludes
+        _assignFn.should.be.callTwice
+        _assignFn.should.be.calledWith attrs, vExcludes
+        result.should.have.property 'prop1', 432
+        result.should.have.property 'prop2', 13
+        obj = createObjectWith SPM
+        _assignFn.reset()
+        result.assignTo obj, vExcludes
+        _assignFn.should.be.callOnce
+        _assignFn.should.be.calledWith result, vExcludes
       if smartAssignSupport
         it 'should assign to a plain object via smart assignment property', ->
           class SPM
