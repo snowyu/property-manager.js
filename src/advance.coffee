@@ -6,47 +6,26 @@ extend          = require 'util-ex/lib/_extend'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
 Properties      = require './properties'
 PropertyManager = require './abstract'
+defineProperties= require './properties/define-properties'
 getkeys         = Object.keys
 
 module.exports  = class AdvancePropertyManager
-  gAttrsName = '$attributes'
-
-  @::[gAttrsName] = null
+  @::$attributes = null
   @::SMART_ASSIGN = Properties.SMART_ASSIGN
 
-  defineProperty @, gAttrsName,
-    get: -> AdvancePropertyManager::[gAttrsName]
-
-  defineProperty @, 'attrsName', undefined,
-    get: -> gAttrsName
-    set: (value)-> gAttrsName = value
+  defineProperty @, '$attributes',
+    get: -> AdvancePropertyManager::$attributes
 
   constructor: -> @initialize.apply @, arguments
   # merge the methods on the PropertyManager.prototype.
   extend @::, PropertyManager::
 
-  getProperties: -> @[gAttrsName]
+  getProperties: -> @$attributes
 
-  @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
-    if isFunction aTarget
-      vPrototype = aTarget::
-      nonExported1stChar = vPrototype.nonExported1stChar
-    else if isObject aTarget
-      vPrototype = getPrototypeOf aTarget
-      nonExported1stChar = aTarget.nonExported1stChar
-    else
-      throw new TypeError 'the target should be a ctor or object!'
-    vAttrs = vPrototype[gAttrsName]
-    nonExported1stChar?= AdvancePropertyManager::nonExported1stChar
-
-    if recreate or not (vAttrs instanceof Properties)
-      vPrototype[gAttrsName] = vAttrs = Properties()
-    vAttrs.nonExported1stChar = nonExported1stChar
-    vAttrs.merge aProperties if aProperties
-    vAttrs
+  @defineProperties = defineProperties
 
   defineProperties: (aProperties, recreate = false) ->
-    vAttrs = defineObjectProperties @, aProperties, recreate
+    vAttrs = defineProperties @, aProperties, recreate
     vAttrs.initializeTo @
     @
 
@@ -54,4 +33,3 @@ module.exports  = class AdvancePropertyManager
     attrs = @getProperties() unless attrs
     attrs.assignPropertyTo dest, src, name, value, skipDefaultValue, isExported
     return
-
