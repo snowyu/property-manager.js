@@ -12,7 +12,6 @@ defineProperties= Object.defineProperties
 getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports  = class NormalPropertyManager
-  gAttrsName = '$attributes'
 
   getRealAttrName = (attrs, name)->
     if not attrs.hasOwnProperty name
@@ -25,16 +24,12 @@ module.exports  = class NormalPropertyManager
   # merge the methods on the PropertyManager.prototype.
   extend @::, PropertyManager::
 
-  @::[gAttrsName] = null
+  @::$attributes = null
 
-  defineProperty @, gAttrsName,
-    get: -> NormalPropertyManager::[gAttrsName]
+  defineProperty @, '$attributes',
+    get: -> NormalPropertyManager::$attributes
 
-  defineProperty @, 'attrsName', undefined,
-    get: -> gAttrsName
-    set: (value)-> gAttrsName = value
-
-  getProperties: -> @[gAttrsName]
+  getProperties: -> @$attributes
 
   @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
     if isFunction aTarget
@@ -46,8 +41,8 @@ module.exports  = class NormalPropertyManager
     else
       throw new TypeError 'the target should be a ctor or object!'
     nonExported1stChar?= NormalPropertyManager::nonExported1stChar
-    vAttrs = vPrototype[gAttrsName]
-    vAttrs = vPrototype[gAttrsName] = {} if recreate or !isObject vAttrs
+    vAttrs = vPrototype.$attributes
+    vAttrs = vPrototype.$attributes = {} if recreate or !isObject vAttrs
     if aProperties
       for k,v of aProperties
         v = value:v unless isObject v
