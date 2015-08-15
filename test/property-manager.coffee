@@ -193,6 +193,24 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         _assignFn.should.be.callOnce
         _assignFn.should.be.calledWith result, vExcludes
       if smartAssignSupport
+        it 'should customize the internal assigned property', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'assign1':
+                  assigned: 'customProp1'
+                  assign: (value, dest, src, name)->extend {hi:'world'}, value
+              , classAttrs
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          result.should.have.ownProperty 'customProp1'
+          obj = {prop1:222}
+          result.assignTo(obj)
+          obj.should.be.deep.equal
+            prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
+            prop6: 'defaultValue'
+            assign1: sd:91, hi: 'world'
         it 'should assign to a plain object via smart assignment property', ->
           class SPM
             inherits SPM, PM

@@ -10,7 +10,7 @@ getOwnPropertyNames = Object.getOwnPropertyNames
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports = class Properties
-  @SMART_ASSIGN: SMART_ASSIGN = 2
+  @SMART_ASSIGN: ''
   nonExported1stChar: '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
@@ -66,14 +66,15 @@ module.exports = class Properties
       if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
          isObject(value)
         value = cloneObject(value)
-      if vAttr.assigned is SMART_ASSIGN and !vAttr.get and !vAttr.set and
+      if isString(vAttr.assigned) and !vAttr.get and !vAttr.set and
          isFunction(vAttr.assign)
         vAttr = cloneObject(vAttr)
-        defineProperty dest, nonExported1stChar+k, value
+        vAttrName = vAttr.assigned || nonExported1stChar+k
+        defineProperty dest, vAttrName, value
         ((name, assign, dest)->
           vAttr.get = ->@[name]
           vAttr.set = (v)->@[name] = assign(v, @, @, name)
-        )(nonExported1stChar+k, vAttr.assign)
+        )(vAttrName, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
     name = @ixNames[name] unless @hasOwnProperty name
@@ -103,9 +104,10 @@ module.exports = class Properties
     name = @getRealAttrName name
     if name
       vAttr = @[name]
-      return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
+      vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
+      return unless (vIsAssigned and !isExported) or (vAttr.exported and isExported)
       return if skipDefaultValue and vAttr.value == value
-      vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
+      vCanAssign = (!isExported and vIsAssigned) or value isnt undefined
       if name is 'name' and vCanAssign and value isnt dest.name
         dest.name = value
         return
@@ -114,10 +116,11 @@ module.exports = class Properties
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
       if vCanAssign
-        if vAttr.assigned is SMART_ASSIGN and !vAttr.get and !vAttr.set and
-           dest.hasOwnProperty(@nonExported1stChar+name) and isFunction(vAttr.assign)
-         # avoid duplication assignment.
-          dest[@nonExported1stChar+name] = value
+        vAttrName = vAttr.assigned || @nonExported1stChar+name if isString vAttr.assigned
+        if vAttrName and !vAttr.get and !vAttr.set and
+           isFunction(vAttr.assign) and dest.hasOwnProperty(vAttrName)
+          # avoid duplication assignment.
+          dest[vAttrName] = value
         else
           dest[name] = value
     return
