@@ -99,15 +99,20 @@ The `key` is the property name. the value is the property descriptor:
   just `return` the changed value. defaults to undefined.
   * **Note**: It only used on assign the options from another object.
   * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
-  * maybe I should wrap it:
-    * add a hidden internal property with prefix
-    * add descriptor `get` function to read the property
-    * add descriptor `set` function to assign the property(call the `assign` descriptor).
+  * Wrap it as smart-assign feature(only on Advance Property Manager):
+    * add a hidden internal property with prefix automatically
+    * add descriptor `get` function to read the property automatically
+    * add descriptor `set` function to assign the property(call the `assign` descriptor) automatically.
 * only available on Normal and Advance Property Manager:
   * `assigned` *(Boolean)*: whether the property can be assigned. defaults: undefined
     * if undefined then `=enumerable isnt false and (writable isnt false or isFunction(set))`
+  * **Smart Assign Support** only available on AdvancePropertyManager
+    * `assigned` *(Boolean|String)*: enable smart-assign support when the assigned is string
+    * it uses the `nonExported1stChar+name` as the internal property name if the string is empty
+    * the `assigned` string is the internal property name if it's non-empty.
   * `exported` *(Boolean)*: whether the property can be exported. defaults: undefined
     * if undefined then `=enumerable isnt false and the first char isnt "$"`
+  * `alias` *(String|ArrayOf String)*: add the alias(es) to the property. It used via assignment from options.
 
 ```js
 
@@ -434,18 +439,22 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
-
 ### TODO
 
-+ add the alias property descriptor:
+### v0.10.0
+
++ add the alias property descriptor(Normal&Advance):
   * You can define one or more aliases to assign from other object(options)
   * `alias` *(String|ArrayOf String)*
-* Smart assignment property supports:
+* Smart assignment property supports(AdvancePropertyManager):
   * **broken**: SMART_ASSIGN constant deprecated.
   * `assigned` descriptor *(Boolean|String)*:
+    * `String` means SMART_ASSIGN.
     * it's the internal property name of the smart assignment if it's string
     * the internal property name is the property name with prefix(`nonExported1stChar`)
       if it's an empty string
+- **broken**: remove `attrsName` property(fixed to '$attributes')
++ add the helper function: properties/define-properties.
 
 ### v0.9.0
 
