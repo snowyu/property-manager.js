@@ -33,10 +33,12 @@ module.exports = (name, ManagerClass, optsPos = 0)->
   defaultValueSupport = false
   assignmentSupport = false
   smartAssignSupport = false
+  aliasSupport = false
 
   if ManagerClass.defineProperties
     defaultValueSupport = true
     assignmentSupport = true
+    aliasSupport = true
   if ManagerClass::$attributes instanceof Properties
     smartAssignSupport = true
 
@@ -172,6 +174,36 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           result = JSON.stringify(result)
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
+    describe '#assign()', ->
+      if aliasSupport
+        it 'should add an alias to a property', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'aliasProp':
+                  alias: 'a1'
+              , classAttrs
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, a1: 'alias-value'
+          result.should.have.property 'aliasProp', 'alias-value'
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, aliasProp: 'aliasvalue'
+          result.should.have.property 'aliasProp', 'aliasvalue'
+        it 'should add multi aliases to a property', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'aliasProp':
+                  alias: ['a1', 'a2']
+              , classAttrs
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, a1: 'alias-value'
+          result.should.have.property 'aliasProp', 'alias-value'
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, a2: 'aliasvalue'
+          result.should.have.property 'aliasProp', 'aliasvalue'
     describe '#assignTo()', ->
       it 'should call _assign if it is exists', ->
         _assignFn = sinon.spy()

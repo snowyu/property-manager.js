@@ -10,7 +10,7 @@ getOwnPropertyNames = Object.getOwnPropertyNames
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports = class Properties
-  @SMART_ASSIGN: ''
+  @SMART_ASSIGN: '' #deprecated
   nonExported1stChar: '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
@@ -56,6 +56,14 @@ module.exports = class Properties
       v = @[k]
       @names[k] = v.name || k
       @ixNames[v.name|| k] = k
+
+      vAlias = v.alias
+      if vAlias
+        if isArray vAlias
+          for n in vAlias
+            @ixNames[n] = k
+        else if isString vAlias
+          @ixNames[vAlias] = k
     return
   initializeTo: (dest)->
     nonExported1stChar = @nonExported1stChar

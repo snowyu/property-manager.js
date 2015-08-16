@@ -45,6 +45,14 @@ module.exports  = class AbstractPropertyManager
       else if (vName = v.name) and
           (!options.hasOwnProperty(vName) or (vName in aExclude))
         vName = null
+      else if !vName and (vAlias = v.alias)
+        if isString(vAlias)
+          vName = vAlias if options.hasOwnProperty(vAlias) and !(vAlias in aExclude)
+        else if isArray(vAlias)
+          for n in vAlias
+            if options.hasOwnProperty(n) and !(n in aExclude)
+              vName = n
+              break
       continue unless vName
       v = options[vName]
       @assignPropertyTo(@, options, k, v, vAttrs)
