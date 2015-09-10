@@ -73,7 +73,12 @@ module.exports = class Properties
       value = vAttr.value
       if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
          isObject(value)
-        value = cloneObject(value)
+        try
+          value = cloneObject(value)
+        catch err
+          err.message = 'the attribute "'+k+'" can not be cloned, set descriptor "clone" to false.\n' +
+            err.message
+          throw err
       if isString(vAttr.assigned) and !vAttr.get and !vAttr.set and
          isFunction(vAttr.assign)
         vAttr = cloneObject(vAttr)

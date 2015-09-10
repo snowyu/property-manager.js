@@ -104,3 +104,20 @@ describe 'Properties', ->
     result.isDefaultObject(obj).should.be.true
     obj.prop6 = 'dd'
     result.isDefaultObject(obj).should.be.false
+
+  it 'should throw a hint error when clone object failed', ->
+    props = Properties obj: value:console
+    result = {}
+    expect(props.initializeTo.bind(props, result)).to.be.throw 'the attribute "obj" can not be cloned, set descriptor "clone" to false'
+  it 'should add the getter/setter to the smart assign attribute automatically', ->
+    props = Properties obj:
+      value: console
+      clone: false
+      assigned: '__oConsole'
+      assign: (value, dest, src, name)->value
+    result = {}
+    props.initializeTo(result)
+    result.__oConsole = 12
+    expect(result.obj).to.be.equal 12
+    result.obj = 66
+    expect(result.__oConsole).to.be.equal 66
