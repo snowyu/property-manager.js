@@ -31,7 +31,7 @@ module.exports = class Properties
     attr.assigned?= vEnumerable and (attr.writable isnt false or attr.set)
     attr.exported?= vEnumerable and name[0] isnt @nonExported1stChar
     vAttr = dest[name]
-    if vAttr is undefined
+    if not isObject vAttr
       dest[name] = attr
     else
       vAttr[k] = v for k, v of attr
@@ -52,8 +52,8 @@ module.exports = class Properties
   updateNames: ->
     @names = {}
     @ixNames = {}
-    for k in getObjectKeys @
-      v = @[k]
+    for k, v of @
+      #v = @[k]
       @names[k] = v.name || k
       @ixNames[v.name|| k] = k
 
@@ -85,7 +85,7 @@ module.exports = class Properties
         )(vAttrName, vAttr.assign)
       defineProperty dest, k, value, vAttr
   getRealAttrName: (name)->
-    name = @ixNames[name] unless @hasOwnProperty name
+    name = @ixNames[name] if @[name] is undefined
     name
   validatePropertyValue: (name, value, attr, raiseError)->
     if isBoolean attr

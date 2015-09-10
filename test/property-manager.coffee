@@ -47,6 +47,9 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       inherits PM, ManagerClass
 
       constructor: ->
+        #TODO::this is for SimplePropertyManager
+        # it's ok if it's merge properties for AdvancePropertyManger.
+        # but it's inherited properties mode now.
         @defineProperties classAttrs
         super
 
@@ -519,14 +522,15 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         o.isSame(result).should.be.true
     describe '#assignPropertyTo', ->
       if defaultValueSupport
-        it 'should assignPropertyTo', ->
+        it.only 'should assignPropertyTo', ->
           class SPM
             inherits SPM, PM
-            ManagerClass.defineProperties SPM,
-              extend
-                'propName':
-                  name: 'meaning'
-              , classAttrs
+            obj = extend
+              'propName':
+                name: 'meaning'
+            , classAttrs
+            console.log 'o',obj
+            ManagerClass.defineProperties SPM, obj
           result = createObjectWith SPM, makeArgs meaning: 1221
           result.should.have.property 'propName', 1221
           obj = {}

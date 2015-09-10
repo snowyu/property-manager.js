@@ -14,5 +14,5 @@ test            = require './property-manager'
 setImmediate    = setImmediate || process.nextTick
 
 
-test('SimplePropertyManager', Simple)
+#test('SimplePropertyManager', Simple)
 

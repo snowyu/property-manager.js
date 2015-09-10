@@ -25,11 +25,13 @@ module.exports  = class AdvancePropertyManager
   @defineProperties = defineProperties
 
   defineProperties: (aProperties, recreate = false) ->
+    console.log 'dP', aProperties
     vAttrs = defineProperties @, aProperties, recreate
     vAttrs.initializeTo @
     @
 
   assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+    console.log 'hhhh'
     attrs = @getProperties() unless attrs
     attrs.assignPropertyTo dest, src, name, value, skipDefaultValue, isExported
     return

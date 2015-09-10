@@ -13,6 +13,7 @@ module.exports  = class AbstractPropertyManager
   nonExported1stChar: '$'
 
   constrcutor: ->
+    console.log 'dddd'
     @initialize.apply @, arguments
 
   assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
@@ -36,6 +37,7 @@ module.exports  = class AbstractPropertyManager
       aExclude = []
 
     vAttrs = @getProperties()
+    console.log @Class.name
     # sometime the assignment order is very important
     # so we must use the defined properties as the assignment order.
     for k,v of vAttrs
@@ -55,6 +57,7 @@ module.exports  = class AbstractPropertyManager
               break
       continue unless vName
       v = options[vName]
+      console.log k,v
       @assignPropertyTo(@, options, k, v, vAttrs)
 
     @_assign(options, aExclude) if isFunction @_assign
