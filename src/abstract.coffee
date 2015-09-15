@@ -92,7 +92,7 @@ module.exports  = class AbstractPropertyManager
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
       continue if skipReadOnly and v.writable is false and !v.set
-      if !dest.hasOwnProperty(k)
+      if dest[k] is undefined
         @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, isExported)
     dest
 
