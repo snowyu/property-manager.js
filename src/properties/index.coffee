@@ -70,6 +70,7 @@ module.exports = class Properties
     nonExported1stChar = @nonExported1stChar
     for k,v of @names
       continue if k is 'name'
+      continue if dest[k] isnt undefined
       vAttr = @[k]
       value = vAttr.value
       if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
