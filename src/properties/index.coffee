@@ -11,7 +11,7 @@ getPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports = class Properties
   @SMART_ASSIGN: '' #deprecated
-  nonExported1stChar: '$'
+  nonExported1stChar: defaultNonExported1stChar = '$'
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
     return dest unless attrs
@@ -45,8 +45,9 @@ module.exports = class Properties
       return new Properties aOptions, nonExported1stChar
     defineProperty @, 'names', {}
     defineProperty @, 'ixNames', {}
-    if isString(nonExported1stChar) and nonExported1stChar.length is 1
-      defineProperty @ , 'nonExported1stChar', nonExported1stChar
+    unless isString(nonExported1stChar) and nonExported1stChar.length is 1
+      nonExported1stChar = defaultNonExported1stChar
+    defineProperty @ , 'nonExported1stChar', nonExported1stChar
     @initialize(aOptions)
 
   updateNames: ->
