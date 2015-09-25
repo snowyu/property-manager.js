@@ -58,7 +58,7 @@ first the rules of the attributes:
 * the readonly(writable is false) attributes can not be assigned.
 * the assignment order of properties is the order of defined properties.
 
-You can inherit from it.
+### You can inherit from it.
 
 * SimplePropertyManager: /lib/simple
   * use the object's property descriptor directly.
@@ -131,12 +131,12 @@ The `key` is the property name. the value is the property descriptor:
 }
 ```
 
-or inject it as an ability:
+### or inject it as an ability:
 
 these methods will be added(replaced):
 
 * `initialize(options)` : overwite this for assign options from constructor?
-  * call `_initialize` if it is exists.
+  * apply the initialized value of the properties to the object if possible.
   * then call `assign` method.
 + `assign(options)` : assign the options' attributes to this object.
   * how to decide which attriubte should be assign?
