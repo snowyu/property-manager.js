@@ -121,3 +121,28 @@ describe 'Properties', ->
     expect(result.obj).to.be.equal 12
     result.obj = 66
     expect(result.__oConsole).to.be.equal 66
+
+  describe '#getValue()', ->
+    it 'should get value from attribute', ->
+      props = Properties str:
+        type: 'String'
+      result = props.getValue(str: '1234', 'str')
+      expect(result).to.be.equal '1234'
+    it 'should get value from attribute name', ->
+      props = Properties str:
+        name: 'Str1'
+        type: 'String'
+      result = props.getValue(Str1: '1234', 'str')
+      expect(result).to.be.equal '1234'
+    it 'should get value from attribute alias string', ->
+      props = Properties str:
+        alias: 'Str1'
+        type: 'String'
+      result = props.getValue(Str1: '1234', 'str')
+      expect(result).to.be.equal '1234'
+    it 'should get value from attribute alias array', ->
+      props = Properties str:
+        alias: ['Str1']
+        type: 'String'
+      result = props.getValue(Str1: '1234', 'str')
+      expect(result).to.be.equal '1234'

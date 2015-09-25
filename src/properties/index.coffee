@@ -162,6 +162,20 @@ module.exports = class Properties
         result = false
         break
     result
+  getValue: (aOptions, aName)->
+    result = aOptions[aName]
+    if not result?
+      attr = @[aName]
+      if attr?
+        result = aOptions[attr.name]
+        if not result? and attr.alias
+          if isString attr.alias
+            result = aOptions[attr.alias]
+          else if isArray attr.alias
+            for aName in attr.alias
+              result = aOptions[aName]
+              break if result?
+    result
   # getNames: ->
   #   result = {}
   #   for k in getObjectKeys @
