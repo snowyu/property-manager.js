@@ -48,7 +48,7 @@ getPropertyManagerClass = (aClass, aOptions)->
       options = arguments[gOptPos]
       options?={}
       that = @
-      if @super and @self
+      if @super and @self # call the parent's initialize method.
         inherited = @super
         that = @self
         inherited.apply(that, arguments)
