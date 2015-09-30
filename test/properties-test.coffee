@@ -109,18 +109,30 @@ describe 'Properties', ->
     props = Properties obj: value:console
     result = {}
     expect(props.initializeTo.bind(props, result)).to.be.throw 'the attribute "obj" can not be cloned, set descriptor "clone" to false'
-  it 'should add the getter/setter to the smart assign attribute automatically', ->
-    props = Properties obj:
-      value: console
-      clone: false
-      assigned: '__oConsole'
-      assign: (value, dest, src, name)->value
-    result = {}
-    props.initializeTo(result)
-    result.__oConsole = 12
-    expect(result.obj).to.be.equal 12
-    result.obj = 66
-    expect(result.__oConsole).to.be.equal 66
+
+  describe 'smart assign', ->
+    it 'should add the getter/setter to the smart assign attribute automatically', ->
+      props = Properties obj:
+        value: console
+        clone: false
+        assigned: '__oConsole'
+        assign: (value, dest, src, name)->value
+      result = {}
+      props.initializeTo(result)
+      result.__oConsole = 12
+      expect(result.obj).to.be.equal 12
+      result.obj = 66
+      expect(result.__oConsole).to.be.equal 66
+    it 'should call the setter when initilizing the property value', ->
+      vAssignFn = sinon.spy (value, dest, src, name)->value
+      props = Properties num:
+        value: 1
+        assigned: '__num'
+        assign: vAssignFn
+      result = {}
+      props.initializeTo result
+      expect(result.num).to.be.equal 1
+      expect(vAssignFn).to.be.calledOnce
 
   describe '#getValue()', ->
     it 'should get value from attribute', ->

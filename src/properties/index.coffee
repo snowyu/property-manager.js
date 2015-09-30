@@ -85,12 +85,13 @@ module.exports = class Properties
          isFunction(vAttr.assign)
         vAttr = cloneObject(vAttr)
         vAttrName = vAttr.assigned || nonExported1stChar+k
-        defineProperty dest, vAttrName, value
-        ((name, assign, dest)->
+        defineProperty dest, vAttrName
+        ((name, assign)->
           vAttr.get = ->@[name]
           vAttr.set = (v)->@[name] = assign(v, @, @, name)
         )(vAttrName, vAttr.assign)
       defineProperty dest, k, value, vAttr
+      dest[k] = value if dest[k] != value # assign the initialization value after define property.
   getRealAttrName: (name)->
     name = @ixNames[name] unless @hasOwnProperty name
     name
