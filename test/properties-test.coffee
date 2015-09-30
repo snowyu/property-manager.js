@@ -116,7 +116,11 @@ describe 'Properties', ->
         value: console
         clone: false
         assigned: '__oConsole'
-        assign: (value, dest, src, name)->value
+        assign: (value, dest, src, name)->
+          expect(dest).be.equal result
+          expect(src).be.equal result
+          expect(name).be.equal '__oConsole'
+          value
       result = {}
       props.initializeTo(result)
       result.__oConsole = 12
