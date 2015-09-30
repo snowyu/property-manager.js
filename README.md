@@ -113,6 +113,8 @@ The `key` is the property name. the value is the property descriptor:
   * `exported` *(Boolean)*: whether the property can be exported. defaults: undefined
     * if undefined then `=enumerable isnt false and the first char isnt "$"`
   * `alias` *(String|ArrayOf String)*: add the alias(es) to the property. It used via assignment from options.
+  * `clone` *(Boolean)*: Whether clone default property value if the value is an object when initializing.
+    defaults to true.
 
 ```js
 
