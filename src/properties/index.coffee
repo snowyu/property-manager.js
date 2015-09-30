@@ -92,6 +92,7 @@ module.exports = class Properties
         )(vAttrName, vAttr.assign)
       defineProperty dest, k, value, vAttr
       dest[k] = value if dest[k] != value # assign the initialization value after define property.
+    return
   getRealAttrName: (name)->
     name = @ixNames[name] unless @hasOwnProperty name
     name
