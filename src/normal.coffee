@@ -5,6 +5,7 @@ isString        = require 'util-ex/lib/is/type/string'
 extend          = require 'util-ex/lib/_extend'
 cloneObject     = require 'util-ex/lib/clone-object'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
+deepEqual       = require 'deep-equal'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
 getAllOwnKeys   = Object.getOwnPropertyNames
@@ -70,7 +71,7 @@ module.exports  = class NormalPropertyManager
     if name
       vAttr = attrs[name]
       return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
-      return if skipDefaultValue and vAttr.value == value
+      return if skipDefaultValue and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
       value = vAttr.assign(value, dest, src, name) if isFunction(vAttr.assign)
       name = vAttr.name || name if isExported

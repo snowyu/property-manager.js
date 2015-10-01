@@ -5,6 +5,7 @@ isFunction      = require 'util-ex/lib/is/type/function'
 isObject        = require 'util-ex/lib/is/type/object'
 defineProperty  = require 'util-ex/lib/defineProperty'
 cloneObject     = require 'util-ex/lib/clone-object'
+deepEqual       = require 'deep-equal'
 getObjectKeys   = Object.keys
 getOwnPropertyNames = Object.getOwnPropertyNames
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
@@ -123,7 +124,7 @@ module.exports = class Properties
       vAttr = @[name]
       vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
       return unless (vIsAssigned and !isExported) or (vAttr.exported and isExported)
-      return if skipDefaultValue and vAttr.value == value
+      return if skipDefaultValue and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vIsAssigned) or value isnt undefined
       if name is 'name' and vCanAssign and value isnt dest.name
         dest.name = value

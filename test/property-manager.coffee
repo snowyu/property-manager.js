@@ -157,6 +157,22 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           obj = {prop1:222}
           result.toObject(obj)
           obj.should.be.deep.equal meaning: 121, prop1: 222
+        it 'should convert a plain object via default object value(deep equal)', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'propName':
+                  value:
+                    true: [1,2]
+                    false: [3,4]
+              , classAttrs
+          result = createObjectWith SPM, makeArgs propName:
+            true: [1,2]
+            false: [3,4]
+          obj = {prop1:222}
+          result.toObject(obj)
+          obj.should.be.deep.equal prop1: 222
     describe '#toJSON', ->
       it 'should JSON.stringify()', ->
         result = createObjectWith PM, makeArgs
@@ -174,6 +190,22 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           result = JSON.stringify(result)
           result = JSON.parse(result)
           result.should.be.deep.equal prop2: 453
+        it 'should JSON.stringify() with default object value(deep equal)', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'propName':
+                  value:
+                    true: [1,2]
+                    false: [3,4]
+              , classAttrs
+          result = createObjectWith SPM, makeArgs prop1: 222, propName:
+            true: [1,2]
+            false: [3,4]
+          result = JSON.stringify result
+          result = JSON.parse(result)
+          result.should.be.deep.equal prop1: 222
     describe '#assign()', ->
       if aliasSupport
         it 'should add an alias to a property', ->
