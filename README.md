@@ -97,6 +97,7 @@ The `key` is the property name. the value is the property descriptor:
     with an assignment operator.
 * assign *(Function(value, dest, src, name))*:the custom attribute assignment function.
   just `return` the changed value. defaults to undefined.
+  It means do not assign this value if return `undefined`
   * **Note**: It only used on assign the options from another object.
   * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
   * Wrap it as smart-assign feature(only on Advance Property Manager):

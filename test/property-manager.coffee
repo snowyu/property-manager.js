@@ -309,6 +309,21 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
             prop6: 'defaultValue'
             assign1: sd:91, hi: 'world'
+        it 'should not assign a property if assign descriptor return undefined', ->
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'assign1':
+                  assign: (value, dest, src, name)->undefined
+              , classAttrs
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, assign1: sd:91
+          obj = {prop1:222}
+          result.assignTo(obj)
+          expect(obj).to.be.deep.equal
+            prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
+            prop6: 'defaultValue'
       it 'should assign itself to another plain object', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111
