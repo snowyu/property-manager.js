@@ -74,6 +74,16 @@ module.exports = class Properties
       continue if dest[k] isnt undefined
       vAttr = @[k]
       value = vAttr.value
+      if isString(vAttr.assigned) and !vAttr.get and !vAttr.set and
+         isFunction(vAttr.assign)
+        # Smart assignment:
+        vAttr = cloneObject(vAttr)
+        vAttrName = vAttr.assigned || nonExported1stChar+k
+        defineProperty dest, vAttrName
+        ((name, assign)->
+          vAttr.get = ->@[name]
+          vAttr.set = (v)->@[name] = assign(v, @, @, name)
+        )(vAttrName, vAttr.assign)
       if !vAttr.get and !vAttr.set and vAttr.clone isnt false and
          isObject(value)
         try
@@ -82,15 +92,6 @@ module.exports = class Properties
           err.message = 'the attribute "'+k+'" can not be cloned, set descriptor "clone" to false.\n' +
             err.message
           throw err
-      if isString(vAttr.assigned) and !vAttr.get and !vAttr.set and
-         isFunction(vAttr.assign)
-        vAttr = cloneObject(vAttr)
-        vAttrName = vAttr.assigned || nonExported1stChar+k
-        defineProperty dest, vAttrName
-        ((name, assign)->
-          vAttr.get = ->@[name]
-          vAttr.set = (v)->@[name] = assign(v, @, @, name)
-        )(vAttrName, vAttr.assign)
       defineProperty dest, k, value, vAttr
       dest[k] = value if dest[k] != value # assign the initialization value after define property.
     return
