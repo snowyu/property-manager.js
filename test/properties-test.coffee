@@ -26,7 +26,9 @@ Properties::Type = FakeType
 describe 'Properties', ->
   after ->fnType.reset()
   classAttrs =
-    prop1: 432
+    prop1:
+      value: 432
+      alias: ['pr1', 'p1']
     prop2: "233"
     prop3: undefined
     prop4: null
@@ -41,7 +43,12 @@ describe 'Properties', ->
       writable: false
       value: 719
   classAttrsDetail =
-    prop1: { value: 432, enumerable: true, assigned: true, exported: true }
+    prop1:
+      value: 432
+      enumerable: true
+      assigned: true
+      exported: true
+      alias: ['pr1', 'p1']
     prop2: { value: '233', enumerable: true, assigned: true, exported: true }
     prop3:
       value: undefined
@@ -96,13 +103,13 @@ describe 'Properties', ->
     result.isDefaultObject({}).should.be.true
     result.isDefaultObject(prop1:431).should.be.false
     obj =
-      prop1: 432
+      p1: 432
       prop2: "233"
       prop4: null
       _prop5: 'nonExport'
       prop6: 'defaultValue'
     result.isDefaultObject(obj).should.be.true
-    obj.prop6 = 'dd'
+    obj.p1 = 431
     result.isDefaultObject(obj).should.be.false
 
   it 'should throw a hint error when clone object failed', ->

@@ -162,7 +162,7 @@ module.exports = class Properties
     for k,v of @names
       attr = @[k]
       continue if k is 'name' or attr.writable is false or attr.enumerable is false
-      value = aObject[k] || aObject[v]
+      value = @getValue(aObject, k)
       #continue unless aObject.hasOwnProperty(k) or aObject.hasOwnProperty(v)
       unless value is undefined or value is attr.value
         result = false
