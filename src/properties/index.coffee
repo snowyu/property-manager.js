@@ -111,9 +111,9 @@ module.exports = class Properties
       if vType
         result = vType.isValid value
         if !result and raiseError
-          k = "assign attribute '#{v}' error"
+          k = "assign attribute '#{name}' error"
           if vType.errors.length
-            k += ": the value #{vValue}"
+            k += ": the value '#{value}'"
             for v in vType.errors
               k += "\n #{v.name}: #{v.message}"
             dest.errors = vType.errors if dest.errors
