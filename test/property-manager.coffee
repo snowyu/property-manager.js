@@ -243,18 +243,18 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           inherits SPM, PM
           _assign: _assignFn
         result = createObjectWith SPM
-        _assignFn.should.be.callOnce
+        _assignFn.should.be.calledOnce
         attrs = {prop1:1, prop2:13}
         vExcludes = ['prop1']
         result.assign attrs, vExcludes
-        _assignFn.should.be.callTwice
+        _assignFn.should.be.calledTwice
         _assignFn.should.be.calledWith attrs, vExcludes
         result.should.have.property 'prop1', 432
         result.should.have.property 'prop2', 13
         obj = createObjectWith SPM
         _assignFn.reset()
         result.assignTo obj, vExcludes
-        _assignFn.should.be.callOnce
+        _assignFn.should.be.calledOnce
         _assignFn.should.be.calledWith result, vExcludes
       if smartAssignSupport
         it 'should customize the internal assigned property', ->
@@ -363,7 +363,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         obj.should.have.property 'prop4', null
         obj.should.have.property '$prop5', 'nonExport'
 
-        obj._assign.should.be.callOnce
+        obj._assign.should.be.calledOnce
         obj._assign.should.be.calledWith result
 
     describe '#isSame()', ->
