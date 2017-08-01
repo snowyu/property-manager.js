@@ -5,4 +5,5 @@ node_modules/*
 lib
 coverage
 .coveralls.yml
-.npmignore
+.npmignorepackage-lock.json
+yarn.lock
