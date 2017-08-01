@@ -30,9 +30,9 @@
     "klass"
   ],
   "dependencies": {
-    "custom-ability": "^1.4.2",
+    "custom-ability": "^1.4.3",
     "deep-equal": "^1.0.1",
-    "inherits-ex": "^1.1.4",
+    "inherits-ex": "^1.2.0",
     "util-ex": "^0.3.15"
   },
   "devDependencies": {
