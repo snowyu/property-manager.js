@@ -13,7 +13,7 @@ module.exports  = class AdvancePropertyManager
   @::$attributes = null
   @::SMART_ASSIGN = Properties.SMART_ASSIGN
 
-  defineProperty @, '$attributes',
+  defineProperty @, '$attributes', undefined,
     get: -> AdvancePropertyManager::$attributes
 
   constructor: -> @initialize.apply @, arguments
