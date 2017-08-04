@@ -16,6 +16,7 @@ module.exports = class Properties
   merge: (attrs)->@mergeTo attrs, @
   mergeTo: (attrs, dest)->
     return dest unless attrs
+    dest = {} unless dest
     for name in getObjectKeys attrs
       attr = attrs[name]
       @mergePropertyTo dest, name, attr
