@@ -120,22 +120,22 @@ module.exports = class Properties
             dest.errors = vType.errors if dest.errors
           throw new TypeError k
     result
-  assignPropertyTo: (dest, src, name, value, skipDefaultValue, isExported)->
+  assignPropertyTo: (dest, src, name, value, skipDefaultValue, exportedOnly)->
     name = @getRealAttrName name
     if name
       vAttr = @[name]
       vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
-      return unless (vIsAssigned and !isExported) or (vAttr.exported and isExported)
+      return unless (vIsAssigned and !exportedOnly) or (vAttr.exported and exportedOnly)
       return if skipDefaultValue and deepEqual vAttr.value, value
-      vCanAssign = (!isExported and vIsAssigned) or value isnt undefined
+      vCanAssign = (!exportedOnly and vIsAssigned) or value isnt undefined
       if name is 'name' and vCanAssign and value isnt dest.name
         dest.name = value
         return
-      @validatePropertyValue name, value, vAttr if !isExported
+      @validatePropertyValue name, value, vAttr if !exportedOnly
       if isFunction(vAttr.assign)
         value = vAttr.assign(value, dest, src, name)
         #vCanAssign = false if value is undefined
-      name = vAttr.name || name if isExported
+      name = vAttr.name || name if exportedOnly
       value = vAttr.value if value is undefined and vAttr.value != undefined
       if vCanAssign
         vAttrName = vAttr.assigned || @nonExported1stChar+name if isString vAttr.assigned
@@ -146,17 +146,24 @@ module.exports = class Properties
         else
           dest[name] = value
     return
-  assignTo: (dest, src, aExclude)->
+  assignTo: (dest, src, aOptions = {})->
+    aExclude = aOptions.exclude
+    skipDefaultValue = aOptions.skipDefault
+    exportedOnly = aOptions.exported
+    skipReadOnly = aOptions.skipReadOnly
     if isString aExclude
       aExclude = [aExclude]
     else if not isArray aExclude
       aExclude = []
+    dest?={}
+
     vNames = @names
     for k, v of vNames
       continue if (v in aExclude) or (k in aExclude)
+      continue if skipReadOnly and v.writable is false and !v.set
       vAttr = @[k]
       vValue = src[v] || src[k]
-      @assignPropertyTo dest, src, k, vValue
+      @assignPropertyTo dest, src, k, vValue, skipDefaultValue, exportedOnly
     return dest
   isDefaultObject: (aObject)->
     result = true

@@ -82,14 +82,25 @@ describe 'Properties', ->
     result = Properties classAttrs, '_'
     obj = {}
     result.mergeTo(result, obj).should.be.deep.equal classAttrsDetail
-  it 'should assign properties to another', ->
-    result = Properties classAttrs, '_'
-    c = extend {}, classAttrsDetail
-    delete c.prop7
-    delete c.hidden
-    result.assignTo({}, result).should.be.deep.equal c
-    delete c.prop1
-    result.assignTo({}, result, 'prop1').should.be.deep.equal c
+
+  describe '#assignTo', ->
+    it 'should assign properties to another', ->
+      result = Properties classAttrs, '_'
+      c = extend {}, classAttrsDetail
+      delete c.prop7
+      delete c.hidden
+      result.assignTo({}, result).should.be.deep.equal c
+      delete c.prop1
+      result.assignTo({}, result, exclude:'prop1').should.be.deep.equal c
+
+    it 'should assign exported properties to another', ->
+      result = Properties classAttrs, '_'
+      c = extend {}, classAttrsDetail
+      delete c._prop5
+      delete c.hidden
+      delete c.prop1
+      result.assignTo({}, result, exported: true, exclude: 'prop1').should.be.deep.equal c
+
   it 'should validate value of property via type', ->
     result = Properties
       test:
