@@ -120,10 +120,11 @@ module.exports = class Properties
             dest.errors = vType.errors if dest.errors
           throw new TypeError k
     result
-  assignPropertyTo: (dest, src, name, value, skipDefaultValue, exportedOnly)->
+  assignPropertyTo: (dest, src, name, value, skipDefaultValue, exportedOnly, skipExists)->
     name = @getRealAttrName name
     if name
       vAttr = @[name]
+      return if skipExists and dest[name] != undefined
       vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
       return unless (vIsAssigned and !exportedOnly) or (vAttr.exported and exportedOnly)
       return if skipDefaultValue and deepEqual vAttr.value, value
@@ -149,6 +150,7 @@ module.exports = class Properties
   assignTo: (dest, src, aOptions = {})->
     aExclude = aOptions.exclude
     skipDefaultValue = aOptions.skipDefault
+    skipExists = aOptions.skipExists # skip dest already exists value
     exportedOnly = aOptions.exported
     skipReadOnly = aOptions.skipReadOnly
     if isString aExclude
@@ -163,7 +165,7 @@ module.exports = class Properties
       continue if skipReadOnly and v.writable is false and !v.set
       vAttr = @[k]
       vValue = src[v] || src[k]
-      @assignPropertyTo dest, src, k, vValue, skipDefaultValue, exportedOnly
+      @assignPropertyTo dest, src, k, vValue, skipDefaultValue, exportedOnly, skipExists
     return dest
   isDefaultObject: (aObject)->
     result = true

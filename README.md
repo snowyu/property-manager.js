@@ -444,6 +444,16 @@ assert.deepEqual(obj.mergeTo(), {
 
 ### TODO
 
+### v0.11.0
+
++ add the `skipExists` option to the `Properties.assignTo` and `Properties.assignPropertyTo`
+* the options to the `Properties.assignTo(dest, src, options)`
+  * `exclude`*(String|Array)*
+  * `skipDefault`*(Boolean)*
+  * `skipExists`*(Boolean)*
+  * `skipReadOnly`*(Boolean)*
+  * `exported`*(Boolean)*
+
 ### v0.10.0
 
 + add the alias property descriptor(Normal&Advance):

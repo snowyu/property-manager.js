@@ -101,6 +101,14 @@ describe 'Properties', ->
       delete c.prop1
       result.assignTo({}, result, exported: true, exclude: 'prop1').should.be.deep.equal c
 
+    it 'should assign properties to another and skip exists', ->
+      result = Properties classAttrs, '_'
+      c = extend {}, classAttrsDetail
+      delete c.prop7
+      delete c.hidden
+      c.prop2 = 1
+      result.assignTo({prop2: 1}, result, skipExists: true).should.be.deep.equal c
+
   it 'should validate value of property via type', ->
     result = Properties
       test:
