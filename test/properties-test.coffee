@@ -24,7 +24,7 @@ class FakeType
 Properties::Type = FakeType
 
 describe 'Properties', ->
-  after ->fnType.reset()
+  after ->fnType.resetHistory()
   classAttrs =
     prop1:
       value: 432

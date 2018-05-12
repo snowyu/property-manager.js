@@ -252,7 +252,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result.should.have.property 'prop1', 432
         result.should.have.property 'prop2', 13
         obj = createObjectWith SPM
-        _assignFn.reset()
+        _assignFn.resetHistory()
         result.assignTo obj, vExcludes
         _assignFn.should.be.calledOnce
         _assignFn.should.be.calledWith result, vExcludes
