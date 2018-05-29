@@ -1,4 +1,4 @@
-export default interface AbstractPropertyManager extends Object {
+export default class AbstractPropertyManager extends Object {
   nonExported1stChar: string;
 
   constructor(...args: any[]);

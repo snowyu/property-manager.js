@@ -1,5 +1,5 @@
 import AbstractPropertyManager from './abstract';
 
-export default interface AdvancePropertyManager extends AbstractPropertyManager {
+export default class AdvancePropertyManager extends AbstractPropertyManager {
   static defineProperties(aTarget, aProperties, recreate?:boolean)
 }
