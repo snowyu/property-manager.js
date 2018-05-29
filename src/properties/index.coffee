@@ -1,3 +1,4 @@
+setPrototypeOf  = require 'inherits-ex/lib/setPrototypeOf'
 isString        = require 'util-ex/lib/is/type/string'
 isArray         = require 'util-ex/lib/is/type/array'
 isBoolean       = require 'util-ex/lib/is/type/boolean'
@@ -11,18 +12,32 @@ getOwnPropertyNames = Object.getOwnPropertyNames
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports = class Properties
+  privated = defineProperty.bind(null, Properties::)
+
   @SMART_ASSIGN: '' #deprecated
-  nonExported1stChar: defaultNonExported1stChar = '$'
-  merge: (attrs)->@mergeTo attrs, @
-  mergeTo: (attrs, dest)->
+  privated 'nonExported1stChar', defaultNonExported1stChar = '$'
+
+  # the attrs inhertis from itself
+  privated 'extends', (attrs, nonExported1stChar)->
+    nonExported1stChar?= this.nonExported1stChar
+    result = Properties(attrs, nonExported1stChar)
+    setPrototypeOf(result, this)
+    result.updateNames()
+    result
+  privated 'merge', (attrs)->@mergeTo attrs, @
+  privated 'mergeTo', (attrs, dest)->
     return dest unless attrs
     dest = {} unless dest
-    for name in getObjectKeys attrs
+    if attrs instanceof Properties
+      keys = (k for k of attrs.names)
+    else
+      keys = getObjectKeys attrs
+    for name in keys
       attr = attrs[name]
       @mergePropertyTo dest, name, attr
     dest.updateNames() if dest.updateNames
     return dest
-  mergePropertyTo: (dest, name, attr)->
+  privated 'mergePropertyTo', (dest, name, attr)->
     #attr = type:attr if isString attr
     attr = value:attr unless isObject attr
     if !attr.enumerable? and attr.assigned is false and attr.exported is false
@@ -38,8 +53,8 @@ module.exports = class Properties
     else
       vAttr[k] = v for k, v of attr
     return
-  _initialize: (aOptions)-> @merge(aOptions)
-  initialize: (aOptions)->
+  privated '_initialize', (aOptions)-> @merge(aOptions)
+  privated 'initialize', (aOptions)->
     @_initialize(aOptions)
     return
   constructor: (aOptions, nonExported1stChar)->
@@ -52,11 +67,12 @@ module.exports = class Properties
     defineProperty @ , 'nonExported1stChar', nonExported1stChar
     @initialize(aOptions)
 
-  updateNames: ->
+  privated 'updateNames', ->
     @names = {}
     @ixNames = {}
-    for k in getObjectKeys @
-      v = @[k]
+    for k,v of @
+      # v = @[k]
+      continue if !isObject(v) or !v.enumerable?
       @names[k] = v.name || k
       @ixNames[v.name|| k] = k
 
@@ -68,7 +84,7 @@ module.exports = class Properties
         else if isString vAlias
           @ixNames[vAlias] = k
     return
-  initializeTo: (dest)->
+  privated 'initializeTo', (dest)->
     nonExported1stChar = @nonExported1stChar
     for k,v of @names
       continue if k is 'name'
@@ -96,10 +112,10 @@ module.exports = class Properties
       defineProperty dest, k, value, vAttr
       dest[k] = value if dest[k] != value # assign the initialization value after define property.
     return
-  getRealAttrName: (name)->
+  privated 'getRealAttrName', (name)->
     name = @ixNames[name] unless @hasOwnProperty name
     name
-  validatePropertyValue: (name, value, attr, raiseError)->
+  privated 'validatePropertyValue', (name, value, attr, raiseError)->
     if isBoolean attr
       raiseError = attr
       attr = null
@@ -120,7 +136,7 @@ module.exports = class Properties
             dest.errors = vType.errors if dest.errors
           throw new TypeError k
     result
-  assignPropertyTo: (dest, src, name, value, skipDefaultValue, exportedOnly, skipExists)->
+  privated 'assignPropertyTo', (dest, src, name, value, skipDefaultValue, exportedOnly, skipExists)->
     name = @getRealAttrName name
     if name
       vAttr = @[name]
@@ -147,7 +163,7 @@ module.exports = class Properties
         else
           dest[name] = value
     return
-  assignTo: (dest, src, aOptions = {})->
+  privated 'assignTo', (dest, src, aOptions = {})->
     aExclude = aOptions.exclude
     skipDefaultValue = aOptions.skipDefault
     skipExists = aOptions.skipExists # skip dest already exists value
@@ -167,7 +183,7 @@ module.exports = class Properties
       vValue = src[v] || src[k]
       @assignPropertyTo dest, src, k, vValue, skipDefaultValue, exportedOnly, skipExists
     return dest
-  isDefaultObject: (aObject)->
+  privated 'isDefaultObject', (aObject)->
     result = true
     for k,v of @names
       attr = @[k]
@@ -178,7 +194,7 @@ module.exports = class Properties
         result = false
         break
     result
-  getValue: (aOptions, aName)->
+  privated 'getValue', (aOptions, aName)->
     result = aOptions[aName]
     if not result?
       attr = @[aName]

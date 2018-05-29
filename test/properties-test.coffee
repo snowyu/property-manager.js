@@ -8,6 +8,7 @@ chai.use(sinonChai)
 
 inherits        = require 'inherits-ex/lib/inherits'
 createObjectWith= require 'inherits-ex/lib/createObjectWith'
+setPrototypeOf  = require 'inherits-ex/lib/setPrototypeOf'
 extend          = require 'util-ex/lib/_extend'
 defineProperty  = require 'util-ex/lib/defineProperty'
 Properties      = require '../src/properties'
@@ -198,3 +199,12 @@ describe 'Properties', ->
         type: 'String'
       result = props.getValue(Str1: '1234', 'str')
       expect(result).to.be.equal '1234'
+
+  describe '#extends', ->
+    it 'should inherit properties', ->
+      result = Properties a: value:1
+      result = result.extends b: value:2
+      obj = {}
+      result.mergeTo(result, obj).should.be.deep.equal
+        b: { value: 2, enumerable: true, assigned: true, exported: true }
+        a: { value: 1, enumerable: true, assigned: true, exported: true }

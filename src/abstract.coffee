@@ -10,6 +10,7 @@ getkeys         = Object.keys
 
 module.exports  = class AbstractPropertyManager
 
+  # the property with prefix '$' will not be exported.
   nonExported1stChar: '$'
 
   constrcutor: ->

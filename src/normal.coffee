@@ -5,6 +5,7 @@ isString        = require 'util-ex/lib/is/type/string'
 extend          = require 'util-ex/lib/_extend'
 cloneObject     = require 'util-ex/lib/clone-object'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
+setPrototypeOf  = require 'inherits-ex/lib/setPrototypeOf'
 deepEqual       = require 'deep-equal'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
@@ -15,7 +16,7 @@ getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
 module.exports  = class NormalPropertyManager
 
   getRealAttrName = (attrs, name)->
-    if not attrs.hasOwnProperty name
+    if not attrs[name]
       for k,v of attrs
         return k if v.name is name
       return
@@ -32,7 +33,26 @@ module.exports  = class NormalPropertyManager
 
   getProperties: -> @$attributes
 
-  @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate = true)->
+  copyProperties = (aProperties, dest, nonExported1stChar) ->
+    dest?= {}
+    if aProperties
+      for k,v of aProperties
+        v = value:v unless isObject v
+        if !v.enumerable? and v.assigned is false and v.exported is false
+          v.enumerable = false
+        else
+          v.enumerable = v.enumerable isnt false
+        v.assigned?= v.enumerable and (v.writable isnt false or isFunction(v.set))
+        v.exported?= v.enumerable and k[0] isnt nonExported1stChar
+        dest[k]= v
+    dest
+
+  extendsObj = (obj) ->
+    result = {}
+    setPrototypeOf(result, obj)
+    result
+
+  @defineProperties: defineObjectProperties = (aTarget, aProperties, recreate)->
     if isFunction aTarget
       vPrototype = aTarget::
       nonExported1stChar = vPrototype.nonExported1stChar
@@ -43,18 +63,13 @@ module.exports  = class NormalPropertyManager
       throw new TypeError 'the target should be a ctor or object!'
     nonExported1stChar?= NormalPropertyManager::nonExported1stChar
     vAttrs = vPrototype.$attributes
-    vAttrs = vPrototype.$attributes = {} if recreate or !isObject vAttrs
-    if aProperties
-      for k,v of aProperties
-        v = value:v unless isObject v
-        if !v.enumerable? and v.assigned is false and v.exported is false
-          v.enumerable = false
-        else
-          v.enumerable = v.enumerable isnt false
-        v.assigned?= v.enumerable and (v.writable isnt false or isFunction(v.set))
-        v.exported?= v.enumerable and k[0] isnt nonExported1stChar
-        vAttrs[k]= v
-    vAttrs
+    vHasOwnProperty = vPrototype.hasOwnProperty('$attributes')
+    vIsProperties = isObject vAttrs
+    if recreate isnt true and !vHasOwnProperty and vIsProperties
+      vPrototype.$attributes = vAttrs = extendsObj(vAttrs)
+    else if recreate or !vIsProperties
+      vAttrs = vPrototype.$attributes = {}
+    copyProperties aProperties, vAttrs, nonExported1stChar
 
   defineProperties: (aProperties, recreate = false) ->
     vAttrs = defineObjectProperties @, aProperties, recreate

@@ -218,11 +218,14 @@ PropertyManager = require 'property-manager/lib/normal'
 SimplePropertyManager = require 'property-manager/lib/simple'
 AdvancePropertyManager = require 'property-manager/lib/advance'
 
+# Only for Normal or Advance PropertyManager
+defineProperties = ProperManager.defineProperties
+
 class MyClass
   inherits MyClass, PropertyManager
   # if you use normal or advance property manager
   # you can define your properties here to:
-  ProperManager.defineProperties MyClass, {
+  defineProperties MyClass, {
     'attr1': {value:123}
     'hidden': {value:1, enumerable: false}
     '$dontExport': {value:3, enumerable: true}
@@ -243,6 +246,11 @@ class MyClass
     #}
     super options
 
+class MyClassEx
+  inherits MyClassEx, MyClass
+  defineProperties MyClassEx, {'extra': {value: 'extra'}}
+  constructor: ->super
+
 ```
 the following is javascript:
 
@@ -252,6 +260,9 @@ var PropertyManager = require('property-manager');
 var PropertyManager = require('property-manager/lib/normal');
 var SimplePropertyManager = require('property-manager/lib/simple');
 var AdvancePropertyManager = require('property-manager/lib/advance');
+
+//# Only for Normal or Advance PropertyManager
+var defineProperties = ProperManager.defineProperties
 
 function MyClass(name, options) {
   this.name = name;
@@ -268,7 +279,7 @@ function MyClass(name, options) {
 inherits(MyClass, PropertyManager);
 
 //only for normal, advance property manager
-PropertyManager.defineProperties(MyClass, {
+defineProperties(MyClass, {
     'attr1': {value:123},
     'hidden': {value:1, enumerable: false},
     '$dontExport': {value:3, enumerable: true},
@@ -283,6 +294,13 @@ PropertyManager.defineProperties(MyClass, {
       }
     }
 });
+
+function MyClassEx() {
+  MyClassEx.__super__.constructor.apply(this, arguments)
+}
+inherits(MyClassEx, MyClass);
+defineProperties(MyClassEx, {'extra': {value: 'extra'}});
+
 
 ```
 
@@ -304,7 +322,8 @@ class MyClass
   # propertyManager MyClass, optionsPosition: 1, exclude: ['assignTo', ...]
   # if you use normal or advance property manager
   # you can define your properties here to:
-  MyClass.defineProperties MyClass, {
+  defineProperties = MyClass.defineProperties
+  defineProperties MyClass, {
     'attr1': {value:123}
     'hidden': {value:1, enumerable: false}
     '$dontExport': {value:3, enumerable: true}
@@ -324,6 +343,11 @@ class MyClass
     # '$dontExport': {value:3, enumerable: false}
     #}
     @initialize.apply @, arguments
+
+class MyClassEx
+  inherits MyClassEx, MyClass
+  defineProperties MyClassEx, {'extra': {value: 'extra'}}
+  constructor: ->super
 
 ```
 
@@ -347,9 +371,10 @@ function MyClass(name, options) {
 // you can exclude some non-core methods:
 //propertyManager(MyClass, {optionsPosition:1, exclude: ['assignTo', ...]})
 propertyManager(MyClass, {optionsPosition: 1});
+var defineProperties = MyClass.defineProperties;
 
 //only for normal, advance property manager
-MyClass.defineProperties(MyClass, {
+defineProperties(MyClass, {
   'attr1': {value: 123},
   'hidden': {value: 1, enumerable: false},
   '$dontExport': {value: 3, enumerable: true},
@@ -365,6 +390,12 @@ MyClass.defineProperties(MyClass, {
   }
 });
 
+function MyClassEx() {
+  MyClassEx.__super__.constructor.apply(this, arguments)
+}
+inherits(MyClassEx, MyClass);
+defineProperties(MyClassEx, {'extra': {value: 'extra'}});
+
 ```
 
 ### Use the Property Manager
@@ -377,6 +408,10 @@ Now the `MyClass` class should have four attributes
 * custom: can be exported and assigned, the value be changed by
   `assign` function in the property descriptor.
 
+the `MyClassEx` inherits from `MyClass` (NOTE: only for normal or advance property manager)
+
+* extra: can be exported and assigned.
+* others inherit from `MyClass`
 
 ```coffee
 assert = require 'assert'
@@ -389,6 +424,9 @@ assert.equal JSON.stringify(my), '{"attr1":3,"custom":{"b":12,"exta":123}}'
 obj = my.clone()
 assert.ok obj.isSame(my) # compare each assigned properties.
 assert.deepEqual obj.mergeTo(), attr1:3, $dontExport:1, custom:{b:12, exta: 123}
+
+myEx = new MyClassEx 'theClassEx', attr1: 3, hidden:11222, $dontExport: 1, custom:{b:12}
+assert.deepEqual myEx.mergeTo(), extra:'extra', attr1:3, $dontExport:1, custom:{b:12, exta: 123}
 ```
 
 the following is javascript:
@@ -443,6 +481,14 @@ assert.deepEqual(obj.mergeTo(), {
 ## Changes
 
 ### TODO
+
+### v0.12.0
+
++ add the `extends(attrs: Object, nonExported1stChar)` method to the `Properties`
+  * return a new `Properties` instance to extends properties from current instance.
++ add the inherited properties supports for `AdvancePropertyManager.defineProperties`
+* change the `recreate` argument default value of `defineProperties` to `false` for `AdvancePropertyManager` and `NormalPropertyManager`
+* set all methods and non-properties of `Properties` to be non-enumerable.
 
 ### v0.11.0
 

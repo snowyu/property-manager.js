@@ -34,11 +34,13 @@ module.exports = (name, ManagerClass, optsPos = 0)->
   assignmentSupport = false
   smartAssignSupport = false
   aliasSupport = false
+  inheritSupport = false
 
   if ManagerClass.defineProperties
     defaultValueSupport = true
     assignmentSupport = true
     aliasSupport = true
+    inheritSupport = true
   if ManagerClass::$attributes instanceof Properties
     smartAssignSupport = true
 
@@ -58,7 +60,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       args.push options
       args
 
-    describe '.contructor', ->
+    describe '.constructor', ->
       it 'should create an object', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111
@@ -91,6 +93,26 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result = createObjectWith SPM2, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111
         result.arr.should.not.be.equal defaultArr
+      if inheritSupport
+        it 'should inherit properties', ->
+          class A
+            inherits A, ManagerClass
+            constructor: -> @initialize.apply @, arguments
+
+            ManagerClass.defineProperties A,
+              a: value:1
+              x: value: 78
+          class B
+            inherits B, A
+            constructor: -> @initialize.apply @, arguments
+            ManagerClass.defineProperties B,
+              b: value:2
+          result = createObjectWith B, makeArgs a:3, b:4, c:5
+          result.should.have.ownProperty 'a', 3
+          result.should.have.ownProperty 'b', 4
+          result.should.have.ownProperty 'x', 78
+          result.should.have.not.property 'c'
+
       if defaultValueSupport
         it 'should create an object with an disable clone default array property', ->
           defaultArr = []
