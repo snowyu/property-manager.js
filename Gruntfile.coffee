@@ -10,7 +10,7 @@ module.exports = (grunt) ->
     copy:
       main:
         files: [
-            {expand: true, cwd: 'src/', src: ['**/*.js'], dest: 'lib/'}
+            {expand: true, cwd: 'src/', src: ['**/*.js','**/*.d.ts'], dest: 'lib/'}
         ]
 
     newer:
@@ -52,7 +52,7 @@ module.exports = (grunt) ->
           'src/**/*.js'
           'test/*.coffee'
         ]
-    
+
 
   #grunt.loadTasks('tasks')
 
