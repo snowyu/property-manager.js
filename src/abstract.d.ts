@@ -1,5 +1,3 @@
-import { Func } from "mocha";
-
 export interface ISimplePropDescriptor {
   configurable?: boolean;
   enumerable?: boolean;
