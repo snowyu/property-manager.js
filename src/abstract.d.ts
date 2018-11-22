@@ -17,13 +17,17 @@ export interface IPropDescriptor extends ISimplePropDescriptor {
   clone?: boolean;
 }
 
-export type SimpleType = any[]|string|number|boolean|null|undefined;
+export type SimpleType = string|number|boolean|any[]|null|undefined;
+export type SimplePropDescriptor = SimpleType | ISimplePropDescriptor;
+export type SimplePropDescriptors = {[name: string]: SimplePropDescriptor};
+export type PropDescriptor = SimpleType | IPropDescriptor;
+export type PropDescriptors = {[name: string]: PropDescriptor};
 
 export default class AbstractPropertyManager extends Object {
   nonExported1stChar: string;
 
   constructor(...args: any[]);
-  defineProperties(aProperties: {[name: string]: ISimplePropDescriptor|SimpleType});
+  defineProperties(aProperties: SimplePropDescriptors);
   getProperties();
   assign(options: any, aExclude?: string|string[]): any;
   assignProperty(options, name: string, value, attrs?, skipDefaultValue?: boolean): void;

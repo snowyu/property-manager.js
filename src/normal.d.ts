@@ -1,5 +1,5 @@
-import AbstractPropertyManager, { IPropDescriptor, SimpleType } from './abstract';
+import AbstractPropertyManager, { PropDescriptors } from './abstract';
 
 export default class NormalPropertyManager extends AbstractPropertyManager {
-  static defineProperties(aTarget, aProperties:IPropDescriptor|SimpleType, recreate?:boolean)
+  static defineProperties(aTarget, aProperties:PropDescriptors, recreate?:boolean)
 }
