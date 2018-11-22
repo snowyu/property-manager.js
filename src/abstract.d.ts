@@ -15,6 +15,7 @@ export interface IPropDescriptor extends ISimplePropDescriptor {
   exported?: boolean;
   alias?: string[]|string;
   clone?: boolean;
+  required?: boolean;
 }
 
 export type SimpleType = string|number|boolean|any[]|null|undefined;
