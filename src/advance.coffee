@@ -33,3 +33,5 @@ module.exports  = class AdvancePropertyManager
     attrs = @getProperties() unless attrs
     attrs.assignPropertyTo dest, src, name, value, skipDefaultValue, isExported
     return
+
+module.exports.default = module.exports;

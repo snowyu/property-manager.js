@@ -62,3 +62,4 @@ coreMethods = [
 ]
 module.exports = customAbility getPropertyManagerClass, coreMethods,  true
 
+module.exports.default = module.exports;

@@ -39,3 +39,5 @@ module.exports  = class SimplePropertyManager
         (isExported and value isnt undefined and name[0] isnt @nonExported1stChar)
       dest[name] = value if vCanAssign
     return
+
+module.exports.default = module.exports;

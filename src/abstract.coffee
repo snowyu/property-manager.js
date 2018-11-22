@@ -132,3 +132,5 @@ module.exports  = class AbstractPropertyManager
       continue if k in aExclude
       return false unless deepEqual aOptions[k], v
     return true
+
+module.exports.default = module.exports;
