@@ -1,7 +1,7 @@
 {
   "name": "property-manager",
   "description": "make it easier to manage the properties/attributes of your class.",
-  "version": "0.12.4",
+  "version": "0.12.5",
   "homepage": "https://github.com/snowyu/property-manager.js",
   "repository": {
     "type": "git",
