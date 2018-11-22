@@ -2,6 +2,7 @@ defineProperty  = require 'util-ex/lib/defineProperty'
 isFunction      = require 'util-ex/lib/is/type/function'
 isObject        = require 'util-ex/lib/is/type/object'
 isString        = require 'util-ex/lib/is/type/string'
+isArray         = require 'util-ex/lib/is/type/array'
 extend          = require 'util-ex/lib/_extend'
 cloneObject     = require 'util-ex/lib/clone-object'
 deepEqual       = require 'deep-equal'
@@ -25,7 +26,7 @@ module.exports  = class SimplePropertyManager
     result
   defineProperties: (aProperties) ->
     for k,v of aProperties
-      v = value:v unless isObject v
+      v = value:v unless !isArray(v) && isObject v
       v.enumerable = v.enumerable isnt false
       value = v.value
       value = cloneObject value if !v.get and !v.set and isObject(value)

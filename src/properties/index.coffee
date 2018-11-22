@@ -39,7 +39,7 @@ module.exports = class Properties
     return dest
   privated 'mergePropertyTo', (dest, name, attr)->
     #attr = type:attr if isString attr
-    attr = value:attr unless isObject attr
+    attr = value:attr unless !isArray(attr) and isObject attr
     if !attr.enumerable? and attr.assigned is false and attr.exported is false
       attr.enumerable = false
     else

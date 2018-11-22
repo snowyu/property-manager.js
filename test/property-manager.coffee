@@ -79,6 +79,19 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       it 'should create an object and not assign readonly', ->
         result = createObjectWith PM, makeArgs prop7: 121
         result.should.have.property 'prop7', 719
+      it 'should create an object with an default value array property only', ->
+        defaultArr = [1]
+        class SPM2
+          inherits SPM2, PM
+          constructor: ->
+            @defineProperties
+              'arr': defaultArr
+            , true
+            super
+        result = createObjectWith SPM2, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111
+        result.should.have.own.deep.property('arr', defaultArr)
+        result.arr.should.not.be.equal defaultArr
       it 'should create an object with an default value array property', ->
         defaultArr = []
         class SPM2
@@ -92,6 +105,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             super
         result = createObjectWith SPM2, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111
+        result.should.have.own.deep.property('arr', defaultArr)
         result.arr.should.not.be.equal defaultArr
       if inheritSupport
         it 'should inherit properties', ->
