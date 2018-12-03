@@ -48,7 +48,7 @@
     "grunt-mocha-test": "*",
     "grunt-newer": "*",
     "istanbul": "^0.4.5",
-    "mocha": "~2.1.0",
+    "mocha": "~5.2.0",
     "pre-commit": "~1.2.2",
     "rimraf": "~2.6.2",
     "shasum": "~1.0.2",
