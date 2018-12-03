@@ -57,6 +57,7 @@
     "sinon-chai": "~3.1.0"
   },
   "scripts": {
+    "release": "standard-version && git push --follow-tags origin master && npm publish",
     "test": "grunt test",
     "test-cov": "mocha --reporter dot && istanbul report text-summary lcovonly"
   },
