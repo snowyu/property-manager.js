@@ -6,6 +6,7 @@ extend          = require 'util-ex/lib/_extend'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
 Properties      = require './properties'
 PropertyManager = require './abstract'
+assignValue     = require './assign-value'
 defineProperties= require './properties/define-properties'
 getkeys         = Object.keys
 

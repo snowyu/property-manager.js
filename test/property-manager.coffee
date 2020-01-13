@@ -15,7 +15,22 @@ Properties      = require '../src/properties'
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
 setImmediate    = setImmediate || process.nextTick
 
+class CustomType
+  constructor: (value)->
+    if !(this instanceof CustomType) then return new CustomType(value)
+    try
+      value = JSON.parse(value)
+    catch err
+    @value = value
+
+  toJSON: ()->JSON.stringify(@value)
+  valueOf: ()->@value
+
 module.exports = (name, ManagerClass, optsPos = 0)->
+  typedAttrs =
+    propTyped:
+      type: CustomType
+      value: 123
   classAttrs =
     prop1: 432
     prop2: "233"
@@ -45,6 +60,12 @@ module.exports = (name, ManagerClass, optsPos = 0)->
     smartAssignSupport = true
 
   describe name, ->
+    class TypedPM
+      inherits TypedPM, ManagerClass
+      constructor: ->
+        @defineProperties typedAttrs
+        super
+
     class PM
       inherits PM, ManagerClass
 
@@ -59,6 +80,19 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           args.push i
       args.push options
       args
+
+    describe 'typed properties', ->
+      it 'should assign typed property', ->
+        return if name.startsWith 'Simple'
+        result = new TypedPM
+        result.should.have.property 'propTyped'
+        result.propTyped.should.instanceof CustomType
+        result.propTyped.value.should.be.equal 123
+        result = createObjectWith TypedPM, makeArgs
+          propTyped: 121
+        result.should.have.property 'propTyped'
+        result.propTyped.should.instanceof CustomType
+        result.propTyped.value.should.be.equal 121
 
     describe '.constructor', ->
       it 'should create an object', ->

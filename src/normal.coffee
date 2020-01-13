@@ -8,6 +8,7 @@ cloneObject     = require 'util-ex/lib/clone-object'
 getPrototypeOf  = require 'inherits-ex/lib/getPrototypeOf'
 setPrototypeOf  = require 'inherits-ex/lib/setPrototypeOf'
 deepEqual       = require 'deep-equal'
+assignValue     = require './assign-value'
 PropertyManager = require './abstract'
 getkeys         = Object.keys
 getAllOwnKeys   = Object.getOwnPropertyNames
@@ -78,6 +79,7 @@ module.exports  = class NormalPropertyManager
       value = v.value
       if !v.get and !v.set and v.clone isnt false and isObject(value)
         value = cloneObject value
+      value = assignValue(value, v.type)
       defineProperty @, k, value, v
     return
 
@@ -94,7 +96,7 @@ module.exports  = class NormalPropertyManager
         #vCanAssign = false if value is undefined
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
-      dest[name] = value if vCanAssign
+      dest[name] = assignValue(value, vAttr.type) if vCanAssign
     return
 
 module.exports.default = module.exports;

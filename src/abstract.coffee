@@ -43,10 +43,10 @@ module.exports  = class AbstractPropertyManager
       continue if k in aExclude
       if options.hasOwnProperty(k)
         vName = k
-      else if (vName = v.name) and
+      else if (vName = v && v.name) and
           (!options.hasOwnProperty(vName) or (vName in aExclude))
         vName = null
-      else if !vName and (vAlias = v.alias)
+      else if !vName and (vAlias = v && v.alias)
         if isString(vAlias)
           vName = vAlias if options.hasOwnProperty(vAlias) and !(vAlias in aExclude)
         else if isArray(vAlias)
@@ -92,7 +92,7 @@ module.exports  = class AbstractPropertyManager
     for k,v of vAttrs
       continue if k in aExclude
       continue if v and v.name and (v.name in aExclude)
-      continue if skipReadOnly and v.writable is false and !v.set
+      continue if skipReadOnly and v && v.writable is false and !v.set
       if dest[k] is undefined
         @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, isExported)
     dest

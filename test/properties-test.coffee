@@ -22,10 +22,11 @@ class FakeType
   isValid: sinon.spy -> @valid
   errors:[]
 
-Properties::Type = FakeType
-
 describe 'Properties', ->
-  after ->fnType.resetHistory()
+  before -> Properties::Type = FakeType
+  after ->
+    fnType.resetHistory()
+    Properties::Type = undefined
   classAttrs =
     prop1:
       value: 432

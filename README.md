@@ -480,7 +480,34 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
-### TODO
+### v0.13.0
+
++ add typed property for `AdvancePropertyManager` and `NormalPropertyManager`
+
+```js
+function CustomType(value) {
+  if (!(this instanceof CustomType)) return new CustomType(value)
+  try {
+    value = JSON.parse(value)
+  } catch(err) {
+    this.value = value
+  }
+}
+
+const attrs = {
+  prop1: {type: CustomType, value: 111}
+}
+
+class TypedPM extends AdvancePropertyManager {
+  constructor(opts) {
+    super(opts)
+  }
+}
+TypedPM.defineProperties(attrs)
+
+const obj = new TypedPM()
+console.log(obj.prop1 instanceof CustomType)
+```
 
 ### v0.12.0
 

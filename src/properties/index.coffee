@@ -7,6 +7,7 @@ isObject        = require 'util-ex/lib/is/type/object'
 defineProperty  = require 'util-ex/lib/defineProperty'
 cloneObject     = require 'util-ex/lib/clone-object'
 deepEqual       = require 'deep-equal'
+assignValue     = require '../assign-value'
 getObjectKeys   = Object.keys
 getOwnPropertyNames = Object.getOwnPropertyNames
 getPropertyDescriptor = Object.getOwnPropertyDescriptor
@@ -109,6 +110,7 @@ module.exports = class Properties
           err.message = 'the attribute "'+k+'" can not be cloned, set descriptor "clone" to false.\n' +
             err.message
           throw err
+      value = assignValue(value, vAttr.type)
       defineProperty dest, k, value, vAttr
       dest[k] = value if dest[k] != value # assign the initialization value after define property.
     return
@@ -159,9 +161,9 @@ module.exports = class Properties
         if vAttrName and !vAttr.get and !vAttr.set and
            isFunction(vAttr.assign) and dest.hasOwnProperty(vAttrName)
           # avoid duplication assignment.
-          dest[vAttrName] = value
+          dest[vAttrName] = assignValue(value, vAttr.type, 'A:'+ vAttrName)
         else
-          dest[name] = value
+          dest[name] = assignValue(value, vAttr.type, 'A:'+ name)
     return
   privated 'assignTo', (dest, src, aOptions = {})->
     aExclude = aOptions.exclude
