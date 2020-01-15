@@ -509,8 +509,41 @@ const obj = new TypedPM()
 console.log(obj.prop1 instanceof CustomType)
 ```
 
-### v0.12.0
+### v1.0.0
 
++ add the array with type supports.
+
+```ts
+import { arrayOf } from 'property-manager/lib/array';
+import AdvancePropertyManager from 'property-manager/lib/advance';
+import { PropertyManager as Properties, Property as Prop } from 'property-manager-decorator';
+
+@Properties
+class Phone extends AdvancePropertyManager {
+  @Prop() value!: string;
+  @Prop() codeNum!: string;
+  @Prop() kind!: string;
+  constructor(initValue?) {
+    super(initValue);
+  }
+}
+
+@Properties
+class Contact extends AdvancePropertyManager {
+  @Prop({type: String}) name!: string;
+  @Prop({type: arrayOf(Phone)}) phones!: Phone[];
+  constructor(initValue?) {
+    super(initValue);
+  }
+}
+```
+* **BROKEN** change `toObject` method params to `(options?: IMergeOptions)`
+* **BROKEN** change `assign` method params to `(src, options?: IMergeOptions)`
+* **BROKEN** change `assignTo` method params to `(dest, options?: IMergeOptions)`
+* **BROKEN** change `assignPropertyTo` and `assignProperty` method params to `(dest, src, name: string, value, attrs?, options?: IMergeOptions)`
+* **BROKEN** change `exportTo` method params to `(dest, options?: IExportOptions)`
+* **BROKEN** change `mergeTo` method params to `(dest, options?: IMergeOptions)`
+  + add `skipNull` and `skipUndefined` option to `IExportOptions` and `IMergeOptions`
 + add the `extends(attrs: Object, nonExported1stChar)` method to the `Properties`
   * return a new `Properties` instance to extends properties from current instance.
 + add the inherited properties supports for `AdvancePropertyManager.defineProperties`
