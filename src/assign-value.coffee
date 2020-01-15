@@ -1,9 +1,10 @@
 assignValue = (value, type) ->
-  if typeof type is 'function'
+  if typeof type is 'function' and not (value instanceof type)
     try
       value = type(value)
     catch err
-      throw err unless err.message.endsWith('\'new\'')
+      msg = err.message
+      throw err unless msg.endsWith('\'new\'') or msg.endsWith('not a function')
       value = new type(value)
   value
 module.exports = assignValue
