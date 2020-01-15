@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/snowyu/property-manager.js/compare/v1.0.0...v1.0.1) (2020-01-15)
+
+
+### Bug Fixes
+
+* IPropDescriptor.type ts declaration miss Function ([b02d694](https://github.com/snowyu/property-manager.js/commit/b02d694f7f442803ff83e172517329372b4abc59))
+
 ## [1.0.0](https://github.com/snowyu/property-manager.js/compare/v0.12.7...v1.0.0) (2020-01-15)
 
 
