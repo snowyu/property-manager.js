@@ -9,6 +9,7 @@ Default         = require './'
 Simple          = require './simple'
 Normal          = require './normal'
 Advance         = require './advance'
+Abstract        = require './abstract'
 getkeys         = Object.keys
 
 getPropertyManagerClass = (aClass, aOptions)->
@@ -32,6 +33,9 @@ getPropertyManagerClass = (aClass, aOptions)->
       when 'advance'
         extend @, Advance
         extend @::, Advance::
+      when 'abstract'
+        extend @, Abstract
+        extend @::, Abstract::
       when 'normal'
         extend @, Normal
         extend @::, Normal::
@@ -57,6 +61,7 @@ getPropertyManagerClass = (aClass, aOptions)->
 
 coreMethods = [
   'assign', 'assignPropertyTo', 'getProperties'
+  'mergeTo'
   'defineProperties'
   'nonExported1stChar'
 ]

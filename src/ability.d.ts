@@ -2,7 +2,7 @@ export interface IAbilityMethods {
   [name: string]: Function;
 }
 
-type PropManagerType = 'simple' | 'advance' | 'normal'
+type PropManagerType = 'simple' | 'advance' | 'normal' | 'abstract'
 type IAbilityOptions = IAbilityOption | PropManagerType
 export interface IAbilityOption {
   name?: string;
