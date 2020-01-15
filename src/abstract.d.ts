@@ -18,6 +18,20 @@ export interface IPropDescriptor extends ISimplePropDescriptor {
   required?: boolean;
 }
 
+export interface IExportOptions {
+  exclude?: string|string[];
+  overwrite?: boolean;
+  skipDefault?: boolean;
+  skipReadOnly?: boolean;
+  skipExists?: boolean;
+  skipNull?: boolean;
+  skipUndefined?: boolean;
+}
+
+export interface IMergeOptions extends IExportOptions {
+  isExported?: boolean;
+}
+
 export type SimpleType = string|number|boolean|any[]|null|undefined;
 export type SimplePropDescriptor = SimpleType | ISimplePropDescriptor;
 export type SimplePropDescriptors = {[name: string]: SimplePropDescriptor};
@@ -31,12 +45,12 @@ export default class AbstractPropertyManager extends Object {
   defineProperties(aProperties: SimplePropDescriptors);
   getProperties();
   assign(options: any, aExclude?: string|string[]): any;
-  assignProperty(options, name: string, value, attrs?, skipDefaultValue?: boolean): void;
-  assignPropertyTo(dest, src, name: string, value, attrs?, skipDefaultValue?: boolean, isExported?: boolean): void;
+  assignProperty(src, name: string, value, attrs?, options?: IMergeOptions): void;
+  assignPropertyTo(dest, src, name: string, value, attrs?, options?: IMergeOptions): void;
   initialize(options): any;
   clone(options): any;
-  mergeTo(dest, aExclude?: string|string[], skipDefault?: boolean, skipReadOnly?: boolean, isExported?: boolean): any;
-  exportTo(dest, aExclude?: string|string[], skipDefault?: boolean, skipReadOnly?: boolean): any;
+  mergeTo(dest, options?: IMergeOptions): any;
+  exportTo(dest, options?: IExportOptions): any;
   toObject(options?): any;
   toJSON():any;
   assignTo(dest, aExclude?: string|string[]):any;
