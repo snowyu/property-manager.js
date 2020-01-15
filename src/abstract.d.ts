@@ -9,7 +9,7 @@ export interface ISimplePropDescriptor {
 
 export interface IPropDescriptor extends ISimplePropDescriptor {
   name?: string;
-  type?: string|(string|Function)[];
+  type?: string|Function|(string|Function)[];
   assign?: (value?, dest?, src?, name?)=>any;
   assigned?: boolean|string;
   exported?: boolean;
