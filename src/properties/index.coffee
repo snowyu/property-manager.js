@@ -138,52 +138,62 @@ module.exports = class Properties
             dest.errors = vType.errors if dest.errors
           throw new TypeError k
     result
-  privated 'assignPropertyTo', (dest, src, name, value, skipDefaultValue, exportedOnly, skipExists)->
+  privated 'assignPropertyTo', (dest, src, name, value, options)->
+    # isExported means exportedOnly
+    {skipDefault, isExported, skipExists} = options if options
     name = @getRealAttrName name
     if name
       vAttr = @[name]
       return if skipExists and dest[name] != undefined
       vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
-      return unless (vIsAssigned and !exportedOnly) or (vAttr.exported and exportedOnly)
-      return if skipDefaultValue and deepEqual vAttr.value, value
-      vCanAssign = (!exportedOnly and vIsAssigned) or value isnt undefined
+      return unless (vIsAssigned and !isExported) or (vAttr.exported and isExported)
+      return if skipDefault and deepEqual vAttr.value, value
+      vCanAssign = (!isExported and vIsAssigned) or value isnt undefined
       if name is 'name' and vCanAssign and value isnt dest.name
         dest.name = value
         return
-      @validatePropertyValue name, value, vAttr if !exportedOnly
+      @validatePropertyValue name, value, vAttr if !isExported
       if isFunction(vAttr.assign)
         value = vAttr.assign(value, dest, src, name)
         #vCanAssign = false if value is undefined
-      name = vAttr.name || name if exportedOnly
+      name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
       if vCanAssign
+
         vAttrName = vAttr.assigned || @nonExported1stChar+name if isString vAttr.assigned
-        if vAttrName and !vAttr.get and !vAttr.set and
+        unless vAttrName and !vAttr.get and !vAttr.set and
            isFunction(vAttr.assign) and dest.hasOwnProperty(vAttrName)
           # avoid duplication assignment.
-          dest[vAttrName] = assignValue(value, vAttr.type, 'A:'+ vAttrName)
+          # dest[vAttrName] = assignValue(value, vAttr.type)
+          # else
+          vAttrName = name
+          # dest[name] = assignValue(value, vAttr.type)
+
+        if isExported
+          if value?
+            if isFunction value.toObject
+              value = value.toObject(options)
+            else if isFunction value.toJSON
+              value = value.toJSON()
+          dest[vAttrName] = value
         else
-          dest[name] = assignValue(value, vAttr.type, 'A:'+ name)
+          dest[vAttrName] = assignValue(value, vAttr.type)
     return
   privated 'assignTo', (dest, src, aOptions = {})->
-    aExclude = aOptions.exclude
-    skipDefaultValue = aOptions.skipDefault
-    skipExists = aOptions.skipExists # skip dest already exists value
-    exportedOnly = aOptions.exported
-    skipReadOnly = aOptions.skipReadOnly
-    if isString aExclude
-      aExclude = [aExclude]
-    else if not isArray aExclude
-      aExclude = []
+    {exclude, skipReadOnly} = aOptions
+    if isString exclude
+      exclude = [exclude]
+    else if not isArray exclude
+      exclude = []
     dest?={}
 
     vNames = @names
     for k, v of vNames
-      continue if (v in aExclude) or (k in aExclude)
+      continue if (v in exclude) or (k in exclude)
       continue if skipReadOnly and v.writable is false and !v.set
       vAttr = @[k]
       vValue = src[v] || src[k]
-      @assignPropertyTo dest, src, k, vValue, skipDefaultValue, exportedOnly, skipExists
+      @assignPropertyTo dest, src, k, vValue, aOptions
     return dest
   privated 'isDefaultObject', (aObject)->
     result = true
@@ -216,3 +226,4 @@ module.exports = class Properties
   #     v = @[k]
   #     result[k] = v.name || k
   #   result
+module.exports.default = module.exports;

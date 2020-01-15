@@ -83,20 +83,31 @@ module.exports  = class NormalPropertyManager
       defineProperty @, k, value, v
     return
 
-  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+  assignPropertyTo: (dest, src, name, value, attrs, options)->
+    {skipDefault, isExported} = options if options
     attrs = @getProperties() unless attrs
     name = getRealAttrName attrs, name
     if name
       vAttr = attrs[name]
       return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
-      return if skipDefaultValue and deepEqual vAttr.value, value
+      return if skipDefault and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
       if isFunction(vAttr.assign)
         value = vAttr.assign(value, dest, src, name)
         #vCanAssign = false if value is undefined
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined
-      dest[name] = assignValue(value, vAttr.type) if vCanAssign
+      if vCanAssign
+        if isExported
+          if value?
+            if isFunction value.toObject
+              value = value.toObject(options)
+            else if isFunction value.toJSON
+              value = value.toJSON()
+
+          dest[name] = value
+        else
+          dest[name] = assignValue(value, vAttr.type)
     return
 
 module.exports.default = module.exports;

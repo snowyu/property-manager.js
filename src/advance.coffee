@@ -30,9 +30,9 @@ module.exports  = class AdvancePropertyManager
     vAttrs.initializeTo @
     @
 
-  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+  assignPropertyTo: (dest, src, name, value, attrs, options)->
     attrs = @getProperties() unless attrs
-    attrs.assignPropertyTo dest, src, name, value, skipDefaultValue, isExported
+    attrs.assignPropertyTo dest, src, name, value, options
     return
 
 module.exports.default = module.exports;

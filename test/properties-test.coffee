@@ -101,7 +101,7 @@ describe 'Properties', ->
       delete c._prop5
       delete c.hidden
       delete c.prop1
-      result.assignTo({}, result, exported: true, exclude: 'prop1').should.be.deep.equal c
+      result.assignTo({}, result, isExported: true, exclude: 'prop1').should.be.deep.equal c
 
     it 'should assign properties to another and skip exists', ->
       result = Properties classAttrs, '_'

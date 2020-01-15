@@ -16,7 +16,7 @@ module.exports  = class AbstractPropertyManager
   constrcutor: ->
     @initialize.apply @, arguments
 
-  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+  assignPropertyTo: (dest, src, name, value, attrs, options)->
   getProperties: ->
   defineProperties: (aProperties)->
 
@@ -30,94 +30,91 @@ module.exports  = class AbstractPropertyManager
     result = createObject @Class || @constructor
     result.assign(options)
 
-  assign: (options, aExclude)->
-    if isString aExclude
-      aExclude = [aExclude]
-    else if not isArray aExclude
-      aExclude = []
+  assign: (src, aOptions)->
+    aOptions = {} unless aOptions
+    aOptions.overwrite ?= true
+    aOptions.isExported ?= false
+
+    {exclude, overwrite} = aOptions
+    if isString exclude
+      exclude = [exclude]
+    else if not isArray exclude
+      exclude = []
 
     vAttrs = @getProperties()
     # sometime the assignment order is very important
     # so we must use the defined properties as the assignment order.
     for k,v of vAttrs
-      continue if k in aExclude
-      if options.hasOwnProperty(k)
+      continue if k in exclude
+      if src.hasOwnProperty(k)
         vName = k
       else if (vName = v && v.name) and
-          (!options.hasOwnProperty(vName) or (vName in aExclude))
+          (!src.hasOwnProperty(vName) or (vName in exclude))
         vName = null
       else if !vName and (vAlias = v && v.alias)
         if isString(vAlias)
-          vName = vAlias if options.hasOwnProperty(vAlias) and !(vAlias in aExclude)
+          vName = vAlias if src.hasOwnProperty(vAlias) and !(vAlias in exclude)
         else if isArray(vAlias)
           for n in vAlias
-            if options.hasOwnProperty(n) and !(n in aExclude)
+            if src.hasOwnProperty(n) and !(n in exclude)
               vName = n
               break
       continue unless vName
-      v = options[vName]
-      @assignPropertyTo(@, options, k, v, vAttrs)
+      v = src[vName]
+      if overwrite || @[k] == undefined
+        @assignPropertyTo(@, src, k, v, vAttrs, aOptions)
 
-    @_assign(options, aExclude) if isFunction @_assign
+    @_assign(src, aOptions) if isFunction @_assign
     @
 
-  assignProperty: (options, name, value, attrs, skipDefaultValue)->
-    @assignPropertyTo(@, options, name, value, attrs, skipDefaultValue)
+  assignProperty: (src, name, value, attrs, options)->
+    @assignPropertyTo(@, src, name, value, attrs, options)
     return
 
-  mergeTo: (dest, aExclude, skipDefault, skipReadOnly, isExported)->
-    if isArray dest
-      aExclude = dest
-      dest = {}
-    else if isBoolean dest
-      isExported = skipDefault
-      skipReadOnly = aExclude
-      skipDefault = dest
-      aExclude = []
-      dest = {}
+  mergeTo: (dest, aOptions)->
+    { overwrite, exclude,
+      skipDefault, skipReadOnly, isExported, skipNull, skipUndefined
+    } = aOptions if aOptions
 
-    if isString aExclude
-      aExclude = [aExclude]
-    else if isBoolean aExclude
-      isExported = skipReadOnly
-      skipReadOnly = skipDefault
-      skipDefault = aExclude
-      aExclude = []
-    else if not isArray aExclude
-      aExclude = []
+    if isString exclude
+      exclude = [exclude]
+    else if not isArray exclude
+      exclude = []
 
     dest?= {}
 
     vAttrs = @getProperties()
+    # sometime the assignment order is very important
+    # so we must use the defined properties as the assignment order.
     for k,v of vAttrs
-      continue if k in aExclude
-      continue if v and v.name and (v.name in aExclude)
+      continue if k in exclude
+      continue if v and v.name and (v.name in exclude)
+      continue if skipNull and @[k] is null
+      continue if skipUndefined and @[k] is undefined
       continue if skipReadOnly and v && v.writable is false and !v.set
-      if dest[k] is undefined
-        @assignPropertyTo(dest, @, k, @[k], vAttrs, skipDefault, isExported)
+      if overwrite || dest[k] is undefined
+        @assignPropertyTo(dest, @, k, @[k], vAttrs, aOptions)
     dest
 
-  exportTo: (dest, aExclude, skipDefault, skipReadOnly)->
-    skipDefault?=true
-    @mergeTo(dest, aExclude, skipDefault, skipReadOnly, true)
+  exportTo: (dest, aOptions)->
+    aOptions = {} unless aOptions
+    aOptions.skipDefault ?= true
+    aOptions.skipUndefined ?= true
+    aOptions.isExported = true
+    @mergeTo(dest, aOptions)
 
   toObject: (options)->
-    @exportTo(options)
+    result = {}
+    @exportTo(result, options)
 
   toJSON: ->@toObject()
 
-  assignTo: (dest, aExclude)->
-    if isString aExclude
-      aExclude = [aExclude]
-    else if not isArray aExclude
-      aExclude = []
-
-    vAttrs = @getProperties()
-    for k,v of vAttrs
-      continue if k in aExclude
-      continue if v and v.name and (v.name in aExclude)
-      @assignPropertyTo(dest, @, k, @[k], vAttrs)
-    dest._assign(@, aExclude) if isFunction dest._assign
+  assignTo: (dest, aOptions)->
+    aOptions = {} unless aOptions
+    aOptions.isExported = false
+    aOptions.overwrite = true
+    this.mergeTo dest, aOptions
+    dest._assign(@, aOptions) if isFunction dest._assign
     dest
 
   # TODO: deeply compare options

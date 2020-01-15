@@ -32,13 +32,20 @@ module.exports  = class SimplePropertyManager
       value = cloneObject value if !v.get and !v.set and isObject(value)
       defineProperty @, k, value, v
     return
-  assignPropertyTo: (dest, src, name, value, attrs, skipDefaultValue, isExported)->
+  assignPropertyTo: (dest, src, name, value, attrs, options)->
+    { isExported } = options if options
     attrs = @getProperties() unless attrs
     vAttr = attrs[name]
     if vAttr and vAttr.enumerable
       vCanAssign = (!isExported and (vAttr.writable or vAttr.set)) or
         (isExported and value isnt undefined and name[0] isnt @nonExported1stChar)
-      dest[name] = value if vCanAssign
+      if vCanAssign
+        if isExported && value?
+          if isFunction value.toObject
+            value = value.toObject(options)
+          else if isFunction value.toJSON
+            value = value.toJSON()
+        dest[name] = value
     return
 
 module.exports.default = module.exports;
