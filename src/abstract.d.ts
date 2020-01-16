@@ -1,5 +1,5 @@
-export type PropType  = string|Function;
-export type PropTypes = PropType[];
+export type PropType      = string|Function;
+export type PropTypeDesc  = PropType|PropType[];
 
 export interface ISimplePropDescriptor {
   configurable?: boolean;
@@ -12,7 +12,7 @@ export interface ISimplePropDescriptor {
 
 export interface IPropDescriptor extends ISimplePropDescriptor {
   name?: string;
-  type?: PropTypes;
+  type?: PropTypeDesc;
   assign?: (value?, dest?, src?, name?)=>any;
   assigned?: boolean|string;
   exported?: boolean;
