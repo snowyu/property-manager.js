@@ -11,6 +11,14 @@ defineProperties= require './properties/define-properties'
 getkeys         = Object.keys
 
 module.exports  = class AdvancePropertyManager
+
+  @getProperties: ->
+    result = {}
+    if @::$attributes
+      for k,v of @::$attributes
+        result[k] = v
+    result
+
   @::$attributes = null
   @::SMART_ASSIGN = Properties.SMART_ASSIGN
 

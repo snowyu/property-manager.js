@@ -17,6 +17,13 @@ getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
 
 module.exports  = class NormalPropertyManager
 
+  @getProperties: ->
+    result = {}
+    if @::$attributes
+      for k,v of @::$attributes
+        result[k] = v
+    result
+
   getRealAttrName = (attrs, name)->
     if not attrs[name]
       for k,v of attrs
