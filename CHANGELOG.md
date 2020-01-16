@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/snowyu/property-manager.js/compare/v1.1.0...v1.1.1) (2020-01-16)
+
+
+### Bug Fixes
+
+* rename PropTypes to PropTypeDesc ([ef0162a](https://github.com/snowyu/property-manager.js/commit/ef0162a24d6b3bbee6127ff13e5e36bfe50eca4f))
+
 ## [1.1.0](https://github.com/snowyu/property-manager.js/compare/v1.0.1...v1.1.0) (2020-01-16)
 
 
