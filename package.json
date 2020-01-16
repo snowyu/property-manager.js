@@ -59,7 +59,7 @@
   "scripts": {
     "release": "standard-version && git push --follow-tags origin master && npm publish",
     "test": "grunt test",
-    "test-cov": "mocha --reporter dot && istanbul report text-summary lcovonly"
+    "test-cov": "npm test && istanbul report text-summary lcovonly"
   },
   "contributors": [
     {
