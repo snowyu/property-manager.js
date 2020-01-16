@@ -26,7 +26,7 @@ describe 'Properties', ->
   before -> Properties::Type = FakeType
   after ->
     fnType.resetHistory()
-    Properties::Type = undefined
+    delete Properties::Type
   classAttrs =
     prop1:
       value: 432

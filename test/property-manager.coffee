@@ -94,6 +94,30 @@ module.exports = (name, ManagerClass, optsPos = 0)->
         result.propTyped.should.instanceof CustomType
         result.propTyped.value.should.be.equal 121
 
+      if defaultValueSupport
+        describe '.getProperties', ->
+          it 'should get all properties with inherited', ->
+            class PM1
+              inherits PM1, ManagerClass
+              ManagerClass.defineProperties PM1, classAttrs
+
+            class SPM
+              inherits SPM, PM1
+              ManagerClass.defineProperties SPM,
+                'propName':
+                  name: 'meaning'
+            result = SPM.getProperties()
+            expect(Object.keys(result)).to.be.deep.equal [
+              'propName'
+              'prop1'
+              'prop2'
+              'prop3'
+              'prop4'
+              '$prop5'
+              'prop6'
+              'hidden'
+              'prop7'
+            ]
     describe '.constructor', ->
       it 'should create an object', ->
         result = createObjectWith PM, makeArgs
@@ -219,14 +243,13 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           class SPM
             inherits SPM, PM
             ManagerClass.defineProperties SPM,
-              extend
-                'propName':
-                  name: 'meaning'
-              , classAttrs
-          result = createObjectWith SPM, makeArgs propName: 121
+              'propName':
+                name: 'meaning'
+            constructor: -> super
+          result = createObjectWith SPM, makeArgs propName: 121, prop3: 5
           obj = {prop1:222}
           result.exportTo(obj)
-          obj.should.be.deep.equal meaning: 121, prop1: 222
+          obj.should.be.deep.equal meaning: 121, prop1: 222, prop3: 5
         it 'should convert a plain object via default object value(deep equal)', ->
           class SPM
             inherits SPM, PM
@@ -674,3 +697,26 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           obj = {}
           result.assignPropertyTo(obj, result, 'meaning', 123, null,true)
           obj.should.have.property 'propName', 123
+    describe '#getProperties', ->
+      it 'should get the properties(descriptor)', ->
+        class SPM
+          inherits SPM, PM
+          constructor: ->
+            @defineProperties
+              'propName':
+                name: 'meaning'
+            super
+        result = createObjectWith SPM, makeArgs propName: 121, prop3: 5
+        result = result.getProperties()
+        result = (k for k of result)
+        expect(result).to.be.deep.equal [
+          'propName'
+          'prop1'
+          'prop2'
+          'prop3'
+          'prop4'
+          '$prop5'
+          'prop6'
+          'hidden'
+          'prop7'
+        ]
