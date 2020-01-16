@@ -15,7 +15,7 @@ module.exports  = class AdvancePropertyManager
   @::SMART_ASSIGN = Properties.SMART_ASSIGN
 
   defineProperty @, '$attributes', undefined,
-    get: -> AdvancePropertyManager::$attributes
+    get: -> getPrototypeOf(@).$attributes
 
   constructor: -> @initialize.apply @, arguments
   # merge the methods on the PropertyManager.prototype.

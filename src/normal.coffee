@@ -31,7 +31,7 @@ module.exports  = class NormalPropertyManager
   @::$attributes = null
 
   defineProperty @, '$attributes', undefined,
-    get: -> NormalPropertyManager::$attributes
+    get: -> getPrototypeOf(@).$attributes
 
   getProperties: -> @$attributes
 
