@@ -134,7 +134,10 @@ describe 'Properties', ->
     result.isDefaultObject(obj).should.be.false
 
   it 'should throw a hint error when clone object failed', ->
-    props = Properties obj: value:console
+    class DontClone
+      clone: ->
+        throw new Error('disable clone')
+    props = Properties obj: value:new DontClone()
     result = {}
     expect(props.initializeTo.bind(props, result)).to.be.throw 'the attribute "obj" can not be cloned, set descriptor "clone" to false'
 
