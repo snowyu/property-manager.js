@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/snowyu/property-manager.js/compare/v1.1.1...v1.2.0) (2020-01-16)
+
+
+### Features
+
+* add getProperties static method to advance and normal property manager ([303e1c1](https://github.com/snowyu/property-manager.js/commit/303e1c154ca8298543657c1635ce30795909c658))
+
+
+### Bug Fixes
+
+* the $attributes readonly property should use getPrototypeOf this ([d262748](https://github.com/snowyu/property-manager.js/commit/d2627485e9fe1cffeb39ea2c62e018e324ce4559))
+
 ### [1.1.1](https://github.com/snowyu/property-manager.js/compare/v1.1.0...v1.1.1) (2020-01-16)
 
 
