@@ -19,28 +19,45 @@
 
 make it easier to manage the properties/attributes of your class.
 
-We often need to manage the attributes of an object, consider the following:
+Features:
 
-* Set the options to the attributes of object when the object was created
+* Inherited properties with class.
+* Assign properties from a plain object.
+* Clone object.
+* Compare object whether is the same.
+* Export properties to a plain object.
+* Declare properties with type and default value.
+  * Suports `arrayOf` property with type
+  * Suports property with `template`(the property value is determined by the template content):
+    * `template` *{string | (this) => string}*:
+      * the template string, eg, `'${author}-${uuid()}'`
+      * or customize template function, `function() {return this.author + '-' + uuid()}`
+    * `imports`: *{Object}* the optional functions could be used in the template string.
+    * **NOTE**: the template property is readonly by default. You can make it writealbe.
+      Once a new value has been written, the template will be no useful unless the new value is null or undefined.
+
+We often need to manage the properties of an object, consider the following:
+
+* Set the options to the properties of object when the object was created
   * `var myObj = new MyObject({opt1:value1, opt2:value2})`
 * Assign the options from another object:
   * `myObj.assign({opt1:v1, opt2:v2})`
 * Clone an object:
   * `var newObj = myObj.clone()`
-* Compare two objects whether is the same by their options(assigned attributes).
+* Compare two objects whether is the same by their options(assigned properties).
   * `myObj.isSame(anotherObj)`
-* Export the attributes as a plain object or JSON to make recreate the object easier in the future.
+* Export the properties as a plain object or JSON to make recreate the object easier in the future.
   * There are some internal attributes should not be exported.
   * The empty or default value of an attribute should not be exported.
   * the meaningful(non-english) name should be exported and assigned.
   * `myObj.toObject()` and `myObj.toJSON()`
   * `JSON.stringify(myObj)`
 
-1. Problem: how to assign an object value of an attribute?
+1. Problem: how to assign an object value of a property?
    * replace the standard `assignPropertyTo()` method.
    * define the attribute's `assign(value, dest, src, name)` method on the `$attributes`.
      * the custom attribute's` assign` the value. return the changed value.
-2. Problem: howto decide which attriubte should be assign or get default value of an attribute?
+2. Problem: how to decide which property should be assign or get default value of an attribute?
    1. define all attriubtes on this object even though the value is null.
       * no default value feature.
    2. define a simple `$attributes` property to manage this:
@@ -49,7 +66,7 @@ We often need to manage the attributes of an object, consider the following:
 
 So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.
 
-first the rules of the attributes:
+first the rules of the properties:
 
 * exported attributes means they are the JSON.stringify(aObj) attributes only.
 * The non-enumerable attributes can not be exported and assigned.
@@ -480,34 +497,7 @@ assert.deepEqual(obj.mergeTo(), {
 
 ## Changes
 
-### v0.13.0
-
-+ add typed property for `AdvancePropertyManager` and `NormalPropertyManager`
-
-```js
-function CustomType(value) {
-  if (!(this instanceof CustomType)) return new CustomType(value)
-  try {
-    value = JSON.parse(value)
-  } catch(err) {
-    this.value = value
-  }
-}
-
-const attrs = {
-  prop1: {type: CustomType, value: 111}
-}
-
-class TypedPM extends AdvancePropertyManager {
-  constructor(opts) {
-    super(opts)
-  }
-}
-TypedPM.defineProperties(attrs)
-
-const obj = new TypedPM()
-console.log(obj.prop1 instanceof CustomType)
-```
+More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
 
 ### v1.0.0
 
@@ -549,6 +539,35 @@ class Contact extends AdvancePropertyManager {
 + add the inherited properties supports for `AdvancePropertyManager.defineProperties`
 * change the `recreate` argument default value of `defineProperties` to `false` for `AdvancePropertyManager` and `NormalPropertyManager`
 * set all methods and non-properties of `Properties` to be non-enumerable.
+
+### v0.13.0
+
++ add typed property for `AdvancePropertyManager` and `NormalPropertyManager`
+
+```js
+function CustomType(value) {
+  if (!(this instanceof CustomType)) return new CustomType(value)
+  try {
+    value = JSON.parse(value)
+  } catch(err) {
+    this.value = value
+  }
+}
+
+const attrs = {
+  prop1: {type: CustomType, value: 111}
+}
+
+class TypedPM extends AdvancePropertyManager {
+  constructor(opts) {
+    super(opts)
+  }
+}
+TypedPM.defineProperties(attrs)
+
+const obj = new TypedPM()
+console.log(obj.prop1 instanceof CustomType)
+```
 
 ### v0.11.0
 
