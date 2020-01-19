@@ -91,11 +91,12 @@ module.exports  = class NormalPropertyManager
     return
 
   assignPropertyTo: (dest, src, name, value, attrs, options)->
-    {skipDefault, isExported} = options if options
+    {skipDefault, isExported, skipExists} = options if options
     attrs = @getProperties() unless attrs
     name = getRealAttrName attrs, name
     if name
       vAttr = attrs[name]
+      return if skipExists and dest[name] != undefined
       return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
       return if skipDefault and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
