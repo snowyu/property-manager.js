@@ -26,10 +26,12 @@ module.exports  = class AbstractPropertyManager
     @defineProperties(src.attributes)
     @assign(src)
 
-  clone: (options)->
-    options = @mergeTo({}, options)
+  clone: (options)-> @cloneTo {}, options
+
+  cloneTo: (dest, options)->
+    dest = @mergeTo(dest, options)
     result = createObject @Class || @constructor
-    result.assign(options)
+    result.assign(dest)
 
   assign: (src, aOptions)->
     defaultOptions = @defaultOptions
@@ -129,13 +131,9 @@ module.exports  = class AbstractPropertyManager
   # TODO: deeply compare options
   #   need ignore redundant properties in aOptions,
   #   skip some properties, custom filter.
-  isSame: (src, aExclude)->
-    if isString aExclude
-      aExclude = [aExclude]
-    else if not isArray aExclude
-      aExclude = []
-    for k,v of @assignTo()
-      continue if k in aExclude
+  isSame: (src, aOptions)->
+    for k,v of @assignTo({}, aOptions)
+      # continue if k in aExclude
       return false unless deepEqual src[k], v
     return true
 

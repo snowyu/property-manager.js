@@ -52,11 +52,12 @@ export default class AbstractPropertyManager extends Object {
   assignProperty(src, name: string, value, attrs?, options?: IMergeOptions): void;
   assignPropertyTo(dest, src, name: string, value, attrs?, options?: IMergeOptions): void;
   initialize(src): any;
+  cloneTo(dest, options?: IMergeOptions);
   clone(options?: IMergeOptions): any;
   mergeTo(dest, options?: IMergeOptions): any;
   exportTo(dest, options?: IExportOptions): any;
   toObject(options?): any;
   toJSON():any;
-  assignTo(dest?, aExclude?: string|string[]):any;
-  isSame(src, aExclude?: string|string[]):boolean;
+  assignTo(dest?, options?: IMergeOptions):any;
+  isSame(src, options?: IMergeOptions):boolean;
 }
