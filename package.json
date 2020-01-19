@@ -57,7 +57,7 @@
     "standard-version": "^7.0.1"
   },
   "scripts": {
-    "release": "standard-version && git push --follow-tags origin master && npm publish",
+    "release": "standard-version && git push --follow-tags origin master",
     "test": "grunt test",
     "test-cov": "npm test && istanbul report text-summary lcovonly"
   },
