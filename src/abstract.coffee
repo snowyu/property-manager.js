@@ -20,20 +20,22 @@ module.exports  = class AbstractPropertyManager
   getProperties: ->
   defineProperties: (aProperties)->
 
-  initialize: (options)->
-    options?={}
-    @defineProperties(options.attributes)
-    @assign(options)
+  initialize: (src)->
+    src?={}
+    # defineProperty @, 'defaultOptions', {}
+    @defineProperties(src.attributes)
+    @assign(src)
 
   clone: (options)->
-    options = @mergeTo(options)
+    options = @mergeTo({}, options)
     result = createObject @Class || @constructor
     result.assign(options)
 
   assign: (src, aOptions)->
-    aOptions = {} unless aOptions
+    defaultOptions = @defaultOptions
+    aOptions = (defaultOptions && defaultOptions.assign) || {} unless aOptions
     aOptions.overwrite ?= true
-    aOptions.isExported ?= false
+    aOptions.isExported = false
 
     {exclude, overwrite} = aOptions
     if isString exclude
@@ -68,10 +70,15 @@ module.exports  = class AbstractPropertyManager
     @
 
   assignProperty: (src, name, value, attrs, options)->
+    defaultOptions = @defaultOptions
+    options = options || (defaultOptions && defaultOptions.assign) || {}
+    options.overwrite ?= true
+    options.isExported = false
     @assignPropertyTo(@, src, name, value, attrs, options)
     return
 
   mergeTo: (dest, aOptions)->
+    # TODO: skipExists and overwrite options are duplication.
     { overwrite, exclude,
       skipDefault, skipReadOnly, isExported, skipNull, skipUndefined
     } = aOptions if aOptions
@@ -97,7 +104,8 @@ module.exports  = class AbstractPropertyManager
     dest
 
   exportTo: (dest, aOptions)->
-    aOptions = {} unless aOptions
+    defaultOptions = @defaultOptions
+    aOptions = (defaultOptions && defaultOptions.export) || {} unless aOptions
     aOptions.skipDefault ?= true
     aOptions.skipUndefined ?= true
     aOptions.isExported = true
@@ -110,24 +118,25 @@ module.exports  = class AbstractPropertyManager
   toJSON: ->@toObject()
 
   assignTo: (dest, aOptions)->
-    aOptions = {} unless aOptions
+    defaultOptions = @defaultOptions
+    aOptions = (defaultOptions && defaultOptions.assign) || {} unless aOptions
     aOptions.isExported = false
     aOptions.overwrite = true
-    this.mergeTo dest, aOptions
+    dest = this.mergeTo dest, aOptions
     dest._assign(@, aOptions) if isFunction dest._assign
     dest
 
   # TODO: deeply compare options
   #   need ignore redundant properties in aOptions,
   #   skip some properties, custom filter.
-  isSame: (aOptions, aExclude)->
+  isSame: (src, aExclude)->
     if isString aExclude
       aExclude = [aExclude]
     else if not isArray aExclude
       aExclude = []
-    for k,v of @mergeTo()
+    for k,v of @assignTo()
       continue if k in aExclude
-      return false unless deepEqual aOptions[k], v
+      return false unless deepEqual src[k], v
     return true
 
 module.exports.default = module.exports;

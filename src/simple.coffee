@@ -22,6 +22,7 @@ module.exports  = class SimplePropertyManager
   getProperties: ->
     result = {}
     for k in getAllOwnKeys(@)
+      continue if k is 'defaultOptions'
       result[k] = getOwnPropertyDescriptor(@, k)
     result
   defineProperties: (aProperties) ->

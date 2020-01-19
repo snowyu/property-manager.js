@@ -56,6 +56,7 @@ getPropertyManagerClass = (aClass, aOptions)->
         inherited = @super
         that = @self
         inherited.apply(that, arguments)
+      # defineProperty that, 'defaultOptions', {}
       that.defineProperties(options.attributes) if isFunction that.defineProperties
       that.assign(options)
 

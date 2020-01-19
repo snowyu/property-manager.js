@@ -42,20 +42,21 @@ export type PropDescriptor = SimpleType | IPropDescriptor;
 export type PropDescriptors = {[name: string]: PropDescriptor};
 
 export default class AbstractPropertyManager extends Object {
+  defaultOptions: {export?: IMergeOptions; assign?: IMergeOptions};
   nonExported1stChar: string;
 
   constructor(...args: any[]);
   defineProperties(aProperties: SimplePropDescriptors);
   getProperties();
-  assign(options: any, aExclude?: string|string[]): any;
+  assign(src, options?: IMergeOptions): any;
   assignProperty(src, name: string, value, attrs?, options?: IMergeOptions): void;
   assignPropertyTo(dest, src, name: string, value, attrs?, options?: IMergeOptions): void;
-  initialize(options): any;
-  clone(options): any;
+  initialize(src): any;
+  clone(options?: IMergeOptions): any;
   mergeTo(dest, options?: IMergeOptions): any;
   exportTo(dest, options?: IExportOptions): any;
   toObject(options?): any;
   toJSON():any;
-  assignTo(dest, aExclude?: string|string[]):any;
-  isSame(aOptions, aExclude?: string|string[]):boolean;
+  assignTo(dest?, aExclude?: string|string[]):any;
+  isSame(src, aExclude?: string|string[]):boolean;
 }
