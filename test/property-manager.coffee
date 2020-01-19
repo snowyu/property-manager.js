@@ -479,10 +479,11 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       it 'should compare itself to another object with skip some keys', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111
-        obj = result.clone(prop4:1211)
+        obj = result.cloneTo(prop4:1211)
+        expect(obj).has.property 'prop4', 1211
         result.isSame(obj).should.be.false
-        result.isSame(obj,'prop4').should.be.true
-        result.isSame(obj,['prop4']).should.be.true
+        result.isSame(obj, exclude: 'prop4').should.be.true
+        result.isSame(obj, exclude: ['prop4']).should.be.true
 
     describe '#mergeTo()', ->
       it 'should merge to itself to another object', ->
@@ -720,3 +721,46 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           'hidden'
           'prop7'
         ]
+    describe '#defaultOptions', ->
+      it 'should customize default options to export', ->
+        class SPM
+          inherits SPM, PM
+          @::defaultOptions = {export: {skipNull: true, skipDefault: false}}
+        obj = createObjectWith SPM, makeArgs prop3: 5
+        result = obj.exportTo({})
+        expect(result).to.be.deep.equal
+          prop1: 432
+          prop2: '233'
+          prop3: 5
+          prop6: 'defaultValue'
+          prop7: 719
+        obj.defaultOptions = {export: {skipNull: false, skipDefault: false}}
+        result = obj.exportTo({})
+        expect(result).to.be.deep.equal
+          prop1: 432
+          prop2: '233'
+          prop3: 5
+          prop4: null
+          prop6: 'defaultValue'
+          prop7: 719
+      it 'should customize default options to assign', ->
+        class SPM
+          inherits SPM, PM
+          @::defaultOptions = {assign: {skipNull: true, skipDefault: false}}
+        obj = createObjectWith SPM, makeArgs prop3: 5
+        result = obj.assignTo({})
+        expect(result).to.be.deep.equal
+          $prop5: 'nonExport'
+          prop1: 432
+          prop2: '233'
+          prop3: 5
+          prop6: 'defaultValue'
+        obj.defaultOptions = {assign: {skipNull: false, skipDefault: false}}
+        result = obj.assignTo({})
+        expect(result).to.be.deep.equal
+          $prop5: 'nonExport'
+          prop1: 432
+          prop2: '233'
+          prop3: 5
+          prop4: null
+          prop6: 'defaultValue'
