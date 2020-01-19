@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/snowyu/property-manager.js/compare/v1.2.0...v1.3.0) (2020-01-19)
+
+
+### Features
+
+* add cloneTo method ([9b2e27b](https://github.com/snowyu/property-manager.js/commit/9b2e27b2ed7b1cdf8464d0b418d5e1e226eab636))
+* add defaultOptions to customize default options of the property manager ([2ea05cf](https://github.com/snowyu/property-manager.js/commit/2ea05cf7e5978ec0e39267adf50290189b48c78b))
+
+
+### Bug Fixes
+
+* check skipExists on assignPropertyTo of NormalPropertyManager ([f57f804](https://github.com/snowyu/property-manager.js/commit/f57f8043233e6511d120ef8b99efedcfd17e1b18))
+
 ## [1.2.0](https://github.com/snowyu/property-manager.js/compare/v1.1.1...v1.2.0) (2020-01-16)
 
 
