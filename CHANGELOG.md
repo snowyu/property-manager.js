@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/snowyu/property-manager.js/compare/v1.3.0...v1.3.1) (2020-01-21)
+
+
+### Bug Fixes
+
+* **assign-value:** ts raise error "Cannot call a class as a function" ([c822f93](https://github.com/snowyu/property-manager.js/commit/c822f935005aa26cc7a9a40d64d6084d835e0113))
+
 ## [1.3.0](https://github.com/snowyu/property-manager.js/compare/v1.2.0...v1.3.0) (2020-01-19)
 
 
