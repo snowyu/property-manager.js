@@ -46,8 +46,9 @@ module.exports = class Properties
     else
       attr.enumerable = attr.enumerable isnt false
     vEnumerable = attr.enumerable isnt false
-    attr.assigned?= vEnumerable and (attr.writable isnt false or attr.set)
-    attr.exported?= vEnumerable and name[0] isnt @nonExported1stChar
+    vWritable = attr.writable isnt false or isFunction(attr.set)
+    attr.assigned?= vEnumerable and vWritable
+    attr.exported?= vEnumerable and name[0] isnt @nonExported1stChar and vWritable
     vAttr = dest[name]
     if vAttr is undefined
       dest[name] = attr
@@ -147,7 +148,7 @@ module.exports = class Properties
       return if skipExists and dest[name] != undefined
       vIsAssigned = vAttr.assigned || isString(vAttr.assigned)
       return unless (vIsAssigned and !isExported) or (vAttr.exported and isExported)
-      return if skipDefault and deepEqual vAttr.value, value
+      return if skipDefault and (vAttr.exported != true or vAttr.writable != false) and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vIsAssigned) or value isnt undefined
       if name is 'name' and vCanAssign and value isnt dest.name
         dest.name = value
@@ -180,7 +181,7 @@ module.exports = class Properties
           dest[vAttrName] = assignValue(value, vAttr.type)
     return
   privated 'assignTo', (dest, src, aOptions = {})->
-    {exclude, skipReadOnly} = aOptions
+    {exclude, skipReadOnly, skipNull, skipUndefined, overwrite} = aOptions
     if isString exclude
       exclude = [exclude]
     else if not isArray exclude
@@ -190,10 +191,13 @@ module.exports = class Properties
     vNames = @names
     for k, v of vNames
       continue if (v in exclude) or (k in exclude)
-      continue if skipReadOnly and v.writable is false and !v.set
+      continue if skipReadOnly and v.writable is false or (v.get && !v.set)
       vAttr = @[k]
       vValue = src[v] || src[k]
-      @assignPropertyTo dest, src, k, vValue, aOptions
+      continue if skipNull and vValue is null
+      continue if skipUndefined and vValue is undefined
+      if overwrite || dest[k] is undefined
+        @assignPropertyTo dest, src, k, vValue, aOptions
     return dest
   privated 'isDefaultObject', (aObject)->
     result = true

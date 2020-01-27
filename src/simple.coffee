@@ -29,6 +29,8 @@ module.exports  = class SimplePropertyManager
     for k,v of aProperties
       v = value:v unless !isArray(v) && isObject v
       v.enumerable = v.enumerable isnt false
+      vIsReadonly = v.writable == false || (v.get && !v.set)
+      v.enumerable = false if vIsReadonly && v.exported isnt true
       value = v.value
       value = cloneObject value if !v.get and !v.set and isObject(value)
       defineProperty @, k, value, v

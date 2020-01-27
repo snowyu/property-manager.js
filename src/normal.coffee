@@ -51,8 +51,9 @@ module.exports  = class NormalPropertyManager
           v.enumerable = false
         else
           v.enumerable = v.enumerable isnt false
-        v.assigned?= v.enumerable and (v.writable isnt false or isFunction(v.set))
-        v.exported?= v.enumerable and k[0] isnt nonExported1stChar
+        vWritable = v.writable isnt false or isFunction(v.set)
+        v.assigned?= v.enumerable and vWritable
+        v.exported?= v.enumerable and k[0] isnt nonExported1stChar and vWritable
         dest[k]= v
     dest
 
@@ -98,7 +99,9 @@ module.exports  = class NormalPropertyManager
       vAttr = attrs[name]
       return if skipExists and dest[name] != undefined
       return unless (vAttr.assigned and !isExported) or (vAttr.exported and isExported)
-      return if skipDefault and deepEqual vAttr.value, value
+      vIsReadonly = vAttr.writable == false || (vAttr.get && !vAttr.set)
+      return if vIsReadonly && vAttr.exported != true
+      return if skipDefault and !vIsReadonly and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
       if isFunction(vAttr.assign)
         value = vAttr.assign(value, dest, src, name)

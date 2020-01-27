@@ -100,7 +100,10 @@ module.exports  = class AbstractPropertyManager
       continue if v and v.name and (v.name in exclude)
       continue if skipNull and @[k] is null
       continue if skipUndefined and @[k] is undefined
-      continue if skipReadOnly and v && v.writable is false and !v.set
+      vIsReadonly = v.writable == false || (v.get && !v.set)
+      # the default is skip readonly unless exported is true.
+      # but the SimplePM can not set the exported attribute.
+      continue if skipReadOnly and v.exported != true && vIsReadonly
       if overwrite || dest[k] is undefined
         @assignPropertyTo(dest, @, k, @[k], vAttrs, aOptions)
     dest
