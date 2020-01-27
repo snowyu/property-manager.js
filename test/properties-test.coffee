@@ -78,8 +78,8 @@ describe 'Properties', ->
       writable: false
       value: 719
       enumerable: true
-      assigned: undefined
-      exported: true
+      assigned: false
+      exported: false
   it 'should create a properties', ->
     result = Properties classAttrs, '_'
     obj = {}
@@ -101,6 +101,7 @@ describe 'Properties', ->
       delete c._prop5
       delete c.hidden
       delete c.prop1
+      delete c.prop7
       result.assignTo({}, result, isExported: true, exclude: 'prop1').should.be.deep.equal c
 
     it 'should assign properties to another and skip exists', ->
@@ -142,6 +143,15 @@ describe 'Properties', ->
     expect(props.initializeTo.bind(props, result)).to.be.throw 'the attribute "obj" can not be cloned, set descriptor "clone" to false'
 
   describe 'smart assign', ->
+    it 'should smart assign readonly property value', ->
+      props = Properties num:
+        value: 1
+        assigned: '__num'
+        writable: false
+      result = {}
+      props.initializeTo result
+      result.num = 12
+      expect(result.num).to.be.equal 1
     it 'should add the getter/setter to the smart assign attribute automatically', ->
       props = Properties obj:
         value: console
@@ -167,6 +177,7 @@ describe 'Properties', ->
       result = {}
       props.initializeTo result
       expect(result.num).to.be.equal 1
+      result.num = 1
       expect(vAssignFn).to.be.calledOnce
     it 'should not clone object', ->
       vAssignFn = sinon.spy (value, dest, src, name)->value
@@ -177,6 +188,7 @@ describe 'Properties', ->
       result = {}
       props.initializeTo result
       expect(result.o).to.be.equal console
+      result.o = console
       expect(vAssignFn).to.be.calledOnce
 
   describe '#getValue()', ->

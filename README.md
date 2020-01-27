@@ -499,6 +499,34 @@ assert.deepEqual(obj.mergeTo(), {
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
 
+### v1.4.0
+
+* feat: add the readonly to smart assigned property
+
+```ts
+@Properties
+class Phone extends AdvancePropertyManager {
+  @Prop({
+    writable: false,
+    exported: true,
+    assigned: '',
+  }) id!: string;
+}
+```
+
+* **BROKEN CHANGE**: DO NOT EXPORT the readonly property by default unless exported is true.
+
+```ts
+@Properties
+class Phone extends AdvancePropertyManager {
+  @Prop({
+    writable: false,
+    exported: true,
+  }) id!: string;
+}
+```
+
+
 ### v1.0.0
 
 + add the array with type supports.

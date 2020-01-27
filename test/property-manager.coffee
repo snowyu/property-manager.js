@@ -216,20 +216,12 @@ module.exports = (name, ManagerClass, optsPos = 0)->
       it 'should convert to a plain object', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
-        if not defaultValueSupport
-          result.toObject().should.be.deep.equal
-            prop1: 121, prop2: 453, prop4: 234, prop7:719
-        else
-          result.toObject().should.be.deep.equal prop1: 121, prop2: 453, prop4: 234
+        result.toObject().should.be.deep.equal prop1: 121, prop2: 453, prop4: 234
       it 'should convert to a plain object with options', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111, prop6:undefined
-        if not defaultValueSupport
-          result.exportTo(prop1: 333, prop4:5).should.be.deep.equal
-            prop1: 333, prop2: 453, prop4: 5, prop7:719
-        else
-          result.exportTo(prop1: 333, prop4:5).should.be.deep.equal
-            prop1: 333, prop2: 453, prop4: 5
+        result.exportTo(prop1: 333, prop4:5).should.be.deep.equal
+          prop1: 333, prop2: 453, prop4: 5
       if defaultValueSupport
         it 'should convert to a plain object with defaults', ->
           result = createObjectWith PM, makeArgs
@@ -272,10 +264,7 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop1: 121, prop2: 453, hidden:399, notExi:111, prop4: 1, prop6:undefined
         result = JSON.stringify(result)
         result = JSON.parse(result)
-        if not defaultValueSupport
-          result.should.be.deep.equal prop1: 121, prop2: 453, prop4: 1, prop7:719
-        else
-          result.should.be.deep.equal prop1: 121, prop2: 453, prop4: 1
+        result.should.be.deep.equal prop1: 121, prop2: 453, prop4: 1
       if defaultValueSupport
         it 'should JSON.stringify() with defaults', ->
           result = createObjectWith PM, makeArgs
@@ -637,6 +626,23 @@ module.exports = (name, ManagerClass, optsPos = 0)->
 
 
     describe '#exportTo()', ->
+      it 'should export the readonly property with exported is true', ->
+        class SPM
+          inherits SPM, PM
+          constructor: ->
+            @defineProperties extend
+              'readonlyWithExported':
+                writable: false
+                exported: true
+                value: 123
+            , classAttrs
+            super
+        result = createObjectWith SPM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        # console.log name, result.exportTo({})
+        result.exportTo({}).should.be.deep.equal
+          prop1: 121, prop2: 453, prop4: 234, readonlyWithExported: 123
+
       it 'should exportTo a object and skip readonly property', ->
         result = createObjectWith PM, makeArgs
           prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
@@ -733,7 +739,6 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop2: '233'
           prop3: 5
           prop6: 'defaultValue'
-          prop7: 719
         obj.defaultOptions = {export: {skipNull: false, skipDefault: false}}
         result = obj.exportTo({})
         expect(result).to.be.deep.equal
@@ -742,7 +747,6 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop3: 5
           prop4: null
           prop6: 'defaultValue'
-          prop7: 719
       it 'should customize default options to assign', ->
         class SPM
           inherits SPM, PM
