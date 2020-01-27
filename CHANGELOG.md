@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/snowyu/property-manager.js/compare/v1.3.1...v1.4.0) (2020-01-27)
+
+
+### Features
+
+* add the readonly to smart assigned property ([1765da7](https://github.com/snowyu/property-manager.js/commit/1765da7123891d343b484900f47028d967cfbda6))
+* DO NOT EXPORT the readonly property by default unless exported is true ([385fa1f](https://github.com/snowyu/property-manager.js/commit/385fa1ff17a7d875bc763d171a4932c79d390dd9))
+
 ### [1.3.1](https://github.com/snowyu/property-manager.js/compare/v1.3.0...v1.3.1) (2020-01-21)
 
 
