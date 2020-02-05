@@ -51,6 +51,19 @@ describe 'ArrayOf', ->
       @defineProperties typedAttrs
       super
 
+  typedAttrs1 =
+    propTyped1:
+      type: arrayOf String
+
+  class TypedPM1
+    inherits TypedPM1, Normal
+
+    constructor: ->
+      return new TypedPM1(args...) unless @ instanceof TypedPM1
+      @defineProperties typedAttrs1
+      super
+
+
   it 'should assign default typed array', ->
     result = new TypedPM propTyped: [prop2: 1233]
     result.should.have.property 'propTyped'
@@ -71,6 +84,22 @@ describe 'ArrayOf', ->
     result.exportTo(obj)
     obj.should.be.deep.equal
       propTyped: [prop1: 500]
+
+  it 'should export empty typed array', ->
+    result = new TypedPM1
+    result = result.toObject {}
+    expect(result).to.have.property 'propTyped1'
+    expect(result.propTyped1).to.have.length 0
+
+  it 'should splice typed array', ->
+    result = new TypedPM1
+    # result = result.toObject {}
+    expect(result).to.have.property 'propTyped1'
+    expect(result.propTyped1).to.have.length 0
+    result.propTyped1.push ['12', '44', '11']
+    expect(result.propTyped1.toJSON()).to.have.deep.equal ['12', '44', '11']
+    result.propTyped1.splice 1, 1
+    expect(result.propTyped1.toJSON()).to.have.deep.equal ['12', '11']
 
 
 
