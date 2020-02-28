@@ -101,5 +101,20 @@ describe 'ArrayOf', ->
     result.propTyped1.splice 1, 1
     expect(result.propTyped1.toJSON()).to.have.deep.equal ['12', '11']
 
+  it 'should push typed array', ->
+    result = new TypedPM1
 
+    expect(result).to.have.property 'propTyped1'
+    expect(result.propTyped1).to.have.length 0
+    result.propTyped1.push ['12', '44', '11'], 66, 7, 8
+    expect(result.propTyped1.toJSON()).to.have.deep.equal ['12', '44', '11', '66', '7', '8']
+
+  it 'should unshift typed array', ->
+    result = new TypedPM1
+
+    expect(result).to.have.property 'propTyped1'
+    expect(result.propTyped1).to.have.length 0
+    result.propTyped1.push 1
+    result.propTyped1.unshift ['12', '44', '11'], 66, 7, 8
+    expect(result.propTyped1.toJSON()).to.have.deep.equal ['12', '44', '11', '66', '7', '8', '1']
 

@@ -23,11 +23,13 @@ module.exports  = class ArrayPropertyManager extends Array
     defineProperty @, '$type', type
     # @defineProperties type
     this.push(value) if value
-  push: (value) ->
+  push: (value, arr...) ->
     value = mapItemType value, this.$type
+    value.push.apply(value, mapItemType(arr, this.$type)) if Array.isArray arr
     super value...
-  unshift: (value) ->
+  unshift: (value, arr...) ->
     value = mapItemType value, this.$type
+    value.push.apply(value, mapItemType(arr, this.$type)) if Array.isArray arr
     super value...
   toJSON: ()->@toObject()
   toObject: (options)->
