@@ -357,6 +357,35 @@ module.exports = (name, ManagerClass, optsPos = 0)->
             prop1: 121, prop2: 453, prop3:undefined, prop4: null, $prop5: 'nonExport'
             prop6: 'defaultValue'
             assign1: sd:91, hi: 'world'
+        it 'should use assign func to import and export json value', ->
+          class N1
+            constructor: (val) ->
+              val = val.val if val instanceof N1
+              @val = parseInt(val)
+            toJSON: -> @val
+          class SPM
+            inherits SPM, PM
+            ManagerClass.defineProperties SPM,
+              extend
+                'date':
+                  assign: (value, dest, src, name, opts)->
+                    {isExported} = opts if opts
+                    if isExported
+                      value.val + ''
+                    else
+                      new N1(value)
+              , classAttrs
+          result = createObjectWith SPM, makeArgs
+            prop1: 121, prop2: 453, hidden:399, notExi:111, date: '202104'
+          result.should.have.ownProperty 'date'
+          result.date.should.instanceof N1
+          result.date.val.should.be.equal 202104
+          obj = {prop1:222}
+          result.assignTo(obj)
+          obj.date.should.instanceof N1
+          obj.date.val.should.be.equal 202104
+          obj = result.toObject()
+          obj.date.should.be.equal '202104'
         it 'should assign to a plain object via smart assignment property', ->
           class SPM
             inherits SPM, PM

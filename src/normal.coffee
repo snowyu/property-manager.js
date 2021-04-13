@@ -104,7 +104,7 @@ module.exports  = class NormalPropertyManager
       return if skipDefault and !vIsReadonly and deepEqual vAttr.value, value
       vCanAssign = (!isExported and vAttr.assigned) or value isnt undefined
       if isFunction(vAttr.assign)
-        value = vAttr.assign(value, dest, src, name)
+        value = vAttr.assign(value, dest, src, name, options)
         #vCanAssign = false if value is undefined
       name = vAttr.name || name if isExported
       value = vAttr.value if value is undefined and vAttr.value != undefined

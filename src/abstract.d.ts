@@ -13,7 +13,7 @@ export interface ISimplePropDescriptor {
 export interface IPropDescriptor extends ISimplePropDescriptor {
   name?: string;
   type?: PropTypeDesc;
-  assign?: (value?, dest?, src?, name?)=>any;
+  assign?: (value?, dest?, src?, name?, options?: IMergeOptions)=>any;
   assigned?: boolean|string;
   exported?: boolean;
   alias?: string[]|string;
