@@ -8,6 +8,7 @@ export interface ISimplePropDescriptor {
   writable?: boolean;
   get?: Function;
   set?: Function;
+  [name: string]: any;
 }
 
 export interface IPropDescriptor extends ISimplePropDescriptor {
