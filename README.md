@@ -22,18 +22,18 @@ make it easier to manage the properties/attributes of your class.
 Features:
 
 * Inherited properties with class.
-* Assign properties from a plain object.
+* Assign properties from a plain object(JSON Object).
 * Clone object.
 * Compare object whether is the same.
-* Export properties to a plain object.
+* Export properties to a plain object(JSON Object).
 * Declare properties with type and default value.
-  * Suports `arrayOf` property with type
-  * Suports property with `template`(the property value is determined by the template content):
+  * Supports `arrayOf` property with type
+  * Supports property with `template`(the property value is determined by the template content):
     * `template` *{string | (this) => string}*:
       * the template string, eg, `'${author}-${uuid()}'`
       * or customize template function, `function() {return this.author + '-' + uuid()}`
     * `imports`: *{Object}* the optional functions could be used in the template string.
-    * **NOTE**: the template property is readonly by default. You can make it writealbe.
+    * **NOTE**: the template property is readonly by default. You can make it writeable.
       Once a new value has been written, the template will be no useful unless the new value is null or undefined.
 
 We often need to manage the properties of an object, consider the following:
@@ -56,13 +56,13 @@ We often need to manage the properties of an object, consider the following:
 1. Problem: how to assign an object value of a property?
    * replace the standard `assignPropertyTo()` method.
    * define the attribute's `assign(value, dest, src, name)` method on the `$attributes`.
-     * the custom attribute's` assign` the value. return the changed value.
+     * the custom attribute's `assign` the value. return the changed value.
 2. Problem: how to decide which property should be assign or get default value of an attribute?
-   1. define all attriubtes on this object even though the value is null.
+   1. define all attributes on this object even though the value is null.
       * no default value feature.
    2. define a simple `$attributes` property to manage this:
       * {attrName: {value:'defaultValue'}, ...}
-   3. define a complex `$attributes`(use `Properties` class) to manage attibutes.
+   3. define a complex `$attributes`(use `Properties` class) to manage attributes.
 
 So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.
 
@@ -75,7 +75,7 @@ first the rules of the properties:
 * the readonly(writable is false) attributes can not be assigned.
 * the assignment order of properties is the order of defined properties.
 
-### You can inherit from it.
+### You can inherit from it
 
 * SimplePropertyManager: /lib/simple
   * use the object's property descriptor directly.
@@ -95,7 +95,6 @@ first the rules of the properties:
   * support object value assignment hook function.
   * support meaningful(non-english) name.
   * support type check if possible.
-
 
 The `$attributes` holds all attributes(like the property descriptor) of an object.
 The `key` is the property name. the value is the property descriptor:
@@ -123,13 +122,13 @@ The `key` is the property name. the value is the property descriptor:
     * add descriptor `set` function to assign the property(call the `assign` descriptor) automatically.
 * only available on Normal and Advance Property Manager:
   * `assigned` *(Boolean)*: whether the property can be assigned. defaults: undefined
-    * if undefined then `=enumerable isnt false and (writable isnt false or isFunction(set))`
+    * if undefined then `=enumerable isn't false and (writable isn't false or isFunction(set))`
   * **Smart Assign Support** only available on AdvancePropertyManager
     * `assigned` *(Boolean|String)*: enable smart-assign support when the assigned is string
     * it uses the `nonExported1stChar+name` as the internal property name if the string is empty
     * the `assigned` string is the internal property name if it's non-empty.
   * `exported` *(Boolean)*: whether the property can be exported. defaults: undefined
-    * if undefined then `=enumerable isnt false and the first char isnt "$"`
+    * if `undefined` then `=enumerable isn't false and the first char isn't "$"`
   * `alias` *(String|ArrayOf String)*: add the alias(es) to the property. It used via assignment from options.
   * `clone` *(Boolean)*: Whether clone default property value if the value is an object when initializing.
     defaults to true.
@@ -151,28 +150,28 @@ The `key` is the property name. the value is the property descriptor:
 }
 ```
 
-### or inject it as an ability:
+### Or inject it as an ability
 
 these methods will be added(replaced):
 
-* `initialize(options)` : overwite this for assign options from constructor?
+* `initialize(options)` : overwrite this for assign options from constructor?
   * apply the initialized value of the properties to the object if possible.
   * then call `assign` method.
 + `assign(options)` : assign the options' attributes to this object.
-  * how to decide which attriubte should be assign?
+  * how to decide which attribute should be assign?
   * I need an attributes manage class? or just a simple attributes list?
   * or define all attributes even the value is null when initialize
   * this must be an optional feature.
-+ `assignPropertyTo(dest, options, attributeName, value)`: assign an atrribute to dest.
++ `assignPropertyTo(dest, options, attributeName, value)`: assign an attribute to dest.
   * you can override it to determine howto assign an object value.
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
-* `assignTo(dest)` : assign the attributes to this `dest`  object.
+* `assignTo(dest)` : assign the attributes to this `dest` object.
 * `mergeTo(dest)`: merge the attributes itself to `dest` object.
   * do not overwrite the already exist attributes of the `dest`.
 * `isSame(obj)`: compare the `obj`'s attributes whether is the same value with itself.
 * `clone(options)`: create a new object with the same attributes' value.
 * `toObject(options)`: convert it as plain object.
-  * do not export the non-enumrable attributes or beginning with '$'
+  * do not export the non-enumerable attributes or beginning with '$'
   * do not export the attribute's value is null
   * do not export the attribute's value is default value.
     * where to get the default value?
@@ -181,7 +180,6 @@ these methods will be added(replaced):
 Note: you should specify the position of the argument if the first argument is not the options
 
 ## Usage
-
 
 ### Make your class manage the properties
 
@@ -344,9 +342,17 @@ class MyClass
     'attr1': {value:123}
     'hidden': {value:1, enumerable: false}
     '$dontExport': {value:3, enumerable: true}
+    'date':
+      assign: (value, dest, src, name, {isExported}) ->
+        if isExported
+          value.toISOString()
+        else if !(value instanceof Date)
+          new Date(value)
+        else
+          value
     'custom':
       value:{}
-      assign:(value, dest, src, name)->
+      assign:(value, dest, src, name, opts)->
         value?={}
         value.exta = 123
         return value
@@ -395,9 +401,20 @@ defineProperties(MyClass, {
   'attr1': {value: 123},
   'hidden': {value: 1, enumerable: false},
   '$dontExport': {value: 3, enumerable: true},
+  'date': {
+    assign(value, dest, src, name, {isExported}) {
+      let result;
+      if (isExported) {
+        result = value.toISOString()
+      } else if (!(value instanceof Date)) {
+        result = new Date(value)
+      }
+      return result;
+    }
+  }
   'custom': {
     value: {},
-    assign: function(value, dest, src, name) {
+    assign: function(value, dest, src, name, opts) {
       if (value == null) {
         value = {};
       }
@@ -663,7 +680,7 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.7.0
 
 * **broken** the arguments order of assign function in property descriptor are changed:
-  * attr.assign(value, dest, src, name) instead of assign(dest, src, value, name)
+  * attr.assign(value, dest, src, name, opts) instead of assign(dest, src, value, name)
 
 ###
 
