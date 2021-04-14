@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/snowyu/property-manager.js/compare/v1.4.1...v1.5.0) (2021-04-14)
+
+
+### Features
+
+* **ts:** can add customize prop name of PropDescriptor ([8fcfb04](https://github.com/snowyu/property-manager.js/commit/8fcfb04e03c737e9f470a748532a23ff0157b02f))
+* add opts parameter to the assign option of the property of Normal and Advance PM ([88ea277](https://github.com/snowyu/property-manager.js/commit/88ea277db0903aaa9bb3f9be3d1ffaf71875ce9c))
+
 ### [1.4.1](https://github.com/snowyu/property-manager.js/compare/v1.4.0...v1.4.1) (2020-02-28)
 
 
