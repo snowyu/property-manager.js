@@ -46,8 +46,10 @@ getPropertyManagerClass = (aClass, aOptions)->
     if isString(nonExported1stChar) and nonExported1stChar.length is 1
       @::nonExported1stChar = nonExported1stChar
 
+    orgInitialize = @::initialize
     # the non-enumerable property can not be replaced in an ability,
     # but beginning with '$' will be injected to `initialize` method.
+    # replace the original initialize method.
     defineProperty @::, '$initialize', ->
       options = arguments[gOptPos]
       options?={}
@@ -57,8 +59,9 @@ getPropertyManagerClass = (aClass, aOptions)->
         that = @self
         inherited.apply(that, arguments)
       # defineProperty that, 'defaultOptions', {}
-      that.defineProperties(options.attributes) if isFunction that.defineProperties
-      that.assign(options)
+      # that.defineProperties(options.attributes) if isFunction that.defineProperties
+      # that.assign(options)
+      orgInitialize.call(that, options)
 
 coreMethods = [
   'assign', 'assignPropertyTo', 'getProperties'
