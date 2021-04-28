@@ -34,6 +34,9 @@ module.exports  = class AbstractPropertyManager
     result.assign(dest)
 
   assign: (src, aOptions)->
+    @__assign(src, aOptions)
+
+  __assign: (src, aOptions)->
     defaultOptions = @defaultOptions
     aOptions = (defaultOptions && defaultOptions.assign) || {} unless aOptions
     aOptions.overwrite ?= true

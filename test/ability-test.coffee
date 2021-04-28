@@ -52,6 +52,16 @@ describe 'PropertyManagerAbility', ->
     checkBasicProperty A
     checkBasicIsSame A, Simple
 
+  it 'should disable initialize method of simple manager to be executed', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      initialize: -> return 'ok'
+      PropertyManager A, 'simple'
+    checkBasicProperty A
+    checkBasicIsSame A, Simple
+    result = new A({attributes: {title: 'good'}})
+    result.should.not.have.property 'title'
+
   it 'should choose normal manager to a class', ->
     class A
       constructor: ->@initialize.apply @, arguments
@@ -59,12 +69,32 @@ describe 'PropertyManagerAbility', ->
     checkProperty A
     checkIsSame A, Normal
 
+  it 'should disable initialize method of normal manager to be executed', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      initialize: -> return 'ok'
+      PropertyManager A, 'normal'
+    checkBasicProperty A
+    checkBasicIsSame A, Normal
+    result = new A({attributes: {title: 'good'}})
+    result.should.not.have.property 'title'
+
   it 'should choose advance manager to a class', ->
     class A
       constructor: ->@initialize.apply @, arguments
       PropertyManager A, 'advance'
     checkProperty A
     checkIsSame A, Advance
+
+  it 'should disable initialize method of normal manager to be executed', ->
+    class A
+      constructor: ->@initialize.apply @, arguments
+      initialize: -> return 'ok'
+      PropertyManager A, 'advance'
+    checkBasicProperty A
+    checkBasicIsSame A, Advance
+    result = new A({attributes: {title: 'good'}})
+    result.should.not.have.property 'title'
 
   it 'should use nonExported1stChar options', ->
     class A

@@ -53,18 +53,22 @@ getPropertyManagerClass = (aClass, aOptions)->
     defineProperty @::, '$initialize', ->
       options = arguments[gOptPos]
       options?={}
-      that = @
-      if @super and @self # call the parent's initialize method.
-        inherited = @super
-        that = @self
-        inherited.apply(that, arguments)
+      that = @self || @
+      inherited = @super
+      if inherited # call the parent's initialize method.
+        return if inherited.apply(that, arguments) is 'ok'
       # defineProperty that, 'defaultOptions', {}
       # that.defineProperties(options.attributes) if isFunction that.defineProperties
       # that.assign(options)
       orgInitialize.call(that, options)
+    defineProperty @::, '$assign', ->
+      that = @self || @
+      return @super.apply(that, arguments) if @super
+      return @__assign.apply(that, arguments)
+
 
 coreMethods = [
-  'assign', 'assignPropertyTo', 'getProperties'
+  '__assign', 'assignPropertyTo', 'getProperties'
   'mergeTo'
   'defineProperties'
   'nonExported1stChar'
