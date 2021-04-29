@@ -86,13 +86,17 @@ module.exports = class Properties
         else if isString vAlias
           @ixNames[vAlias] = k
     return
-  privated 'initializeTo', (dest)->
+  privated 'initializeTo', (dest, src = {}, aOptions = {})->
+    {skipNull, skipUndefined, overwrite} = aOptions
     nonExported1stChar = @nonExported1stChar
     for k,v of @names
       continue if k is 'name'
-      continue if dest[k] isnt undefined
+      continue if !overwrite && dest[k] isnt undefined
       vAttr = @[k]
-      value = vAttr.value
+      value = src[k]
+      value = vAttr.value if value is undefined
+      continue if skipNull && value is null
+      continue if skipUndefined && value is undefined
       if isString(vAttr.assigned) and !vAttr.get and !vAttr.set
         # Smart assignment:
         vAttr = cloneObject(vAttr)

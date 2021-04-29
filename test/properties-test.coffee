@@ -142,6 +142,35 @@ describe 'Properties', ->
     result = {}
     expect(props.initializeTo.bind(props, result)).to.be.throw 'the attribute "obj" can not be cloned, set descriptor "clone" to false'
 
+  it 'should initializeTo with src', ->
+      props = Properties
+        num: value: 1
+        undef: value: undefined
+        unnull: value: null
+      result = {}
+      props.initializeTo result, {num: 34}
+      expect(result.num).to.be.equal 34
+      expect(result).to.have.property 'undef'
+      expect(result).to.have.property 'unnull'
+
+  it 'should initializeTo with src and skip undefined or null', ->
+      props = Properties
+        num: value: 1
+        undef: value: undefined
+        unnull: value: null
+      result = {num: 12}
+      props.initializeTo result, {}, {skipUndefined: true, skipNull: true}
+      expect(result.num).to.be.equal 12
+      expect(result).to.not.have.property 'undef'
+      expect(result).to.not.have.property 'unnull'
+
+  it 'should initializeTo with src and overwrite', ->
+      props = Properties
+        num: value: 1
+      result = {num: 12}
+      props.initializeTo result, {}, {overwrite: true}
+      expect(result.num).to.be.equal 1
+
   describe 'smart assign', ->
     it 'should smart assign readonly property value', ->
       props = Properties num:
