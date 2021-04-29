@@ -1,4 +1,4 @@
-import { IMergeOptions } from '../abstract';
+import { IExportOptions, IMergeOptions } from '../abstract';
 
 export default class Properties {
   nonExported1stChar: string;
@@ -7,7 +7,7 @@ export default class Properties {
   mergeTo(attrs?: any, dest?: any): any;
   mergePropertyTo(dest, name, attr): void;
   initialize(attrs?: any): void;
-  initializeTo(dest: any): void;
+  initializeTo(dest: any, src?: any, options?: IExportOptions): void;
   getRealAttrName(name: string): string;
   validatePropertyValue(name, value, attr, raiseError): boolean;
   assignPropertyTo(dest, src, name, value, options?: IMergeOptions): void;
