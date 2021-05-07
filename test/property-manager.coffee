@@ -718,6 +718,18 @@ module.exports = (name, ManagerClass, optsPos = 0)->
           prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
         o = result.clone()
         o.isSame(result).should.be.true
+      it 'should clone object with options', ->
+        result = createObjectWith PM, makeArgs
+          prop1: 121, prop2: 453, hidden:399, notExi:111, prop4:234, prop6:undefined
+        o = result.clone({prop1: 120})
+        o.isSame(result).should.not.be.true
+        o.prop1.should.be.equal 120
+        o = o.toObject()
+        delete o.prop1
+        result = result.toObject()
+        delete result.prop1
+        o.should.be.deep.equal result
+
     describe '#assignPropertyTo', ->
       if defaultValueSupport
         it 'should assignPropertyTo', ->

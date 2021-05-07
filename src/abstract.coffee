@@ -82,11 +82,10 @@ module.exports  = class AbstractPropertyManager
     @assignPropertyTo(@, src, name, value, attrs, options)
     return
 
-  mergeTo: (dest, aOptions)->
-    # TODO: skipExists and overwrite options are duplication.
+  mergeTo: (dest, aOptions = {})->
     { overwrite, exclude,
       skipDefault, skipReadOnly, isExported, skipNull, skipUndefined
-    } = aOptions if aOptions
+    } = aOptions
 
     if isString exclude
       exclude = [exclude]
@@ -108,7 +107,9 @@ module.exports  = class AbstractPropertyManager
       # but the SimplePM can not set the exported attribute.
       continue if skipReadOnly and v.exported != true && vIsReadonly
       if overwrite || dest[k] is undefined
-        @assignPropertyTo(dest, @, k, @[k], vAttrs, aOptions)
+        val = aOptions[k]
+        val = @[k] unless val?
+        @assignPropertyTo(dest, @, k, val, vAttrs, aOptions)
     dest
 
   exportTo: (dest, aOptions)->
