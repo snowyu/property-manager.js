@@ -206,8 +206,9 @@ describe 'Properties', ->
       result = {}
       props.initializeTo result
       expect(result.num).to.be.equal 1
-      result.num = 1
       expect(vAssignFn).to.be.calledOnce
+      result.num = 2
+      expect(vAssignFn).to.be.calledTwice
     it 'should not clone object', ->
       vAssignFn = sinon.spy (value, dest, src, name)->value
       props = Properties o:
@@ -218,7 +219,7 @@ describe 'Properties', ->
       props.initializeTo result
       expect(result.o).to.be.equal console
       result.o = console
-      expect(vAssignFn).to.be.calledOnce
+      expect(vAssignFn).to.be.calledTwice
 
   describe '#getValue()', ->
     it 'should get value from attribute', ->

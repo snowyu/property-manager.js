@@ -122,7 +122,8 @@ module.exports = class Properties
           throw err
       value = assignValue(value, vAttr.type)
       defineProperty dest, k, value, vAttr
-      dest[k] = value if dest[k] != value # assign the initialization value after define property.
+      # call set function to assign the initialization value after define property.
+      dest[k] = value if vAttr.set
     return
   privated 'getRealAttrName', (name)->
     name = @ixNames[name] unless @hasOwnProperty name
