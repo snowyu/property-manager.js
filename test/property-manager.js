@@ -82,7 +82,7 @@ module.exports = function(name, ManagerClass, optsPos) {
   if (ManagerClass.prototype.$attributes instanceof Properties) {
     smartAssignSupport = true;
   }
-  return describe(name, function() {
+  describe(name, function() {
     var PM, TypedPM, makeArgs;
     TypedPM = (function() {
       inherits(TypedPM, ManagerClass);
