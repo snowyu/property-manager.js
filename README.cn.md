@@ -17,121 +17,122 @@
 [codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
 [codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
 
-make it easier to manage the properties/attributes of your class.
 
-Features:
+使得业务对象/类的属性更容易管理.
 
-* Inherited properties with class.
-* Assign properties from a plain object(JSON Object).
-* Clone object.
-* Compare object whether is the same.
-* Export properties to a plain object(JSON Object).
-* Declare properties with type and default value.
-  * Supports `arrayOf` property with type
-  * Supports property with `template`(the property value is determined by the template content):
+适用于需要围绕业务对象/类来维护管理数据的场合. 我们首先需要定义该业务对象有哪些数据类型.
+
+能够快速对该业务对象进行赋值,合并,导出(JsonObject)以及校验.
+
+功能:
+
+* 定义的属性可跟随业务类继承
+* 业务对象/类赋值属性从纯对象(JSON Object).
+* 克隆业务对象.
+* 比较业务对象是否相同(所有属性值相同).
+* 导出属性到纯对象(JSON Object).
+* 定义/声明属性类型及默认值
+  * 支持 `arrayOf` 带类型的数组类型
+  * 支持模板属性`template`(属性值由模板内容确定):
     * `template` *{string | (this) => string}*:
-      * the template string, eg, `'${author}-${uuid()}'`
-      * or customize template function, `function() {return this.author + '-' + uuid()}`
-    * `imports`: *{Object}* the optional functions could be used in the template string.
-    * **NOTE**: the template property is readonly by default. You can make it writeable.
-      Once a new value has been written, the template will be no useful unless the new value is null or undefined.
+      * 字符串(模板), 如, `'${author}-${uuid()}'`
+      * 或模板函数, 如, `function() {return this.author + '-' + uuid()}`
+    * 导入的函数供模板使用 `imports`: *{Object}* the optional functions could be used in the template string.
+    * **注意**: 默认模板属性为只读,不过也可以将它设置为可写. 一旦新值被写入后,模板就不再有用,除非新值是`null`或`undefined`
 
-We often need to manage the properties of an object, consider the following:
+我们经常需要管理一个对象的属性，考虑以下几点：
 
-* Set the options to the properties of object when the object was created
+* 创建业务对象时将选项设置为对象的属性
   * `var myObj = new MyObject({opt1:value1, opt2:value2})`
-* Assign the options value from another object:
+* 赋值(设置)来自另一个对象的属性
   * `myObj.assign({opt1:v1, opt2:v2})`
-* Clone an object:
+* 克隆业务对象(属性值完全相同):
   * `var newObj = myObj.clone()`
-* Compare two objects whether is the same by their options(assigned properties).
+* 通过分配的属性比较两个对象是否相同。
   * `myObj.isSame(anotherObj)`
-* Export the properties as a plain object or JSON to make recreate the object easier in the future.
-  * There are some internal attributes should not be exported.
-  * The empty or default value of an attribute should not be exported.
-  * the meaningful(non-english) name should be exported and assigned.
+* 将属性导出为普通对象或 JSON，以便将来更轻松地重新创建对象。
+  * 有一些内部属性不应该被导出。
+  * 不应导出属性的空值或默认值。
+  * 应该导出并分配有意义的（非英语）名称。
   * `myObj.toObject()` and `myObj.toJSON()`
   * `JSON.stringify(myObj)`
 
-1. Problem: how to assign an object value of a property?
+1. Problem: 如何为对象属性赋值？
    * replace the standard `assignPropertyTo()` method.
    * define the attribute's `assign(value, dest, src, name)` method on the `$attributes`.
      * the custom attribute's `assign` the value. return the changed value.
-2. Problem: how to decide which property should be assign value or get default value of an attribute?
-   1. define all attributes on this object even though the value is null.
-      * no default value feature.
-   2. define a simple `$attributes` property to manage this:
-      * {attrName: {value:'defaultValue'}, ...}
-   3. define a complex `$attributes`(use `Properties` class) to manage attributes.
+2. Problem: 如何决定应该为也许对象中的哪些属性赋值或获取属性的默认值？
+   1. 在此对象上预先定义所有属性，即使值为 null。
+      * 不支持默认值
+   2. 定义一个简单的 `$attributes` 属性来管理属性及默认值:
+      * `{attrName: {value:'defaultValue'}, ...}`
+   3. 定义一个复杂的 `$attributes`（使用 `Properties` 类）来管理属性
 
-So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.
+所以我们有了相应的属性管理类：`SimplePropertyManager`、`NormalPropertyManager` 和 `AdvancePropertyManager`。
 
-first the rules of the properties:
+首先是属性规则:
 
-* exported attributes means they are the JSON.stringify(aObj) attributes only.
-* The non-enumerable attributes can not be exported and assigned.
-* The enumerable attributes beginning with '$' can not be exported. but can be assigned.
-* `undefined` value can not be exported.
-* the readonly(writable is false) attributes can not be assigned.
-* the assignment order of properties is the order of defined properties.
+* 导出的属性意味着它们是 `JSON.stringify(aObj)` 属性。
+* 不可枚举的属性不能被`导出`(`export`)和`赋值`(`assign`)。
+* 无法导出以"`$`"开头的可枚举属性,但可以被`赋值`(`assign`)。
+* `undefined` 值无法导出。
+* 只读（可写`writable`为假）属性不能赋值。
+* 属性的赋值顺序就是定义的属性的顺序。
 
-### You can inherit from it
+### 你可以继承它
 
-* SimplePropertyManager: /lib/simple
-  * use the object's property descriptor directly.
-  * so do not support default value.
-  * do not support object value assignment hook function.
-  * do not support meaningful(non-english) name.
-* NormalPropertyManager: /lib/normal
-  * use the `$attributes` plain object to hold the declaration properties
-  * support default value.
-  * support object value assignment hook function.
-  * support meaningful(non-english) name.
-* AdvancePropertyManager: /lib/advance
-  * use the `$attributes` to hold the declaration properties
-  * the `$attributes` is an instance of `Properties` class.
-  * so you can custom your `Properties` class inherited from.
-  * support default value.
-  * support object value assignment hook function.
-  * support meaningful(non-english) name.
-  * support type check if possible.
+* `SimplePropertyManager`: /lib/simple
+  * 直接使用对象的属性描述符。
+  * 所以不支持默认值。
+  * 不支持对象赋值钩子函数。
+  * 不支持有意义的（非英文）名称(别名)。
+* `NormalPropertyManager`: /lib/normal
+  * 使用 `$attributes` 普通对象来保存声明属性
+  * 支持默认值
+  * 支持对象赋值钩子函数
+  * 支持有意义的（非英文）名称(别名)
+* `AdvancePropertyManager`: /lib/advance
+  * 使用 `$attributes` 来保存声明属性
+  * `$attributes` 是 `Properties` 类的实例。
+  * 因此您可以自定义继承自的“Properties”类。
+  * 支持默认值
+  * 支持对象赋值钩子函数
+  * 支持有意义的（非英文）名称(别名)
+  * 如果可能，支持类型检查
 
-The `$attributes` holds all attributes(like the property descriptor) of an object.
-The `key` is the property name. the value is the property descriptor:
+`$attributes` 包含对象的所有属性（如属性描述符）,其中`key` 是属性名称。 而`value`值是属性描述符对象.
 
-* name *(String)*: the non-english name to export, Defaults to the `key` name.
-* value: the property's default value if exists. Defaults to `undefined`.
-* type *(String)*: the property's type name. defaults to undefined.
-* enumerable *(Boolean)*: defaults to true
-  * true if and only if this property shows up during enumeration of
-    the properties on the corresponding object.
-* configurable *(Boolean)*: defaults to true
-  * true if and only if the type of this property descriptor may be changed
-    and if the property may be deleted from the corresponding object.
+**属性描述符对象**:
+
+* `name` *(String)*: 要导出的非英文名称，默认为 `key` 名称。
+* `value`: 属性的默认值（如果存在）。 默认为 `undefined`。
+* `type` *(String)*: 属性的类型名称。 默认为 `undefined`。
+* `enumerable` *(Boolean)*: defaults to true
+  * 当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+* `configurable` *(Boolean)*: defaults to true
+  * 当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。
 * writable *(Boolean)*: defaults to true
-  * true if and only if the value associated with the property may be changed
-    with an assignment operator.
-* assign *(Function(value, dest, src, name))*:the custom attribute assignment function.
-  just `return` the changed value. defaults to undefined.
-  It means do not assign this value if return `undefined`
-  * **Note**: It only used on assign the options from another object.
-  * It's no effect if the assign the property individually. use the property descriptor `set` to do so.
-  * Wrap it as smart-assign feature(only on Advance Property Manager):
-    * automatically add a hidden internal property with prefix
-    * automatically add descriptor `get` function to read the property
-    * automatically add descriptor `set` function to assign the property(call the `assign` descriptor).
-* only available on Normal and Advance Property Manager:
-  * `assigned` *(Boolean)*: whether the property can be assigned. defaults: undefined
-    * if undefined then `=enumerable isn't false and (writable isn't false or isFunction(set))`
-  * **Smart Assign Support** only available on AdvancePropertyManager
-    * `assigned` *(Boolean|String)*: enable smart-assign support when the assigned is string
-    * it uses the `nonExported1stChar+name` as the internal property name if the string is empty
-    * the `assigned` string is the internal property name if it's non-empty.
-  * `exported` *(Boolean)*: whether the property can be exported. defaults: undefined
-    * if `undefined` then `=enumerable isn't false and the first char isn't "$"`
-  * `alias` *(String|ArrayOf String)*: add the alias(es) to the property. It used via assignment from options.
-  * `clone` *(Boolean)*: Whether clone default property value if the value is an object when initializing.
-    defaults to true.
+  * 当且仅当该属性的 writable 键值为 true 时，属性的值，也就是上面的 value，才能被赋值运算符改变。
+* assign *(Function(value, dest, src, name))*: defaults to `undefined`.
+  * 自定义属性赋值函数。只需“返回”更改后的值。如果返回 `undefined` 就不要赋值
+  * **注意**: 它只用于从另一个对象赋值时。
+  * 如果单独对属性赋值，则无效。 请使用属性描述符 `set` 来做到这一点。
+  * 将其封装为智能赋值功能（仅支持 Advance Property Manager ）：
+    * 自动添加带前缀的隐藏内部属性
+    * 自动添加描述符 `get` 函数以读取属性
+    * 自动添加描述符 `set` 函数来写入属性（调用 `assign` 描述符）
+* 仅适用于 Normal 和 Advance Property Manager:
+  * `assigned` *(Boolean)*: 是否属性可被赋值. defaults: `undefined`
+    * 如果 `undefined` 那么是否可被赋值由此决定: `enumerable isn't false and (writable isn't false or isFunction(set))`
+  * **智能赋值支持(Smart Assign Support)** 仅适用于 `AdvancePropertyManager`
+    * `assigned` *(Boolean|String)*: 当“assigned”值为字符串时启用`智能赋值`支持
+    * 如果字符串值为空("")，那么它使用 `nonExported1stChar+[name]` 作为内部属性名称
+    * 当字符串值非空,那么该`assigned`值作为内部属性名
+    * 根据属性的可写性,自动创建对应的`get`/`set`描述符.
+  * `exported` *(Boolean)*: 是否该属性可被导出. defaults: `undefined`
+    * 如果 `undefined` 那么是否可被导出由此决定: `enumerable isn't false and the first char isn't "$"`
+  * `alias` *(String|ArrayOf String)*: 该属性的别名. 用于从其它纯对象选项中赋值时
+  * `clone` *(Boolean)*: 初始化时如果值为对象，是否克隆默认属性值。defaults to true.
 
 ```js
 
@@ -150,9 +151,9 @@ The `key` is the property name. the value is the property descriptor:
 }
 ```
 
-### Or inject it as an ability
+### 或者作为能力注入
 
-these methods will be added(replaced):
+当作为能力注入时,以下方法将被添加(或替换):
 
 * `initialize(options)` : overwrite this for assign options from constructor?
   * apply the initialized value of the properties to the object if possible.
@@ -682,6 +683,8 @@ console.log(obj.prop1 instanceof CustomType)
 
 * **broken** the arguments order of assign function in property descriptor are changed:
   * attr.assign(value, dest, src, name, opts) instead of assign(dest, src, value, name)
+
+###
 
 ## License
 
