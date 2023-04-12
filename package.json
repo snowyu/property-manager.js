@@ -35,7 +35,7 @@
     "custom-ability": "^2.0.0-alpha.1",
     "deep-equal": "^2.2.0",
     "inherits-ex": "^2.1.0-alpha.6",
-    "util-ex": "^2.0.0-alpha.6"
+    "util-ex": "^2.0.0-alpha.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.4",
