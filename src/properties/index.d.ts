@@ -1,7 +1,22 @@
 import { IExportOptions, IMergeOptions } from '../abstract';
 
-export default class Properties {
+/**
+ * Collection the advanced attribute descriptors
+ *
+ */
+export class Properties {
+  /**
+   * Indicates that the property will not be exported, defaults to '$'
+   */
   nonExported1stChar: string;
+
+  /**
+   * Collection the advanced attribute descriptors
+   *
+   * @param {*} aOptions
+   * @param {string} nonExported1stChar Indicates that the property will not be exported
+   */
+  constructor(attrs, nonExported1stChar?: string);
   extends(attrs, nonExported1stChar?: string): Properties;
   merge(attrs?: any): any;
   mergeTo(attrs?: any, dest?: any): any;
@@ -15,3 +30,5 @@ export default class Properties {
   isDefaultObject(obj): boolean;
   getValue(obj, aName): any;
 }
+
+export default Properties
