@@ -8,6 +8,8 @@
     "url": "git://github.com/snowyu/property-manager.js.git"
   },
   "main": "./lib/index.js",
+  "module": "./src/index.js",
+  "source": "./src/index.js",
   "files": [
     "README.md",
     "LICENSE-MIT",
