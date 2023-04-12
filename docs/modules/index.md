@@ -13,11 +13,13 @@
 - [JSONValue](index.md#jsonvalue)
 - [NormalPropertyManager](index.md#normalpropertymanager)
 - [Primitive](index.md#primitive)
+- [Properties](index.md#properties)
 - [PropertyAbility](index.md#propertyability)
 - [SimplePropertyManager](index.md#simplepropertymanager)
 - [arrayOf](index.md#arrayof)
 - [assignValue](index.md#assignvalue)
 - [default](index.md#default)
+- [defineProperties](index.md#defineproperties)
 
 ## References
 
@@ -63,6 +65,12 @@ Re-exports [Primitive](array.md#primitive)
 
 ___
 
+### Properties
+
+Re-exports [Properties](../classes/properties.Properties.md)
+
+___
+
 ### PropertyAbility
 
 Re-exports [PropertyAbility](ability.md#propertyability)
@@ -90,3 +98,9 @@ ___
 ### default
 
 Renames and re-exports [NormalPropertyManager](../classes/normal.NormalPropertyManager.md)
+
+___
+
+### defineProperties
+
+Renames and re-exports [__type](../classes/advance-1.AdvancePropertyManager.md#__type)

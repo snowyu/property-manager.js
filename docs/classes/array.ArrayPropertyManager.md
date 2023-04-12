@@ -80,7 +80,7 @@ Array.constructor
 
 #### Defined in
 
-[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L23)
+[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.d.ts#L23)
 
 ## Properties
 
@@ -90,7 +90,7 @@ Array.constructor
 
 #### Defined in
 
-[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L21)
+[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.d.ts#L21)
 
 ___
 
@@ -1068,7 +1068,7 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L24)
+[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.d.ts#L24)
 
 ___
 
@@ -1110,7 +1110,7 @@ convert to the plain object
 
 #### Defined in
 
-[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L29)
+[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.d.ts#L29)
 
 ___
 
@@ -1170,7 +1170,7 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L30)
+[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.d.ts#L30)
 
 ___
 
