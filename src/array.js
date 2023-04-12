@@ -72,6 +72,8 @@ export class ArrayPropertyManager extends Array {
 
 };
 
+export const arrayOf = ArrayPropertyManager.arrayOf
+
 // orgAssignPropertyTo = ArrayPropertyManager::assignPropertyTo
 // assignPropertyTo: (dest, src, name, value, attrs, options)->
 //   value = assignValue value, this.$type

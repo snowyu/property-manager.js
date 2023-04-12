@@ -1,6 +1,6 @@
 import { IMergeOptions, PropType } from './abstract';
 
-type Primitive =
+export type Primitive =
   | bigint
   | boolean
   | null
@@ -9,15 +9,15 @@ type Primitive =
   | symbol
   | undefined;
 
-type JSONValue = Primitive | JSONObject | JSONArray;
+export type JSONValue = Primitive | JSONObject | JSONArray;
 
-interface JSONObject {
+export interface JSONObject {
   [key: string]: JSONValue;
 }
 
-interface JSONArray extends Array<JSONValue> { }
+export interface JSONArray extends Array<JSONValue> { }
 
-export default class ArrayPropertyManager extends Array {
+export class ArrayPropertyManager extends Array {
   $type: PropType;
 
   constructor(value: any, type: PropType);
@@ -29,5 +29,7 @@ export default class ArrayPropertyManager extends Array {
   toObject(options?: IMergeOptions): JSONObject;
   valueOf(): JSONObject;
 }
+
+export default ArrayPropertyManager
 
 export function arrayOf(type: PropType): (value: any)=>ArrayPropertyManager;
