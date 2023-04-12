@@ -1,4 +1,6 @@
 import AbstractPropertyManager from './abstract';
 
-export default class SimplePropertyManager extends AbstractPropertyManager {
+export class SimplePropertyManager extends AbstractPropertyManager {
 }
+
+export default SimplePropertyManager
