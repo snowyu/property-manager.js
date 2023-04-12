@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* export Properties etc to index.js ([a362a17](https://github.com/snowyu/property-manager.js/commit/a362a17adc50dd137bce0458fa7b25b247969947))
+
 ## [2.0.0-alpha.0](https://github.com/snowyu/property-manager.js/compare/v1.6.1...v2.0.0-alpha.0) (2023-04-12)
 
 
