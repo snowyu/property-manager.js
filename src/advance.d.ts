@@ -1,7 +1,7 @@
 import AbstractPropertyManager, { PropDescriptors } from './abstract';
 import Properties from './properties';
 
-export default class AdvancePropertyManager extends AbstractPropertyManager {
+export class AdvancePropertyManager extends AbstractPropertyManager {
   $attributes: Properties;
 
   /**
@@ -10,3 +10,5 @@ export default class AdvancePropertyManager extends AbstractPropertyManager {
   static getProperties(): PropDescriptors;
   static defineProperties(aTarget, aProperties: PropDescriptors, recreate?:boolean)
 }
+
+export default AdvancePropertyManager

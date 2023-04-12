@@ -25,7 +25,6 @@ NormalPropertyManager.getProperties = function getProperties() {
   return result;
 }
 
-
 NormalPropertyManager.prototype.getProperties = function getProperties() {
   return this.$attributes;
 }
