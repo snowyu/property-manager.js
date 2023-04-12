@@ -15,4 +15,6 @@ export interface IAbilityOption {
   replacedMethods?: string[];
 }
 
-export default function(Class, options?: IAbilityOptions)
+export function PropertyAbility(Class, options?: IAbilityOptions)
+
+export default PropertyAbility
