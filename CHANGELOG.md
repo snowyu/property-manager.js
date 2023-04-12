@@ -1,6 +1,27 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [2.0.0-alpha.0](https://github.com/snowyu/property-manager.js/compare/v1.6.1...v2.0.0-alpha.0) (2023-04-12)
+
+
+### Features
+
+* **ts:** export all on index.js ([9d31e79](https://github.com/snowyu/property-manager.js/commit/9d31e7947ee938664103c7871a5a664ddc9b25dd))
+
+
+### Bug Fixes
+
+* export all functions ([5ad3634](https://github.com/snowyu/property-manager.js/commit/5ad3634f8aa5a204c680206ad64a62c778718c4f))
+* **ts:** export all functions on index.js ([97b079e](https://github.com/snowyu/property-manager.js/commit/97b079e664e35b5b91db5e0346df86026a629932))
+* **ts:** export functions and more docs added ([aad7199](https://github.com/snowyu/property-manager.js/commit/aad71992d73e59d02c2ad3d6e96fd0bea4b82c5f))
+* **ts:** export named PropertyAbility ([f9f7784](https://github.com/snowyu/property-manager.js/commit/f9f77841c889d9ae1b8640d5dc0f2e3044f148fc))
+* **ts:** export named SimplePropertyManager ([2d6f288](https://github.com/snowyu/property-manager.js/commit/2d6f288ff944cdd7916b4a9146dab801f75beeea))
+
+
+### Refactor
+
+* convert coffeescript to js ([462214d](https://github.com/snowyu/property-manager.js/commit/462214d99b0c01611a31caefc0ae71ebfd94cc08))
 
 ## [1.5.0](https://github.com/snowyu/property-manager.js/compare/v1.4.1...v1.5.0) (2021-04-14)
 
