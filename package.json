@@ -58,7 +58,8 @@
   "scripts": {
     "build": "npm run build.cjs && npm run build.ts && npm run doc.md",
     "build.cjs": "babel src --out-dir lib --config-file ./.babelrc",
-    "build.ts": "tsc --declaration --emitDeclarationOnly --outDir types",
+    "build.ts": "npx cpx 'src/**/*.d.ts' lib",
+    "build.ts.d": "tsc --declaration --emitDeclarationOnly --outDir types",
     "clean": "rm -fr web docs types lib",
     "doc": "typedoc --plugin none --out web ./src",
     "doc.md": "typedoc --plugin typedoc-plugin-markdown --out docs ./src",
