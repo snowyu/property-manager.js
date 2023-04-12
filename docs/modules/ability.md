@@ -13,6 +13,11 @@
 - [IAbilityMethods](../interfaces/ability.IAbilityMethods.md)
 - [IAbilityOption](../interfaces/ability.IAbilityOption.md)
 
+### Type Aliases
+
+- [IAbilityOptions](ability.md#iabilityoptions)
+- [PropManagerType](ability.md#propmanagertype)
+
 ### Functions
 
 - [PropertyAbility](ability.md#propertyability)
@@ -22,6 +27,26 @@
 ### default
 
 Renames and re-exports [PropertyAbility](ability.md#propertyability)
+
+## Type Aliases
+
+### IAbilityOptions
+
+Ƭ **IAbilityOptions**: [`IAbilityOption`](../interfaces/ability.IAbilityOption.md) \| [`PropManagerType`](ability.md#propmanagertype)
+
+#### Defined in
+
+[src/ability.d.ts:6](https://github.com/snowyu/property-manager.js/blob/2259d20/src/ability.d.ts#L6)
+
+___
+
+### PropManagerType
+
+Ƭ **PropManagerType**: ``"simple"`` \| ``"advance"`` \| ``"normal"`` \| ``"abstract"``
+
+#### Defined in
+
+[src/ability.d.ts:5](https://github.com/snowyu/property-manager.js/blob/2259d20/src/ability.d.ts#L5)
 
 ## Functions
 
@@ -34,7 +59,7 @@ Renames and re-exports [PropertyAbility](ability.md#propertyability)
 | Name | Type |
 | :------ | :------ |
 | `Class` | `any` |
-| `options?` | `IAbilityOptions` |
+| `options?` | [`IAbilityOptions`](ability.md#iabilityoptions) |
 
 #### Returns
 
@@ -42,4 +67,4 @@ Renames and re-exports [PropertyAbility](ability.md#propertyability)
 
 #### Defined in
 
-[src/ability.d.ts:18](https://github.com/snowyu/property-manager.js/blob/7796872/src/ability.d.ts#L18)
+[src/ability.d.ts:18](https://github.com/snowyu/property-manager.js/blob/2259d20/src/ability.d.ts#L18)

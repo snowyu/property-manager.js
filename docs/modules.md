@@ -13,6 +13,7 @@
 - [advance](modules/advance.md)
 - [advance](modules/advance-1.md)
 - [array](modules/array.md)
+- [array](modules/array-1.md)
 - [assign-value](modules/assign_value.md)
 - [assign-value](modules/assign_value-1.md)
 - [index](modules/index.md)

@@ -1,98 +1,55 @@
-[property-manager](../README.md) / [Exports](../modules.md) / [array](../modules/array.md) / ArrayPropertyManager
+[property-manager](../README.md) / [Exports](../modules.md) / [array](../modules/array.md) / JSONArray
 
-# Class: ArrayPropertyManager
+# Interface: JSONArray
 
-[array](../modules/array.md).ArrayPropertyManager
+[array](../modules/array.md).JSONArray
 
 ## Hierarchy
 
-- `Array`
+- `Array`<[`JSONValue`](../modules/array.md#jsonvalue)\>
 
-  ↳ **`ArrayPropertyManager`**
+  ↳ **`JSONArray`**
 
 ## Table of contents
 
-### Constructors
-
-- [constructor](array.ArrayPropertyManager.md#constructor)
-
 ### Properties
 
-- [$type](array.ArrayPropertyManager.md#$type)
-- [[unscopables]](array.ArrayPropertyManager.md#[unscopables])
-- [length](array.ArrayPropertyManager.md#length)
-- [[species]](array.ArrayPropertyManager.md#[species])
+- [[unscopables]](array.JSONArray.md#[unscopables])
+- [length](array.JSONArray.md#length)
 
 ### Methods
 
-- [[iterator]](array.ArrayPropertyManager.md#[iterator])
-- [concat](array.ArrayPropertyManager.md#concat)
-- [copyWithin](array.ArrayPropertyManager.md#copywithin)
-- [entries](array.ArrayPropertyManager.md#entries)
-- [every](array.ArrayPropertyManager.md#every)
-- [fill](array.ArrayPropertyManager.md#fill)
-- [filter](array.ArrayPropertyManager.md#filter)
-- [find](array.ArrayPropertyManager.md#find)
-- [findIndex](array.ArrayPropertyManager.md#findindex)
-- [forEach](array.ArrayPropertyManager.md#foreach)
-- [indexOf](array.ArrayPropertyManager.md#indexof)
-- [join](array.ArrayPropertyManager.md#join)
-- [keys](array.ArrayPropertyManager.md#keys)
-- [lastIndexOf](array.ArrayPropertyManager.md#lastindexof)
-- [map](array.ArrayPropertyManager.md#map)
-- [pop](array.ArrayPropertyManager.md#pop)
-- [push](array.ArrayPropertyManager.md#push)
-- [reduce](array.ArrayPropertyManager.md#reduce)
-- [reduceRight](array.ArrayPropertyManager.md#reduceright)
-- [reverse](array.ArrayPropertyManager.md#reverse)
-- [shift](array.ArrayPropertyManager.md#shift)
-- [slice](array.ArrayPropertyManager.md#slice)
-- [some](array.ArrayPropertyManager.md#some)
-- [sort](array.ArrayPropertyManager.md#sort)
-- [splice](array.ArrayPropertyManager.md#splice)
-- [toJSON](array.ArrayPropertyManager.md#tojson)
-- [toLocaleString](array.ArrayPropertyManager.md#tolocalestring)
-- [toObject](array.ArrayPropertyManager.md#toobject)
-- [toString](array.ArrayPropertyManager.md#tostring)
-- [unshift](array.ArrayPropertyManager.md#unshift)
-- [valueOf](array.ArrayPropertyManager.md#valueof)
-- [values](array.ArrayPropertyManager.md#values)
-- [from](array.ArrayPropertyManager.md#from)
-- [isArray](array.ArrayPropertyManager.md#isarray)
-- [of](array.ArrayPropertyManager.md#of)
-
-## Constructors
-
-### constructor
-
-• **new ArrayPropertyManager**(`value`, `type`)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `any` |
-| `type` | [`PropType`](../modules/abstract.md#proptype) |
-
-#### Overrides
-
-Array.constructor
-
-#### Defined in
-
-[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L23)
+- [[iterator]](array.JSONArray.md#[iterator])
+- [concat](array.JSONArray.md#concat)
+- [copyWithin](array.JSONArray.md#copywithin)
+- [entries](array.JSONArray.md#entries)
+- [every](array.JSONArray.md#every)
+- [fill](array.JSONArray.md#fill)
+- [filter](array.JSONArray.md#filter)
+- [find](array.JSONArray.md#find)
+- [findIndex](array.JSONArray.md#findindex)
+- [forEach](array.JSONArray.md#foreach)
+- [indexOf](array.JSONArray.md#indexof)
+- [join](array.JSONArray.md#join)
+- [keys](array.JSONArray.md#keys)
+- [lastIndexOf](array.JSONArray.md#lastindexof)
+- [map](array.JSONArray.md#map)
+- [pop](array.JSONArray.md#pop)
+- [push](array.JSONArray.md#push)
+- [reduce](array.JSONArray.md#reduce)
+- [reduceRight](array.JSONArray.md#reduceright)
+- [reverse](array.JSONArray.md#reverse)
+- [shift](array.JSONArray.md#shift)
+- [slice](array.JSONArray.md#slice)
+- [some](array.JSONArray.md#some)
+- [sort](array.JSONArray.md#sort)
+- [splice](array.JSONArray.md#splice)
+- [toLocaleString](array.JSONArray.md#tolocalestring)
+- [toString](array.JSONArray.md#tostring)
+- [unshift](array.JSONArray.md#unshift)
+- [values](array.JSONArray.md#values)
 
 ## Properties
-
-### $type
-
-• **$type**: [`PropType`](../modules/abstract.md#proptype)
-
-#### Defined in
-
-[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L21)
-
-___
 
 ### [unscopables]
 
@@ -161,31 +118,17 @@ Array.length
 
 node_modules/typescript/lib/lib.es5.d.ts:1305
 
-___
-
-### [species]
-
-▪ `Static` `Readonly` **[species]**: `ArrayConstructor`
-
-#### Inherited from
-
-Array.\_\_@species@580
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:316
-
 ## Methods
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`<`any`\>
+▸ **[iterator]**(): `IterableIterator`<[`JSONValue`](../modules/array.md#jsonvalue)\>
 
 Iterator
 
 #### Returns
 
-`IterableIterator`<`any`\>
+`IterableIterator`<[`JSONValue`](../modules/array.md#jsonvalue)\>
 
 #### Inherited from
 
@@ -199,7 +142,7 @@ ___
 
 ### concat
 
-▸ **concat**(`...items`): `any`[]
+▸ **concat**(`...items`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Combines two or more arrays.
 This method returns a new array without modifying any existing arrays.
@@ -208,11 +151,11 @@ This method returns a new array without modifying any existing arrays.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...items` | `ConcatArray`<`any`\>[] | Additional arrays and/or items to add to the end of the array. |
+| `...items` | `ConcatArray`<[`JSONValue`](../modules/array.md#jsonvalue)\>[] | Additional arrays and/or items to add to the end of the array. |
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 #### Inherited from
 
@@ -222,7 +165,7 @@ Array.concat
 
 node_modules/typescript/lib/lib.es5.d.ts:1329
 
-▸ **concat**(`...items`): `any`[]
+▸ **concat**(`...items`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Combines two or more arrays.
 This method returns a new array without modifying any existing arrays.
@@ -231,11 +174,11 @@ This method returns a new array without modifying any existing arrays.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...items` | `any`[] | Additional arrays and/or items to add to the end of the array. |
+| `...items` | ([`JSONValue`](../modules/array.md#jsonvalue) \| `ConcatArray`<[`JSONValue`](../modules/array.md#jsonvalue)\>)[] | Additional arrays and/or items to add to the end of the array. |
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 #### Inherited from
 
@@ -249,7 +192,7 @@ ___
 
 ### copyWithin
 
-▸ **copyWithin**(`target`, `start`, `end?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **copyWithin**(`target`, `start`, `end?`): [`JSONArray`](array.JSONArray.md)
 
 Returns the this object after copying a section of the array identified by start and end
 to the same array starting at position target
@@ -264,7 +207,7 @@ to the same array starting at position target
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`JSONArray`](array.JSONArray.md)
 
 #### Inherited from
 
@@ -278,13 +221,13 @@ ___
 
 ### entries
 
-▸ **entries**(): `IterableIterator`<[`number`, `any`]\>
+▸ **entries**(): `IterableIterator`<[`number`, [`JSONValue`](../modules/array.md#jsonvalue)]\>
 
 Returns an iterable of key, value pairs for every entry in the array
 
 #### Returns
 
-`IterableIterator`<[`number`, `any`]\>
+`IterableIterator`<[`number`, [`JSONValue`](../modules/array.md#jsonvalue)]\>
 
 #### Inherited from
 
@@ -306,13 +249,13 @@ Determines whether all the members of an array satisfy the specified test.
 
 | Name | Type |
 | :------ | :------ |
-| `S` | extends `any` |
+| `S` | extends [`JSONValue`](../modules/array.md#jsonvalue) |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => value is S | A function that accepts up to three arguments. The every method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value false, or until the end of the array. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => value is S | A function that accepts up to three arguments. The every method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value false, or until the end of the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -335,7 +278,7 @@ Determines whether all the members of an array satisfy the specified test.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => `unknown` | A function that accepts up to three arguments. The every method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value false, or until the end of the array. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `unknown` | A function that accepts up to three arguments. The every method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value false, or until the end of the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -354,7 +297,7 @@ ___
 
 ### fill
 
-▸ **fill**(`value`, `start?`, `end?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **fill**(`value`, `start?`, `end?`): [`JSONArray`](array.JSONArray.md)
 
 Changes all array elements from `start` to `end` index to a static `value` and returns the modified array
 
@@ -362,13 +305,13 @@ Changes all array elements from `start` to `end` index to a static `value` and r
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `any` | value to fill array section with |
+| `value` | [`JSONValue`](../modules/array.md#jsonvalue) | value to fill array section with |
 | `start?` | `number` | index to start filling the array at. If start is negative, it is treated as length+start where length is the length of the array. |
 | `end?` | `number` | index to stop filling the array at. If end is negative, it is treated as length+end. |
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`JSONArray`](array.JSONArray.md)
 
 #### Inherited from
 
@@ -390,13 +333,13 @@ Returns the elements of an array that meet the condition specified in a callback
 
 | Name | Type |
 | :------ | :------ |
-| `S` | extends `any` |
+| `S` | extends [`JSONValue`](../modules/array.md#jsonvalue) |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => value is S | A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => value is S | A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -411,7 +354,7 @@ Array.filter
 
 node_modules/typescript/lib/lib.es5.d.ts:1448
 
-▸ **filter**(`predicate`, `thisArg?`): `any`[]
+▸ **filter**(`predicate`, `thisArg?`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Returns the elements of an array that meet the condition specified in a callback function.
 
@@ -419,12 +362,12 @@ Returns the elements of an array that meet the condition specified in a callback
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => `unknown` | A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `unknown` | A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 #### Inherited from
 
@@ -447,13 +390,13 @@ otherwise.
 
 | Name | Type |
 | :------ | :------ |
-| `S` | extends `any` |
+| `S` | extends [`JSONValue`](../modules/array.md#jsonvalue) |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `obj`: `any`[]) => value is S | find calls predicate once for each element of the array, in ascending order, until it finds one where predicate returns true. If such an element is found, find immediately returns that element value. Otherwise, find returns undefined. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `obj`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => value is S | find calls predicate once for each element of the array, in ascending order, until it finds one where predicate returns true. If such an element is found, find immediately returns that element value. Otherwise, find returns undefined. |
 | `thisArg?` | `any` | If provided, it will be used as the this value for each invocation of predicate. If it is not provided, undefined is used instead. |
 
 #### Returns
@@ -468,18 +411,18 @@ Array.find
 
 node_modules/typescript/lib/lib.es2015.core.d.ts:29
 
-▸ **find**(`predicate`, `thisArg?`): `any`
+▸ **find**(`predicate`, `thisArg?`): [`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `obj`: `any`[]) => `unknown` |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `obj`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `unknown` |
 | `thisArg?` | `any` |
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -502,7 +445,7 @@ otherwise.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `obj`: `any`[]) => `unknown` | find calls predicate once for each element of the array, in ascending order, until it finds one where predicate returns true. If such an element is found, findIndex immediately returns that element index. Otherwise, findIndex returns -1. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `obj`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `unknown` | find calls predicate once for each element of the array, in ascending order, until it finds one where predicate returns true. If such an element is found, findIndex immediately returns that element index. Otherwise, findIndex returns -1. |
 | `thisArg?` | `any` | If provided, it will be used as the this value for each invocation of predicate. If it is not provided, undefined is used instead. |
 
 #### Returns
@@ -529,7 +472,7 @@ Performs the specified action for each element in an array.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => `void` | A function that accepts up to three arguments. forEach calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `void` | A function that accepts up to three arguments. forEach calls the callbackfn function one time for each element in the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -556,7 +499,7 @@ Returns the index of the first occurrence of a value in an array, or -1 if it is
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `searchElement` | `any` | The value to locate in the array. |
+| `searchElement` | [`JSONValue`](../modules/array.md#jsonvalue) | The value to locate in the array. |
 | `fromIndex?` | `number` | The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0. |
 
 #### Returns
@@ -629,7 +572,7 @@ Returns the index of the last occurrence of a specified value in an array, or -1
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `searchElement` | `any` | The value to locate in the array. |
+| `searchElement` | [`JSONValue`](../modules/array.md#jsonvalue) | The value to locate in the array. |
 | `fromIndex?` | `number` | The array index at which to begin searching backward. If fromIndex is omitted, the search starts at the last index in the array. |
 
 #### Returns
@@ -662,7 +605,7 @@ Calls a defined callback function on each element of an array, and returns an ar
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => `U` | A function that accepts up to three arguments. The map method calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `U` | A function that accepts up to three arguments. The map method calls the callbackfn function one time for each element in the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -681,14 +624,14 @@ ___
 
 ### pop
 
-▸ **pop**(): `any`
+▸ **pop**(): [`JSONValue`](../modules/array.md#jsonvalue)
 
 Removes the last element from an array and returns it.
 If the array is empty, undefined is returned and the array is not modified.
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -710,7 +653,7 @@ Appends new elements to the end of an array, and returns the new length of the a
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...items` | `any`[] | New elements to add to the array. |
+| `...items` | [`JSONValue`](../modules/array.md#jsonvalue)[] | New elements to add to the array. |
 
 #### Returns
 
@@ -728,7 +671,7 @@ ___
 
 ### reduce
 
-▸ **reduce**(`callbackfn`): `any`
+▸ **reduce**(`callbackfn`): [`JSONValue`](../modules/array.md#jsonvalue)
 
 Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
 
@@ -736,11 +679,11 @@ Calls the specified callback function for all the elements in an array. The retu
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`previousValue`: `any`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `any` | A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`previousValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => [`JSONValue`](../modules/array.md#jsonvalue) | A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array. |
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -750,18 +693,18 @@ Array.reduce
 
 node_modules/typescript/lib/lib.es5.d.ts:1460
 
-▸ **reduce**(`callbackfn`, `initialValue`): `any`
+▸ **reduce**(`callbackfn`, `initialValue`): [`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`previousValue`: `any`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `any` |
-| `initialValue` | `any` |
+| `callbackfn` | (`previousValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => [`JSONValue`](../modules/array.md#jsonvalue) |
+| `initialValue` | [`JSONValue`](../modules/array.md#jsonvalue) |
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -785,7 +728,7 @@ Calls the specified callback function for all the elements in an array. The retu
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`previousValue`: `U`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `U` | A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`previousValue`: `U`, `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `U` | A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array. |
 | `initialValue` | `U` | If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value. |
 
 #### Returns
@@ -804,7 +747,7 @@ ___
 
 ### reduceRight
 
-▸ **reduceRight**(`callbackfn`): `any`
+▸ **reduceRight**(`callbackfn`): [`JSONValue`](../modules/array.md#jsonvalue)
 
 Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
 
@@ -812,11 +755,11 @@ Calls the specified callback function for all the elements in an array, in desce
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`previousValue`: `any`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `any` | A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`previousValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => [`JSONValue`](../modules/array.md#jsonvalue) | A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. |
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -826,18 +769,18 @@ Array.reduceRight
 
 node_modules/typescript/lib/lib.es5.d.ts:1473
 
-▸ **reduceRight**(`callbackfn`, `initialValue`): `any`
+▸ **reduceRight**(`callbackfn`, `initialValue`): [`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`previousValue`: `any`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `any` |
-| `initialValue` | `any` |
+| `callbackfn` | (`previousValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => [`JSONValue`](../modules/array.md#jsonvalue) |
+| `initialValue` | [`JSONValue`](../modules/array.md#jsonvalue) |
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -861,7 +804,7 @@ Calls the specified callback function for all the elements in an array, in desce
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callbackfn` | (`previousValue`: `U`, `currentValue`: `any`, `currentIndex`: `number`, `array`: `any`[]) => `U` | A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. |
+| `callbackfn` | (`previousValue`: `U`, `currentValue`: [`JSONValue`](../modules/array.md#jsonvalue), `currentIndex`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `U` | A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. |
 | `initialValue` | `U` | If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value. |
 
 #### Returns
@@ -880,14 +823,14 @@ ___
 
 ### reverse
 
-▸ **reverse**(): `any`[]
+▸ **reverse**(): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Reverses the elements in an array in place.
 This method mutates the array and returns a reference to the same array.
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 #### Inherited from
 
@@ -901,14 +844,14 @@ ___
 
 ### shift
 
-▸ **shift**(): `any`
+▸ **shift**(): [`JSONValue`](../modules/array.md#jsonvalue)
 
 Removes the first element from an array and returns it.
 If the array is empty, undefined is returned and the array is not modified.
 
 #### Returns
 
-`any`
+[`JSONValue`](../modules/array.md#jsonvalue)
 
 #### Inherited from
 
@@ -922,7 +865,7 @@ ___
 
 ### slice
 
-▸ **slice**(`start?`, `end?`): `any`[]
+▸ **slice**(`start?`, `end?`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Returns a copy of a section of an array.
 For both start and end, a negative index can be used to indicate an offset from the end of the array.
@@ -937,7 +880,7 @@ For example, -2 refers to the second to last element of the array.
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 #### Inherited from
 
@@ -959,7 +902,7 @@ Determines whether the specified callback function returns true for any element 
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `predicate` | (`value`: `any`, `index`: `number`, `array`: `any`[]) => `unknown` | A function that accepts up to three arguments. The some method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value true, or until the end of the array. |
+| `predicate` | (`value`: [`JSONValue`](../modules/array.md#jsonvalue), `index`: `number`, `array`: [`JSONValue`](../modules/array.md#jsonvalue)[]) => `unknown` | A function that accepts up to three arguments. The some method calls the predicate function for each element in the array until the predicate returns a value which is coercible to the Boolean value true, or until the end of the array. |
 | `thisArg?` | `any` | An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value. |
 
 #### Returns
@@ -978,7 +921,7 @@ ___
 
 ### sort
 
-▸ **sort**(`compareFn?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **sort**(`compareFn?`): [`JSONArray`](array.JSONArray.md)
 
 Sorts an array in place.
 This method mutates the array and returns a reference to the same array.
@@ -987,11 +930,11 @@ This method mutates the array and returns a reference to the same array.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `compareFn?` | (`a`: `any`, `b`: `any`) => `number` | Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise. If omitted, the elements are sorted in ascending, ASCII character order. ```ts [11,2,22,1].sort((a, b) => a - b) ``` |
+| `compareFn?` | (`a`: [`JSONValue`](../modules/array.md#jsonvalue), `b`: [`JSONValue`](../modules/array.md#jsonvalue)) => `number` | Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise. If omitted, the elements are sorted in ascending, ASCII character order. ```ts [11,2,22,1].sort((a, b) => a - b) ``` |
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`JSONArray`](array.JSONArray.md)
 
 #### Inherited from
 
@@ -1005,7 +948,7 @@ ___
 
 ### splice
 
-▸ **splice**(`start`, `deleteCount?`): `any`[]
+▸ **splice**(`start`, `deleteCount?`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
 
@@ -1018,7 +961,7 @@ Removes elements from an array and, if necessary, inserts new elements in their 
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 An array containing the elements that were deleted.
 
@@ -1030,7 +973,7 @@ Array.splice
 
 node_modules/typescript/lib/lib.es5.d.ts:1378
 
-▸ **splice**(`start`, `deleteCount`, `...items`): `any`[]
+▸ **splice**(`start`, `deleteCount`, `...items`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
 Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
 
@@ -1040,11 +983,11 @@ Removes elements from an array and, if necessary, inserts new elements in their 
 | :------ | :------ | :------ |
 | `start` | `number` | The zero-based location in the array from which to start removing elements. |
 | `deleteCount` | `number` | The number of elements to remove. |
-| `...items` | `any`[] | Elements to insert into the array in place of the deleted elements. |
+| `...items` | [`JSONValue`](../modules/array.md#jsonvalue)[] | Elements to insert into the array in place of the deleted elements. |
 
 #### Returns
 
-`any`[]
+[`JSONValue`](../modules/array.md#jsonvalue)[]
 
 An array containing the elements that were deleted.
 
@@ -1055,20 +998,6 @@ Array.splice
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:1386
-
-___
-
-### toJSON
-
-▸ **toJSON**(): [`JSONObject`](../interfaces/array.JSONObject.md)
-
-#### Returns
-
-[`JSONObject`](../interfaces/array.JSONObject.md)
-
-#### Defined in
-
-[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L24)
 
 ___
 
@@ -1089,28 +1018,6 @@ Array.toLocaleString
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:1313
-
-___
-
-### toObject
-
-▸ **toObject**(`options?`): [`JSONObject`](../interfaces/array.JSONObject.md)
-
-convert to the plain object
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `options?` | [`IMergeOptions`](../interfaces/abstract.IMergeOptions.md) | the convert options |
-
-#### Returns
-
-[`JSONObject`](../interfaces/array.JSONObject.md)
-
-#### Defined in
-
-[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L29)
 
 ___
 
@@ -1144,7 +1051,7 @@ Inserts new elements at the start of an array, and returns the new length of the
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...items` | `any`[] | Elements to insert at the start of the array. |
+| `...items` | [`JSONValue`](../modules/array.md#jsonvalue)[] | Elements to insert at the start of the array. |
 
 #### Returns
 
@@ -1160,29 +1067,15 @@ node_modules/typescript/lib/lib.es5.d.ts:1391
 
 ___
 
-### valueOf
-
-▸ **valueOf**(): [`JSONObject`](../interfaces/array.JSONObject.md)
-
-#### Returns
-
-[`JSONObject`](../interfaces/array.JSONObject.md)
-
-#### Defined in
-
-[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L30)
-
-___
-
 ### values
 
-▸ **values**(): `IterableIterator`<`any`\>
+▸ **values**(): `IterableIterator`<[`JSONValue`](../modules/array.md#jsonvalue)\>
 
 Returns an iterable of values in the array
 
 #### Returns
 
-`IterableIterator`<`any`\>
+`IterableIterator`<[`JSONValue`](../modules/array.md#jsonvalue)\>
 
 #### Inherited from
 
@@ -1191,181 +1084,3 @@ Array.values
 #### Defined in
 
 node_modules/typescript/lib/lib.es2015.iterable.d.ts:73
-
-___
-
-### from
-
-▸ `Static` **from**<`T`\>(`arrayLike`): `T`[]
-
-Creates an array from an array-like object.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `arrayLike` | `ArrayLike`<`T`\> | An array-like object to convert to an array. |
-
-#### Returns
-
-`T`[]
-
-#### Inherited from
-
-Array.from
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.core.d.ts:70
-
-▸ `Static` **from**<`T`, `U`\>(`arrayLike`, `mapfn`, `thisArg?`): `U`[]
-
-Creates an array from an iterable object.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-| `U` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `arrayLike` | `ArrayLike`<`T`\> | An array-like object to convert to an array. |
-| `mapfn` | (`v`: `T`, `k`: `number`) => `U` | A mapping function to call on every element of the array. |
-| `thisArg?` | `any` | Value of 'this' used to invoke the mapfn. |
-
-#### Returns
-
-`U`[]
-
-#### Inherited from
-
-Array.from
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.core.d.ts:78
-
-▸ `Static` **from**<`T`\>(`iterable`): `T`[]
-
-Creates an array from an iterable object.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `iterable` | `Iterable`<`T`\> \| `ArrayLike`<`T`\> | An iterable object to convert to an array. |
-
-#### Returns
-
-`T`[]
-
-#### Inherited from
-
-Array.from
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:81
-
-▸ `Static` **from**<`T`, `U`\>(`iterable`, `mapfn`, `thisArg?`): `U`[]
-
-Creates an array from an iterable object.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-| `U` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `iterable` | `Iterable`<`T`\> \| `ArrayLike`<`T`\> | An iterable object to convert to an array. |
-| `mapfn` | (`v`: `T`, `k`: `number`) => `U` | A mapping function to call on every element of the array. |
-| `thisArg?` | `any` | Value of 'this' used to invoke the mapfn. |
-
-#### Returns
-
-`U`[]
-
-#### Inherited from
-
-Array.from
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:89
-
-___
-
-### isArray
-
-▸ `Static` **isArray**(`arg`): arg is any[]
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `arg` | `any` |
-
-#### Returns
-
-arg is any[]
-
-#### Inherited from
-
-Array.isArray
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es5.d.ts:1492
-
-___
-
-### of
-
-▸ `Static` **of**<`T`\>(`...items`): `T`[]
-
-Returns a new array from a set of elements.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...items` | `T`[] | A set of elements to include in the new array object. |
-
-#### Returns
-
-`T`[]
-
-#### Inherited from
-
-Array.of
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.core.d.ts:84

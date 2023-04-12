@@ -32,7 +32,7 @@ the exclude property name(s)
 
 #### Defined in
 
-[src/abstract.d.ts:29](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L29)
+[src/abstract.d.ts:29](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L29)
 
 ___
 
@@ -44,7 +44,7 @@ Whether overwrite the dest property
 
 #### Defined in
 
-[src/abstract.d.ts:33](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L33)
+[src/abstract.d.ts:33](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L33)
 
 ___
 
@@ -56,7 +56,7 @@ skip if src property is default value.
 
 #### Defined in
 
-[src/abstract.d.ts:37](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L37)
+[src/abstract.d.ts:37](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L37)
 
 ___
 
@@ -68,7 +68,7 @@ skip if dest property value is exists(isn't undefined)
 
 #### Defined in
 
-[src/abstract.d.ts:45](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L45)
+[src/abstract.d.ts:45](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L45)
 
 ___
 
@@ -80,7 +80,7 @@ skip if src property value is null
 
 #### Defined in
 
-[src/abstract.d.ts:49](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L49)
+[src/abstract.d.ts:49](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L49)
 
 ___
 
@@ -92,7 +92,7 @@ skip if src property is readonly
 
 #### Defined in
 
-[src/abstract.d.ts:41](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L41)
+[src/abstract.d.ts:41](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L41)
 
 ___
 
@@ -104,4 +104,4 @@ skip if src property value is undefined
 
 #### Defined in
 
-[src/abstract.d.ts:53](https://github.com/snowyu/property-manager.js/blob/7796872/src/abstract.d.ts#L53)
+[src/abstract.d.ts:53](https://github.com/snowyu/property-manager.js/blob/2259d20/src/abstract.d.ts#L53)

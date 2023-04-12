@@ -48,7 +48,7 @@ Collection the advanced attribute descriptors
 
 #### Defined in
 
-[src/properties/index.d.ts:19](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L19)
+[src/properties/index.d.ts:19](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L19)
 
 ## Properties
 
@@ -60,7 +60,7 @@ Indicates that the property will not be exported, defaults to '$'
 
 #### Defined in
 
-[src/properties/index.d.ts:11](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L11)
+[src/properties/index.d.ts:11](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L11)
 
 ## Methods
 
@@ -84,7 +84,7 @@ Indicates that the property will not be exported, defaults to '$'
 
 #### Defined in
 
-[src/properties/index.d.ts:28](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L28)
+[src/properties/index.d.ts:28](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L28)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:29](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L29)
+[src/properties/index.d.ts:29](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L29)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:20](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L20)
+[src/properties/index.d.ts:20](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L20)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:26](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L26)
+[src/properties/index.d.ts:26](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L26)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:31](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L31)
+[src/properties/index.d.ts:31](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L31)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:24](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L24)
+[src/properties/index.d.ts:24](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L24)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:25](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L25)
+[src/properties/index.d.ts:25](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L25)
 
 ___
 
@@ -230,7 +230,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:30](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L30)
+[src/properties/index.d.ts:30](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L30)
 
 ___
 
@@ -250,7 +250,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:21](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L21)
+[src/properties/index.d.ts:21](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L21)
 
 ___
 
@@ -272,7 +272,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:23](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L23)
+[src/properties/index.d.ts:23](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L23)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:22](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L22)
+[src/properties/index.d.ts:22](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L22)
 
 ___
 
@@ -316,4 +316,4 @@ ___
 
 #### Defined in
 
-[src/properties/index.d.ts:27](https://github.com/snowyu/property-manager.js/blob/7796872/src/properties/index.d.ts#L27)
+[src/properties/index.d.ts:27](https://github.com/snowyu/property-manager.js/blob/2259d20/src/properties/index.d.ts#L27)

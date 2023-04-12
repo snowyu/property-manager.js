@@ -30,10 +30,10 @@ Features:
 * Declare properties with type and default value.
   * Supports `arrayOf` property with type
   * Supports property with `template`(the property value is determined by the template content):
-    * `template` *{string | (this) => string}*:
+    * `template` *`{string | (this) => string}`*:
       * the template string, eg, `'${author}-${uuid()}'`
       * or customize template function, `function() {return this.author + '-' + uuid()}`
-    * `imports`: *{Object}* the optional functions could be used in the template string.
+    * `imports`: *`{Object}`* the optional functions could be used in the template string.
     * **NOTE**: the template property is readonly by default. You can make it writeable.
       Once a new value has been written, the template will be no useful unless the new value is null or undefined.
 
@@ -62,7 +62,7 @@ We often need to manage the properties of an object, consider the following:
    1. define all attributes on this object even though the value is null.
       * no default value feature.
    2. define a simple `$attributes` property to manage this:
-      * {attrName: {value:'defaultValue'}, ...}
+      * `{attrName: {value:'defaultValue'}, ...}`
    3. define a complex `$attributes`(use `Properties` class) to manage attributes.
 
 So we have these classes: SimplePropertyManager,NormalPropertyManager and AdvancePropertyManager.

@@ -7,9 +7,16 @@
 ### References
 
 - [AdvancePropertyManager](index-1.md#advancepropertymanager)
+- [ArrayPropertyManager](index-1.md#arraypropertymanager)
+- [JSONArray](index-1.md#jsonarray)
+- [JSONObject](index-1.md#jsonobject)
+- [JSONValue](index-1.md#jsonvalue)
 - [NormalPropertyManager](index-1.md#normalpropertymanager)
+- [Primitive](index-1.md#primitive)
 - [PropertyAbility](index-1.md#propertyability)
 - [SimplePropertyManager](index-1.md#simplepropertymanager)
+- [arrayOf](index-1.md#arrayof)
+- [assignValue](index-1.md#assignvalue)
 - [default](index-1.md#default)
 
 ## References
@@ -20,9 +27,39 @@ Re-exports [AdvancePropertyManager](../classes/advance.AdvancePropertyManager.md
 
 ___
 
+### ArrayPropertyManager
+
+Re-exports [ArrayPropertyManager](../classes/array.ArrayPropertyManager.md)
+
+___
+
+### JSONArray
+
+Re-exports [JSONArray](../interfaces/array.JSONArray.md)
+
+___
+
+### JSONObject
+
+Re-exports [JSONObject](../interfaces/array.JSONObject.md)
+
+___
+
+### JSONValue
+
+Re-exports [JSONValue](array.md#jsonvalue)
+
+___
+
 ### NormalPropertyManager
 
 Re-exports [NormalPropertyManager](../classes/normal.NormalPropertyManager.md)
+
+___
+
+### Primitive
+
+Re-exports [Primitive](array.md#primitive)
 
 ___
 
@@ -35,6 +72,18 @@ ___
 ### SimplePropertyManager
 
 Re-exports [SimplePropertyManager](../classes/simple.SimplePropertyManager.md)
+
+___
+
+### arrayOf
+
+Re-exports [arrayOf](array.md#arrayof)
+
+___
+
+### assignValue
+
+Re-exports [assignValue](assign_value.md#assignvalue)
 
 ___
 

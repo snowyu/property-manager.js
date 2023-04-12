@@ -1,8 +1,8 @@
-[property-manager](../README.md) / [Exports](../modules.md) / [array](../modules/array.md) / ArrayPropertyManager
+[property-manager](../README.md) / [Exports](../modules.md) / [array](../modules/array-1.md) / ArrayPropertyManager
 
 # Class: ArrayPropertyManager
 
-[array](../modules/array.md).ArrayPropertyManager
+[array](../modules/array-1.md).ArrayPropertyManager
 
 ## Hierarchy
 
@@ -14,52 +14,52 @@
 
 ### Constructors
 
-- [constructor](array.ArrayPropertyManager.md#constructor)
+- [constructor](array-1.ArrayPropertyManager.md#constructor)
 
 ### Properties
 
-- [$type](array.ArrayPropertyManager.md#$type)
-- [[unscopables]](array.ArrayPropertyManager.md#[unscopables])
-- [length](array.ArrayPropertyManager.md#length)
-- [[species]](array.ArrayPropertyManager.md#[species])
+- [[unscopables]](array-1.ArrayPropertyManager.md#[unscopables])
+- [length](array-1.ArrayPropertyManager.md#length)
+- [[species]](array-1.ArrayPropertyManager.md#[species])
 
 ### Methods
 
-- [[iterator]](array.ArrayPropertyManager.md#[iterator])
-- [concat](array.ArrayPropertyManager.md#concat)
-- [copyWithin](array.ArrayPropertyManager.md#copywithin)
-- [entries](array.ArrayPropertyManager.md#entries)
-- [every](array.ArrayPropertyManager.md#every)
-- [fill](array.ArrayPropertyManager.md#fill)
-- [filter](array.ArrayPropertyManager.md#filter)
-- [find](array.ArrayPropertyManager.md#find)
-- [findIndex](array.ArrayPropertyManager.md#findindex)
-- [forEach](array.ArrayPropertyManager.md#foreach)
-- [indexOf](array.ArrayPropertyManager.md#indexof)
-- [join](array.ArrayPropertyManager.md#join)
-- [keys](array.ArrayPropertyManager.md#keys)
-- [lastIndexOf](array.ArrayPropertyManager.md#lastindexof)
-- [map](array.ArrayPropertyManager.md#map)
-- [pop](array.ArrayPropertyManager.md#pop)
-- [push](array.ArrayPropertyManager.md#push)
-- [reduce](array.ArrayPropertyManager.md#reduce)
-- [reduceRight](array.ArrayPropertyManager.md#reduceright)
-- [reverse](array.ArrayPropertyManager.md#reverse)
-- [shift](array.ArrayPropertyManager.md#shift)
-- [slice](array.ArrayPropertyManager.md#slice)
-- [some](array.ArrayPropertyManager.md#some)
-- [sort](array.ArrayPropertyManager.md#sort)
-- [splice](array.ArrayPropertyManager.md#splice)
-- [toJSON](array.ArrayPropertyManager.md#tojson)
-- [toLocaleString](array.ArrayPropertyManager.md#tolocalestring)
-- [toObject](array.ArrayPropertyManager.md#toobject)
-- [toString](array.ArrayPropertyManager.md#tostring)
-- [unshift](array.ArrayPropertyManager.md#unshift)
-- [valueOf](array.ArrayPropertyManager.md#valueof)
-- [values](array.ArrayPropertyManager.md#values)
-- [from](array.ArrayPropertyManager.md#from)
-- [isArray](array.ArrayPropertyManager.md#isarray)
-- [of](array.ArrayPropertyManager.md#of)
+- [[iterator]](array-1.ArrayPropertyManager.md#[iterator])
+- [concat](array-1.ArrayPropertyManager.md#concat)
+- [copyWithin](array-1.ArrayPropertyManager.md#copywithin)
+- [entries](array-1.ArrayPropertyManager.md#entries)
+- [every](array-1.ArrayPropertyManager.md#every)
+- [fill](array-1.ArrayPropertyManager.md#fill)
+- [filter](array-1.ArrayPropertyManager.md#filter)
+- [find](array-1.ArrayPropertyManager.md#find)
+- [findIndex](array-1.ArrayPropertyManager.md#findindex)
+- [forEach](array-1.ArrayPropertyManager.md#foreach)
+- [indexOf](array-1.ArrayPropertyManager.md#indexof)
+- [join](array-1.ArrayPropertyManager.md#join)
+- [keys](array-1.ArrayPropertyManager.md#keys)
+- [lastIndexOf](array-1.ArrayPropertyManager.md#lastindexof)
+- [map](array-1.ArrayPropertyManager.md#map)
+- [pop](array-1.ArrayPropertyManager.md#pop)
+- [push](array-1.ArrayPropertyManager.md#push)
+- [reduce](array-1.ArrayPropertyManager.md#reduce)
+- [reduceRight](array-1.ArrayPropertyManager.md#reduceright)
+- [reverse](array-1.ArrayPropertyManager.md#reverse)
+- [shift](array-1.ArrayPropertyManager.md#shift)
+- [slice](array-1.ArrayPropertyManager.md#slice)
+- [some](array-1.ArrayPropertyManager.md#some)
+- [sort](array-1.ArrayPropertyManager.md#sort)
+- [splice](array-1.ArrayPropertyManager.md#splice)
+- [toJSON](array-1.ArrayPropertyManager.md#tojson)
+- [toLocaleString](array-1.ArrayPropertyManager.md#tolocalestring)
+- [toObject](array-1.ArrayPropertyManager.md#toobject)
+- [toString](array-1.ArrayPropertyManager.md#tostring)
+- [unshift](array-1.ArrayPropertyManager.md#unshift)
+- [valueOf](array-1.ArrayPropertyManager.md#valueof)
+- [values](array-1.ArrayPropertyManager.md#values)
+- [arrayOf](array-1.ArrayPropertyManager.md#arrayof)
+- [from](array-1.ArrayPropertyManager.md#from)
+- [isArray](array-1.ArrayPropertyManager.md#isarray)
+- [of](array-1.ArrayPropertyManager.md#of)
 
 ## Constructors
 
@@ -72,7 +72,7 @@
 | Name | Type |
 | :------ | :------ |
 | `value` | `any` |
-| `type` | [`PropType`](../modules/abstract.md#proptype) |
+| `type` | `any` |
 
 #### Overrides
 
@@ -80,19 +80,9 @@ Array.constructor
 
 #### Defined in
 
-[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L23)
+[src/array.js:21](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L21)
 
 ## Properties
-
-### $type
-
-• **$type**: [`PropType`](../modules/abstract.md#proptype)
-
-#### Defined in
-
-[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L21)
-
-___
 
 ### [unscopables]
 
@@ -249,7 +239,7 @@ ___
 
 ### copyWithin
 
-▸ **copyWithin**(`target`, `start`, `end?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **copyWithin**(`target`, `start`, `end?`): [`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 Returns the this object after copying a section of the array identified by start and end
 to the same array starting at position target
@@ -264,7 +254,7 @@ to the same array starting at position target
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 #### Inherited from
 
@@ -354,7 +344,7 @@ ___
 
 ### fill
 
-▸ **fill**(`value`, `start?`, `end?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **fill**(`value`, `start?`, `end?`): [`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 Changes all array elements from `start` to `end` index to a static `value` and returns the modified array
 
@@ -368,7 +358,7 @@ Changes all array elements from `start` to `end` index to a static `value` and r
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 #### Inherited from
 
@@ -702,27 +692,26 @@ ___
 
 ### push
 
-▸ **push**(`...items`): `number`
-
-Appends new elements to the end of an array, and returns the new length of the array.
+▸ **push**(`value`, `...arr`): `number`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...items` | `any`[] | New elements to add to the array. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+| `...arr` | `any`[] |
 
 #### Returns
 
 `number`
 
-#### Inherited from
+#### Overrides
 
 Array.push
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1323
+[src/array.js:36](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L36)
 
 ___
 
@@ -978,7 +967,7 @@ ___
 
 ### sort
 
-▸ **sort**(`compareFn?`): [`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+▸ **sort**(`compareFn?`): [`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 Sorts an array in place.
 This method mutates the array and returns a reference to the same array.
@@ -991,7 +980,7 @@ This method mutates the array and returns a reference to the same array.
 
 #### Returns
 
-[`ArrayPropertyManager`](array.ArrayPropertyManager.md)
+[`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
 
 #### Inherited from
 
@@ -1060,15 +1049,15 @@ ___
 
 ### toJSON
 
-▸ **toJSON**(): [`JSONObject`](../interfaces/array.JSONObject.md)
+▸ **toJSON**(): `any`[]
 
 #### Returns
 
-[`JSONObject`](../interfaces/array.JSONObject.md)
+`any`[]
 
 #### Defined in
 
-[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L24)
+[src/array.js:52](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L52)
 
 ___
 
@@ -1094,23 +1083,21 @@ ___
 
 ### toObject
 
-▸ **toObject**(`options?`): [`JSONObject`](../interfaces/array.JSONObject.md)
-
-convert to the plain object
+▸ **toObject**(`options`): `any`[]
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `options?` | [`IMergeOptions`](../interfaces/abstract.IMergeOptions.md) | the convert options |
+| Name | Type |
+| :------ | :------ |
+| `options` | `any` |
 
 #### Returns
 
-[`JSONObject`](../interfaces/array.JSONObject.md)
+`any`[]
 
 #### Defined in
 
-[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L29)
+[src/array.js:56](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L56)
 
 ___
 
@@ -1136,41 +1123,40 @@ ___
 
 ### unshift
 
-▸ **unshift**(`...items`): `number`
-
-Inserts new elements at the start of an array, and returns the new length of the array.
+▸ **unshift**(`value`, `...arr`): `number`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...items` | `any`[] | Elements to insert at the start of the array. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+| `...arr` | `any`[] |
 
 #### Returns
 
 `number`
 
-#### Inherited from
+#### Overrides
 
 Array.unshift
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1391
+[src/array.js:44](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L44)
 
 ___
 
 ### valueOf
 
-▸ **valueOf**(): [`JSONObject`](../interfaces/array.JSONObject.md)
+▸ **valueOf**(): `any`[]
 
 #### Returns
 
-[`JSONObject`](../interfaces/array.JSONObject.md)
+`any`[]
 
 #### Defined in
 
-[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.d.ts#L30)
+[src/array.js:69](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L69)
 
 ___
 
@@ -1191,6 +1177,38 @@ Array.values
 #### Defined in
 
 node_modules/typescript/lib/lib.es2015.iterable.d.ts:73
+
+___
+
+### arrayOf
+
+▸ `Static` **arrayOf**(`type`): (`value`: `any`) => [`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `type` | `any` |
+
+#### Returns
+
+`fn`
+
+▸ (`value`): [`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `any` |
+
+##### Returns
+
+[`ArrayPropertyManager`](array-1.ArrayPropertyManager.md)
+
+#### Defined in
+
+[src/array.js:15](https://github.com/snowyu/property-manager.js/blob/2259d20/src/array.js#L15)
 
 ___
 
