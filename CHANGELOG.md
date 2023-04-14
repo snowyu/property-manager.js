@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* **ctor:** do not call initialize if no arguments ([f67a659](https://github.com/snowyu/property-manager.js/commit/f67a659fa48614c47ef6a88667d862d886960067))
+
+
+### Refactor
+
+* **abstract:** use [].includes instead [].indexOf ([2d46052](https://github.com/snowyu/property-manager.js/commit/2d460527c58297ac9cb67995c1ba8c6d4886683c))
+
 ## [2.0.0-alpha.2](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2023-04-14)
 
 
