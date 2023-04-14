@@ -3,7 +3,6 @@ import {createObject} from 'inherits-ex'
 
 import deepEqual from 'deep-equal';
 
-const indexOf = [].indexOf;
 
 /**
  * The Abstract PropertyManager Class
@@ -192,7 +191,7 @@ AbstractPropertyManager.prototype.mergeTo = function mergeTo(dest, aOptions = {}
   // so we must use the defined properties as the assignment order.
   for (const k in vAttrs) {
     const v = vAttrs[k];
-    if (indexOf.call(exclude, k) >= 0) {
+    if (exclude.includes(k)) {
       continue;
     }
     if (v && v.name && exclude.includes(v.name)) {continue}
