@@ -37,4 +37,4 @@ Renames and re-exports [assignValue](assign_value-1.md#assignvalue)
 
 #### Defined in
 
-[src/assign-value.js:1](https://github.com/snowyu/property-manager.js/blob/0800533/src/assign-value.js#L1)
+[src/assign-value.js:1](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/assign-value.js#L1)

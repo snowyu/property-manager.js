@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[src/abstract.d.ts:20](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L20)
+[src/abstract.d.ts:20](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L20)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:17](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L17)
+[src/abstract.d.ts:17](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L17)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:18](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L18)
+[src/abstract.d.ts:18](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L18)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L21)
+[src/abstract.d.ts:21](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L21)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:5](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L5)
+[src/abstract.d.ts:5](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L5)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:6](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L6)
+[src/abstract.d.ts:6](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L6)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:19](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L19)
+[src/abstract.d.ts:19](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L19)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:9](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L9)
+[src/abstract.d.ts:9](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L9)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:15](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L15)
+[src/abstract.d.ts:15](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L15)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:22](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L22)
+[src/abstract.d.ts:22](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L22)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:10](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L10)
+[src/abstract.d.ts:10](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L10)
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:16](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L16)
+[src/abstract.d.ts:16](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L16)
 
 ___
 
@@ -195,7 +195,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:7](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L7)
+[src/abstract.d.ts:7](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L7)
 
 ___
 
@@ -209,4 +209,4 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:8](https://github.com/snowyu/property-manager.js/blob/0800533/src/abstract.d.ts#L8)
+[src/abstract.d.ts:8](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L8)

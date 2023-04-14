@@ -36,7 +36,7 @@ Renames and re-exports [PropertyAbility](ability.md#propertyability)
 
 #### Defined in
 
-[src/ability.d.ts:6](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L6)
+[src/ability.d.ts:6](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L6)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:5](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L5)
+[src/ability.d.ts:5](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L5)
 
 ## Functions
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:18](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L18)
+[src/ability.d.ts:18](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L18)

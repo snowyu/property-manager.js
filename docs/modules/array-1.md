@@ -52,4 +52,4 @@ Renames and re-exports [ArrayPropertyManager](../classes/array-1.ArrayPropertyMa
 
 #### Defined in
 
-[src/array.js:15](https://github.com/snowyu/property-manager.js/blob/0800533/src/array.js#L15)
+[src/array.js:15](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/array.js#L15)

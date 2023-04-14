@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[src/ability.d.ts:14](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L14)
+[src/ability.d.ts:14](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L14)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:11](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L11)
+[src/ability.d.ts:11](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L11)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:12](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L12)
+[src/ability.d.ts:12](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L12)
 
 ___
 
@@ -55,17 +55,17 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:13](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L13)
+[src/ability.d.ts:13](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L13)
 
 ___
 
 ### name
 
-• `Optional` **name**: `string`
+• `Optional` **name**: [`PropManagerType`](../modules/ability.md#propmanagertype)
 
 #### Defined in
 
-[src/ability.d.ts:8](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L8)
+[src/ability.d.ts:8](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L8)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:10](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L10)
+[src/ability.d.ts:10](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L10)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:9](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L9)
+[src/ability.d.ts:9](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L9)
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 #### Defined in
 
-[src/ability.d.ts:15](https://github.com/snowyu/property-manager.js/blob/0800533/src/ability.d.ts#L15)
+[src/ability.d.ts:15](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/ability.d.ts#L15)
