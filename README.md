@@ -183,7 +183,7 @@ Note: you should specify the position of the argument if the first argument is n
 
 ### Make your class manage the properties
 
-there are two ways to make your class manage the attributes.
+there are three ways to make your class manage the attributes.
 
 * Class inherits from
   * inherits from PropertyManager directly.
@@ -221,6 +221,7 @@ there are two ways to make your class manage the attributes.
         * toObject
     15. isSame (optional)
         * mergeTo
+* Decorator: [property-manager-decorator](https://github.com/snowyu/property-manager-decorator.ts/tree/v2)
 
 #### Class Inherits
 
