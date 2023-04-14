@@ -7,7 +7,7 @@ const getAllOwnKeys = Object.getOwnPropertyNames;
 const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 export function SimplePropertyManager() {
-  this.initialize.apply(this, arguments);
+  if (arguments.length) this.initialize.apply(this, arguments);
 }
 
 // merge the methods on the PropertyManager.prototype.

@@ -8,7 +8,7 @@ import assignValue from './assign-value.js';
 import PropertyManager from './abstract.js';
 
 export function NormalPropertyManager() {
-  this.initialize.apply(this, arguments);
+  if (arguments.length) this.initialize.apply(this, arguments);
 }
 
 // merge the methods on the PropertyManager.prototype.

@@ -8,7 +8,7 @@ import deepEqual from 'deep-equal';
  * The Abstract PropertyManager Class
  */
 export function AbstractPropertyManager() {
-  return this.initialize.apply(this, arguments);
+  if (arguments.length) this.initialize.apply(this, arguments);
 }
 
 /**

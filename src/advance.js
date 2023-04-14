@@ -6,7 +6,7 @@ import PropertyManager from './abstract.js'
 import _defineProperties from './properties/define-properties'
 
 export function AdvancePropertyManager() {
-  this.initialize.apply(this, arguments);
+  if (arguments.length) this.initialize.apply(this, arguments);
 }
 
 // merge the methods on the PropertyManager.prototype.
