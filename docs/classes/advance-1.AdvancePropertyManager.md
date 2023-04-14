@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L8)
+[src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L8)
 
 ## Properties
 
@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[src/advance.js:44](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L44)
+[src/advance.js:44](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L44)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[src/advance.js:46](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L46)
+[src/advance.js:46](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L46)
 
 ___
 
@@ -87,7 +87,7 @@ the defined attributes
 
 #### Defined in
 
-[src/advance.js:54](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L54)
+[src/advance.js:54](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L54)
 
 ## Methods
 
@@ -112,7 +112,7 @@ the defined attributes
 
 #### Defined in
 
-[src/advance.js:37](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L37)
+[src/advance.js:37](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L37)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[src/advance.js:31](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L31)
+[src/advance.js:31](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L31)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[src/advance.js:27](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L27)
+[src/advance.js:27](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L27)
 
 ___
 
@@ -161,4 +161,4 @@ ___
 
 #### Defined in
 
-[src/advance.js:15](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/advance.js#L15)
+[src/advance.js:15](https://github.com/snowyu/property-manager.js/blob/95356d9/src/advance.js#L15)

@@ -43,7 +43,7 @@ Renames and re-exports [AbstractPropertyManager](../classes/abstract.AbstractPro
 
 #### Defined in
 
-[src/abstract.d.ts:63](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L63)
+[src/abstract.d.ts:63](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L63)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:64](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L64)
+[src/abstract.d.ts:64](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L64)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:1](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L1)
+[src/abstract.d.ts:1](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L1)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:2](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L2)
+[src/abstract.d.ts:2](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L2)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:61](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L61)
+[src/abstract.d.ts:61](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L61)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:62](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L62)
+[src/abstract.d.ts:62](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L62)
 
 ___
 
@@ -111,4 +111,4 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:60](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.d.ts#L60)
+[src/abstract.d.ts:60](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.d.ts#L60)

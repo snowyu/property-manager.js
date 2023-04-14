@@ -43,4 +43,4 @@ Collection the advanced attribute descriptors
 
 #### Defined in
 
-[src/properties/index.js:17](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/properties/index.js#L17)
+[src/properties/index.js:17](https://github.com/snowyu/property-manager.js/blob/95356d9/src/properties/index.js#L17)

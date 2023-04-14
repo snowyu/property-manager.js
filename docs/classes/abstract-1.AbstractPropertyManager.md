@@ -48,7 +48,7 @@ The Abstract PropertyManager Class
 
 #### Defined in
 
-[src/abstract.js:11](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L11)
+[src/abstract.js:10](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L10)
 
 ## Properties
 
@@ -58,7 +58,7 @@ The Abstract PropertyManager Class
 
 #### Defined in
 
-[src/abstract.js:300](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L300)
+[src/abstract.js:299](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L299)
 
 ## Methods
 
@@ -79,7 +79,7 @@ The Abstract PropertyManager Class
 
 #### Defined in
 
-[src/abstract.js:103](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L103)
+[src/abstract.js:102](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L102)
 
 ___
 
@@ -104,7 +104,7 @@ this object
 
 #### Defined in
 
-[src/abstract.js:91](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L91)
+[src/abstract.js:90](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L90)
 
 ___
 
@@ -130,7 +130,7 @@ Assign a property of src to this object.
 
 #### Defined in
 
-[src/abstract.js:164](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L164)
+[src/abstract.js:163](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L163)
 
 ___
 
@@ -159,7 +159,7 @@ Assign the property value from the src to destination object.
 
 #### Defined in
 
-[src/abstract.js:28](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L28)
+[src/abstract.js:27](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L27)
 
 ___
 
@@ -184,7 +184,7 @@ the dest object
 
 #### Defined in
 
-[src/abstract.js:262](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L262)
+[src/abstract.js:261](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L261)
 
 ___
 
@@ -208,7 +208,7 @@ the new object
 
 #### Defined in
 
-[src/abstract.js:67](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L67)
+[src/abstract.js:66](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L66)
 
 ___
 
@@ -233,7 +233,7 @@ the new dest object
 
 #### Defined in
 
-[src/abstract.js:78](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L78)
+[src/abstract.js:77](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L77)
 
 ___
 
@@ -257,7 +257,7 @@ Define the attributes of this object.
 
 #### Defined in
 
-[src/abstract.js:47](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L47)
+[src/abstract.js:46](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L46)
 
 ___
 
@@ -282,7 +282,7 @@ the dest object.
 
 #### Defined in
 
-[src/abstract.js:225](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L225)
+[src/abstract.js:224](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L224)
 
 ___
 
@@ -302,7 +302,7 @@ the descriptors of properties object
 
 #### Defined in
 
-[src/abstract.js:37](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L37)
+[src/abstract.js:36](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L36)
 
 ___
 
@@ -326,7 +326,7 @@ this object.
 
 #### Defined in
 
-[src/abstract.js:55](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L55)
+[src/abstract.js:54](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L54)
 
 ___
 
@@ -349,7 +349,7 @@ Check the src object whether “equals” this object.
 
 #### Defined in
 
-[src/abstract.js:286](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L286)
+[src/abstract.js:285](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L285)
 
 ___
 
@@ -374,7 +374,7 @@ the dest object.
 
 #### Defined in
 
-[src/abstract.js:179](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L179)
+[src/abstract.js:178](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L178)
 
 ___
 
@@ -388,7 +388,7 @@ ___
 
 #### Defined in
 
-[src/abstract.js:251](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L251)
+[src/abstract.js:250](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L250)
 
 ___
 
@@ -412,4 +412,4 @@ the json object.
 
 #### Defined in
 
-[src/abstract.js:246](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/abstract.js#L246)
+[src/abstract.js:245](https://github.com/snowyu/property-manager.js/blob/95356d9/src/abstract.js#L245)

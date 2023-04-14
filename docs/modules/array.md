@@ -40,7 +40,7 @@ Renames and re-exports [ArrayPropertyManager](../classes/array.ArrayPropertyMana
 
 #### Defined in
 
-[src/array.d.ts:12](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/array.d.ts#L12)
+[src/array.d.ts:12](https://github.com/snowyu/property-manager.js/blob/95356d9/src/array.d.ts#L12)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:3](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/array.d.ts#L3)
+[src/array.d.ts:3](https://github.com/snowyu/property-manager.js/blob/95356d9/src/array.d.ts#L3)
 
 ## Functions
 
@@ -82,4 +82,4 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:35](https://github.com/snowyu/property-manager.js/blob/248d0b4/src/array.d.ts#L35)
+[src/array.d.ts:35](https://github.com/snowyu/property-manager.js/blob/95356d9/src/array.d.ts#L35)
