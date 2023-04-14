@@ -5,7 +5,7 @@ export interface IAbilityMethods {
 export type PropManagerType = 'simple' | 'advance' | 'normal' | 'abstract'
 export type IAbilityOptions = IAbilityOption | PropManagerType
 export interface IAbilityOption {
-  name?: string;
+  name?: PropManagerType;
   optionsPosition?: number;
   nonExported1stChar?: string;
   exclude?: string[]|string;
