@@ -22,7 +22,7 @@
 
 适用于需要围绕业务对象/类来维护管理数据的场合. 我们首先需要定义该业务对象有哪些数据类型.
 
-能够快速对该业务对象进行赋值,合并,导出(JsonObject)以及校验.
+能够快速对该业务对象的公开属性进行赋值,合并,导出(JsonObject)以及校验.
 
 功能:
 
@@ -321,7 +321,7 @@ class MyClass {
     //  '$dontExport': {value:3, enumerable: false}
     //})
     this.name = name;
-    // initialize ProperManager
+    // initialize PropertyManager
     this.initialize.apply(this, arguments);
   }
 }

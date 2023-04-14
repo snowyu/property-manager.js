@@ -320,7 +320,7 @@ class MyClass {
     //  '$dontExport': {value:3, enumerable: false}
     //})
     this.name = name;
-    // initialize ProperManager
+    // initialize PropertyManager
     this.initialize.apply(this, arguments);
   }
 }
