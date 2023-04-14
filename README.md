@@ -77,17 +77,17 @@ first the rules of the properties:
 
 ### You can inherit from it
 
-* SimplePropertyManager: /lib/simple
+* `SimplePropertyManager`: /lib/simple
   * use the object's property descriptor directly.
   * so do not support default value.
   * do not support object value assignment hook function.
   * do not support meaningful(non-english) name.
-* NormalPropertyManager: /lib/normal
+* `NormalPropertyManager`: /lib/normal
   * use the `$attributes` plain object to hold the declaration properties
   * support default value.
   * support object value assignment hook function.
   * support meaningful(non-english) name.
-* AdvancePropertyManager: /lib/advance
+* `AdvancePropertyManager`: /lib/advance
   * use the `$attributes` to hold the declaration properties
   * the `$attributes` is an instance of `Properties` class.
   * so you can custom your `Properties` class inherited from.
