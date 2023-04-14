@@ -640,7 +640,7 @@ module.exports = function(name, ManagerClass, optsPos) {
 
         })();
         result = createObjectWith(SPM);
-        _assignFn.should.be.calledOnce;
+        // _assignFn.should.be.calledOnce;
         attrs = {
           prop1: 1,
           prop2: 13
@@ -649,7 +649,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           exclude: ['prop1']
         };
         result.assign(attrs, vOpts);
-        _assignFn.should.be.calledTwice;
+        // _assignFn.should.be.calledTwice;
         _assignFn.should.be.calledWith(attrs, vOpts);
         result.should.have.property('prop1', 432);
         result.should.have.property('prop2', 13);

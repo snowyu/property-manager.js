@@ -77,7 +77,7 @@ module.exports = function(name, ManagerClass, optsPos) {
   describe(name, function() {
     class TypedPM extends ManagerClass {
       constructor() {
-        super(...arguments)
+        super() // do not call initialize() if no arguments
         this.defineProperties(typedAttrs);
         this.initialize(...arguments)
       }
@@ -85,16 +85,16 @@ module.exports = function(name, ManagerClass, optsPos) {
 
     class PM extends ManagerClass {
       constructor() {
-        super(...arguments)
+        super() // do not call initialize() if no arguments
         this.defineProperties(classAttrs);
         this.initialize(...arguments)
       }
     }
 
     function makeArgs(options) {
-      var args, i, j, ref;
-      args = [];
+      const args = [];
       if (optsPos) {
+        let i, j, ref;
         for (i = j = 1, ref = optsPos; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
           args.push(i);
         }
