@@ -307,6 +307,17 @@ defineProperties(MyClassEx, {'extra': {value: 'extra'}});
 
 #### Ability to hook on any class
 
+Inject PropertyManger ability into any class via the `PropertyAbility` function.
+
+`PropertyAbility(target:Function|Object, options?)` If there is no parameter then it is the default `normal` property manager.
+
+options:
+
+* `name`: `{'simple' | 'advance' | 'normal' | 'abstract'}` Selected PropertyManger, default `normal`
+* `optionsPosition`: `{number}`, optional attribute option parameter position, used when the constructor needs to import Json object attributes.
+* `exclude`: `{string[]}` A list of attribute capability method names that do not need to be injected, the default is empty.
+
+
 ```js
 // var PropertyAbility = require('property-manager/ability');
 import {PropertyAbility} from 'property-manager'
@@ -470,6 +481,12 @@ assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:
 ## Changes
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
+
+### v2
+
+* ES6 Class
+* ESM support
+* NodeJS >= 8
 
 ### v1.4.0
 

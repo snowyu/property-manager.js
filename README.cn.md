@@ -178,54 +178,55 @@
     * where to get the default value?
 * `toJSON()`: this will call the `toObject()` to return.
 
-Note: you should specify the position of the argument if the first argument is not the options
+注意: 如果构造函数的第一个参数不是**属性选项**,那么你需要指定`属性选项`参数位置.
 
-## Usage
+## 用法
 
-### Make your class manage the properties
+### 让你的类能够管理(导入/导出)属性
 
-there are two ways to make your class manage the attributes.
+有下列三种方式使你的类可以管理属性:
 
-* Class inherits from
+* 继承方式:让你的类继承自属性管理器
   * inherits from PropertyManager directly.
-* Ability to hook on any class
-  * You need confirm these method names are not be used.
-    The `$attributes` is used via normal and advance PropertyManager.
-    the `nonExported1stChar` is used to change the first char of non-exported
-    property, defaults to '$'. It must be exist.
-    The first four methods must be exist. others are optional.
-    But be care of their dependencies.
-    1. $attributes (unless use simple PropertyManager)
-    2. nonExported1stChar
-    3. assign
-    4. assignPropertyTo
-    5. getProperties
-    6. defineProperties
-    7. clone (optional)
-       * mergeTo
-    8. initialize (optional)
-       * getProperties
-       * assign
-    9. assignProperty (optional)
-       * assignPropertyTo
-    10. mergeTo (optional)
-        * getProperties
-        * assignPropertyTo
-    11. exportTo (optional)
-        * mergeTo
-    12. assignTo (optional)
-        * getProperties
-        * assignPropertyTo
-    13. toObject (optional)
-        * exportTo
-    14. toJSON (optional)
-        * toObject
-    15. isSame (optional)
-        * mergeTo
+* 通过将属性能力注入到你的类
+  * 你需要确保下列的成员名称没有被类使用.
+    1. The `$attributes` 成员用于 `normal` and `advance` PropertyManager.
+    2. `nonExported1stChar` 成员用于改变非导出(`non-exported`)属性首字符约定,默认为 '`$`'.
+    * 前四种方法必须存在。其他是可选的。但要注意它们的依赖性。
+      1. assign
+      2. assignPropertyTo
+      3. getProperties
+      4. defineProperties
+      5. clone (optional)
+         * mergeTo
+      6. initialize (optional)
+         * getProperties
+         * assign
+      7. assignProperty (optional)
+         * assignPropertyTo
+      8. mergeTo (optional)
+          * getProperties
+          * assignPropertyTo
+      9. exportTo (optional)
+          * mergeTo
+      10. assignTo (optional)
+          * getProperties
+          * assignPropertyTo
+      11. toObject (optional)
+          * exportTo
+      12. toJSON (optional)
+          * toObject
+      13. isSame (optional)
+          * mergeTo
+* 修饰器: [property-manager-decorator](https://github.com/snowyu/property-manager-decorator.ts/tree/v2)
 
 #### Class Inherits
 
-there are three PropertyManager class to use, the default is NormalPropertyManager.
+有三类属性管理器可供选择, 默认是`NormalPropertyManager`,详细介绍参见前述.
+
+* `SimplePropertyManager`: 最简单的属性管理器,直接使用JS的对象属性描述符,因此无法在类上定义属性
+* `NormalPropertyManager`: 常规属性管理器,通过在类上的`prototype`的`$attributes`纯对象管理定义的属性
+* `AdvancePropertyManager`:高级属性管理器,通过在类上的`prototype`的`$attributes` `Properties`对象管理定义的属性
 
 ```js
 // var inherits = require('inherits-ex/lib/inherits');
@@ -306,6 +307,17 @@ defineProperties(MyClassEx, {'extra': {value: 'extra'}});
 ```
 
 #### 灵活的属性能力注入到任意类中
+
+通过`PropertyAbility`函数将属性能力注入到任意类中.
+
+`PropertyAbility(target:Function|Object, options?)` 如果没有参数那么就是默认的`normal`属性管理器.
+
+options:
+
+* `name`: `{'simple' | 'advance' | 'normal' | 'abstract'}` 选定属性管理器, 默认为 `normal`
+* `optionsPosition`: `{number}`, 可选的属性选项参数位置,在构造函数中需要导入Json对象属性时使用.
+* `exclude`: `{string[]}` 不需要注入的属性能力方法名称列表，默认为空。
+
 
 ```js
 // var PropertyAbility = require('property-manager/ability');
@@ -469,6 +481,12 @@ assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:
 ## Changes
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
+
+### v2
+
+* ES6 Class
+* ESM support
+* NodeJS >= 8
 
 ### v1.4.0
 
