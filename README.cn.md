@@ -167,10 +167,10 @@
   * you can override it to determine howto assign an object value.
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
 * `assignTo(dest)` : assign the attributes to this `dest` object.
-* `mergeTo(dest)`: merge the attributes itself to `dest` object.
+* `mergeTo(dest, options)`: 将this对象的属性值写入到 `dest` object, 如果options对象存在,并且options中的属性值存在,那么options中的属性值将覆盖原值.
   * do not overwrite the already exist attributes of the `dest`.
 * `isSame(obj)`: compare the `obj`'s attributes whether is the same value with itself.
-* `clone(options)`: create a new object with the same attributes' value.
+* `clone(options)`: 克隆对象, 如果options对象存在,并且options中的属性值存在,那么options中的属性值将覆盖原值.
 * `toObject(options)`: convert it as plain object.
   * do not export the non-enumerable attributes or beginning with '$'
   * do not export the attribute's value is null
