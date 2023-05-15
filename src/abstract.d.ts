@@ -157,7 +157,7 @@ export class AbstractPropertyManager extends Object {
    * Merge this attributes to dest object.
    *
    * @param {*} dest The destination object
-   * @param {IMergeOptions} [aOptions]
+   * @param {IMergeOptions} [aOptions] They should overwrite the dest's attributes if the attributes exists in the aOptions.
    * @returns the dest object.
    */
   mergeTo(dest, options?: IMergeOptions): any;

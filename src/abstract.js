@@ -172,7 +172,7 @@ AbstractPropertyManager.prototype.assignProperty = function assignProperty(src, 
  * Merge this attributes to dest object.
  *
  * @param {*} dest The destination object
- * @param {IMergeOptions} [aOptions]
+ * @param {IMergeOptions} [aOptions] They should overwrite the dest's attributes if the attributes exists in the aOptions.
  * @returns the dest object.
  */
 AbstractPropertyManager.prototype.mergeTo = function mergeTo(dest, aOptions = {}) {
@@ -218,7 +218,7 @@ AbstractPropertyManager.prototype.mergeTo = function mergeTo(dest, aOptions = {}
  * Export attributes to the dest json object.
  *
  * @param {*} dest the destination object
- * @param {IMergeOptions} [aOptions]
+ * @param {IMergeOptions} [aOptions] They should overwrite the dest's attributes if the attributes exists in the aOptions.
  * @returns the dest object.
  */
 AbstractPropertyManager.prototype.exportTo = function exportTo(dest, aOptions) {
