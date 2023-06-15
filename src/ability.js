@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/no-invalid-this: 0 */
-import customAbility from 'custom-ability';
+import createAbilityInjector from 'custom-ability';
 import {defineProperty, isNumber, isString} from 'util-ex';
 import {extend as extendPrototype} from 'inherits-ex';
 
@@ -104,6 +104,6 @@ function getPropertyManagerClass(aClass, aOptions) {
 
 const coreMethods = ['__assign', 'assignPropertyTo', 'getProperties', 'mergeTo', 'defineProperties', 'nonExported1stChar']
 
-export const PropertyAbility = customAbility(getPropertyManagerClass, coreMethods, true)
+export const PropertyAbility = createAbilityInjector(getPropertyManagerClass, coreMethods, true)
 
 export default PropertyAbility
