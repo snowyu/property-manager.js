@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-invalid-this: 0 */
 import customAbility from 'custom-ability';
 import {defineProperty, isNumber, isString} from 'util-ex';
 import {extend as extendPrototype} from 'inherits-ex';

@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-invalid-this: 0 */
 import {cloneObject, defineProperty, isArray, isBool as isBoolean, isFunction, isObject, isString} from 'util-ex'
 import {setPrototypeOf} from 'inherits-ex'
 import deepEqual from 'deep-equal'

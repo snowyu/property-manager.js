@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-invalid-this: 0 */
 import {defineProperty, extend} from 'inherits-ex';
 import {cloneObject, isArray, isFunction, isObject} from 'util-ex';
 
@@ -7,7 +8,7 @@ const getAllOwnKeys = Object.getOwnPropertyNames;
 const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 export function SimplePropertyManager() {
-  if (arguments.length) this.initialize.apply(this, arguments);
+  if (arguments.length) {this.initialize.apply(this, arguments)}
 }
 
 // merge the methods on the PropertyManager.prototype.
