@@ -96,7 +96,7 @@ when they will be absent when used in a 'with' statement.
 
 #### Inherited from
 
-Array.\_\_@unscopables@84
+Array.[unscopables]
 
 #### Defined in
 
@@ -116,7 +116,7 @@ Array.length
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1305
+node_modules/typescript/lib/lib.es5.d.ts:1318
 
 ## Methods
 
@@ -132,7 +132,7 @@ Iterator
 
 #### Inherited from
 
-Array.\_\_@iterator@82
+Array.[iterator]
 
 #### Defined in
 
@@ -163,7 +163,7 @@ Array.concat
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1329
+node_modules/typescript/lib/lib.es5.d.ts:1342
 
 ▸ **concat**(`...items`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
@@ -186,13 +186,13 @@ Array.concat
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1335
+node_modules/typescript/lib/lib.es5.d.ts:1348
 
 ___
 
 ### copyWithin
 
-▸ **copyWithin**(`target`, `start`, `end?`): [`JSONArray`](array.JSONArray.md)
+▸ **copyWithin**(`target`, `start?`, `end?`): [`JSONArray`](array.JSONArray.md)
 
 Returns the this object after copying a section of the array identified by start and end
 to the same array starting at position target
@@ -202,7 +202,7 @@ to the same array starting at position target
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `target` | `number` | If target is negative, it is treated as length+target where length is the length of the array. |
-| `start` | `number` | If start is negative, it is treated as length+start. If end is negative, it is treated as length+end. |
+| `start?` | `number` | If start is negative, it is treated as length+start. If end is negative, it is treated as length+end. If start is omitted, `0` is used. |
 | `end?` | `number` | If not specified, length of the this object is used as its default value. |
 
 #### Returns
@@ -268,7 +268,7 @@ Array.every
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1412
+node_modules/typescript/lib/lib.es5.d.ts:1425
 
 ▸ **every**(`predicate`, `thisArg?`): `boolean`
 
@@ -291,7 +291,7 @@ Array.every
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1421
+node_modules/typescript/lib/lib.es5.d.ts:1434
 
 ___
 
@@ -352,7 +352,7 @@ Array.filter
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1448
+node_modules/typescript/lib/lib.es5.d.ts:1461
 
 ▸ **filter**(`predicate`, `thisArg?`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
@@ -375,7 +375,7 @@ Array.filter
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1454
+node_modules/typescript/lib/lib.es5.d.ts:1467
 
 ___
 
@@ -485,7 +485,7 @@ Array.forEach
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1436
+node_modules/typescript/lib/lib.es5.d.ts:1449
 
 ___
 
@@ -512,7 +512,7 @@ Array.indexOf
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1397
+node_modules/typescript/lib/lib.es5.d.ts:1410
 
 ___
 
@@ -538,7 +538,7 @@ Array.join
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1340
+node_modules/typescript/lib/lib.es5.d.ts:1353
 
 ___
 
@@ -585,7 +585,7 @@ Array.lastIndexOf
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1403
+node_modules/typescript/lib/lib.es5.d.ts:1416
 
 ___
 
@@ -618,7 +618,7 @@ Array.map
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1442
+node_modules/typescript/lib/lib.es5.d.ts:1455
 
 ___
 
@@ -639,7 +639,7 @@ Array.pop
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1318
+node_modules/typescript/lib/lib.es5.d.ts:1331
 
 ___
 
@@ -665,7 +665,7 @@ Array.push
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1323
+node_modules/typescript/lib/lib.es5.d.ts:1336
 
 ___
 
@@ -691,7 +691,7 @@ Array.reduce
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1460
+node_modules/typescript/lib/lib.es5.d.ts:1473
 
 ▸ **reduce**(`callbackfn`, `initialValue`): [`JSONValue`](../modules/array.md#jsonvalue)
 
@@ -712,7 +712,7 @@ Array.reduce
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1461
+node_modules/typescript/lib/lib.es5.d.ts:1474
 
 ▸ **reduce**<`U`\>(`callbackfn`, `initialValue`): `U`
 
@@ -741,7 +741,7 @@ Array.reduce
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1467
+node_modules/typescript/lib/lib.es5.d.ts:1480
 
 ___
 
@@ -767,7 +767,7 @@ Array.reduceRight
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1473
+node_modules/typescript/lib/lib.es5.d.ts:1486
 
 ▸ **reduceRight**(`callbackfn`, `initialValue`): [`JSONValue`](../modules/array.md#jsonvalue)
 
@@ -788,7 +788,7 @@ Array.reduceRight
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1474
+node_modules/typescript/lib/lib.es5.d.ts:1487
 
 ▸ **reduceRight**<`U`\>(`callbackfn`, `initialValue`): `U`
 
@@ -817,7 +817,7 @@ Array.reduceRight
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1480
+node_modules/typescript/lib/lib.es5.d.ts:1493
 
 ___
 
@@ -838,7 +838,7 @@ Array.reverse
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1345
+node_modules/typescript/lib/lib.es5.d.ts:1358
 
 ___
 
@@ -859,7 +859,7 @@ Array.shift
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1350
+node_modules/typescript/lib/lib.es5.d.ts:1363
 
 ___
 
@@ -888,7 +888,7 @@ Array.slice
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1360
+node_modules/typescript/lib/lib.es5.d.ts:1373
 
 ___
 
@@ -915,7 +915,7 @@ Array.some
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1430
+node_modules/typescript/lib/lib.es5.d.ts:1443
 
 ___
 
@@ -942,7 +942,7 @@ Array.sort
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1371
+node_modules/typescript/lib/lib.es5.d.ts:1384
 
 ___
 
@@ -971,7 +971,7 @@ Array.splice
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1378
+node_modules/typescript/lib/lib.es5.d.ts:1391
 
 ▸ **splice**(`start`, `deleteCount`, `...items`): [`JSONValue`](../modules/array.md#jsonvalue)[]
 
@@ -997,7 +997,7 @@ Array.splice
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1386
+node_modules/typescript/lib/lib.es5.d.ts:1399
 
 ___
 
@@ -1017,7 +1017,7 @@ Array.toLocaleString
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1313
+node_modules/typescript/lib/lib.es5.d.ts:1326
 
 ___
 
@@ -1037,7 +1037,7 @@ Array.toString
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1309
+node_modules/typescript/lib/lib.es5.d.ts:1322
 
 ___
 
@@ -1063,7 +1063,7 @@ Array.unshift
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1391
+node_modules/typescript/lib/lib.es5.d.ts:1404
 
 ___
 

@@ -78,17 +78,17 @@ first the rules of the properties:
 
 ### You can inherit from it
 
-* SimplePropertyManager: /lib/simple
+* `SimplePropertyManager`: /lib/simple
   * use the object's property descriptor directly.
   * so do not support default value.
   * do not support object value assignment hook function.
   * do not support meaningful(non-english) name.
-* NormalPropertyManager: /lib/normal
+* `NormalPropertyManager`: /lib/normal
   * use the `$attributes` plain object to hold the declaration properties
   * support default value.
   * support object value assignment hook function.
   * support meaningful(non-english) name.
-* AdvancePropertyManager: /lib/advance
+* `AdvancePropertyManager`: /lib/advance
   * use the `$attributes` to hold the declaration properties
   * the `$attributes` is an instance of `Properties` class.
   * so you can custom your `Properties` class inherited from.
@@ -184,7 +184,7 @@ Note: you should specify the position of the argument if the first argument is n
 
 ### Make your class manage the properties
 
-there are two ways to make your class manage the attributes.
+there are three ways to make your class manage the attributes.
 
 * Class inherits from
   * inherits from PropertyManager directly.
@@ -222,6 +222,7 @@ there are two ways to make your class manage the attributes.
         * toObject
     15. isSame (optional)
         * mergeTo
+* Decorator: [property-manager-decorator](https://github.com/snowyu/property-manager-decorator.ts/tree/v2)
 
 #### Class Inherits
 
@@ -307,6 +308,16 @@ defineProperties(MyClassEx, {'extra': {value: 'extra'}});
 
 #### Ability to hook on any class
 
+Inject PropertyManger ability into any class via the `PropertyAbility` function.
+
+`PropertyAbility(target:Function|Object, options?)` If there is no parameter then it is the default `normal` property manager.
+
+options:
+
+* `name`: `{'simple' | 'advance' | 'normal' | 'abstract'}` Selected PropertyManger, default `normal`
+* `optionsPosition`: `{number}`, optional attribute option parameter position, used when the constructor needs to import Json object attributes.
+* `exclude`: `{string[]}` A list of attribute capability method names that do not need to be injected, the default is empty.
+
 ```js
 // var PropertyAbility = require('property-manager/ability');
 import {PropertyAbility} from 'property-manager'
@@ -321,7 +332,7 @@ class MyClass {
     //  '$dontExport': {value:3, enumerable: false}
     //})
     this.name = name;
-    // initialize ProperManager
+    // initialize PropertyManager
     this.initialize.apply(this, arguments);
   }
 }
@@ -468,6 +479,12 @@ assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:
 ## Changes
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
+
+### v2
+
+* ES6 Class
+* ESM support
+* NodeJS >= 8
 
 ### v1.4.0
 
