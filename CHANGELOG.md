@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.4](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2023-06-15)
+
+
+### Bug Fixes
+
+* **lint:** typo and ignore @typescript-eslint/no-invalid-this ([ef7d26c](https://github.com/snowyu/property-manager.js/commit/ef7d26c290e9899dd36b2a021fbc4710b1be850d))
+
 ## [2.0.0-alpha.3](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2023-04-14)
 
 
