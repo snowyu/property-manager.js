@@ -381,7 +381,7 @@ defineProperties(MyClass, {
       }
       return result;
     }
-  }
+  },
   'custom': {
     value: {},
     assign: function(value, dest, src, name, opts) {
