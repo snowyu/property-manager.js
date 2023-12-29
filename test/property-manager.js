@@ -301,7 +301,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           result.should.have.ownProperty('a', 3);
           result.should.have.ownProperty('b', 4);
           result.should.have.ownProperty('x', 78);
-          return result.should.have.not.property('c');
+          result.should.have.not.property('c');
         });
       }
       if (defaultValueSupport) {
@@ -331,9 +331,9 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          return result.arr.should.be.equal(defaultArr);
+          result.arr.should.be.equal(defaultArr);
         });
-        return it('should create an object via meaningful name', function() {
+        it('should create an object via meaningful name', function() {
           var SPM, result;
           SPM = (function() {
             function SPM() {}
@@ -352,7 +352,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           result = createObjectWith(SPM, makeArgs({
             meaning: 1221
           }));
-          return result.should.have.property('propName', 1221);
+          result.should.have.property('propName', 1221);
         });
       }
     });
@@ -367,7 +367,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 234,
           prop6: void 0
         }));
-        return result.toObject().should.be.deep.equal({
+        result.toObject().should.be.deep.equal({
           prop1: 121,
           prop2: 453,
           prop4: 234
@@ -382,7 +382,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           notExi: 111,
           prop6: void 0
         }));
-        return result.exportTo({
+        result.exportTo({
           prop1: 333,
           prop4: 5
         }).should.be.deep.equal({
@@ -392,6 +392,35 @@ module.exports = function(name, ManagerClass, optsPos) {
         });
       });
       if (defaultValueSupport) {
+        it('should convert to a plain object with defaults and not skipDefault option', function() {
+          var result;
+          result = createObjectWith(PM, makeArgs({
+            prop1: 432,
+            prop2: 453,
+            hidden: 399,
+            notExi: 111
+          }));
+          result.toObject({skipDefault: false}).should.be.deep.equal({
+            prop1: 432,
+            prop2: 453,
+            prop4: null,
+            prop6: 'defaultValue',
+          });
+        });
+        it('should convert to a plain object with defaults with not skipDefault and skipNull options', function() {
+          var result;
+          result = createObjectWith(PM, makeArgs({
+            prop1: 432,
+            prop2: 453,
+            hidden: 399,
+            notExi: 111
+          }));
+          result.toObject({skipDefault: false, skipNull: true}).should.be.deep.equal({
+            prop1: 432,
+            prop2: 453,
+            prop6: 'defaultValue',
+          });
+        });
         it('should convert to a plain object with defaults', function() {
           var result;
           result = createObjectWith(PM, makeArgs({
@@ -400,7 +429,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          return result.toObject().should.be.deep.equal({
+          result.toObject().should.be.deep.equal({
             prop2: 453
           });
         });
@@ -411,7 +440,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          return result.exportTo({
+          result.exportTo({
             prop3: 333,
             prop4: 5
           }).should.be.deep.equal({
@@ -446,13 +475,13 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.exportTo(obj);
-          return obj.should.be.deep.equal({
+          obj.should.be.deep.equal({
             meaning: 121,
             prop1: 222,
             prop3: 5
           });
         });
-        return it('should convert a plain object via default object value(deep equal)', function() {
+        it('should convert a plain object via default object value(deep equal)', function() {
           var SPM, obj, result;
           SPM = (function() {
             function SPM() {}
@@ -481,7 +510,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.exportTo(obj);
-          return obj.should.be.deep.equal({
+          obj.should.be.deep.equal({
             prop1: 222
           });
         });
