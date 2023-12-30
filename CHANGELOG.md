@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0-alpha.5](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2023-12-30)
+
+
+### Features
+
+* add skipDefault option to property descriptor ([121fb68](https://github.com/snowyu/property-manager.js/commit/121fb682052aacf43eac612d3968af7579816fef))
+
 ## [2.0.0-alpha.4](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2023-06-15)
 
 
