@@ -37,7 +37,7 @@ the exclude property name(s)
 
 #### Defined in
 
-[src/abstract.d.ts:29](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L29)
+[src/abstract.d.ts:30](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L30)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:57](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L57)
+[src/abstract.d.ts:58](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L58)
 
 ___
 
@@ -63,7 +63,7 @@ Whether overwrite the dest property
 
 #### Defined in
 
-[src/abstract.d.ts:33](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L33)
+[src/abstract.d.ts:34](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L34)
 
 ___
 
@@ -79,7 +79,7 @@ skip if src property is default value.
 
 #### Defined in
 
-[src/abstract.d.ts:37](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L37)
+[src/abstract.d.ts:38](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L38)
 
 ___
 
@@ -95,7 +95,7 @@ skip if dest property value is exists(isn't undefined)
 
 #### Defined in
 
-[src/abstract.d.ts:45](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L45)
+[src/abstract.d.ts:46](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L46)
 
 ___
 
@@ -111,7 +111,7 @@ skip if src property value is null
 
 #### Defined in
 
-[src/abstract.d.ts:49](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L49)
+[src/abstract.d.ts:50](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L50)
 
 ___
 
@@ -127,7 +127,7 @@ skip if src property is readonly
 
 #### Defined in
 
-[src/abstract.d.ts:41](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L41)
+[src/abstract.d.ts:42](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L42)
 
 ___
 
@@ -143,4 +143,4 @@ skip if src property value is undefined
 
 #### Defined in
 
-[src/abstract.d.ts:53](https://github.com/snowyu/property-manager.js/blob/d0c8aad/src/abstract.d.ts#L53)
+[src/abstract.d.ts:54](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L54)
