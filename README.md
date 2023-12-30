@@ -97,7 +97,7 @@ first the rules of the properties:
   * support type check if possible.
 
 The `$attributes` holds all attributes(like the property descriptor) of an object.
-The `key` is the property name. the value is the property descriptor:
+The `key` is the property name. the value is the **property descriptor**:
 
 * `name` *(String)*: the non-english name to export, Defaults to the `key` name.
 * `value`: the property's default value if exists. Defaults to `undefined`.
@@ -132,6 +132,7 @@ The `key` is the property name. the value is the property descriptor:
   * `alias` *(String|ArrayOf String)*: add the alias(es) to the property. It used via assignment from options.
   * `clone` *(Boolean)*: Whether clone default property value if the value is an object when initializing.
     defaults to true.
+  * `skipDefault` *(Boolean)*: Whether to skip default values when exporting. defaults to true.
 
 ```js
 

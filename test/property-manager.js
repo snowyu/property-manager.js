@@ -392,6 +392,28 @@ module.exports = function(name, ManagerClass, optsPos) {
         });
       });
       if (defaultValueSupport) {
+        it('should convert to a plain object with not skipDefault in descriptor', function() {
+          const defaultArr = '124';
+          class SPM2 extends PM {
+            constructor(...args) {
+              super(...args);
+              this.defineProperties({
+                'arr': {
+                  value: defaultArr,
+                  skipDefault: false,
+                }
+              }, true);
+            }
+          }
+          const result = createObjectWith(SPM2, makeArgs({
+            prop1: 121,
+            prop2: 453,
+            hidden: 399,
+            notExi: 111
+          }));
+          result.toObject().should.have.own.deep.property('arr', defaultArr);
+        });
+
         it('should convert to a plain object with defaults and not skipDefault option', function() {
           var result;
           result = createObjectWith(PM, makeArgs({

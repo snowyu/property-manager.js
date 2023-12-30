@@ -237,7 +237,7 @@ Private('assignPropertyTo', function(dest, src, name, value, options = {}) {
     if (!((vIsAssigned && !isExported) || (vAttr.exported && isExported))) {
       return;
     }
-    if (skipDefault && (vAttr.exported !== true || vAttr.writable !== false) && deepEqual(vAttr.value, value)) {
+    if (skipDefault && vAttr.skipDefault !== false && (vAttr.exported !== true || vAttr.writable !== false) && deepEqual(vAttr.value, value)) {
       return;
     }
     const vCanAssign = (!isExported && vIsAssigned) || value !== undefined;

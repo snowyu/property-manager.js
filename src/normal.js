@@ -58,7 +58,7 @@ NormalPropertyManager.prototype.assignPropertyTo = function assignPropertyTo(des
     }
     const vIsReadonly = vAttr.writable === false || (vAttr.get && !vAttr.set);
     if (vIsReadonly && vAttr.exported !== true) {return}
-    if (skipDefault && !vIsReadonly && deepEqual(vAttr.value, value)) {return}
+    if (skipDefault && vAttr.skipDefault !== false && !vIsReadonly && deepEqual(vAttr.value, value)) {return}
 
     const vCanAssign = (!isExported && vAttr.assigned) || value !== undefined;
     if (isFunction(vAttr.assign)) {

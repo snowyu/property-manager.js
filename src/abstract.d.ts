@@ -20,6 +20,7 @@ export interface IPropDescriptor extends ISimplePropDescriptor {
   alias?: string[]|string;
   clone?: boolean;
   required?: boolean;
+  skipDefault?: boolean;
 }
 
 export interface IExportOptions {

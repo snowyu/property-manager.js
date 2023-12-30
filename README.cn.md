@@ -133,6 +133,7 @@
     * 如果 `undefined` 那么是否可被导出由此决定: `enumerable isn't false and the first char isn't "$"`
   * `alias` *(String|ArrayOf String)*: 该属性的别名. 用于从其它纯对象选项中赋值时
   * `clone` *(Boolean)*: 初始化时如果值为对象，是否克隆默认属性值。defaults to true.
+  * `skipDefault` *(Boolean)*: 是否在导出的时候跳过默认值。defaults to true.
 
 ```js
 
