@@ -46,6 +46,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",
     "@babel/register": "^7.22.5",
     "chai": "~4.3.7",
+    "cpx2": "^7.0.1",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-tsdoc": "^0.2.17",
