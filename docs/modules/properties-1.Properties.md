@@ -20,4 +20,4 @@
 
 #### Defined in
 
-[src/properties/index.js:36](https://github.com/snowyu/property-manager.js/blob/121fb68/src/properties/index.js#L36)
+[src/properties/index.js:36](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/properties/index.js#L36)

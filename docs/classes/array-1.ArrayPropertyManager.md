@@ -34,6 +34,7 @@
 - [find](array-1.ArrayPropertyManager.md#find)
 - [findIndex](array-1.ArrayPropertyManager.md#findindex)
 - [forEach](array-1.ArrayPropertyManager.md#foreach)
+- [includes](array-1.ArrayPropertyManager.md#includes)
 - [indexOf](array-1.ArrayPropertyManager.md#indexof)
 - [join](array-1.ArrayPropertyManager.md#join)
 - [keys](array-1.ArrayPropertyManager.md#keys)
@@ -80,7 +81,7 @@ Array.constructor
 
 #### Defined in
 
-[src/array.js:21](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L21)
+[src/array.js:21](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L21)
 
 ## Properties
 
@@ -107,6 +108,7 @@ when they will be absent when used in a 'with' statement.
 | `find?` | {} | - |
 | `findIndex?` | {} | - |
 | `forEach?` | {} | - |
+| `includes?` | {} | - |
 | `indexOf?` | {} | - |
 | `join?` | {} | - |
 | `keys?` | {} | - |
@@ -536,6 +538,33 @@ node_modules/typescript/lib/lib.es5.d.ts:1449
 
 ___
 
+### includes
+
+▸ **includes**(`searchElement`, `fromIndex?`): `boolean`
+
+Determines whether an array includes a certain element, returning true or false as appropriate.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `searchElement` | `any` | The element to search for. |
+| `fromIndex?` | `number` | The position in this array at which to begin searching for searchElement. |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Array.includes
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2016.array.include.d.ts:25
+
+___
+
 ### indexOf
 
 ▸ **indexOf**(`searchElement`, `fromIndex?`): `number`
@@ -711,7 +740,7 @@ Array.push
 
 #### Defined in
 
-[src/array.js:36](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L36)
+[src/array.js:36](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L36)
 
 ___
 
@@ -1057,7 +1086,7 @@ ___
 
 #### Defined in
 
-[src/array.js:52](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L52)
+[src/array.js:52](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L52)
 
 ___
 
@@ -1097,7 +1126,7 @@ ___
 
 #### Defined in
 
-[src/array.js:56](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L56)
+[src/array.js:56](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L56)
 
 ___
 
@@ -1142,7 +1171,7 @@ Array.unshift
 
 #### Defined in
 
-[src/array.js:44](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L44)
+[src/array.js:44](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L44)
 
 ___
 
@@ -1156,7 +1185,7 @@ ___
 
 #### Defined in
 
-[src/array.js:69](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L69)
+[src/array.js:69](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L69)
 
 ___
 
@@ -1208,7 +1237,7 @@ ___
 
 #### Defined in
 
-[src/array.js:15](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.js#L15)
+[src/array.js:15](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.js#L15)
 
 ___
 

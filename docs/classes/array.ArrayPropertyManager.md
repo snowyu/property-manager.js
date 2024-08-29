@@ -35,6 +35,7 @@
 - [find](array.ArrayPropertyManager.md#find)
 - [findIndex](array.ArrayPropertyManager.md#findindex)
 - [forEach](array.ArrayPropertyManager.md#foreach)
+- [includes](array.ArrayPropertyManager.md#includes)
 - [indexOf](array.ArrayPropertyManager.md#indexof)
 - [join](array.ArrayPropertyManager.md#join)
 - [keys](array.ArrayPropertyManager.md#keys)
@@ -80,7 +81,7 @@ Array.constructor
 
 #### Defined in
 
-[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.d.ts#L23)
+[src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.d.ts#L23)
 
 ## Properties
 
@@ -90,7 +91,7 @@ Array.constructor
 
 #### Defined in
 
-[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.d.ts#L21)
+[src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.d.ts#L21)
 
 ___
 
@@ -117,6 +118,7 @@ when they will be absent when used in a 'with' statement.
 | `find?` | {} | - |
 | `findIndex?` | {} | - |
 | `forEach?` | {} | - |
+| `includes?` | {} | - |
 | `indexOf?` | {} | - |
 | `join?` | {} | - |
 | `keys?` | {} | - |
@@ -543,6 +545,33 @@ Array.forEach
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:1449
+
+___
+
+### includes
+
+▸ **includes**(`searchElement`, `fromIndex?`): `boolean`
+
+Determines whether an array includes a certain element, returning true or false as appropriate.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `searchElement` | `any` | The element to search for. |
+| `fromIndex?` | `number` | The position in this array at which to begin searching for searchElement. |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Array.includes
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2016.array.include.d.ts:25
 
 ___
 
@@ -1068,7 +1097,7 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.d.ts#L24)
+[src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.d.ts#L24)
 
 ___
 
@@ -1110,7 +1139,7 @@ convert to the plain object
 
 #### Defined in
 
-[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.d.ts#L29)
+[src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.d.ts#L29)
 
 ___
 
@@ -1170,7 +1199,7 @@ ___
 
 #### Defined in
 
-[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/121fb68/src/array.d.ts#L30)
+[src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/array.d.ts#L30)
 
 ___
 

@@ -42,4 +42,4 @@ the defined attributes
 
 #### Defined in
 
-[src/properties/define-properties.js:14](https://github.com/snowyu/property-manager.js/blob/121fb68/src/properties/define-properties.js#L14)
+[src/properties/define-properties.js:14](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/properties/define-properties.js#L14)

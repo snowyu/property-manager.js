@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/121fb68/src/simple.js#L10)
+[src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/simple.js#L10)
 
 ## Methods
 
@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[src/simple.js:57](https://github.com/snowyu/property-manager.js/blob/121fb68/src/simple.js#L57)
+[src/simple.js:57](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/simple.js#L57)
 
 ___
 
@@ -77,7 +77,7 @@ Define properties to this object
 
 #### Defined in
 
-[src/simple.js:40](https://github.com/snowyu/property-manager.js/blob/121fb68/src/simple.js#L40)
+[src/simple.js:40](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/simple.js#L40)
 
 ___
 
@@ -95,4 +95,4 @@ the descriptors of properties object
 
 #### Defined in
 
-[src/simple.js:22](https://github.com/snowyu/property-manager.js/blob/121fb68/src/simple.js#L22)
+[src/simple.js:22](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/simple.js#L22)

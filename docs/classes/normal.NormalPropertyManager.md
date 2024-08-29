@@ -51,8 +51,10 @@ The Abstract PropertyManager Class
 - [create](normal.NormalPropertyManager.md#create)
 - [defineProperties](normal.NormalPropertyManager.md#defineproperties-1)
 - [defineProperty](normal.NormalPropertyManager.md#defineproperty)
+- [entries](normal.NormalPropertyManager.md#entries)
 - [freeze](normal.NormalPropertyManager.md#freeze)
 - [getOwnPropertyDescriptor](normal.NormalPropertyManager.md#getownpropertydescriptor)
+- [getOwnPropertyDescriptors](normal.NormalPropertyManager.md#getownpropertydescriptors)
 - [getOwnPropertyNames](normal.NormalPropertyManager.md#getownpropertynames)
 - [getOwnPropertySymbols](normal.NormalPropertyManager.md#getownpropertysymbols)
 - [getProperties](normal.NormalPropertyManager.md#getproperties-1)
@@ -65,6 +67,7 @@ The Abstract PropertyManager Class
 - [preventExtensions](normal.NormalPropertyManager.md#preventextensions)
 - [seal](normal.NormalPropertyManager.md#seal)
 - [setPrototypeOf](normal.NormalPropertyManager.md#setprototypeof)
+- [values](normal.NormalPropertyManager.md#values)
 
 ## Constructors
 
@@ -84,7 +87,7 @@ The Abstract PropertyManager Class
 
 #### Defined in
 
-[src/abstract.d.ts:80](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L80)
+[src/abstract.d.ts:80](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L80)
 
 ## Properties
 
@@ -94,7 +97,7 @@ The Abstract PropertyManager Class
 
 #### Defined in
 
-[src/normal.d.ts:4](https://github.com/snowyu/property-manager.js/blob/121fb68/src/normal.d.ts#L4)
+[src/normal.d.ts:4](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/normal.d.ts#L4)
 
 ___
 
@@ -133,7 +136,7 @@ The default options for export and assign
 
 #### Defined in
 
-[src/abstract.d.ts:74](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L74)
+[src/abstract.d.ts:74](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L74)
 
 ___
 
@@ -149,7 +152,7 @@ the property with the default prefix '$' will not be exported.
 
 #### Defined in
 
-[src/abstract.d.ts:78](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L78)
+[src/abstract.d.ts:78](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L78)
 
 ## Methods
 
@@ -178,7 +181,7 @@ this object
 
 #### Defined in
 
-[src/abstract.d.ts:106](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L106)
+[src/abstract.d.ts:106](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L106)
 
 ___
 
@@ -208,7 +211,7 @@ Assign a property of src to this object.
 
 #### Defined in
 
-[src/abstract.d.ts:117](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L117)
+[src/abstract.d.ts:117](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L117)
 
 ___
 
@@ -241,7 +244,7 @@ Assign the property value from the src to destination object.
 
 #### Defined in
 
-[src/abstract.d.ts:131](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L131)
+[src/abstract.d.ts:131](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L131)
 
 ___
 
@@ -270,7 +273,7 @@ the dest object
 
 #### Defined in
 
-[src/abstract.d.ts:191](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L191)
+[src/abstract.d.ts:191](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L191)
 
 ___
 
@@ -298,7 +301,7 @@ the new object
 
 #### Defined in
 
-[src/abstract.d.ts:155](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L155)
+[src/abstract.d.ts:155](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L155)
 
 ___
 
@@ -327,7 +330,7 @@ the new dest object
 
 #### Defined in
 
-[src/abstract.d.ts:148](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L148)
+[src/abstract.d.ts:148](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L148)
 
 ___
 
@@ -355,7 +358,7 @@ Define the attributes of this object.
 
 #### Defined in
 
-[src/abstract.d.ts:89](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L89)
+[src/abstract.d.ts:89](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L89)
 
 ___
 
@@ -384,7 +387,7 @@ the dest object.
 
 #### Defined in
 
-[src/abstract.d.ts:173](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L173)
+[src/abstract.d.ts:173](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L173)
 
 ___
 
@@ -408,7 +411,7 @@ the descriptors of properties object
 
 #### Defined in
 
-[src/abstract.d.ts:98](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L98)
+[src/abstract.d.ts:98](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L98)
 
 ___
 
@@ -462,7 +465,7 @@ this object.
 
 #### Defined in
 
-[src/abstract.d.ts:139](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L139)
+[src/abstract.d.ts:139](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L139)
 
 ___
 
@@ -515,7 +518,7 @@ Check the src object whether “equals” this object.
 
 #### Defined in
 
-[src/abstract.d.ts:200](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L200)
+[src/abstract.d.ts:200](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L200)
 
 ___
 
@@ -544,7 +547,7 @@ the dest object.
 
 #### Defined in
 
-[src/abstract.d.ts:164](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L164)
+[src/abstract.d.ts:164](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L164)
 
 ___
 
@@ -588,7 +591,7 @@ ___
 
 #### Defined in
 
-[src/abstract.d.ts:182](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L182)
+[src/abstract.d.ts:182](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L182)
 
 ___
 
@@ -636,7 +639,7 @@ the json object.
 
 #### Defined in
 
-[src/abstract.d.ts:181](https://github.com/snowyu/property-manager.js/blob/121fb68/src/abstract.d.ts#L181)
+[src/abstract.d.ts:181](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/abstract.d.ts#L181)
 
 ___
 
@@ -880,7 +883,7 @@ Adds one or more properties to an object, and/or modifies attributes of existing
 
 #### Defined in
 
-[src/normal.d.ts:11](https://github.com/snowyu/property-manager.js/blob/121fb68/src/normal.d.ts#L11)
+[src/normal.d.ts:11](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/normal.d.ts#L11)
 
 ___
 
@@ -915,6 +918,60 @@ Adds a property to an object, or modifies attributes of an existing property.
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:203
+
+___
+
+### entries
+
+▸ `Static` **entries**<`T`\>(`o`): [`string`, `T`][]
+
+Returns an array of key/values of the enumerable properties of an object
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `o` | { `[s: string]`: `T`;  } \| `ArrayLike`<`T`\> | Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object. |
+
+#### Returns
+
+[`string`, `T`][]
+
+#### Inherited from
+
+[AbstractPropertyManager](abstract.AbstractPropertyManager.md).[entries](abstract.AbstractPropertyManager.md#entries)
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2017.object.d.ts:36
+
+▸ `Static` **entries**(`o`): [`string`, `any`][]
+
+Returns an array of key/values of the enumerable properties of an object
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `o` | `Object` | Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object. |
+
+#### Returns
+
+[`string`, `any`][]
+
+#### Inherited from
+
+[AbstractPropertyManager](abstract.AbstractPropertyManager.md).[entries](abstract.AbstractPropertyManager.md#entries)
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2017.object.d.ts:42
 
 ___
 
@@ -1035,6 +1092,38 @@ node_modules/typescript/lib/lib.es5.d.ts:175
 
 ___
 
+### getOwnPropertyDescriptors
+
+▸ `Static` **getOwnPropertyDescriptors**<`T`\>(`o`): { [P in string \| number \| symbol]: TypedPropertyDescriptor<T[P]\> } & { `[x: string]`: `PropertyDescriptor`;  }
+
+Returns an object containing all own property descriptors of an object
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `o` | `T` | Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object. |
+
+#### Returns
+
+{ [P in string \| number \| symbol]: TypedPropertyDescriptor<T[P]\> } & { `[x: string]`: `PropertyDescriptor`;  }
+
+#### Inherited from
+
+[AbstractPropertyManager](abstract.AbstractPropertyManager.md).[getOwnPropertyDescriptors](abstract.AbstractPropertyManager.md#getownpropertydescriptors)
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2017.object.d.ts:48
+
+___
+
 ### getOwnPropertyNames
 
 ▸ `Static` **getOwnPropertyNames**(`o`): `string`[]
@@ -1100,7 +1189,7 @@ get all properties descriptor include inherited.
 
 #### Defined in
 
-[src/normal.d.ts:9](https://github.com/snowyu/property-manager.js/blob/121fb68/src/normal.d.ts#L9)
+[src/normal.d.ts:9](https://github.com/snowyu/property-manager.js/blob/4242c0a/src/normal.d.ts#L9)
 
 ___
 
@@ -1371,3 +1460,57 @@ Sets the prototype of a specified object o to object proto or null. Returns the 
 #### Defined in
 
 node_modules/typescript/lib/lib.es2015.core.d.ts:337
+
+___
+
+### values
+
+▸ `Static` **values**<`T`\>(`o`): `T`[]
+
+Returns an array of values of the enumerable properties of an object
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `o` | { `[s: string]`: `T`;  } \| `ArrayLike`<`T`\> | Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object. |
+
+#### Returns
+
+`T`[]
+
+#### Inherited from
+
+[AbstractPropertyManager](abstract.AbstractPropertyManager.md).[values](abstract.AbstractPropertyManager.md#values)
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2017.object.d.ts:24
+
+▸ `Static` **values**(`o`): `any`[]
+
+Returns an array of values of the enumerable properties of an object
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `o` | `Object` | Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object. |
+
+#### Returns
+
+`any`[]
+
+#### Inherited from
+
+[AbstractPropertyManager](abstract.AbstractPropertyManager.md).[values](abstract.AbstractPropertyManager.md#values)
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2017.object.d.ts:30

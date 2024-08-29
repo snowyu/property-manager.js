@@ -29,6 +29,7 @@
 - [find](array.JSONArray.md#find)
 - [findIndex](array.JSONArray.md#findindex)
 - [forEach](array.JSONArray.md#foreach)
+- [includes](array.JSONArray.md#includes)
 - [indexOf](array.JSONArray.md#indexof)
 - [join](array.JSONArray.md#join)
 - [keys](array.JSONArray.md#keys)
@@ -74,6 +75,7 @@ when they will be absent when used in a 'with' statement.
 | `find?` | {} | - |
 | `findIndex?` | {} | - |
 | `forEach?` | {} | - |
+| `includes?` | {} | - |
 | `indexOf?` | {} | - |
 | `join?` | {} | - |
 | `keys?` | {} | - |
@@ -486,6 +488,33 @@ Array.forEach
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:1449
+
+___
+
+### includes
+
+▸ **includes**(`searchElement`, `fromIndex?`): `boolean`
+
+Determines whether an array includes a certain element, returning true or false as appropriate.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `searchElement` | [`JSONValue`](../modules/array.md#jsonvalue) | The element to search for. |
+| `fromIndex?` | `number` | The position in this array at which to begin searching for searchElement. |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+Array.includes
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es2016.array.include.d.ts:25
 
 ___
 
