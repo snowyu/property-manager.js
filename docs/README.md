@@ -1,4 +1,6 @@
-property-manager / [Exports](modules.md)
+**property-manager**
+
+***
 
 ## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
@@ -479,7 +481,7 @@ assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:
 
 ## Changes
 
-More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
+More recent changes see: [CHANGELOG.md](_media/CHANGELOG.md)
 
 ### v2
 
