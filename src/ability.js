@@ -22,6 +22,11 @@ function extendCtor(target, source) {
   }
 }
 
+/**
+ * @param {any} aClass
+ * @param {IAbilityOption | string | number} aOptions
+ * @returns {InternalPropertyManager}
+ */
 function getPropertyManagerClass(aClass, aOptions) {
   if (isString(aOptions)) {
     aOptions = {
