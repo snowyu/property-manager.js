@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.1](https://github.com/snowyu/property-manager.js/compare/v2.0.0...v2.0.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **ts:** make ts happy ([ea710f8](https://github.com/snowyu/property-manager.js/commit/ea710f8438970df37ff2de3e62b28115a8018fac))
+
 ## [2.0.0](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.5...v2.0.0) (2024-08-29)
 
 ## [2.0.0-alpha.5](https://github.com/snowyu/property-manager.js/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2023-12-30)
