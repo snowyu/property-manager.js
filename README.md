@@ -475,6 +475,88 @@ var myEx = new MyClassEx('theClassEx', {attr1: 3, hidden:11222, $dontExport: 1, 
 assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:{b:12, exta: 123}})
 ```
 
+### Advanced Usage: Typed Arrays and Nested Objects
+
+Beyond basic property management, `property-manager` also supports more complex scenarios, such as handling arrays with specific element types or automatically converting plain objects into class instances. This is extremely useful for building structured, type-safe data models.
+
+#### 1. Typed Arrays with `arrayOf`
+
+When you need an array property and want to ensure that all elements within that array are instances of a specific class, you can use the `arrayOf` helper function.
+
+`arrayOf(Type)` creates a special array that automatically converts new elements (if they are plain objects) into instances of `Type` upon being added.
+
+**Example:**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { arrayOf } from 'property-manager/lib/array';
+
+// Define a Phone class
+class Phone extends AdvancePropertyManager { /* ... */ }
+defineProperties(Phone, { number: { type: String } });
+
+// Define a Contact class with an array of phones
+class Contact extends AdvancePropertyManager { /* ... */ }
+defineProperties(Contact, {
+  name: { type: String },
+  phones: { type: arrayOf(Phone) } // Each element in phones will be an instance of Phone
+});
+
+const contact = new Contact({
+  name: 'John',
+  phones: [
+    { number: '123-456-7890' }, // This is a plain object
+    { number: '098-765-4321' }  // This is also a plain object
+  ]
+});
+
+// Verify the automatic conversion
+// contact.phones[0] is now an instance of the Phone class, not a plain object
+console.log(contact.phones[0] instanceof Phone); // Outputs: true
+```
+
+#### 2. Nested Property Manager Objects
+
+If a property of an object is itself another complex object (also managed by `property-manager`), you simply need to specify its corresponding class in the `type` definition. `property-manager` will automatically handle the conversion from a plain object to a class instance upon assignment.
+
+This makes building nested data models simple and intuitive.
+
+**Example:**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+
+// 1. Define the inner Address class
+class Address extends AdvancePropertyManager { /* ... */ }
+defineProperties(Address, {
+  street: { type: String },
+  city: { type: String }
+});
+
+// 2. Define the outer Person class
+class Person extends AdvancePropertyManager { /* ... */ }
+
+// 3. In Person's properties, use the Address class directly as the type
+defineProperties(Person, {
+  name: { type: String },
+  address: { type: Address } // <-- The key is here
+});
+
+// 4. Instantiate with a nested plain object
+const person = new Person({
+  name: 'John Doe',
+  address: {
+    street: '123 Main St',
+    city: 'Anytown'
+  }
+});
+
+// 5. Verify the automatic conversion
+// person.address is now an instance of the Address class
+console.log(person.address instanceof Address); // Outputs: true
+console.log(person.address.city); // Outputs: Anytown
+```
+
 ## API
 
 

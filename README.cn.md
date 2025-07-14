@@ -475,6 +475,88 @@ var myEx = new MyClassEx('theClassEx', {attr1: 3, hidden:11222, $dontExport: 1, 
 assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:{b:12, exta: 123}})
 ```
 
+### 高级用法：类型化数组和嵌套对象
+
+除了基本的属性管理外，`property-manager` 还支持更复杂的场景，例如处理包含特定类型元素的数组，或将纯对象自动转换为类的实例。这在构建结构化、类型安全的数据模型时非常有用。
+
+#### 1. 类型化数组 `arrayOf`
+
+当你需要一个数组属性，并希望确保该数组中的所有元素都是某个特定类的实例时，你可以使用 `arrayOf` 辅助函数。
+
+`arrayOf(Type)` 会创建一个特殊的数组，当你向该数组中添加新元素时，它会自动将这些元素（如果是纯对象）转换为 `Type` 的实例。
+
+**示例：**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { arrayOf } from 'property-manager/lib/array';
+
+// 定义一个 Phone 类
+class Phone extends AdvancePropertyManager { ... }
+defineProperties(Phone, { number: { type: String } });
+
+// 定义一个 Contact 类，它有一个 phones 数组
+class Contact extends AdvancePropertyManager { ... }
+defineProperties(Contact, {
+  name: { type: String },
+  phones: { type: arrayOf(Phone) } // phones 数组中的每个元素都将是 Phone 的实例
+});
+
+const contact = new Contact({
+  name: 'John',
+  phones: [
+    { number: '123-456-7890' }, // 这是一个纯对象
+    { number: '098-765-4321' }  // 这也是一个纯对象
+  ]
+});
+
+// 验证自动转换
+// contact.phones[0] 现在是一个 Phone 类的实例, 而不是纯对象
+console.log(contact.phones[0] instanceof Phone); // 输出: true
+```
+
+#### 2. 嵌套的属性管理器对象
+
+如果一个对象的属性本身就是另一个复杂的对象（也由 `property-manager` 管理），你只需在 `type` 中指定其对应的类即可。`property-manager` 会在赋值时自动完成从纯对象到类实例的转换。
+
+这使得构建嵌套的数据模型变得非常简单和直观。
+
+**示例：**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+
+// 1. 定义内层的 Address 类
+class Address extends AdvancePropertyManager { ... }
+defineProperties(Address, {
+  street: { type: String },
+  city: { type: String }
+});
+
+// 2. 定义外层的 Person 类
+class Person extends AdvancePropertyManager { ... }
+
+// 3. 在 Person 的属性中，直接使用 Address 类作为类型
+defineProperties(Person, {
+  name: { type: String },
+  address: { type: Address } // <-- 关键点
+});
+
+// 4. 使用嵌套的纯对象进行实例化
+const person = new Person({
+  name: 'John Doe',
+  address: {
+    street: '123 Main St',
+    city: 'Anytown'
+  }
+});
+
+// 5. 验证自动转换
+// person.address 现在是一个 Address 类的实例
+console.log(person.address instanceof Address); // 输出: true
+console.log(person.address.city); // 输出: Anytown
+```
+
 ## API
 
 
