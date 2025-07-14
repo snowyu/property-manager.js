@@ -1,25 +1,16 @@
 {
   "name": "property-manager",
-  "description": "make it easier to manage the properties/attributes of your class.",
   "version": "2.0.0",
+  "description": "make it easier to manage the properties/attributes of your class.",
+  "license": "MIT",
   "homepage": "https://github.com/snowyu/property-manager.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/snowyu/property-manager.js.git"
   },
-  "main": "./lib/index.js",
-  "module": "./src/index.js",
-  "source": "./src/index.js",
-  "files": [
-    "README.md",
-    "LICENSE-MIT",
-    "*.js",
-    "*.coffee",
-    "*.json",
-    "test",
-    "src",
-    "lib"
-  ],
+  "bugs": {
+    "url": "https://github.com/snowyu/property-manager.js/issues"
+  },
   "keywords": [
     "attribute",
     "property",
@@ -33,6 +24,33 @@
     "serialization",
     "deserialization"
   ],
+  "main": "./lib/index.js",
+  "module": "./src/index.js",
+  "source": "./src/index.js",
+  "files": [
+    "README.md",
+    "LICENSE-MIT",
+    "*.js",
+    "*.coffee",
+    "*.json",
+    "test",
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "build": "npm run build.cjs && npm run build.ts && npm run doc.md",
+    "build.cjs": "babel src --out-dir lib --config-file ./.babelrc",
+    "build.ts": "npx cpx 'src/**/*.d.ts' lib",
+    "build.ts.d": "tsc --declaration --emitDeclarationOnly --outDir types",
+    "clean": "rm -fr web docs types lib",
+    "doc": "typedoc --plugin none --out web ./src",
+    "doc.md": "typedoc --plugin typedoc-plugin-markdown --out docs ./src",
+    "lint": "npx eslint --config .eslintrc.yml src",
+    "lint.fix": "npm run lint -- --fix",
+    "release": "npm run clean && npm run build && git add docs && git ci -m 'docs: update API docs' && npx commit-and-tag-version -s",
+    "release.alpha": "npm run release -- --prerelease alpha",
+    "test": "mocha"
+  },
   "dependencies": {
     "custom-ability": "^2.0.0",
     "deep-equal": "^2.2.3",
@@ -58,20 +76,6 @@
     "typedoc-plugin-markdown": "^3.15.3",
     "typescript": "^5.1.3"
   },
-  "scripts": {
-    "build": "npm run build.cjs && npm run build.ts && npm run doc.md",
-    "build.cjs": "babel src --out-dir lib --config-file ./.babelrc",
-    "build.ts": "npx cpx 'src/**/*.d.ts' lib",
-    "build.ts.d": "tsc --declaration --emitDeclarationOnly --outDir types",
-    "clean": "rm -fr web docs types lib",
-    "doc": "typedoc --plugin none --out web ./src",
-    "doc.md": "typedoc --plugin typedoc-plugin-markdown --out docs ./src",
-    "lint": "npx eslint --config .eslintrc.yml src",
-    "lint.fix": "npm run lint -- --fix",
-    "release": "npm run clean && npm run build && git add docs && git ci -m 'docs: update API docs' && npx commit-and-tag-version -s",
-    "release.alpha": "npm run release -- --prerelease alpha",
-    "test": "mocha"
-  },
   "contributors": [
     {
       "name": "Riceball LEE",
@@ -88,9 +92,5 @@
   "pre-commit": [
     "test"
   ],
-  "bugs": {
-    "url": "https://github.com/snowyu/property-manager.js/issues"
-  },
-  "license": "MIT",
   "stability": "unstable"
 }
