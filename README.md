@@ -556,6 +556,93 @@ console.log(person.address instanceof Address); // Outputs: true
 console.log(person.address.city); // Outputs: Anytown
 ```
 
+## Helper Functions
+
+### toJsonSchema
+
+The `toJsonSchema` helper function converts properties defined in a `PropertyManager` instance into a JSON Schema. This is particularly useful for generating schema definitions for data validation, API documentation, or form generation based on your `PropertyManager` models.
+
+#### Usage
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toJsonSchema } from 'property-manager/lib/to-json-schema';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  id: { type: Number, value: 0 },
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true },
+  tags: { type: Array, value: [], itemType: String },
+  address: {
+    type: Object,
+    properties: {
+      street: { type: String },
+      city: { type: String }
+    }
+  }
+});
+
+const schema = toJsonSchema(MyDataModel);
+console.log(JSON.stringify(schema, null, 2));
+/*
+Output:
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "default": 0
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+*/
+```
+
+#### Parameters
+
+`toJsonSchema(target: Function | Object, options?: ToJsonSchemaOptions)`
+
+*   `target`: The `PropertyManager` class or instance for which to generate the JSON Schema.
+*   `options`: Optional configuration object.
+    *   `title`: `string` - A title for the generated schema.
+    *   `description`: `string` - A description for the generated schema.
+    *   `exclude`: `string[]` - An array of property names to exclude from the schema.
+    *   `include`: `string[]` - An array of property names to explicitly include in the schema. If provided, only these properties will be included.
+    *   `required`: `string[]` - An array of property names to mark as required in the schema.
+    *   `additionalProperties`: `boolean` - Whether to allow additional properties not defined in the schema. Defaults to `false`.
+
+#### Return Value
+
+`object` - A JSON Schema object representing the properties defined in the `PropertyManager` instance.
+
 ## API
 
 ## Changes

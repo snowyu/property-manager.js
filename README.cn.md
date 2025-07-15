@@ -556,6 +556,93 @@ console.log(person.address instanceof Address); // 输出: true
 console.log(person.address.city); // 输出: Anytown
 ```
 
+## 辅助函数
+
+### toJsonSchema
+
+`toJsonSchema` 辅助函数将 `PropertyManager` 实例定义的属性转换为 JSON Schema。这对于根据您的 `PropertyManager` 模型生成用于数据验证、API 文档或表单生成的 Schema 定义特别有用。
+
+#### 用法
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toJsonSchema } from 'property-manager/lib/to-json-schema';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  id: { type: Number, value: 0 },
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true },
+  tags: { type: Array, value: [], itemType: String },
+  address: {
+    type: Object,
+    properties: {
+      street: { type: String },
+      city: { type: String }
+    }
+  }
+});
+
+const schema = toJsonSchema(MyDataModel);
+console.log(JSON.stringify(schema, null, 2));
+/*
+Output:
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "default": 0
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+*/
+```
+
+#### 参数
+
+`toJsonSchema(target: Function | Object, options?: ToJsonSchemaOptions)`
+
+*   `target`: 要生成 JSON Schema 的 `PropertyManager` 类或 `PropertyManager` 实例。
+*   `options`: 可选配置对象。
+    *   `title`: `string` - 生成的 Schema 的标题。
+    *   `description`: `string` - 生成的 Schema 的描述。
+    *   `exclude`: `string[]` - 要从 Schema 中排除的属性名称数组。
+    *   `include`: `string[]` - 要在 Schema 中显式包含的属性名称数组。如果提供，则只包含这些属性。
+    *   `required`: `string[]` - 要在 Schema 中标记为必需的属性名称数组。
+    *   `additionalProperties`: `boolean` - 是否允许 Schema 中未定义的额外属性。默认为 `false`。
+
+#### 返回值
+
+`object` - 一个 JSON Schema 对象，表示 `PropertyManager` 实例中定义的属性。
+
 ## API
 
 ## Changes
