@@ -1,5 +1,5 @@
 
-## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
+# property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
 [![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -13,10 +13,8 @@
 [trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
-[coveralls]:https://coveralls.io/repos/snowyu/property-manager.js/badge.svg?branch=master&service=github
 [codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
 [codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
-
 
 使得业务对象/类的属性更容易管理.
 
@@ -78,6 +76,8 @@
 * `undefined` 值无法导出。
 * 只读（可写`writable`为假）属性不能赋值。
 * 属性的赋值顺序就是定义的属性的顺序。
+
+## 用法
 
 ### 你可以继承它
 
@@ -159,6 +159,7 @@
 * `initialize(options)` : overwrite this for assign options from constructor?
   * 如果可能，将属性的初始化值应用于对象。
   * 然后调用`赋值`(`assign`) 方法.
+
 + `assign(options)` : assign the options' attributes to this object.
   * how to decide which attribute should be assign?
   * I need an attributes manage class? or just a simple attributes list?
@@ -167,6 +168,7 @@
 + `assignPropertyTo(dest, options, attributeName, value)`: assign an attribute to dest.
   * you can override it to determine howto assign an object value.
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
+
 * `assignTo(dest)` : assign the attributes to this `dest` object.
 * `mergeTo(dest, options)`: 将this对象的属性值写入到 `dest` object, 如果options对象存在,并且options中的属性值存在,那么options中的属性值将覆盖原值.
   * do not overwrite the already exist attributes of the `dest`.
@@ -180,8 +182,6 @@
 * `toJSON()`: this will call the `toObject()` to return.
 
 注意: 如果构造函数的第一个参数不是**属性选项**,那么你需要指定`属性选项`参数位置.
-
-## 用法
 
 ### 让你的类能够管理(导入/导出)属性
 
@@ -318,7 +318,6 @@ options:
 * `name`: `{'simple' | 'advance' | 'normal' | 'abstract'}` 选定属性管理器, 默认为 `normal`
 * `optionsPosition`: `{number}`, 可选的属性选项参数位置,在构造函数中需要导入Json对象属性时使用.
 * `exclude`: `{string[]}` 不需要注入的属性能力方法名称列表，默认为空。
-
 
 ```js
 // var PropertyAbility = require('property-manager/ability');
@@ -559,8 +558,6 @@ console.log(person.address.city); // 输出: Anytown
 
 ## API
 
-
-
 ## Changes
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
@@ -598,7 +595,6 @@ class Phone extends AdvancePropertyManager {
 }
 ```
 
-
 ### v1.0.0
 
 + add the array with type supports.
@@ -635,9 +631,11 @@ class Contact extends AdvancePropertyManager {
 * **BROKEN** change `exportTo` method params to `(dest, options?: IExportOptions)`
 * **BROKEN** change `mergeTo` method params to `(dest, options?: IMergeOptions)`
   + add `skipNull` and `skipUndefined` option to `IExportOptions` and `IMergeOptions`
+
 + add the `extends(attrs: Object, nonExported1stChar)` method to the `Properties`
   * return a new `Properties` instance to extends properties from current instance.
 + add the inherited properties supports for `AdvancePropertyManager.defineProperties`
+
 * change the `recreate` argument default value of `defineProperties` to `false` for `AdvancePropertyManager` and `NormalPropertyManager`
 * set all methods and non-properties of `Properties` to be non-enumerable.
 
@@ -673,6 +671,7 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.11.0
 
 + add the `skipExists` option to the `Properties.assignTo` and `Properties.assignPropertyTo`
+
 * the options to the `Properties.assignTo(dest, src, options)`
   * `exclude`*(String|Array)*
   * `skipDefault`*(Boolean)*
@@ -685,6 +684,7 @@ console.log(obj.prop1 instanceof CustomType)
 + add the alias property descriptor(Normal&Advance):
   * You can define one or more aliases to assign from other object(options)
   * `alias` *(String|ArrayOf String)*
+
 * Smart assignment property supports(AdvancePropertyManager):
   * **broken**: SMART_ASSIGN constant deprecated.
   * `assigned` descriptor *(Boolean|String)*:
@@ -692,7 +692,9 @@ console.log(obj.prop1 instanceof CustomType)
     * it's the internal property name of the smart assignment if it's string
     * the internal property name is the property name with prefix(`nonExported1stChar`)
       if it's an empty string
+
 - **broken**: remove `attrsName` property(fixed to '$attributes')
+
 + add the helper function: properties/define-properties.
 
 ### v0.9.0
@@ -708,6 +710,7 @@ console.log(obj.prop1 instanceof CustomType)
       * use this solution. but if someone wish all instance share the same value.
       * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
         + `clone` *(Boolean)*: defaults to true.
+
 + Smart assignment property supports:
   * assign property descriptor *(Function(value, dest, src, name))*:
     * It only used to assign the options from another object.
@@ -725,10 +728,12 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.8.0
 
 + add the property writable check: do not assign the readonly property.
+
 * Normal, Advance
   + add the `assigned`, `exported` *(Boolean)* to property descriptor directly.
     * `assigned`: enumerable isnt false and (writable isnt false or isFunction(set)).
     * `exported`: enumerable isnt false and the first char isnt "$"
+
 + `PropertyManager::nonExported1stChar` *(Char)*, defaults to '$'
   * note: the `exported` descriptor is higher prior than `nonExported1stChar`.
 + `nonExported1stChar` option to the property manager ability.

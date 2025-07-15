@@ -1,5 +1,4 @@
-
-## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
+# property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
 [![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -13,7 +12,6 @@
 [trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
-[coveralls]:https://coveralls.io/repos/snowyu/property-manager.js/badge.svg?branch=master&service=github
 [codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
 [codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
 
@@ -74,6 +72,8 @@ first the rules of the properties:
 * `undefined` value can not be exported.
 * the readonly(writable is false) attributes can not be assigned.
 * the assignment order of properties is the order of defined properties.
+
+## Usage
 
 ### You can inherit from it
 
@@ -158,6 +158,7 @@ these methods will be added(replaced):
 * `initialize(options)` : overwrite this for assign options from constructor?
   * apply the initialized value of the properties to the object if possible.
   * then call `assign` method.
+
 + `assign(options)` : assign the options' attributes to this object.
   * how to decide which attribute should be assign?
   * I need an attributes manage class? or just a simple attributes list?
@@ -166,6 +167,7 @@ these methods will be added(replaced):
 + `assignPropertyTo(dest, options, attributeName, value)`: assign an attribute to dest.
   * you can override it to determine howto assign an object value.
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
+
 * `assignTo(dest)` : assign the attributes to this `dest` object.
 * `mergeTo(dest)`: merge the attributes itself to `dest` object.
   * do not overwrite the already exist attributes of the `dest`.
@@ -179,8 +181,6 @@ these methods will be added(replaced):
 * `toJSON()`: this will call the `toObject()` to return.
 
 Note: you should specify the position of the argument if the first argument is not the options
-
-## Usage
 
 ### Make your class manage the properties
 
@@ -317,7 +317,6 @@ options:
 * `name`: `{'simple' | 'advance' | 'normal' | 'abstract'}` Selected PropertyManger, default `normal`
 * `optionsPosition`: `{number}`, optional attribute option parameter position, used when the constructor needs to import Json object attributes.
 * `exclude`: `{string[]}` A list of attribute capability method names that do not need to be injected, the default is empty.
-
 
 ```js
 // var PropertyAbility = require('property-manager/ability');
@@ -559,8 +558,6 @@ console.log(person.address.city); // Outputs: Anytown
 
 ## API
 
-
-
 ## Changes
 
 More recent changes see: [CHANGELOG.md](./CHANGELOG.md)
@@ -598,7 +595,6 @@ class Phone extends AdvancePropertyManager {
 }
 ```
 
-
 ### v1.0.0
 
 + add the array with type supports.
@@ -635,9 +631,11 @@ class Contact extends AdvancePropertyManager {
 * **BROKEN** change `exportTo` method params to `(dest, options?: IExportOptions)`
 * **BROKEN** change `mergeTo` method params to `(dest, options?: IMergeOptions)`
   + add `skipNull` and `skipUndefined` option to `IExportOptions` and `IMergeOptions`
+
 + add the `extends(attrs: Object, nonExported1stChar)` method to the `Properties`
   * return a new `Properties` instance to extends properties from current instance.
 + add the inherited properties supports for `AdvancePropertyManager.defineProperties`
+
 * change the `recreate` argument default value of `defineProperties` to `false` for `AdvancePropertyManager` and `NormalPropertyManager`
 * set all methods and non-properties of `Properties` to be non-enumerable.
 
@@ -673,6 +671,7 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.11.0
 
 + add the `skipExists` option to the `Properties.assignTo` and `Properties.assignPropertyTo`
+
 * the options to the `Properties.assignTo(dest, src, options)`
   * `exclude`*(String|Array)*
   * `skipDefault`*(Boolean)*
@@ -685,6 +684,7 @@ console.log(obj.prop1 instanceof CustomType)
 + add the alias property descriptor(Normal&Advance):
   * You can define one or more aliases to assign from other object(options)
   * `alias` *(String|ArrayOf String)*
+
 * Smart assignment property supports(AdvancePropertyManager):
   * **broken**: SMART_ASSIGN constant deprecated.
   * `assigned` descriptor *(Boolean|String)*:
@@ -692,7 +692,9 @@ console.log(obj.prop1 instanceof CustomType)
     * it's the internal property name of the smart assignment if it's string
     * the internal property name is the property name with prefix(`nonExported1stChar`)
       if it's an empty string
+
 - **broken**: remove `attrsName` property(fixed to '$attributes')
+
 + add the helper function: properties/define-properties.
 
 ### v0.9.0
@@ -708,6 +710,7 @@ console.log(obj.prop1 instanceof CustomType)
       * use this solution. but if someone wish all instance share the same value.
       * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
         + `clone` *(Boolean)*: defaults to true.
+
 + Smart assignment property supports:
   * assign property descriptor *(Function(value, dest, src, name))*:
     * It only used to assign the options from another object.
@@ -725,10 +728,12 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.8.0
 
 + add the property writable check: do not assign the readonly property.
+
 * Normal, Advance
   + add the `assigned`, `exported` *(Boolean)* to property descriptor directly.
     * `assigned`: enumerable isnt false and (writable isnt false or isFunction(set)).
     * `exported`: enumerable isnt false and the first char isnt "$"
+
 + `PropertyManager::nonExported1stChar` *(Char)*, defaults to '$'
   * note: the `exported` descriptor is higher prior than `nonExported1stChar`.
 + `nonExported1stChar` option to the property manager ability.

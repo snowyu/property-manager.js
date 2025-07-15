@@ -27,6 +27,7 @@
   "main": "./lib/index.js",
   "module": "./src/index.js",
   "source": "./src/index.js",
+  "type": "module",
   "files": [
     "README.md",
     "LICENSE-MIT",
