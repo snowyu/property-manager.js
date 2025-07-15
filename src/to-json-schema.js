@@ -40,7 +40,7 @@ function normalizeAttributes(pm) {
   if (isFunction(proto.getProperties)) {
     const instance = isFunction(pm) ? new pm() : pm;
     const simpleProps = instance.getProperties();
-    const normalized = { names: {}, ixNames: {}, isSimple: true };
+    const normalized = { names: {} };
 
     for (const key of Object.keys(simpleProps)) {
       if (key === 'defaultOptions') continue;
@@ -48,7 +48,6 @@ function normalizeAttributes(pm) {
       const prop = { ...simpleProps[key] };
       normalized[key] = prop;
       normalized.names[key] = key;
-      normalized.ixNames[key] = key;
 
       if (!prop.type && prop.value !== undefined) {
         if (typeof prop.value === 'string') {
@@ -110,9 +109,9 @@ export function toJsonSchema(pm) {
   };
   const required = [];
 
-  for (const key of Object.keys(attributes.names)) {
+  for (const key of Object.keys(attributes)) {
     const prop = attributes[key];
-    if (!prop || prop.exported === false || prop.enumerable === false) {
+    if (!prop || prop.exported === false || prop.enumerable === false || (!prop.type && prop.value === undefined)) {
       continue;
     }
 
@@ -125,7 +124,7 @@ export function toJsonSchema(pm) {
     if (prop.required) {
       required.push(propertyName);
     }
-    if (!attributes.isSimple && prop.value !== undefined) {
+    if (prop.value !== undefined) {
       schemaProperty.default = prop.value;
     }
 
@@ -153,12 +152,7 @@ export function toJsonSchema(pm) {
         schemaProperty.type = typeString;
       }
     }
-
-    
-
-    if (Object.keys(schemaProperty).length > 0) {
-      schema.properties[propertyName] = schemaProperty;
-    }
+    schema.properties[propertyName] = schemaProperty;
   }
 
   if (required.length > 0) {
