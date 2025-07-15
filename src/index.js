@@ -9,5 +9,6 @@ export * from './normal.js'
 export * from './simple.js';
 export * from './properties/index.js'
 export * from './properties/define-properties.js'
+export * from './to-json-schema.js';
 
 export default NormalPropertyManager
