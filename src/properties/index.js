@@ -19,6 +19,7 @@ export function Properties(aOptions, nonExported1stChar) {
   if (!(this instanceof Properties)) {
     return new Properties(aOptions, nonExported1stChar);
   }
+  // Define non-enumerable properties:
   defineProperty(this, 'names', {});
   defineProperty(this, 'ixNames', {});
   if (!(isString(nonExported1stChar) && nonExported1stChar.length === 1)) {
