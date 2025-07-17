@@ -20,8 +20,8 @@ export function Properties(aOptions, nonExported1stChar) {
     return new Properties(aOptions, nonExported1stChar);
   }
   // Define non-enumerable properties:
-  defineProperty(this, 'names', {});
-  defineProperty(this, 'ixNames', {});
+  defineProperty(this, '_names', {});
+  defineProperty(this, '_ixNames', {});
   if (!(isString(nonExported1stChar) && nonExported1stChar.length === 1)) {
     nonExported1stChar = defaultNonExported1stChar;
   }
@@ -60,7 +60,7 @@ Private('mergeTo', function(attrs, dest) {
   if (!dest) {
     dest = {};
   }
-  const keys = attrs instanceof Properties ? getObjectKeys(attrs.names) : getObjectKeys(attrs)
+  const keys = attrs instanceof Properties ? getObjectKeys(attrs._names) : getObjectKeys(attrs)
   for (let i = 0; i < keys.length; i++) {
     const name = keys[i];
     const attr = attrs[name];
@@ -110,22 +110,22 @@ Private('initialize', function(aOptions) {
 });
 
 Private('updateNames', function() {
-  this.names = {};
-  this.ixNames = {};
+  this._names = {};
+  this._ixNames = {};
   for (const k in this) {
     const v = this[k];
     if (!isObject(v) || (v.enumerable == null)) {continue}
-    this.names[k] = v.name || k;
-    this.ixNames[v.name || k] = k;
+    this._names[k] = v.name || k;
+    this._ixNames[v.name || k] = k;
     const vAlias = v.alias;
     if (vAlias) {
       if (isArray(vAlias)) {
         for (let i = 0; i < vAlias.length; i++) {
           const n = vAlias[i];
-          this.ixNames[n] = k;
+          this._ixNames[n] = k;
         }
       } else if (isString(vAlias)) {
-        this.ixNames[vAlias] = k;
+        this._ixNames[vAlias] = k;
       }
     }
   }
@@ -134,7 +134,7 @@ Private('updateNames', function() {
 Private('initializeTo', function(dest, src = {}, aOptions = {}) {
   const {skipNull, skipUndefined, overwrite} = aOptions;
   const nonExported1stChar = this.nonExported1stChar;
-  for (const k in this.names) {
+  for (const k in this._names) {
     if (k === 'name') {continue}
     if (!overwrite && dest[k] !== undefined) {continue}
     let vAttr = this[k]
@@ -183,7 +183,7 @@ Private('initializeTo', function(dest, src = {}, aOptions = {}) {
 
 Private('getRealAttrName', function(name) {
   if (!this.hasOwnProperty(name)) {
-    name = this.ixNames[name];
+    name = this._ixNames[name];
   }
   return name;
 });
@@ -297,7 +297,7 @@ Private('assignTo', function(dest, src, aOptions = {}) {
   if (dest == null) {
     dest = {};
   }
-  const vNames = this.names;
+  const vNames = this._names;
   for (const k in vNames) {
     const v = vNames[k];
     if (exclude.includes(v) || exclude.includes(k)) {continue}
@@ -315,7 +315,7 @@ Private('assignTo', function(dest, src, aOptions = {}) {
 
 Private('isDefaultObject', function(aObject) {
   let result = true;
-  for (const k in this.names) {
+  for (const k in this._names) {
     const attr = this[k];
     if (k === 'name' || attr.writable === false || attr.enumerable === false) {
       continue;

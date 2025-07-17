@@ -91,7 +91,7 @@
   * 支持默认值
   * 支持对象赋值钩子函数
   * 支持有意义的（非英文）名称(别名)
-  * **建议**: 为了便于将来升级到 `AdvancePropertyManager`, 建议您在定义属性时, 避免使用 `AdvancePropertyManager` 的保留关键字: `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`。
+  * **建议**: 为了便于将来升级到 `AdvancePropertyManager`, 建议您在定义属性时, 避免使用 `AdvancePropertyManager` 的保留关键字: `_names`, `_ixNames`, `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`。
 * `AdvancePropertyManager`: /lib/advance
   * 使用 `$attributes` 来保存声明属性
   * `$attributes` 是 `Properties` 类的实例。
@@ -100,7 +100,7 @@
   * 支持对象赋值钩子函数
   * 支持有意义的（非英文）名称(别名)
   * 如果可能，支持类型检查
-  * **注意**: 由于 `$attributes` 是 `Properties` 类的实例, 因此在定义属性时, 属性名称不能与 `Properties` 类的保留方法名冲突。这些保留名称包括: `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`。
+  * **注意**: 由于 `$attributes` 是 `Properties` 类的实例, 因此在定义属性时, 属性名称不能与 `Properties` 类的保留方法名冲突。这些保留名称包括: `_names`, `_ixNames`, `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`。
 
 `$attributes` 包含对象的所有属性（如属性描述符）,其中`key` 是属性名称。 而`value`值是属性描述符对象.
 

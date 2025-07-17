@@ -30,24 +30,29 @@ function getType(type) {
  * @returns {object} An object containing normalized property attributes.
  * @throws {TypeError} If the target is not a recognized PropertyManager.
  */
-function normalizeAttributes(pm) {
+export function normalizeAttributes(pm) {
   const proto = isFunction(pm) ? pm.prototype : getPrototypeOf(pm);
+  const attrs = proto.$attributes || (isFunction(pm.getProperties) ? pm.getProperties() : undefined)
 
-  if (proto.hasOwnProperty('$attributes')) {
+  if (proto.$attributes) {
     return proto.$attributes;
   }
 
   if (isFunction(proto.getProperties)) {
     const instance = isFunction(pm) ? new pm() : pm;
     const simpleProps = instance.getProperties();
-    const normalized = { names: {} };
+    const normalized = { _names: {} };
 
     for (const key of Object.keys(simpleProps)) {
       if (key === 'defaultOptions') continue;
 
       const prop = { ...simpleProps[key] };
       normalized[key] = prop;
-      normalized.names[key] = key;
+      normalized._names[key] = key;
+      const _type = prop.type
+      if (_type && _type.$type) {
+        prop.type = Array.isArray(_type) ? [_type.$type] : _type.$type;
+      }
 
       if (!prop.type && prop.value !== undefined) {
         if (typeof prop.value === 'string') {
@@ -115,7 +120,7 @@ export function toJsonSchema(pm) {
       continue;
     }
 
-    const propertyName = attributes.names[key];
+    const propertyName = attributes._names[key];
     const schemaProperty = {};
 
     if (prop.description) {

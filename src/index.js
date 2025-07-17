@@ -10,5 +10,7 @@ export * from './simple.js';
 export * from './properties/index.js'
 export * from './properties/define-properties.js'
 export * from './to-json-schema.js';
+export * from './to-ui-schema.js';
+export * from './to-rjsf.js';
 
 export default NormalPropertyManager
