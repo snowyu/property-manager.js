@@ -242,7 +242,7 @@ describe('toJsonSchema', () => {
       type: 'object',
       properties: {
         propWithType: { type: 'string' },
-        propWithValue: { default: 'some value' },
+        propWithValue: { type: 'string', default: 'some value' },
       },
     };
 
