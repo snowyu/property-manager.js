@@ -566,7 +566,7 @@ console.log(person.address.city); // Outputs: Anytown
 
 The `toJsonSchema` helper function converts properties defined in a `PropertyManager` instance into a JSON Schema. This is particularly useful for generating schema definitions for data validation, API documentation, or form generation based on your `PropertyManager` models.
 
-#### Usage
+**Usage**
 
 ```javascript
 import { AdvancePropertyManager, defineProperties } from 'property-manager';
@@ -630,24 +630,131 @@ Output:
 */
 ```
 
-#### Parameters
+**Parameters**
 
-`toJsonSchema(target: Function | Object, options?: ToJsonSchemaOptions)`
+`toJsonSchema(target: Function | Object)`
 
-*   `target`: The `PropertyManager` class or instance for which to generate the JSON Schema.
-*   `options`: Optional configuration object.
-    *   `title`: `string` - A title for the generated schema.
-    *   `description`: `string` - A description for the generated schema.
-    *   `exclude`: `string[]` - An array of property names to exclude from the schema.
-    *   `include`: `string[]` - An array of property names to explicitly include in the schema. If provided, only these properties will be included.
-    *   `required`: `string[]` - An array of property names to mark as required in the schema.
-    *   `additionalProperties`: `boolean` - Whether to allow additional properties not defined in the schema. Defaults to `false`.
+* `target`: The `PropertyManager` class or instance for which to generate the JSON Schema.
 
-#### Return Value
+**Return Value**
 
-`object` - A JSON Schema object representing the properties defined in the `PropertyManager` instance.
+* `object` - A JSON Schema object representing the properties defined in the `PropertyManager` instance.
 
-## API
+### toUISchema
+
+The `toUISchema` helper function converts properties defined in a `PropertyManager` instance or class into a `uiSchema` object for [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/). This is useful for controlling the UI appearance of form fields, such as making a field read-only or using a specific widget.
+
+**Usage**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toUISchema } from 'property-manager/lib/to-ui-schema';
+
+class MyFormModel extends AdvancePropertyManager { }
+
+defineProperties(MyFormModel, {
+  id: { type: Number, writable: false }, // Read-only field
+  name: { type: String, value: '', 'ui:placeholder': 'Enter name' }, // Custom UI attribute
+  bio: { type: String, value: '', 'ui:widget': 'textarea' },
+  nested: {
+    type: Object,
+    properties: {
+      field1: { type: String, 'ui:title': 'Field One' }
+    }
+  }
+});
+
+const uiSchema = toUISchema(MyFormModel);
+console.log(JSON.stringify(uiSchema, null, 2));
+/*
+Output:
+{
+  "id": {
+    "ui:readonly": true
+  },
+  "name": {
+    "ui:placeholder": "Enter name"
+  },
+  "bio": {
+    "ui:widget": "textarea"
+  },
+  "nested": {
+    "field1": {
+      "ui:title": "Field One"
+    }
+  }
+}
+*/
+```
+
+**Parameters**
+
+* `toUISchema(target: Function | Object)`
+  * `target`: The `PropertyManager` class or instance for which to generate the `uiSchema`.
+
+**Return Value**
+
+* `object` - An RJSF `uiSchema` object.
+
+### toRjsf
+
+The `toRjsf` helper function is a convenient utility that converts a `PropertyManager` instance into both a JSON Schema and a UI Schema, which is the format required by [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/).
+
+**Usage**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toRjsf } from 'property-manager/lib/to-rjsf';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true, writable: false }
+});
+
+const { schema, uiSchema } = toRjsf(MyDataModel);
+
+console.log('--- Schema ---');
+console.log(JSON.stringify(schema, null, 2));
+
+console.log('\n--- UI Schema ---');
+console.log(JSON.stringify(uiSchema, null, 2));
+
+/*
+Output:
+--- Schema ---
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
+
+--- UI Schema ---
+{
+  "isActive": {
+    "ui:readonly": true
+  }
+}
+*/
+```
+
+**Parameters**
+
+* `toRjsf(target: Function | Object)`
+  * `target`: The `PropertyManager` class or instance to convert.
+
+**Return Value**
+
+* `{schema: object, uiSchema: object}` - An object containing both the `schema` and `uiSchema`.
 
 ## Changes
 

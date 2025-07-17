@@ -566,7 +566,7 @@ console.log(person.address.city); // 输出: Anytown
 
 `toJsonSchema` 辅助函数将 `PropertyManager` 实例定义的属性转换为 JSON Schema。这对于根据您的 `PropertyManager` 模型生成用于数据验证、API 文档或表单生成的 Schema 定义特别有用。
 
-#### 用法
+**用法**
 
 ```javascript
 import { AdvancePropertyManager, defineProperties } from 'property-manager';
@@ -630,24 +630,131 @@ Output:
 */
 ```
 
-#### 参数
+**参数**
 
-`toJsonSchema(target: Function | Object, options?: ToJsonSchemaOptions)`
+`toJsonSchema(target: Function | Object)`
 
-*   `target`: 要生成 JSON Schema 的 `PropertyManager` 类或 `PropertyManager` 实例。
-*   `options`: 可选配置对象。
-    *   `title`: `string` - 生成的 Schema 的标题。
-    *   `description`: `string` - 生成的 Schema 的描述。
-    *   `exclude`: `string[]` - 要从 Schema 中排除的属性名称数组。
-    *   `include`: `string[]` - 要在 Schema 中显式包含的属性名称数组。如果提供，则只包含这些属性。
-    *   `required`: `string[]` - 要在 Schema 中标记为必需的属性名称数组。
-    *   `additionalProperties`: `boolean` - 是否允许 Schema 中未定义的额外属性。默认为 `false`。
+* `target`: 要生成 JSON Schema 的 `PropertyManager` 类或 `PropertyManager` 实例。
 
-#### 返回值
+**返回值**
 
-`object` - 一个 JSON Schema 对象，表示 `PropertyManager` 实例中定义的属性。
+* `object` - 一个 JSON Schema 对象，表示 `PropertyManager` 实例中定义的属性。
 
-## API
+### toUISchema
+
+`toUISchema` 辅助函数将 `PropertyManager` 实例或类定义的属性转换为 [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/) 的 `uiSchema` 对象。这对于控制表单字段的 UI 表现（例如，将字段设为只读或使用特定的小部件）非常有用。
+
+**用法**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toUISchema } from 'property-manager/lib/to-ui-schema';
+
+class MyFormModel extends AdvancePropertyManager { }
+
+defineProperties(MyFormModel, {
+  id: { type: Number, writable: false }, // 只读字段
+  name: { type: String, value: '', 'ui:placeholder': '请输入名称' }, // 自定义 UI 属性
+  bio: { type: String, value: '', 'ui:widget': 'textarea' },
+  nested: {
+    type: Object,
+    properties: {
+      field1: { type: String, 'ui:title': '字段一' }
+    }
+  }
+});
+
+const uiSchema = toUISchema(MyFormModel);
+console.log(JSON.stringify(uiSchema, null, 2));
+/*
+Output:
+{
+  "id": {
+    "ui:readonly": true
+  },
+  "name": {
+    "ui:placeholder": "请输入名称"
+  },
+  "bio": {
+    "ui:widget": "textarea"
+  },
+  "nested": {
+    "field1": {
+      "ui:title": "字段一"
+    }
+  }
+}
+*/
+```
+
+**参数**
+
+* `toUISchema(target: Function | Object)`
+  * `target`: 要生成 `uiSchema` 的 `PropertyManager` 类或 `PropertyManager` 实例。
+
+**返回值**
+
+* `object` - 一个 RJSF `uiSchema` 对象。
+
+### toRjsf
+
+`toRjsf` 是一个便捷的辅助函数，它将 `PropertyManager` 实例同时转换为 JSON Schema 和 UI Schema，这正是 [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/) 所需的格式。
+
+**用法**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toRjsf } from 'property-manager/lib/to-rjsf';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true, writable: false }
+});
+
+const { schema, uiSchema } = toRjsf(MyDataModel);
+
+console.log('--- Schema ---');
+console.log(JSON.stringify(schema, null, 2));
+
+console.log('\n--- UI Schema ---');
+console.log(JSON.stringify(uiSchema, null, 2));
+
+/*
+Output:
+--- Schema ---
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
+
+--- UI Schema ---
+{
+  "isActive": {
+    "ui:readonly": true
+  }
+}
+*/
+```
+
+**参数**
+
+* `toRjsf(target: Function | Object)`
+  * `target`: 要转换的 `PropertyManager` 类或 `PropertyManager` 实例。
+
+**返回值**
+
+* `{schema: object, uiSchema: object}` - 一个包含 `schema` 和 `uiSchema` 的对象。
 
 ## Changes
 
