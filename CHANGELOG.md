@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0](https://github.com/snowyu/property-manager.js/compare/v2.0.1...v3.0.0) (2025-07-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename internal prop names: names to _names, ixNames to _ixNames
+
+### Features
+
+* add to-json-schema func ([3015aee](https://github.com/snowyu/property-manager.js/commit/3015aee96d30e87f3c404183f5e25329c567b833))
+* add toRjsf func ([e05b125](https://github.com/snowyu/property-manager.js/commit/e05b125c1a189d55da84c1430cd6027ae0f99d2a))
+* add toUISchema func ([ed7bc49](https://github.com/snowyu/property-manager.js/commit/ed7bc49871b7c2d8792ffc3ab90ca91ce6b74234))
+* export toJsonSchema func ([2982ca8](https://github.com/snowyu/property-manager.js/commit/2982ca81875ca866347959fcb03b9b13e195a777))
+
+
+### Bug Fixes
+
+* should merge `ui:` and $uiSchema ([4fdbf60](https://github.com/snowyu/property-manager.js/commit/4fdbf60e636e590fea262ab2472dad4a331f3cbb))
+* **toJsonSchema:** should export unknown propery definitions ([f72710f](https://github.com/snowyu/property-manager.js/commit/f72710f5ce330702b2149088951952379aa1d834))
+
+
+### Refactor
+
+* rename internal prop names: names to _names, ixNames to _ixNames ([817402a](https://github.com/snowyu/property-manager.js/commit/817402a41829af8b704704db8d8516716e656ca7))
+* toJsonSchema func ([6302ff4](https://github.com/snowyu/property-manager.js/commit/6302ff42076244fe91216259c8c14543600877c2))
+
 ## [2.0.1](https://github.com/snowyu/property-manager.js/compare/v2.0.0...v2.0.1) (2025-07-14)
 
 
