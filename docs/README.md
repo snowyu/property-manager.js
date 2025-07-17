@@ -2,7 +2,7 @@
 
 ***
 
-## property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
+# property-manager [![npm][npm]](https://npmjs.org/package/property-manager)
 
 [![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -16,7 +16,6 @@
 [trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
-[coveralls]:https://coveralls.io/repos/snowyu/property-manager.js/badge.svg?branch=master&service=github
 [codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
 [codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
 
@@ -76,7 +75,10 @@ first the rules of the properties:
 * The enumerable attributes beginning with '$' can not be exported. but can be assigned.
 * `undefined` value can not be exported.
 * the readonly(writable is false) attributes can not be assigned.
+  * **IMPORTANT**: By default, readonly properties (`writable: false`) are **NOT** exported. If you want a readonly property to be exported (e.g., to appear in `toObject()` or `toJSON()`), you must explicitly set `exported: true`.
 * the assignment order of properties is the order of defined properties.
+
+## Usage
 
 ### You can inherit from it
 
@@ -85,11 +87,13 @@ first the rules of the properties:
   * so do not support default value.
   * do not support object value assignment hook function.
   * do not support meaningful(non-english) name.
+  * When defining properties, you must not use `nonExported1stChar` and `defaultOptions` as property names.
 * `NormalPropertyManager`: /lib/normal
   * use the `$attributes` plain object to hold the declaration properties
   * support default value.
   * support object value assignment hook function.
   * support meaningful(non-english) name.
+  * **Recommendation**: To facilitate future upgrades to `AdvancePropertyManager`, it is recommended to avoid using the reserved keywords of `AdvancePropertyManager` when defining properties. These names include: `_names`, `_ixNames`, `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`.
 * `AdvancePropertyManager`: /lib/advance
   * use the `$attributes` to hold the declaration properties
   * the `$attributes` is an instance of `Properties` class.
@@ -98,6 +102,7 @@ first the rules of the properties:
   * support object value assignment hook function.
   * support meaningful(non-english) name.
   * support type check if possible.
+  * **NOTE**: Because `$attributes` is an instance of the `Properties` class, property names cannot conflict with the reserved method names of the `Properties` class when defining properties. These reserved names include: `_names`, `_ixNames`, `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`.
 
 The `$attributes` holds all attributes(like the property descriptor) of an object.
 The `key` is the property name. the value is the **property descriptor**:
@@ -161,6 +166,7 @@ these methods will be added(replaced):
 * `initialize(options)` : overwrite this for assign options from constructor?
   * apply the initialized value of the properties to the object if possible.
   * then call `assign` method.
+
 + `assign(options)` : assign the options' attributes to this object.
   * how to decide which attribute should be assign?
   * I need an attributes manage class? or just a simple attributes list?
@@ -169,6 +175,7 @@ these methods will be added(replaced):
 + `assignPropertyTo(dest, options, attributeName, value)`: assign an attribute to dest.
   * you can override it to determine howto assign an object value.
 + `assignProperty(options, attributeName, value)`: assign an atrribute. called by `assign`
+
 * `assignTo(dest)` : assign the attributes to this `dest` object.
 * `mergeTo(dest)`: merge the attributes itself to `dest` object.
   * do not overwrite the already exist attributes of the `dest`.
@@ -182,8 +189,6 @@ these methods will be added(replaced):
 * `toJSON()`: this will call the `toObject()` to return.
 
 Note: you should specify the position of the argument if the first argument is not the options
-
-## Usage
 
 ### Make your class manage the properties
 
@@ -477,7 +482,283 @@ var myEx = new MyClassEx('theClassEx', {attr1: 3, hidden:11222, $dontExport: 1, 
 assert.deepEqual(myEx.mergeTo(), {extra:'extra', attr1:3, $dontExport:1, custom:{b:12, exta: 123}})
 ```
 
-## API
+### Advanced Usage: Typed Arrays and Nested Objects
+
+Beyond basic property management, `property-manager` also supports more complex scenarios, such as handling arrays with specific element types or automatically converting plain objects into class instances. This is extremely useful for building structured, type-safe data models.
+
+#### 1. Typed Arrays with `arrayOf`
+
+When you need an array property and want to ensure that all elements within that array are instances of a specific class, you can use the `arrayOf` helper function.
+
+`arrayOf(Type)` creates a special array that automatically converts new elements (if they are plain objects) into instances of `Type` upon being added.
+
+**Example:**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { arrayOf } from 'property-manager/lib/array';
+
+// Define a Phone class
+class Phone extends AdvancePropertyManager { /* ... */ }
+defineProperties(Phone, { number: { type: String } });
+
+// Define a Contact class with an array of phones
+class Contact extends AdvancePropertyManager { /* ... */ }
+defineProperties(Contact, {
+  name: { type: String },
+  phones: { type: arrayOf(Phone) } // Each element in phones will be an instance of Phone
+});
+
+const contact = new Contact({
+  name: 'John',
+  phones: [
+    { number: '123-456-7890' }, // This is a plain object
+    { number: '098-765-4321' }  // This is also a plain object
+  ]
+});
+
+// Verify the automatic conversion
+// contact.phones[0] is now an instance of the Phone class, not a plain object
+console.log(contact.phones[0] instanceof Phone); // Outputs: true
+```
+
+#### 2. Nested Property Manager Objects
+
+If a property of an object is itself another complex object (also managed by `property-manager`), you simply need to specify its corresponding class in the `type` definition. `property-manager` will automatically handle the conversion from a plain object to a class instance upon assignment.
+
+This makes building nested data models simple and intuitive.
+
+**Example:**
+
+```js
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+
+// 1. Define the inner Address class
+class Address extends AdvancePropertyManager { /* ... */ }
+defineProperties(Address, {
+  street: { type: String },
+  city: { type: String }
+});
+
+// 2. Define the outer Person class
+class Person extends AdvancePropertyManager { /* ... */ }
+
+// 3. In Person's properties, use the Address class directly as the type
+defineProperties(Person, {
+  name: { type: String },
+  address: { type: Address } // <-- The key is here
+});
+
+// 4. Instantiate with a nested plain object
+const person = new Person({
+  name: 'John Doe',
+  address: {
+    street: '123 Main St',
+    city: 'Anytown'
+  }
+});
+
+// 5. Verify the automatic conversion
+// person.address is now an instance of the Address class
+console.log(person.address instanceof Address); // Outputs: true
+console.log(person.address.city); // Outputs: Anytown
+```
+
+## Helper Functions
+
+### toJsonSchema
+
+The `toJsonSchema` helper function converts properties defined in a `PropertyManager` instance into a JSON Schema. This is particularly useful for generating schema definitions for data validation, API documentation, or form generation based on your `PropertyManager` models.
+
+**Usage**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toJsonSchema } from 'property-manager/lib/to-json-schema';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  id: { type: Number, value: 0 },
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true },
+  tags: { type: Array, value: [], itemType: String },
+  address: {
+    type: Object,
+    properties: {
+      street: { type: String },
+      city: { type: String }
+    }
+  }
+});
+
+const schema = toJsonSchema(MyDataModel);
+console.log(JSON.stringify(schema, null, 2));
+/*
+Output:
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "default": 0
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+*/
+```
+
+**Parameters**
+
+`toJsonSchema(target: Function | Object)`
+
+* `target`: The `PropertyManager` class or instance for which to generate the JSON Schema.
+
+**Return Value**
+
+* `object` - A JSON Schema object representing the properties defined in the `PropertyManager` instance.
+
+### toUISchema
+
+The `toUISchema` helper function converts properties defined in a `PropertyManager` instance or class into a `uiSchema` object for [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/). This is useful for controlling the UI appearance of form fields, such as making a field read-only or using a specific widget.
+
+**Usage**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toUISchema } from 'property-manager/lib/to-ui-schema';
+
+class MyFormModel extends AdvancePropertyManager { }
+
+defineProperties(MyFormModel, {
+  id: { type: Number, writable: false }, // Read-only field
+  name: { type: String, value: '', 'ui:placeholder': 'Enter name' }, // Custom UI attribute
+  bio: { type: String, value: '', 'ui:widget': 'textarea' },
+  nested: {
+    type: Object,
+    properties: {
+      field1: { type: String, 'ui:title': 'Field One' }
+    }
+  }
+});
+
+const uiSchema = toUISchema(MyFormModel);
+console.log(JSON.stringify(uiSchema, null, 2));
+/*
+Output:
+{
+  "id": {
+    "ui:readonly": true
+  },
+  "name": {
+    "ui:placeholder": "Enter name"
+  },
+  "bio": {
+    "ui:widget": "textarea"
+  },
+  "nested": {
+    "field1": {
+      "ui:title": "Field One"
+    }
+  }
+}
+*/
+```
+
+**Parameters**
+
+* `toUISchema(target: Function | Object)`
+  * `target`: The `PropertyManager` class or instance for which to generate the `uiSchema`.
+
+**Return Value**
+
+* `object` - An RJSF `uiSchema` object.
+
+### toRjsf
+
+The `toRjsf` helper function is a convenient utility that converts a `PropertyManager` instance into both a JSON Schema and a UI Schema, which is the format required by [React JSON Schema Form (RJSF)](https://react-jsonschema-form.readthedocs.io/).
+
+**Usage**
+
+```javascript
+import { AdvancePropertyManager, defineProperties } from 'property-manager';
+import { toRjsf } from 'property-manager/lib/to-rjsf';
+
+class MyDataModel extends AdvancePropertyManager { }
+
+defineProperties(MyDataModel, {
+  name: { type: String, value: '' },
+  isActive: { type: Boolean, value: true, writable: false }
+});
+
+const { schema, uiSchema } = toRjsf(MyDataModel);
+
+console.log('--- Schema ---');
+console.log(JSON.stringify(schema, null, 2));
+
+console.log('\n--- UI Schema ---');
+console.log(JSON.stringify(uiSchema, null, 2));
+
+/*
+Output:
+--- Schema ---
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
+
+--- UI Schema ---
+{
+  "isActive": {
+    "ui:readonly": true
+  }
+}
+*/
+```
+
+**Parameters**
+
+* `toRjsf(target: Function | Object)`
+  * `target`: The `PropertyManager` class or instance to convert.
+
+**Return Value**
+
+* `{schema: object, uiSchema: object}` - An object containing both the `schema` and `uiSchema`.
 
 ## Changes
 
@@ -552,9 +833,11 @@ class Contact extends AdvancePropertyManager {
 * **BROKEN** change `exportTo` method params to `(dest, options?: IExportOptions)`
 * **BROKEN** change `mergeTo` method params to `(dest, options?: IMergeOptions)`
   + add `skipNull` and `skipUndefined` option to `IExportOptions` and `IMergeOptions`
+
 + add the `extends(attrs: Object, nonExported1stChar)` method to the `Properties`
   * return a new `Properties` instance to extends properties from current instance.
 + add the inherited properties supports for `AdvancePropertyManager.defineProperties`
+
 * change the `recreate` argument default value of `defineProperties` to `false` for `AdvancePropertyManager` and `NormalPropertyManager`
 * set all methods and non-properties of `Properties` to be non-enumerable.
 
@@ -590,6 +873,7 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.11.0
 
 + add the `skipExists` option to the `Properties.assignTo` and `Properties.assignPropertyTo`
+
 * the options to the `Properties.assignTo(dest, src, options)`
   * `exclude`*(String|Array)*
   * `skipDefault`*(Boolean)*
@@ -602,6 +886,7 @@ console.log(obj.prop1 instanceof CustomType)
 + add the alias property descriptor(Normal&Advance):
   * You can define one or more aliases to assign from other object(options)
   * `alias` *(String|ArrayOf String)*
+
 * Smart assignment property supports(AdvancePropertyManager):
   * **broken**: SMART_ASSIGN constant deprecated.
   * `assigned` descriptor *(Boolean|String)*:
@@ -609,7 +894,9 @@ console.log(obj.prop1 instanceof CustomType)
     * it's the internal property name of the smart assignment if it's string
     * the internal property name is the property name with prefix(`nonExported1stChar`)
       if it's an empty string
+
 - **broken**: remove `attrsName` property(fixed to '$attributes')
+
 + add the helper function: properties/define-properties.
 
 ### v0.9.0
@@ -625,6 +912,7 @@ console.log(obj.prop1 instanceof CustomType)
       * use this solution. but if someone wish all instance share the same value.
       * add a descriptor to control whethe enable this. but simple can not support the custom descriptor.
         + `clone` *(Boolean)*: defaults to true.
+
 + Smart assignment property supports:
   * assign property descriptor *(Function(value, dest, src, name))*:
     * It only used to assign the options from another object.
@@ -642,10 +930,12 @@ console.log(obj.prop1 instanceof CustomType)
 ### v0.8.0
 
 + add the property writable check: do not assign the readonly property.
+
 * Normal, Advance
   + add the `assigned`, `exported` *(Boolean)* to property descriptor directly.
     * `assigned`: enumerable isnt false and (writable isnt false or isFunction(set)).
     * `exported`: enumerable isnt false and the first char isnt "$"
+
 + `PropertyManager::nonExported1stChar` *(Char)*, defaults to '$'
   * note: the `exported` descriptor is higher prior than `nonExported1stChar`.
 + `nonExported1stChar` option to the property manager ability.

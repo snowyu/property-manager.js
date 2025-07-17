@@ -6,7 +6,7 @@
 
 # Interface: IExportOptions
 
-Defined in: [src/abstract.d.ts:26](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L26)
+Defined in: [src/abstract.d.ts:26](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L26)
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: [src/abstract.d.ts:26](https://github.com/snowyu/property-manager.js
 
 > `optional` **exclude**: `string` \| `string`[]
 
-Defined in: [src/abstract.d.ts:30](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L30)
+Defined in: [src/abstract.d.ts:30](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L30)
 
 the exclude property name(s)
 
@@ -28,7 +28,7 @@ the exclude property name(s)
 
 > `optional` **overwrite**: `boolean`
 
-Defined in: [src/abstract.d.ts:34](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L34)
+Defined in: [src/abstract.d.ts:34](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L34)
 
 Whether overwrite the dest property
 
@@ -38,7 +38,7 @@ Whether overwrite the dest property
 
 > `optional` **skipDefault**: `boolean`
 
-Defined in: [src/abstract.d.ts:38](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L38)
+Defined in: [src/abstract.d.ts:38](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L38)
 
 skip if src property is default value.
 
@@ -48,7 +48,7 @@ skip if src property is default value.
 
 > `optional` **skipExists**: `boolean`
 
-Defined in: [src/abstract.d.ts:46](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L46)
+Defined in: [src/abstract.d.ts:46](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L46)
 
 skip if dest property value is exists(isn't undefined)
 
@@ -58,7 +58,7 @@ skip if dest property value is exists(isn't undefined)
 
 > `optional` **skipNull**: `boolean`
 
-Defined in: [src/abstract.d.ts:50](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L50)
+Defined in: [src/abstract.d.ts:50](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L50)
 
 skip if src property value is null
 
@@ -68,7 +68,7 @@ skip if src property value is null
 
 > `optional` **skipReadOnly**: `boolean`
 
-Defined in: [src/abstract.d.ts:42](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L42)
+Defined in: [src/abstract.d.ts:42](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L42)
 
 skip if src property is readonly
 
@@ -78,6 +78,6 @@ skip if src property is readonly
 
 > `optional` **skipUndefined**: `boolean`
 
-Defined in: [src/abstract.d.ts:54](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/abstract.d.ts#L54)
+Defined in: [src/abstract.d.ts:54](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L54)
 
 skip if src property value is undefined

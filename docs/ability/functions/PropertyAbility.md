@@ -8,7 +8,7 @@
 
 > **PropertyAbility**\<`T`\>(`Class`, `options?`): `T` & [`InternalPropertyManager`](../interfaces/InternalPropertyManager.md)
 
-Defined in: [src/ability.d.ts:67](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L67)
+Defined in: [src/ability.d.ts:67](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L67)
 
 Enhances a given class with property management capabilities by injecting
 prototype methods and behaviors from the AbstractPropertyManager.

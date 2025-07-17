@@ -6,7 +6,7 @@
 
 # Class: ArrayPropertyManager
 
-Defined in: [src/array.js:13](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L13)
+Defined in: [src/array.js:13](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L13)
 
 ## Extends
 
@@ -22,7 +22,7 @@ Defined in: [src/array.js:13](https://github.com/snowyu/property-manager.js/blob
 
 > **new ArrayPropertyManager**(`value`, `type`): `ArrayPropertyManager`
 
-Defined in: [src/array.js:21](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L21)
+Defined in: [src/array.js:21](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L21)
 
 #### Parameters
 
@@ -876,7 +876,7 @@ If the array is empty, undefined is returned and the array is not modified.
 
 > **push**(`value`, ...`arr`): `number`
 
-Defined in: [src/array.js:36](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L36)
+Defined in: [src/array.js:36](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L36)
 
 Appends new elements to the end of an array, and returns the new length of the array.
 
@@ -1295,7 +1295,7 @@ An array containing the elements that were deleted.
 
 > **toJSON**(): `any`[]
 
-Defined in: [src/array.js:52](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L52)
+Defined in: [src/array.js:52](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L52)
 
 #### Returns
 
@@ -1351,7 +1351,7 @@ Defined in: node\_modules/typescript/lib/lib.es2015.core.d.ts:64
 
 > **toObject**(`options`): `any`[]
 
-Defined in: [src/array.js:56](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L56)
+Defined in: [src/array.js:56](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L56)
 
 #### Parameters
 
@@ -1387,7 +1387,7 @@ Returns a string representation of an array.
 
 > **unshift**(`value`, ...`arr`): `number`
 
-Defined in: [src/array.js:44](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L44)
+Defined in: [src/array.js:44](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L44)
 
 Inserts new elements at the start of an array, and returns the new length of the array.
 
@@ -1415,7 +1415,7 @@ Inserts new elements at the start of an array, and returns the new length of the
 
 > **valueOf**(): `any`[]
 
-Defined in: [src/array.js:69](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L69)
+Defined in: [src/array.js:69](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L69)
 
 Returns the primitive value of the specified object.
 
@@ -1447,7 +1447,7 @@ Returns an iterable of values in the array
 
 > `static` **arrayOf**(`type`): (`value`) => `ArrayPropertyManager`
 
-Defined in: [src/array.js:15](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/array.js#L15)
+Defined in: [src/array.js:15](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.js#L15)
 
 #### Parameters
 

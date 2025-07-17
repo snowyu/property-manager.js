@@ -114,6 +114,12 @@ Re-exports [JSONValue](../array/type-aliases/JSONValue.md)
 
 ***
 
+### normalizeAttributes
+
+Re-exports [normalizeAttributes](../to-json-schema/functions/normalizeAttributes.md)
+
+***
+
 ### NormalPropertyManager
 
 Re-exports [NormalPropertyManager](../normal/classes/NormalPropertyManager.md)
@@ -189,3 +195,21 @@ Re-exports [SimplePropertyManager](../simple/classes/SimplePropertyManager.md)
 ### SimpleType
 
 Re-exports [SimpleType](../abstract/type-aliases/SimpleType.md)
+
+***
+
+### toJsonSchema
+
+Re-exports [toJsonSchema](../to-json-schema/functions/toJsonSchema.md)
+
+***
+
+### toRjsf
+
+Re-exports [toRjsf](../to-rjsf/functions/toRjsf.md)
+
+***
+
+### toUISchema
+
+Re-exports [toUISchema](../to-ui-schema/functions/toUISchema.md)

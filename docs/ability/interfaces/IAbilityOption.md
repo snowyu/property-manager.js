@@ -6,7 +6,7 @@
 
 # Interface: IAbilityOption
 
-Defined in: [src/ability.d.ts:9](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L9)
+Defined in: [src/ability.d.ts:9](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/ability.d.ts:9](https://github.com/snowyu/property-manager.js/b
 
 > `optional` **classMethods**: [`IAbilityMethods`](IAbilityMethods.md)
 
-Defined in: [src/ability.d.ts:16](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L16)
+Defined in: [src/ability.d.ts:16](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L16)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/ability.d.ts:16](https://github.com/snowyu/property-manager.js/
 
 > `optional` **exclude**: `string` \| `string`[]
 
-Defined in: [src/ability.d.ts:13](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L13)
+Defined in: [src/ability.d.ts:13](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L13)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/ability.d.ts:13](https://github.com/snowyu/property-manager.js/
 
 > `optional` **include**: `string` \| `string`[]
 
-Defined in: [src/ability.d.ts:14](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L14)
+Defined in: [src/ability.d.ts:14](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L14)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/ability.d.ts:14](https://github.com/snowyu/property-manager.js/
 
 > `optional` **methods**: [`IAbilityMethods`](IAbilityMethods.md)
 
-Defined in: [src/ability.d.ts:15](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L15)
+Defined in: [src/ability.d.ts:15](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L15)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/ability.d.ts:15](https://github.com/snowyu/property-manager.js/
 
 > `optional` **name**: [`PropManagerType`](../type-aliases/PropManagerType.md)
 
-Defined in: [src/ability.d.ts:10](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L10)
+Defined in: [src/ability.d.ts:10](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L10)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/ability.d.ts:10](https://github.com/snowyu/property-manager.js/
 
 > `optional` **nonExported1stChar**: `string`
 
-Defined in: [src/ability.d.ts:12](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L12)
+Defined in: [src/ability.d.ts:12](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L12)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/ability.d.ts:12](https://github.com/snowyu/property-manager.js/
 
 > `optional` **optionsPosition**: `number`
 
-Defined in: [src/ability.d.ts:11](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L11)
+Defined in: [src/ability.d.ts:11](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L11)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [src/ability.d.ts:11](https://github.com/snowyu/property-manager.js/
 
 > `optional` **replacedMethods**: `string`[]
 
-Defined in: [src/ability.d.ts:17](https://github.com/snowyu/property-manager.js/blob/875a648099d0c063400c33d31fea8b465b85b679/src/ability.d.ts#L17)
+Defined in: [src/ability.d.ts:17](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/ability.d.ts#L17)

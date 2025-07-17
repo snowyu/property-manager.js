@@ -26,3 +26,6 @@
 - [properties/define-properties](properties/define-properties/README-1.md)
 - [simple](simple/README.md)
 - [simple](simple/README-1.md)
+- [to-json-schema](to-json-schema/README.md)
+- [to-rjsf](to-rjsf/README.md)
+- [to-ui-schema](to-ui-schema/README.md)
