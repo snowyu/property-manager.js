@@ -135,11 +135,11 @@ describe('toUISchema', () => {
   it('should prioritize explicit uiSchema over derived properties', () => {
     class OverrideTest extends AdvancePropertyManager {}
     defineProperties(OverrideTest, {
-      myProp: { type: String },
+      myProp: { type: String, "ui:widget": "password" },
     });
 
     OverrideTest.$uiSchema = {
-      myProp: { "ui:readonly": true, "ui:widget": "password" }, // Explicitly set to false
+      myProp: { "ui:readonly": true }, // Explicitly set to false
     };
 
     const uiSchema = toUISchema(OverrideTest);

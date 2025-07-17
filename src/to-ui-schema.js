@@ -38,7 +38,13 @@ export function toUISchema(pm) {
 
     Object.keys(prop).reduce((result, key) => {
       if (key.startsWith('ui:')) {
-        result[key] = prop[key];
+        const oldValue = result[key]
+        const newValue = prop[key]
+        if (oldValue && typeof oldValue === 'object' && newValue && typeof newValue === 'object') {
+          result[key] = {...result[key], ...prop[key]};
+        } else {
+          result[key] = newValue;
+        }
         delete prop[key];
       }
       return result;
