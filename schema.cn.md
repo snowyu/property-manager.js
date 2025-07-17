@@ -1,251 +1,179 @@
-# Property Manager Schema 规范
+# Property Manager Schema 体系
 
-本文档定义了 `property-manager.js` 库所使用的 Schema 规范，旨在使其能够与 UI 渲染库（特别是 [React JSON Schema Form (RJSF)](https://react-json-schema-form.readthedocs.io/en/latest/)）无缝集成。
+`property-manager.js` 的 Schema 体系由三个逻辑上分离的核心部分组成。这种设计确保了核心库的职责单一，同时通过一套约定和辅助函数，提供了强大的 UI 集成能力。
 
-## 核心理念
+1. **内部 Property Manager Schema**: 定义数据结构和运行时行为的核心。
+2. **JSON Schema**: 从内部 Schema 生成的、用于数据校验的标准格式。
+3. **UI Schema**: 通过一套独立的命名约定和辅助函数生成的、用于控制 UI 渲染的配置。
 
-本规范的核心思想是采用**“超集” (Superset)** Schema 的设计。这意味着您的 `property-manager.js` Schema 将包含所有标准的 JSON Schema 关键字，并额外增加一个专门用于 UI 配置的字段（`ui`）。
+---
 
-通过这种方式，一个 Schema 定义文件可以同时承载数据的结构定义和 UI 的展现配置，实现关注点分离的同时，保持了高度的内聚性。
+## 1. 内部 Property Manager Schema (数据与行为核心)
 
-## Schema 结构
+这是所有 Schema 的**源头 (Source of Truth)**，它定义了一个属性的**数据结构和运行时行为**。它完全是 UI 无关的，只关心数据本身。
 
-`property-manager.js` 的 Schema 是一个标准的 JSON Schema 对象，但它被扩展以包含一个可选的 `ui` 字段，用于定义 UI 相关的配置。
+这个 Schema 是通过在 `PropertyManager` 子类中定义 `static $attributes` 来实现的。
 
-```javascript
-const mySchema = {
-  // --- 标准 JSON Schema 部分 ---
-  // 遵循 JSON Schema Draft 07 规范
-  title: "表单标题",
-  description: "表单描述",
-  type: "object", // 或 "string", "number", "array", "boolean" 等
-  required: ["field1", "field2"], // 必需字段列表
-  properties: {
-    field1: {
-      type: "string",
-      title: "字段1标题",
-      description: "字段1描述",
-      default: "默认值",
-      minLength: 3,
-      maxLength: 10,
-      pattern: "^[a-zA-Z0-9]*$",
-      enum: ["option1", "option2"],
-      // ... 更多标准 JSON Schema 关键字
-    },
-    field2: {
-      type: "number",
-      minimum: 0,
-      maximum: 100,
-      // ...
-    },
-    nestedObject: {
-      type: "object",
-      properties: {
-        nestedField: {
-          type: "string",
-          format: "email"
-        }
-      }
-    },
-    arrayOfStrings: {
-      type: "array",
-      items: {
-        type: "string"
-      },
-      minItems: 1,
-      maxItems: 5
-    },
-    arrayOfObjects: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          id: { type: "number" },
-          name: { type: "string" }
-        }
-      }
-    }
-  },
-  // ... 更多标准 JSON Schema 关键字 (e.g., definitions, patternProperties)
+**核心组成:**
 
-  // --- UI 扩展部分 (可选) ---
-  // 此字段的内容完全遵循 RJSF 的 uiSchema 规范。
-  // 它定义了表单字段的 UI 展现方式、顺序、自定义组件等。
-  ui: {
-    "ui:order": ["field1", "field2", "nestedObject", "*"], // 字段排序
-    field1: {
-      "ui:widget": "textarea", // 使用文本域组件
-      "ui:help": "请输入3到10个字符", // 帮助文本
-      "ui:placeholder": "在此输入...", // 占位符
-      "ui:autofocus": true,
-      "ui:readonly": false,
-      "ui:disabled": false,
-      "ui:hidden": false,
-      "ui:classNames": "custom-field-class",
-      "ui:options": { // RJSF 选项，例如用于选择框
-        "rows": 5
-      }
-    },
-    field2: {
-      "ui:widget": "updown", // 使用数字上下选择器
-      "ui:readonly": true, // 只读
-    },
-    nestedObject: {
-      "ui:title": "嵌套对象标题",
-      "ui:description": "这是嵌套对象的描述",
-      nestedField: {
-        "ui:widget": "password",
-        "ui:placeholder": "请输入密码"
-      }
-    },
-    arrayOfStrings: {
-      "ui:options": {
-        "addable": true,
-        "removable": true,
-        "orderable": true
-      }
-    },
-    arrayOfObjects: {
-      "ui:options": {
-        "orderable": false
-      },
-      items: { // 数组项的 UI 配置，同样支持递归
-        "ui:title": "列表项",
-        name: {
-          "ui:widget": "alt-datetime"
-        }
-      }
-    }
-    // ... 更多 RJSF uiSchema 关键字
-  },
-};
-```
+`static $attributes` 对象中的属性描述符 (`IPropDescriptor`) 包含两类字段：
 
-### 字段说明与映射细节
+**A. 核心字段 (由 `IPropDescriptor` 接口或文档约定正式定义)**
 
-### Property Manager 属性描述符 (`IPropDescriptor`) 与 JSON Schema 的关系
+这些字段被 `property-manager.js` 的核心功能（如赋值、克隆、导出）所直接使用。
 
-`property-manager.js` 库通过其内部的属性描述符 (`IPropDescriptor`) 来定义和管理业务对象的属性。这些描述符包含了比标准 JSON Schema 更丰富的配置，例如属性的赋值逻辑、导出规则等。在将 `property-manager.js` 定义的属性转换为 JSON Schema 时，只有与数据结构和验证相关的部分会被映射，而其他用于控制 `property-manager.js` 内部行为的字段则不会出现在最终的 JSON Schema 中。
+* **数据与行为**:
+  * `type`: 属性的类型，如 `String`, `Number`, 或另一个 `PropertyManager` 子类。
+  * `value`: 属性的默认值。
+  * `name`: 导出的属性名（别名），默认为属性键名。
+  * `required`: 是否为必需字段。
+  * `writable`: 属性是否可写。
+  * `exported`: 属性是否可被导出。
+  * `enumerable`: 属性是否可被枚举。
+  * `assign`: 一个函数，用于自定义赋值逻辑。
+  * `assigned`: 是否可被赋值。在 `AdvancePropertyManager` 中，如果设为字符串，则启用“智能赋值”功能，该字符串将作为内部属性的名称。
+  * `alias`: 属性的别名，用于从纯对象赋值。
+  * `clone`: 当默认值是对象时，在初始化时是否克隆该值。
+  * `skipDefault`: 在导出时是否跳过值为默认值的属性。
+  * `get` / `set`:标准的 getter/setter。
+* **模板属性 (Template Properties)**:
+  * `template`: 一个字符串模板或返回字符串的函数，用于动态生成属性值。例如：`'${author}-${uuid()}'`。
+  * `imports`: 一个对象，为 `template` 提供可用的函数。
 
-以下是 `IPropDescriptor` 中常见字段的说明及其与 JSON Schema 的对应关系：
+**B. JSON Schema 透传字段 (约定而非正式定义)**
 
-* **`name`** *(String)*:
-  * **作用**: 定义属性在导出时可能使用的非英文名称（别名）。
-  * **JSON Schema 映射**: **无直接映射**。JSON Schema 的属性名由其在 `properties` 对象中的键名决定。此字段主要影响 `property-manager.js` 的数据导出行为。
+这些字段并未在 `IPropDescriptor` 接口中正式定义，但 `toJsonSchema` 辅助函数会识别它们，并将它们**直接传递**到生成的 JSON Schema 中。`property-manager.js` 的核心逻辑会忽略这些字段。
 
-* **`value`**:
-  * **作用**: 定义属性的默认值。
-  * **JSON Schema 映射**: 直接映射到 JSON Schema 的 `default` 关键字。
+* **常见的透传字段**: `title`, `description`, `minLength`, `maxLength`, `pattern`, `format`, `enum`, `minimum`, `maximum` 等。
 
-* **`type`** *(String | Function)*:
-  * **作用**: 定义属性的数据类型。可以是 JavaScript 的基本类型构造函数（如 `String`, `Number`, `Boolean`, `Array`, `Object`），也可以是其他 `property-manager.js` 管理的类。
-  * **JSON Schema 映射**:
-    * 当 `type` 是 `String`, `Number`, `Boolean` 时，映射到 JSON Schema 的 `"string"`, `"number"`, `"boolean"` 类型。
-    * 当 `type` 是 `Array` 或 `arrayOf(SomeType)` 的实例时，映射到 JSON Schema 的 `"array"` 类型，并根据 `SomeType` 递归定义 `items` 字段。
-    * 当 `type` 是 `Object` 或另一个 `AdvancePropertyManager` 的子类时，映射到 JSON Schema 的 `"object"` 类型，并递归定义其 `properties` 字段。
-
-* **`enumerable`** *(Boolean)*:
-  * **作用**: 控制属性是否可被枚举（例如在 `for...in` 循环或 `Object.keys()` 中可见）。
-  * **JSON Schema 映射**: **无直接映射**。这是 JavaScript 属性的特性，不属于 JSON Schema 的范畴。
-
-* **`configurable`** *(Boolean)*:
-  * **作用**: 控制属性描述符是否可被修改，以及属性是否可从对象中删除。
-  * **JSON Schema 映射**: **无直接映射**。
-
-* **`writable`** *(Boolean)*:
-  * **作用**: 控制属性的值是否可以通过赋值运算符 (`=`) 进行修改。
-  * **JSON Schema 映射**: **无直接映射到 JSON Schema 的数据结构部分**。然而，当生成 RJSF 的 `uiSchema` 时，如果 `writable` 为 `false`，则应将其映射为 `"ui:readonly": true`，以使 UI 字段变为只读。
-
-* **`assign`** *(Function)*:
-  * **作用**: 自定义属性的赋值逻辑。当从其他对象赋值时，此函数会被调用。
-  * **JSON Schema 映射**: **无直接映射**。这是一个 `property-manager.js` 内部的业务逻辑钩子。
-
-* **`assigned`** *(Boolean | String)*:
-  * **作用**: 控制属性是否可以被赋值。在 `AdvancePropertyManager` 中，如果为字符串，还支持智能赋值。
-  * **JSON Schema 映射**: **无直接映射**。
-
-* **`exported`** *(Boolean)*:
-  * **作用**: 控制属性是否可以被导出到纯 JavaScript 对象（例如通过 `toObject()` 或 `toJSON()`）。
-  * **JSON Schema 映射**: **无直接映射**。此字段影响 `property-manager.js` 的数据序列化行为，而非 Schema 定义。
-
-* **`alias`** *(String | `Array<String>`)*:
-  * **作用**: 为属性定义一个或多个别名，以便从其他纯对象中进行赋值匹配。
-  * **JSON Schema 映射**: **无直接映射**。
-
-* **`clone`** *(Boolean)*:
-  * **作用**: 当属性的默认值是对象时，控制在初始化时是否克隆该默认值，以避免多个实例共享同一个默认对象。
-  * **JSON Schema 映射**: **无直接映射**。
-
-* **`skipDefault`** *(Boolean)*:
-  * **作用**: 在导出数据时，如果属性的值等于其默认值，则跳过导出该属性。
-  * **JSON Schema 映射**: **无直接映射**。
-
-* **`get`** *(Function)* / **`set`** *(Function)*:
-  * **作用**: 标准 JavaScript 属性的 getter 和 setter 函数，用于定义属性的访问和修改行为。
-  * **JSON Schema 映射**: **无直接映射**。
-
-**总结**:
-
-`IPropDescriptor` 提供了强大的运行时属性管理能力。在转换为 JSON Schema 时，我们主要关注其描述数据结构和默认值的部分（如 `value` 和 `type`）。而那些与 `property-manager.js` 内部行为、赋值逻辑、导出控制等相关的字段，则不会体现在生成的 JSON Schema 中，因为它们超出了 JSON Schema 作为数据结构描述语言的范畴。
-
-* **标准 JSON Schema 部分**:
-  * `title`, `description`, `type`, `properties`, `required`, `default`, `minLength`, `maxLength`, `pattern`, `enum`, `minimum`, `maximum`, `format` 等所有标准的 JSON Schema 关键字都应被支持。
-  * 对于嵌套对象和数组，其 `properties` 或 `items` 字段内部同样遵循 JSON Schema 规范，并支持递归定义。
-  * **`required` 属性**: 在 `property-manager.js` 的属性描述符 (`IPropDescriptor`) 中，如果 `required: true`，则在生成的 JSON Schema 中，该字段的名称会被添加到父级 Schema 的 `required` 数组中。
-  * **`type` 映射**: `IPropDescriptor` 中的 `type` 字段（例如 `String`, `Number`, `Boolean`, `Array`, `Object`）会被精确映射到 JSON Schema 的 `type` 字符串（`"string"`, `"number"`, `"boolean"`, `"array"`, `"object"`）。
-    * 当 `type` 是另一个 `AdvancePropertyManager` 的子类时，它将被递归地转换为一个 `"object"` 类型的 JSON Schema。
-    * 当 `type` 是 `arrayOf(SomeType)` 的实例时，它将被转换为一个 `"array"` 类型的 JSON Schema，其 `items` 字段将递归地定义 `SomeType` 的 Schema。
-  * **`value` 映射**: `IPropDescriptor` 中的 `value` 字段会被映射到 JSON Schema 的 `default` 关键字。
-  * **`property-manager.js` 内部属性**: `IPropDescriptor` 中诸如 `assign`, `assigned`, `exported`, `alias`, `clone`, `writable`, `get`, `set` 等字段是 `property-manager.js` 内部机制所使用的，它们**不会**出现在最终生成的 JSON Schema 中，因为它们不属于 JSON Schema 规范。
-
-* **`ui` 扩展部分**:
-  * 这是一个可选的顶级字段，必须与 `title`, `description`, `properties` 等在同一层级定义。
-  * 其内部结构**完全遵循 RJSF 的 `uiSchema` 规范**。这意味着您可以直接将 RJSF 文档中描述的任何 `uiSchema` 关键字放置在此处。
-  * **常用 `uiSchema` 关键字示例**:
-    * `"ui:widget"`: 指定渲染组件（如 `"textarea"`, `"password"`, `"radio"`, `"select"`, `"updown"` 等）。
-    * `"ui:options"`: 为 widget 提供额外选项（如 `rows`, `addable`, `removable`, `orderable` 等）。
-    * `"ui:order"`: 控制字段在表单中的显示顺序。
-    * `"ui:help"`: 提供字段的帮助文本。
-    * `"ui:placeholder"`: 输入框的占位符文本。
-    * `"ui:autofocus"`: 字段是否自动获取焦点。
-    * `"ui:readonly"`: 字段是否只读。
-    * `"ui:disabled"`: 字段是否禁用。
-    * `"ui:hidden"`: 字段是否隐藏。
-    * `"ui:classNames"`: 为字段添加自定义 CSS 类。
-    * `"ui:title"`, `"ui:description"`: 覆盖 Schema 中定义的标题和描述。
-  * **递归性**: 对于嵌套对象和数组项 (`items`)，`ui` 字段内部的结构也应与数据 Schema 的层级相匹配，以实现 UI 配置的递归。
-
-* **`property-manager.js` 自有扩展部分 (例如 `pm` 字段)**:
-  * 这是一个可选的字段，用于存放 `property-manager.js` 库特有的元数据或配置，这些信息不属于标准 JSON Schema 也不属于 UI Schema。
-  * 此字段的内容不会被 `toRjsf()` 方法处理，因此不会影响 RJSF 的输出。
-
-## 转换函数：`toJsonSchema(obj: PropertyManager)`
-
-## 转换函数：`toUISchema(obj: PropertyManager)`
-
-## 转换函数：`toRjsf(obj: PropertyManager)`
-
-为了方便将上述超集 Schema 转换为 RJSF 可直接使用的格式，提供了 `toRjsf(obj: PropertyManager)` 函数。
+**示例:**
 
 ```javascript
-/**
- * 将一个 PropertyManager 实例的 Schema 转换为 RJSF 兼容的格式。
- *
- * @returns {{schema: object, uiSchema: object}} - 返回一个包含 RJSF schema 和 uiSchema 的对象。
- */
-toRjsf(instance);
+class UserProfile extends AdvancePropertyManager {
+  static $attributes = {
+    username: {
+      // --- 核心字段 ---
+      type: String,
+      required: true,
+      name: '用户名',
+      // --- JSON Schema 透传字段 ---
+      title: '用户名称',
+      description: '公开显示的名称',
+      minLength: 3
+    },
+    userId: {
+        // --- 模板属性 ---
+        template: 'USER-${uuid()}',
+        imports: { uuid: require('uuid').v4 },
+        writable: false
+    },
+    role: {
+      // --- 核心字段 ---
+      type: String,
+      assigned: '_internal_role' // 启用智能赋值
+    }
+  };
+}
 ```
 
-此方法会执行以下操作：
+---
 
-1. 从 `property-manager.js` 实例中提取纯净的 JSON Schema 部分，并递归处理嵌套对象和数组的 Schema。
-2. 从 `property-manager.js` 实例中提取 `ui` 扩展部分，作为 `uiSchema`，并递归收集所有嵌套的 UI 配置。
-3. 返回一个包含这两个对象的结构，可以直接传递给 RJSF 的 `<Form />` 组件。
+## 2. JSON Schema (数据结构与验证)
 
-## 最佳实践与注意事项
+JSON Schema 是一个**纯粹的数据结构和验证定义**，由 `toJsonSchema(pm)` 辅助函数根据**内部 PM Schema**生成。它严格遵循 JSON Schema 规范。
 
-* **统一 Schema 定义**: 尽可能将数据结构定义和 UI 配置放在同一个 Schema 文件中，以提高可维护性。
-* **遵循 RJSF `uiSchema` 规范**: `ui` 字段的内容应严格遵循 RJSF 的 `uiSchema` 规范，以确保兼容性。
-* **动态 Schema**: 这种设计模式也为实现动态 Schema 提供了基础，您可以在运行时根据业务逻辑动态修改 Schema 或 `ui` 字段。
+**生成规则:**
 
-这份规范确保了 `property-manager.js` 在提供强大属性管理能力的同时，也能优雅地与现代前端表单解决方案结合。
+* **映射**: `toJsonSchema` 函数读取内部 Schema 中的数据与验证字段 (`type`, `title`, `required` 等)，并转换为标准的 JSON Schema 关键字。
+* **忽略**: 所有与 `property-manager.js` 内部运行时行为相关的字段（如 `writable`, `exported`, `assign`）都会被**忽略**。
+
+**示例:**
+
+对于上面的 `UserProfile` 类，`toJsonSchema(UserProfile)` 会生成：
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "title": "用户名"
+    },
+    "secretCode": {
+      "type": "string"
+    }
+  },
+  "required": ["username"]
+}
+```
+
+---
+
+## 3. UI Schema (表现层配置)
+
+UI Schema 用于控制 UI 的渲染，它**不是** `property-manager.js` 的核心部分。它是由 `toUISchema(pm)` 这个独立的辅助函数生成的。该函数通过识别 `PropertyManager` 类定义中的一套**命名约定**来工作。
+
+### UI Schema 的信息来源约定
+
+`toUISchema` 会在 `PropertyManager` 类中寻找以下两个命名约定作为信息来源：
+
+1. **约定 1: 内联 UI 提示 (`ui:` 前缀)**
+    * 在 `$attributes` 的属性描述符中，任何以 `ui:` 为前缀的键都将被识别为内联 UI 配置。这用于定义与字段紧密相关的 UI 细节。
+
+2. **约定 2: 静态 UI 配置 (`$uiSchema`)**
+    * 在 `PropertyManager` 类上定义的 `static $uiSchema` 对象，用于存放全局性的 UI 配置，如字段顺序。
+
+**示例:**
+
+```javascript
+// 为 UserProfile 添加用于生成 UI Schema 的命名约定
+class UserProfileWithUI extends AdvancePropertyManager {
+  static $attributes = {
+    username: {
+      type: String, title: '用户名', required: true,
+      // 约定1: 内联 UI 提示
+      'ui:help': '长度至少为3个字符。'
+    },
+    secretCode: {
+      type: String, writable: false
+    }
+  };
+
+  // 约定2: 静态 UI 配置
+  static $uiSchema = {
+    'ui:order': ['username', 'secretCode']
+  };
+}
+```
+
+### 生成规则
+
+* **合并与覆盖**: `toUISchema` 会合并来自这两个约定的配置。如果冲突，**内联 `ui:` 配置的优先级更高**。
+* **行为映射**: 它还会解释一些内部 PM Schema 的行为字段，例如 `writable: false` 会被映射为 `"ui:readonly": true`。
+* **过滤**: `exported: false` 或 `enumerable: false` 的属性将不会出现在 UI Schema 中。
+
+* **重要注意事项**: 在 `property-manager` 中，当一个属性被设置为 `writable: false` 时，它的 `exported` 属性也会被**默认**设置为 `false`。这意味着，如果一个只读字段需要在 UI 中显示（即出现在 UI Schema 中），您必须**明确地**在其属性描述符中设置 `exported: true`。
+
+    ```javascript
+    {
+      readOnlyField: {
+        type: String,
+        writable: false, // 这会隐式地将 exported 设置为 false
+        exported: true   // 必须手动设置此项，才能让字段出现在 UI Schema 中
+      }
+    }
+    ```
+
+对于 `UserProfileWithUI`，`toUISchema()` 会生成：
+
+```json
+{
+  "ui:order": ["username", "secretCode"],
+  "username": {
+    "ui:help": "长度至少为3个字符。"
+  },
+  "secretCode": {
+    "ui:readonly": true
+  }
+}
+```

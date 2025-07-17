@@ -71,6 +71,7 @@ first the rules of the properties:
 * The enumerable attributes beginning with '$' can not be exported. but can be assigned.
 * `undefined` value can not be exported.
 * the readonly(writable is false) attributes can not be assigned.
+  * **IMPORTANT**: By default, readonly properties (`writable: false`) are **NOT** exported. If you want a readonly property to be exported (e.g., to appear in `toObject()` or `toJSON()`), you must explicitly set `exported: true`.
 * the assignment order of properties is the order of defined properties.
 
 ## Usage
