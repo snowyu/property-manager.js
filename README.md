@@ -82,6 +82,7 @@ first the rules of the properties:
   * so do not support default value.
   * do not support object value assignment hook function.
   * do not support meaningful(non-english) name.
+  * When defining properties, you must not use `nonExported1stChar` and `defaultOptions` as property names.
 * `NormalPropertyManager`: /lib/normal
   * use the `$attributes` plain object to hold the declaration properties
   * support default value.

@@ -86,6 +86,7 @@
   * 所以不支持默认值。
   * 不支持对象赋值钩子函数。
   * 不支持有意义的（非英文）名称(别名)。
+  * 在定义属性时,不能使用 `nonExported1stChar` 和 `defaultOptions` 作为属性名。
 * `NormalPropertyManager`: /lib/normal
   * 使用 `$attributes` 普通对象来保存声明属性
   * 支持默认值
