@@ -87,6 +87,7 @@ first the rules of the properties:
   * support default value.
   * support object value assignment hook function.
   * support meaningful(non-english) name.
+  * **Recommendation**: To facilitate future upgrades to `AdvancePropertyManager`, it is recommended to avoid using the reserved keywords of `AdvancePropertyManager` when defining properties. These names include: `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`.
 * `AdvancePropertyManager`: /lib/advance
   * use the `$attributes` to hold the declaration properties
   * the `$attributes` is an instance of `Properties` class.
@@ -95,6 +96,7 @@ first the rules of the properties:
   * support object value assignment hook function.
   * support meaningful(non-english) name.
   * support type check if possible.
+  * **NOTE**: Because `$attributes` is an instance of the `Properties` class, property names cannot conflict with the reserved method names of the `Properties` class when defining properties. These reserved names include: `nonExported1stChar`, `extends`, `merge`, `mergeTo`, `mergePropertyTo`, `_initialize`, `initialize`, `updateNames`, `initializeTo`, `getRealAttrName`, `validatePropertyValue`, `assignPropertyTo`, `assignTo`, `isDefaultObject`, `getValue`.
 
 The `$attributes` holds all attributes(like the property descriptor) of an object.
 The `key` is the property name. the value is the **property descriptor**:
