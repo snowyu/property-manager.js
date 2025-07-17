@@ -128,14 +128,12 @@ export function normalizeAttributes(pm) {
 }
 
 function toSchemaProp(prop) {
-  const schemaProperty = {};
-  if (prop.description) {
-    schemaProperty.description = prop.description;
-  }
+  const schemaProperty = {...prop};
 
   if (prop.value !== undefined) {
     schemaProperty.default = prop.value;
   }
+  ['value', 'assigned', 'enumerable', 'exported', 'writable', 'required', 'configurable'].forEach(k => delete schemaProperty[k]);
 
   const propType = prop.type;
 

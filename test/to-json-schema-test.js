@@ -75,7 +75,7 @@ describe('toJsonSchema', () => {
       }
     }
     defineProperties(Product, {
-      productId: { type: Number, required: true, description: 'Unique product identifier' },
+      productId: { type: Number, required: true, title: 'Product ID', description: 'Unique product identifier' },
       price: { type: Number, value: 0.0, description: 'Product price' },
       available: { type: Boolean, value: true },
       colors: { type: [String], value: ['red', 'blue'] },
@@ -87,7 +87,7 @@ describe('toJsonSchema', () => {
     const expectedSchema = {
       type: 'object',
       properties: {
-        productId: { type: 'number', description: 'Unique product identifier' },
+        productId: { type: 'number', title: 'Product ID', description: 'Unique product identifier' },
         price: { type: 'number', default: 0.0, description: 'Product price' },
         available: { type: 'boolean', default: true },
         colors: { type: 'array', default: ['red', 'blue'], items: { type: 'string' } },
