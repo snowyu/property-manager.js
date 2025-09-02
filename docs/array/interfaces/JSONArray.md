@@ -6,7 +6,7 @@
 
 # Interface: JSONArray
 
-Defined in: [src/array.d.ts:18](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/array.d.ts#L18)
+Defined in: [src/array.d.ts:18](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L18)
 
 ## Extends
 

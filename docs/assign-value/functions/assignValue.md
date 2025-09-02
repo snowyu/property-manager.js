@@ -8,7 +8,7 @@
 
 > **assignValue**\<`T`\>(`value`, `type?`): `T`
 
-Defined in: [src/assign-value.d.ts:1](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/assign-value.d.ts#L1)
+Defined in: [src/assign-value.d.ts:1](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/assign-value.d.ts#L1)
 
 ## Type Parameters
 

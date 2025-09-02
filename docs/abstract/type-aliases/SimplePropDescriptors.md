@@ -8,7 +8,7 @@
 
 > **SimplePropDescriptors** = `object`
 
-Defined in: [src/abstract.d.ts:63](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/abstract.d.ts#L63)
+Defined in: [src/abstract.d.ts:63](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L63)
 
 ## Index Signature
 

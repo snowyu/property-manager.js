@@ -8,7 +8,7 @@
 
 > **normalizeAttributes**(`pm`): `any`
 
-Defined in: [src/to-json-schema.js:110](https://github.com/snowyu/property-manager.js/blob/2b37d0c5958df603b1f7a346809647025321a3c0/src/to-json-schema.js#L110)
+Defined in: [src/to-json-schema.js:110](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/to-json-schema.js#L110)
 
 Normalizes the attributes of a PropertyManager instance or class.
 It extracts property descriptors, inferring types from default values if not explicitly defined.
