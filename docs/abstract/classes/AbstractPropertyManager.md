@@ -6,7 +6,7 @@
 
 # Class: AbstractPropertyManager
 
-Defined in: [src/abstract.d.ts:70](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L70)
+Defined in: [src/abstract.d.ts:70](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L70)
 
 The Abstract PropertyManager Class
 
@@ -26,7 +26,7 @@ The Abstract PropertyManager Class
 
 > **new AbstractPropertyManager**(...`args`): `AbstractPropertyManager`
 
-Defined in: [src/abstract.d.ts:80](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L80)
+Defined in: [src/abstract.d.ts:80](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L80)
 
 #### Parameters
 
@@ -62,7 +62,7 @@ The initial value of Object.prototype.constructor is the standard built-in Objec
 
 > **defaultOptions**: `object`
 
-Defined in: [src/abstract.d.ts:74](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L74)
+Defined in: [src/abstract.d.ts:74](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L74)
 
 The default options for export and assign
 
@@ -80,7 +80,7 @@ The default options for export and assign
 
 > **nonExported1stChar**: `string`
 
-Defined in: [src/abstract.d.ts:78](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L78)
+Defined in: [src/abstract.d.ts:78](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L78)
 
 the property with the default prefix '$' will not be exported.
 
@@ -90,7 +90,7 @@ the property with the default prefix '$' will not be exported.
 
 > **assign**(`src`, `options?`): `this`
 
-Defined in: [src/abstract.d.ts:106](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L106)
+Defined in: [src/abstract.d.ts:106](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L106)
 
 Assign the values from the src object.
 
@@ -118,7 +118,7 @@ this object
 
 > **assignProperty**(`src`, `name`, `value`, `attrs?`, `options?`): `void`
 
-Defined in: [src/abstract.d.ts:117](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L117)
+Defined in: [src/abstract.d.ts:117](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L117)
 
 Assign a property of src to this object.
 
@@ -162,7 +162,7 @@ the attributes object
 
 > `abstract` **assignPropertyTo**(`dest`, `src`, `name`, `value`, `attrs?`, `options?`): `void`
 
-Defined in: [src/abstract.d.ts:131](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L131)
+Defined in: [src/abstract.d.ts:131](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L131)
 
 Assign the property value from the src to destination object.
 
@@ -212,7 +212,7 @@ The attributes object of the property
 
 > **assignTo**(`dest?`, `options?`): `any`
 
-Defined in: [src/abstract.d.ts:191](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L191)
+Defined in: [src/abstract.d.ts:191](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L191)
 
 Assign this attributes to the dest object
 
@@ -240,7 +240,7 @@ the dest object
 
 > **clone**(`options?`): `any`
 
-Defined in: [src/abstract.d.ts:155](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L155)
+Defined in: [src/abstract.d.ts:155](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L155)
 
 Create a new object with the same values of attributes.
 
@@ -262,7 +262,7 @@ the new object
 
 > **cloneTo**(`dest`, `options?`): `any`
 
-Defined in: [src/abstract.d.ts:148](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L148)
+Defined in: [src/abstract.d.ts:148](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L148)
 
 Create and assign the values to the destination object.
 
@@ -290,7 +290,7 @@ the new dest object
 
 > `abstract` **defineProperties**(`aProperties`): `any`
 
-Defined in: [src/abstract.d.ts:89](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L89)
+Defined in: [src/abstract.d.ts:89](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L89)
 
 Define the attributes of this object.
 
@@ -312,7 +312,7 @@ the defined attributes of the object
 
 > **exportTo**(`dest`, `options?`): `any`
 
-Defined in: [src/abstract.d.ts:173](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L173)
+Defined in: [src/abstract.d.ts:173](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L173)
 
 Export attributes to the dest json object.
 
@@ -340,7 +340,7 @@ the dest object.
 
 > `abstract` **getProperties**(): [`PropDescriptors`](../type-aliases/PropDescriptors.md)
 
-Defined in: [src/abstract.d.ts:98](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L98)
+Defined in: [src/abstract.d.ts:98](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L98)
 
 Get the defined attributes.
 
@@ -382,7 +382,7 @@ A property name.
 
 > **initialize**(`src?`): `this`
 
-Defined in: [src/abstract.d.ts:139](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L139)
+Defined in: [src/abstract.d.ts:139](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L139)
 
 Initialize object and assign attribute values from src if src exists.
 
@@ -430,7 +430,7 @@ Another object whose prototype chain is to be checked.
 
 > **isSame**(`src`, `options?`): `boolean`
 
-Defined in: [src/abstract.d.ts:200](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L200)
+Defined in: [src/abstract.d.ts:200](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L200)
 
 Check the src object whether “equals” this object.
 
@@ -456,7 +456,7 @@ The source object
 
 > **mergeTo**(`dest`, `options?`): `any`
 
-Defined in: [src/abstract.d.ts:164](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L164)
+Defined in: [src/abstract.d.ts:164](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L164)
 
 Merge this attributes to dest object.
 
@@ -510,7 +510,7 @@ A property name.
 
 > **toJSON**(): `any`
 
-Defined in: [src/abstract.d.ts:182](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L182)
+Defined in: [src/abstract.d.ts:182](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L182)
 
 #### Returns
 
@@ -540,7 +540,7 @@ Returns a date converted to a string using the current locale.
 
 > **toObject**(`options?`): `any`
 
-Defined in: [src/abstract.d.ts:181](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L181)
+Defined in: [src/abstract.d.ts:181](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/abstract.d.ts#L181)
 
 Convert the attributes to the json object
 

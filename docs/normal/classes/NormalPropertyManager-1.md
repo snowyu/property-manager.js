@@ -6,7 +6,7 @@
 
 # Class: NormalPropertyManager
 
-Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L10)
+Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L10)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blo
 
 > **new NormalPropertyManager**(...`args`): `NormalPropertyManager`
 
-Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L10)
+Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L10)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/normal.js:10](https://github.com/snowyu/property-manager.js/blo
 
 > **$attributes**: `any`
 
-Defined in: [src/normal.js:104](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L104)
+Defined in: [src/normal.js:104](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L104)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/normal.js:104](https://github.com/snowyu/property-manager.js/bl
 
 > `static` **defineProperties**: (`aTarget`, `aProperties`, `recreate`) => `any`
 
-Defined in: [src/normal.js:167](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L167)
+Defined in: [src/normal.js:167](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L167)
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: [src/normal.js:167](https://github.com/snowyu/property-manager.js/bl
 
 > **assignPropertyTo**(`dest`, `src`, `name`, `value`, `attrs`, `options`): `void`
 
-Defined in: [src/normal.js:45](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L45)
+Defined in: [src/normal.js:45](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L45)
 
 #### Parameters
 
@@ -102,7 +102,7 @@ Defined in: [src/normal.js:45](https://github.com/snowyu/property-manager.js/blo
 
 > **defineProperties**(`aProperties`, `recreate`): `void`
 
-Defined in: [src/normal.js:32](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L32)
+Defined in: [src/normal.js:32](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L32)
 
 #### Parameters
 
@@ -124,7 +124,7 @@ Defined in: [src/normal.js:32](https://github.com/snowyu/property-manager.js/blo
 
 > **getProperties**(): `any`
 
-Defined in: [src/normal.js:28](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L28)
+Defined in: [src/normal.js:28](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L28)
 
 #### Returns
 
@@ -136,7 +136,7 @@ Defined in: [src/normal.js:28](https://github.com/snowyu/property-manager.js/blo
 
 > `static` **getProperties**(): `object`
 
-Defined in: [src/normal.js:17](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/normal.js#L17)
+Defined in: [src/normal.js:17](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/normal.js#L17)
 
 #### Returns
 

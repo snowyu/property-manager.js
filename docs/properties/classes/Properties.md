@@ -6,7 +6,7 @@
 
 # Class: Properties
 
-Defined in: [src/properties/index.d.ts:7](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L7)
+Defined in: [src/properties/index.d.ts:7](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L7)
 
 Collection the advanced attribute descriptors
 
@@ -16,7 +16,7 @@ Collection the advanced attribute descriptors
 
 > **new Properties**(`attrs`, `nonExported1stChar?`): `Properties`
 
-Defined in: [src/properties/index.d.ts:19](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L19)
+Defined in: [src/properties/index.d.ts:19](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L19)
 
 Collection the advanced attribute descriptors
 
@@ -42,7 +42,7 @@ Indicates that the property will not be exported
 
 > **nonExported1stChar**: `string`
 
-Defined in: [src/properties/index.d.ts:11](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L11)
+Defined in: [src/properties/index.d.ts:11](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L11)
 
 Indicates that the property will not be exported, defaults to '$'
 
@@ -52,7 +52,7 @@ Indicates that the property will not be exported, defaults to '$'
 
 > **assignPropertyTo**(`dest`, `src`, `name`, `value`, `options?`): `void`
 
-Defined in: [src/properties/index.d.ts:28](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L28)
+Defined in: [src/properties/index.d.ts:28](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L28)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [src/properties/index.d.ts:28](https://github.com/snowyu/property-ma
 
 > **assignTo**(`dest`, `src`, `aOptions?`): `any`
 
-Defined in: [src/properties/index.d.ts:29](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L29)
+Defined in: [src/properties/index.d.ts:29](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L29)
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [src/properties/index.d.ts:29](https://github.com/snowyu/property-ma
 
 > **extends**(`attrs`, `nonExported1stChar?`): `Properties`
 
-Defined in: [src/properties/index.d.ts:20](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L20)
+Defined in: [src/properties/index.d.ts:20](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L20)
 
 #### Parameters
 
@@ -134,7 +134,7 @@ Defined in: [src/properties/index.d.ts:20](https://github.com/snowyu/property-ma
 
 > **getRealAttrName**(`name`): `string`
 
-Defined in: [src/properties/index.d.ts:26](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L26)
+Defined in: [src/properties/index.d.ts:26](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L26)
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Defined in: [src/properties/index.d.ts:26](https://github.com/snowyu/property-ma
 
 > **getValue**(`obj`, `aName`): `any`
 
-Defined in: [src/properties/index.d.ts:31](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L31)
+Defined in: [src/properties/index.d.ts:31](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L31)
 
 #### Parameters
 
@@ -174,7 +174,7 @@ Defined in: [src/properties/index.d.ts:31](https://github.com/snowyu/property-ma
 
 > **initialize**(`attrs?`): `void`
 
-Defined in: [src/properties/index.d.ts:24](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L24)
+Defined in: [src/properties/index.d.ts:24](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L24)
 
 #### Parameters
 
@@ -192,7 +192,7 @@ Defined in: [src/properties/index.d.ts:24](https://github.com/snowyu/property-ma
 
 > **initializeTo**(`dest`, `src?`, `options?`): `void`
 
-Defined in: [src/properties/index.d.ts:25](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L25)
+Defined in: [src/properties/index.d.ts:25](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L25)
 
 #### Parameters
 
@@ -218,7 +218,7 @@ Defined in: [src/properties/index.d.ts:25](https://github.com/snowyu/property-ma
 
 > **isDefaultObject**(`obj`): `boolean`
 
-Defined in: [src/properties/index.d.ts:30](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L30)
+Defined in: [src/properties/index.d.ts:30](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L30)
 
 #### Parameters
 
@@ -236,7 +236,7 @@ Defined in: [src/properties/index.d.ts:30](https://github.com/snowyu/property-ma
 
 > **merge**(`attrs?`): `any`
 
-Defined in: [src/properties/index.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L21)
+Defined in: [src/properties/index.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L21)
 
 #### Parameters
 
@@ -254,7 +254,7 @@ Defined in: [src/properties/index.d.ts:21](https://github.com/snowyu/property-ma
 
 > **mergePropertyTo**(`dest`, `name`, `attr`): `void`
 
-Defined in: [src/properties/index.d.ts:23](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L23)
+Defined in: [src/properties/index.d.ts:23](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L23)
 
 #### Parameters
 
@@ -280,7 +280,7 @@ Defined in: [src/properties/index.d.ts:23](https://github.com/snowyu/property-ma
 
 > **mergeTo**(`attrs?`, `dest?`): `any`
 
-Defined in: [src/properties/index.d.ts:22](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L22)
+Defined in: [src/properties/index.d.ts:22](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L22)
 
 #### Parameters
 
@@ -302,7 +302,7 @@ Defined in: [src/properties/index.d.ts:22](https://github.com/snowyu/property-ma
 
 > **validatePropertyValue**(`name`, `value`, `attr`, `raiseError`): `boolean`
 
-Defined in: [src/properties/index.d.ts:27](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/index.d.ts#L27)
+Defined in: [src/properties/index.d.ts:27](https://github.com/snowyu/property-manager.js/blob/0a26f8ac8272cf662455db6a79ab5298188a6840/src/properties/index.d.ts#L27)
 
 #### Parameters
 
