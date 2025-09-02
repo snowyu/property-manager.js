@@ -1,5 +1,5 @@
-import { toJsonSchema } from './to-json-schema';
-import { toUISchema } from './to-ui-schema';
+import { toJsonSchema } from './to-json-schema.js';
+import { toUISchema } from './to-ui-schema.js';
 
 /**
  * Converts a PropertyManager instance's schema to RJSF compatible format.

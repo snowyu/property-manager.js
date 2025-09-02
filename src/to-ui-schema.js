@@ -1,5 +1,5 @@
 import { isFunction, isObject } from 'util-ex';
-import { normalizeAttributes } from './to-json-schema';
+import { normalizeAttributes } from './to-json-schema.js';
 
 /**
  * Converts a PropertyManager class or instance into a RJSF uiSchema object.

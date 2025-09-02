@@ -3,7 +3,7 @@ import {extend, getPrototypeOf} from 'inherits-ex'
 
 import Properties from './properties/index.js'
 import PropertyManager from './abstract.js'
-import _defineProperties from './properties/define-properties'
+import _defineProperties from './properties/define-properties.js'
 
 export function AdvancePropertyManager() {
   if (arguments.length) {this.initialize.apply(this, arguments)}
