@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/no-invalid-this: 0 */
-import createAbilityInjector from 'custom-ability';
+import {createAbilityInjector} from 'custom-ability';
 import {defineProperty, isNumber, isString} from 'util-ex';
 import {extend as extendPrototype} from 'inherits-ex';
 
