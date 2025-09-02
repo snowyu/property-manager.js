@@ -1,6 +1,6 @@
 {
   "name": "property-manager",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "make it easier to manage the properties/attributes of your class.",
   "license": "MIT",
   "homepage": "https://github.com/snowyu/property-manager.js",
