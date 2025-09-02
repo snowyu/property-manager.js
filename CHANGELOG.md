@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.3](https://github.com/snowyu/property-manager.js/compare/v3.0.2...v3.0.3) (2025-09-02)
+
+
+### Bug Fixes
+
+* mjs import error ([0a26f8a](https://github.com/snowyu/property-manager.js/commit/0a26f8ac8272cf662455db6a79ab5298188a6840))
+
 ## [3.0.2](https://github.com/snowyu/property-manager.js/compare/v3.0.1...v3.0.2) (2025-09-02)
 
 
