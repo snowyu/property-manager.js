@@ -8,7 +8,7 @@
 
 > **toUISchema**(`pm`): `any`
 
-Defined in: [src/to-ui-schema.js:11](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/to-ui-schema.js#L11)
+Defined in: [src/to-ui-schema.js:11](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/to-ui-schema.js#L11)
 
 Converts a PropertyManager class or instance into a RJSF uiSchema object.
 It recursively processes nested PropertyManager types and handles various property attributes

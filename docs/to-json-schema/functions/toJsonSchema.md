@@ -8,7 +8,7 @@
 
 > **toJsonSchema**(`pm`): `any`
 
-Defined in: [src/to-json-schema.js:172](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/to-json-schema.js#L172)
+Defined in: [src/to-json-schema.js:172](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/to-json-schema.js#L172)
 
 Converts a PropertyManager class or instance into a JSON Schema object.
 It recursively processes nested PropertyManager types and handles various property attributes

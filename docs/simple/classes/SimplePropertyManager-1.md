@@ -6,7 +6,7 @@
 
 # Class: SimplePropertyManager
 
-Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/simple.js#L10)
+Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/simple.js#L10)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blo
 
 > **new SimplePropertyManager**(...`args`): `SimplePropertyManager`
 
-Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/simple.js#L10)
+Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/simple.js#L10)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/simple.js:10](https://github.com/snowyu/property-manager.js/blo
 
 > **assignPropertyTo**(`dest`, `src`, `name`, `value`, `attrs`, `options`): `void`
 
-Defined in: [src/simple.js:57](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/simple.js#L57)
+Defined in: [src/simple.js:57](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/simple.js#L57)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [src/simple.js:57](https://github.com/snowyu/property-manager.js/blo
 
 > **defineProperties**(`aProperties`): `void`
 
-Defined in: [src/simple.js:40](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/simple.js#L40)
+Defined in: [src/simple.js:40](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/simple.js#L40)
 
 Define properties to this object
 
@@ -92,7 +92,7 @@ the descriptors of properties object
 
 > **getProperties**(): `PropDescriptors`
 
-Defined in: [src/simple.js:22](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/simple.js#L22)
+Defined in: [src/simple.js:22](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/simple.js#L22)
 
 Get the all property descriptors of this object except `defaultOptions`
 

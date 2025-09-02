@@ -6,7 +6,7 @@
 
 # Class: ArrayPropertyManager
 
-Defined in: [src/array.d.ts:20](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L20)
+Defined in: [src/array.d.ts:20](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L20)
 
 ## Extends
 
@@ -22,7 +22,7 @@ Defined in: [src/array.d.ts:20](https://github.com/snowyu/property-manager.js/bl
 
 > **new ArrayPropertyManager**(`value`, `type`): `ArrayPropertyManager`
 
-Defined in: [src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L23)
+Defined in: [src/array.d.ts:23](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L23)
 
 #### Parameters
 
@@ -200,7 +200,7 @@ Gets or sets the length of the array. This is a number one higher than the highe
 
 > **$type**: [`PropType`](../../abstract/type-aliases/PropType.md)
 
-Defined in: [src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L21)
+Defined in: [src/array.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L21)
 
 ***
 
@@ -1301,7 +1301,7 @@ An array containing the elements that were deleted.
 
 > **toJSON**(): [`JSONObject`](../interfaces/JSONObject.md)
 
-Defined in: [src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L24)
+Defined in: [src/array.d.ts:24](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L24)
 
 #### Returns
 
@@ -1357,7 +1357,7 @@ Defined in: node\_modules/typescript/lib/lib.es2015.core.d.ts:64
 
 > **toObject**(`options?`): [`JSONObject`](../interfaces/JSONObject.md)
 
-Defined in: [src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L29)
+Defined in: [src/array.d.ts:29](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L29)
 
 convert to the plain object
 
@@ -1423,7 +1423,7 @@ Elements to insert at the start of the array.
 
 > **valueOf**(): [`JSONObject`](../interfaces/JSONObject.md)
 
-Defined in: [src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L30)
+Defined in: [src/array.d.ts:30](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L30)
 
 Returns the primitive value of the specified object.
 

@@ -6,7 +6,7 @@
 
 # Interface: IPropDescriptor
 
-Defined in: [src/abstract.d.ts:14](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L14)
+Defined in: [src/abstract.d.ts:14](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L14)
 
 ## Extends
 
@@ -22,7 +22,7 @@ Defined in: [src/abstract.d.ts:14](https://github.com/snowyu/property-manager.js
 
 > `optional` **alias**: `string` \| `string`[]
 
-Defined in: [src/abstract.d.ts:20](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L20)
+Defined in: [src/abstract.d.ts:20](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L20)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/abstract.d.ts:20](https://github.com/snowyu/property-manager.js
 
 > `optional` **assign**: (`value?`, `dest?`, `src?`, `name?`, `options?`) => `any`
 
-Defined in: [src/abstract.d.ts:17](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L17)
+Defined in: [src/abstract.d.ts:17](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L17)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: [src/abstract.d.ts:17](https://github.com/snowyu/property-manager.js
 
 > `optional` **assigned**: `string` \| `boolean`
 
-Defined in: [src/abstract.d.ts:18](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L18)
+Defined in: [src/abstract.d.ts:18](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L18)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/abstract.d.ts:18](https://github.com/snowyu/property-manager.js
 
 > `optional` **clone**: `boolean`
 
-Defined in: [src/abstract.d.ts:21](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L21)
+Defined in: [src/abstract.d.ts:21](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L21)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/abstract.d.ts:21](https://github.com/snowyu/property-manager.js
 
 > `optional` **configurable**: `boolean`
 
-Defined in: [src/abstract.d.ts:5](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L5)
+Defined in: [src/abstract.d.ts:5](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L5)
 
 #### Inherited from
 
@@ -92,7 +92,7 @@ Defined in: [src/abstract.d.ts:5](https://github.com/snowyu/property-manager.js/
 
 > `optional` **enumerable**: `boolean`
 
-Defined in: [src/abstract.d.ts:6](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L6)
+Defined in: [src/abstract.d.ts:6](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L6)
 
 #### Inherited from
 
@@ -104,7 +104,7 @@ Defined in: [src/abstract.d.ts:6](https://github.com/snowyu/property-manager.js/
 
 > `optional` **exported**: `boolean`
 
-Defined in: [src/abstract.d.ts:19](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L19)
+Defined in: [src/abstract.d.ts:19](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L19)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [src/abstract.d.ts:19](https://github.com/snowyu/property-manager.js
 
 > `optional` **get**: `Function`
 
-Defined in: [src/abstract.d.ts:9](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L9)
+Defined in: [src/abstract.d.ts:9](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L9)
 
 #### Inherited from
 
@@ -124,7 +124,7 @@ Defined in: [src/abstract.d.ts:9](https://github.com/snowyu/property-manager.js/
 
 > `optional` **name**: `string`
 
-Defined in: [src/abstract.d.ts:15](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L15)
+Defined in: [src/abstract.d.ts:15](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L15)
 
 ***
 
@@ -132,7 +132,7 @@ Defined in: [src/abstract.d.ts:15](https://github.com/snowyu/property-manager.js
 
 > `optional` **required**: `boolean`
 
-Defined in: [src/abstract.d.ts:22](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L22)
+Defined in: [src/abstract.d.ts:22](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L22)
 
 ***
 
@@ -140,7 +140,7 @@ Defined in: [src/abstract.d.ts:22](https://github.com/snowyu/property-manager.js
 
 > `optional` **set**: `Function`
 
-Defined in: [src/abstract.d.ts:10](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L10)
+Defined in: [src/abstract.d.ts:10](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L10)
 
 #### Inherited from
 
@@ -152,7 +152,7 @@ Defined in: [src/abstract.d.ts:10](https://github.com/snowyu/property-manager.js
 
 > `optional` **skipDefault**: `boolean`
 
-Defined in: [src/abstract.d.ts:23](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L23)
+Defined in: [src/abstract.d.ts:23](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L23)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [src/abstract.d.ts:23](https://github.com/snowyu/property-manager.js
 
 > `optional` **type**: [`PropTypeDesc`](../type-aliases/PropTypeDesc.md)
 
-Defined in: [src/abstract.d.ts:16](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L16)
+Defined in: [src/abstract.d.ts:16](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L16)
 
 ***
 
@@ -168,7 +168,7 @@ Defined in: [src/abstract.d.ts:16](https://github.com/snowyu/property-manager.js
 
 > `optional` **value**: `any`
 
-Defined in: [src/abstract.d.ts:7](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L7)
+Defined in: [src/abstract.d.ts:7](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L7)
 
 #### Inherited from
 
@@ -180,7 +180,7 @@ Defined in: [src/abstract.d.ts:7](https://github.com/snowyu/property-manager.js/
 
 > `optional` **writable**: `boolean`
 
-Defined in: [src/abstract.d.ts:8](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L8)
+Defined in: [src/abstract.d.ts:8](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L8)
 
 #### Inherited from
 

@@ -8,4 +8,4 @@
 
 > **Primitive** = `bigint` \| `boolean` \| `null` \| `number` \| `string` \| `symbol` \| `undefined`
 
-Defined in: [src/array.d.ts:3](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L3)
+Defined in: [src/array.d.ts:3](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L3)

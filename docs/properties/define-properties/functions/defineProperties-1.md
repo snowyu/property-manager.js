@@ -8,7 +8,7 @@
 
 > **defineProperties**(`aTarget`, `aProperties`, `recreate?`): `any`
 
-Defined in: [src/properties/define-properties.js:14](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/properties/define-properties.js#L14)
+Defined in: [src/properties/define-properties.js:14](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/properties/define-properties.js#L14)
 
 Define properties on the $attributes of the target object/class(prototype).
 

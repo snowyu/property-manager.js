@@ -8,4 +8,4 @@
 
 > **PropManagerType** = `"simple"` \| `"advance"` \| `"normal"` \| `"abstract"`
 
-Defined in: [src/ability.d.ts:7](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/ability.d.ts#L7)
+Defined in: [src/ability.d.ts:7](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/ability.d.ts#L7)

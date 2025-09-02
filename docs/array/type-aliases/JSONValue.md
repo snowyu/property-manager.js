@@ -8,4 +8,4 @@
 
 > **JSONValue** = [`Primitive`](Primitive.md) \| [`JSONObject`](../interfaces/JSONObject.md) \| [`JSONArray`](../interfaces/JSONArray.md)
 
-Defined in: [src/array.d.ts:12](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/array.d.ts#L12)
+Defined in: [src/array.d.ts:12](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/array.d.ts#L12)

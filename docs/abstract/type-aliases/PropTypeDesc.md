@@ -8,4 +8,4 @@
 
 > **PropTypeDesc** = [`PropType`](PropType.md) \| [`PropType`](PropType.md)[]
 
-Defined in: [src/abstract.d.ts:2](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/abstract.d.ts#L2)
+Defined in: [src/abstract.d.ts:2](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/abstract.d.ts#L2)

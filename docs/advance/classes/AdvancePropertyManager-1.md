@@ -6,7 +6,7 @@
 
 # Class: AdvancePropertyManager
 
-Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L8)
+Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L8)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blo
 
 > **new AdvancePropertyManager**(...`args`): `AdvancePropertyManager`
 
-Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L8)
+Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L8)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/advance.js:8](https://github.com/snowyu/property-manager.js/blo
 
 > **$attributes**: `any`
 
-Defined in: [src/advance.js:44](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L44)
+Defined in: [src/advance.js:44](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L44)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/advance.js:44](https://github.com/snowyu/property-manager.js/bl
 
 > **SMART\_ASSIGN**: `any`
 
-Defined in: [src/advance.js:46](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L46)
+Defined in: [src/advance.js:46](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L46)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/advance.js:46](https://github.com/snowyu/property-manager.js/bl
 
 > `static` **defineProperties**: (`aTarget`, `aProperties`, `recreate?`) => [`Properties`](../../properties/classes/Properties.md)
 
-Defined in: [src/advance.js:54](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L54)
+Defined in: [src/advance.js:54](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L54)
 
 Define properties on the $attributes of the target object/class(prototype).
 
@@ -84,7 +84,7 @@ the defined attributes
 
 > **assignPropertyTo**(`dest`, `src`, `name`, `value`, `attrs`, `options`): `void`
 
-Defined in: [src/advance.js:37](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L37)
+Defined in: [src/advance.js:37](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L37)
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: [src/advance.js:37](https://github.com/snowyu/property-manager.js/bl
 
 > **defineProperties**(`aProperties`, `recreate`): `AdvancePropertyManager`
 
-Defined in: [src/advance.js:31](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L31)
+Defined in: [src/advance.js:31](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L31)
 
 #### Parameters
 
@@ -144,7 +144,7 @@ Defined in: [src/advance.js:31](https://github.com/snowyu/property-manager.js/bl
 
 > **getProperties**(): `any`
 
-Defined in: [src/advance.js:27](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L27)
+Defined in: [src/advance.js:27](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L27)
 
 #### Returns
 
@@ -156,7 +156,7 @@ Defined in: [src/advance.js:27](https://github.com/snowyu/property-manager.js/bl
 
 > `static` **getProperties**(): `object`
 
-Defined in: [src/advance.js:15](https://github.com/snowyu/property-manager.js/blob/7cecb27374754b743733e81c6027a17dd0c349c2/src/advance.js#L15)
+Defined in: [src/advance.js:15](https://github.com/snowyu/property-manager.js/blob/0a9d329d6dc8235fcbd7381e69042a60653674b6/src/advance.js#L15)
 
 #### Returns
 

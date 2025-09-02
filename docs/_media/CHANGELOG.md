@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.1](https://github.com/snowyu/property-manager.js/compare/v3.0.0...v3.0.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* **build:** should use export specfied entry ([7cecb27](https://github.com/snowyu/property-manager.js/commit/7cecb27374754b743733e81c6027a17dd0c349c2))
+
 ## [3.0.0](https://github.com/snowyu/property-manager.js/compare/v2.0.1...v3.0.0) (2025-07-17)
 
 
