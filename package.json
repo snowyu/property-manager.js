@@ -59,10 +59,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "custom-ability": "^2.0.1",
+    "custom-ability": "^2.2.0",
     "deep-equal": "^2.2.3",
     "inherits-ex": "^2.1.0",
-    "util-ex": "^2.3.0"
+    "util-ex": "^2.5.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
