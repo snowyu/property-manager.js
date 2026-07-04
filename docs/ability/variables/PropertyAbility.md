@@ -8,4 +8,4 @@
 
 > `const` **PropertyAbility**: `ClassAbilityFn`\<(`aClass`, `aOptions`) => `InternalPropertyManager`\>
 
-Defined in: [src/ability.js:112](https://github.com/snowyu/property-manager.js/blob/f0cc44436eff71240d6d51f844a494d026a6027b/src/ability.js#L112)
+Defined in: [src/ability.js:112](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/ability.js#L112)

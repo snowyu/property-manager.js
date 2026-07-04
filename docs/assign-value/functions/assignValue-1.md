@@ -8,7 +8,7 @@
 
 > **assignValue**(`value`, `type`): `any`
 
-Defined in: [src/assign-value.js:1](https://github.com/snowyu/property-manager.js/blob/f0cc44436eff71240d6d51f844a494d026a6027b/src/assign-value.js#L1)
+Defined in: [src/assign-value.js:1](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/assign-value.js#L1)
 
 ## Parameters
 
