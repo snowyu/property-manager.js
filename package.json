@@ -30,7 +30,7 @@
   "exports": {
     ".": {
       "import": "./src/index.js",
-      "require": "./lib/index.js"
+      "require": "./lib/index.cjs"
     }
   },
   "type": "module",
@@ -46,7 +46,7 @@
   ],
   "scripts": {
     "build": "npm run build.cjs && npm run build.ts && npm run doc.md",
-    "build.cjs": "babel src --out-dir lib --config-file ./.babelrc",
+    "build.cjs": "babel src --out-dir lib --config-file ./.babelrc && node scripts/fix-cjs.mjs",
     "build.ts": "npx cpx 'src/**/*.d.ts' lib",
     "build.ts.d": "tsc --declaration --emitDeclarationOnly --outDir types",
     "clean": "rm -fr web docs types lib",
