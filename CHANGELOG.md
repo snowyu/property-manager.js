@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [4.0.0](https://github.com/snowyu/property-manager.js/compare/v3.0.6...v4.0.0) (2026-07-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* build and test infrastructure overhaul
+
+Build:
+- Replace babel with tsup for compilation (ESM + CJS dual output)
+- Add tsup.config.ts with .d.ts generation and .cjs output extension
+- Remove .babelrc, scripts/fix-cjs.mjs, Gruntfile.js
+- Update package.json exports to point to lib/ output
+- Remove babel, cpx2, grunt devDependencies
+
+Test:
+- Replace mocha/chai/sinon with vitest
+- Add vitest.config.ts with globals enabled
+- Convert all 13 test files:
+  - Remove chai/sinon/sinon-chai imports and usage
+  - Replace sinon.spy() with vi.fn()
+  - Replace sinon assertions with vitest matchers
+  - Convert before/after to beforeAll/afterAll
+  - Rewrite all .should assertions to expect() calls
+  - Fix describe() nesting to avoid empty suites
+  - Restructure ability tests to avoid describe-in-it
+  - Update imports to ESM pattern with .js extensions
+- Remove .mocharc.yml, mocha/chai/sinon devDependencies
+
+Dependencies:
+- Update util-ex from 2.5.2 to 2.7.1, inherits-ex from 2.1.0 to 2.2.2
+- Add tsup ^8.5.1, vitest ^4.1.10
+- Remove babel/cli, babel/core, babel/plugin-transform-modules-commonjs,
+  babel/register, mocha, chai, sinon, sinon-chai, cpx2, coffee-script,
+  grunt and related packages
+
+Cleanup:
+- Remove .codeclimate.yml, .travis.yml, coffeelint.json (unused CI/configs)
+- Remove advance-schema.js, rjsf-schema-test.js, test.ts, test1.ts (drafts)
+- Remove empty scripts/ directory
+- Remove .eslintrc.yml (old format), update lint script
+- Remove *.coffee from package.json files field
+- Update README.md and README.cn.md:
+  - Remove Travis CI, Code Climate badge references
+  - Add Development section documenting tsup/vitest/lint
+
+### Refactor
+
+* migrate build to tsup, test to vitest, and clean up old configs ([a1510eb](https://github.com/snowyu/property-manager.js/commit/a1510ebe902840f23cc4e13bb79b96fc0b7720a9))
+
 ## [3.0.6](https://github.com/snowyu/property-manager.js/compare/v3.0.5...v3.0.6) (2026-07-10)
 
 
