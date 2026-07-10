@@ -24,7 +24,7 @@
     "serialization",
     "deserialization"
   ],
-  "main": "./lib/index.js",
+  "main": "./lib/index.cjs",
   "module": "./src/index.js",
   "source": "./src/index.js",
   "exports": {
@@ -61,8 +61,8 @@
   "dependencies": {
     "custom-ability": "^2.2.0",
     "deep-equal": "^2.2.3",
-    "inherits-ex": "^2.1.0",
-    "util-ex": "^2.5.2"
+    "inherits-ex": "^2.2.2",
+    "util-ex": "^2.7.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
