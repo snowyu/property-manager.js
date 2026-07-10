@@ -5,10 +5,12 @@
 [![npm][npm]](https://npmjs.org/package/property-manager)
 [![downloads][downloads]](https://npmjs.org/package/property-manager)
 [![license][license]](https://npmjs.org/package/property-manager)
+[![codecov][codecov]](https://codecov.io/gh/snowyu/property-manager.js)
 
 [npm]:https://img.shields.io/npm/v/property-manager.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
+[codecov]:https://img.shields.io/codecov/c/gh/snowyu/property-manager.js
 
 make it easier to manage the properties/attributes of your class.
 

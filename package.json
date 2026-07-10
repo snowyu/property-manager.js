@@ -55,7 +55,8 @@
     "release": "npm run clean && npm run build && git add docs && git ci -m 'docs: update API docs' && npx commit-and-tag-version -s",
     "release.alpha": "npm run release -- --prerelease alpha",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "custom-ability": "^2.3.1",
