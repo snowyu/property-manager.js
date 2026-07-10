@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.6](https://github.com/snowyu/property-manager.js/compare/v3.0.5...v3.0.6) (2026-07-10)
+
+
+### Bug Fixes
+
+* main should index.cjs ([a4165aa](https://github.com/snowyu/property-manager.js/commit/a4165aa460f3661cfed38e259993ae481926bfa0))
+
 ## [3.0.5](https://github.com/snowyu/property-manager.js/compare/v3.0.4...v3.0.5) (2026-07-04)
 
 
