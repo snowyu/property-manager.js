@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-tsdoc": "^0.4.0",
