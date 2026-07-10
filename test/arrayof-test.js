@@ -1,14 +1,6 @@
-import sinonChai from "sinon-chai";
-import sinon from "sinon";
-import chai from "chai";
-var assert = chai.assert;
-var expect = chai.expect;
-var should = chai.should();
-chai.use(sinonChai);
-
-import inherits from 'inherits-ex/lib/inherits';
-import ArrayPropertyManager from '../src/array';
-import Normal from '../src/normal';
+import {inherits} from 'inherits-ex';
+import ArrayPropertyManager from '../src/array.js';
+import Normal from '../src/normal.js';
 
 const arrayOf = ArrayPropertyManager.arrayOf;
 
@@ -103,12 +95,12 @@ describe('ArrayOf', function() {
         }
       ]
     });
-    result.should.have.property('propTyped');
-    expect(result.propTyped).to.be["instanceof"](ArrayPropertyManager);
-    expect(result.propTyped[0]).to.be["instanceof"](PM);
+    expect(result).to.have.property('propTyped');
+    expect(result.propTyped).to.be.instanceOf(ArrayPropertyManager);
+    expect(result.propTyped[0]).to.be.instanceOf(PM);
     obj = {};
     result.exportTo(obj);
-    return obj.should.be.deep.equal({
+    expect(obj).to.deep.equal({
       propTyped: [
         {
           prop2: '1233'
@@ -119,14 +111,14 @@ describe('ArrayOf', function() {
   it('should export default typed array', function() {
     var obj, result;
     result = new TypedPM;
-    result.should.have.property('propTyped');
+    expect(result).to.have.property('propTyped');
     expect(result.propTyped).to.be.ok;
-    expect(result.propTyped).to.be["instanceof"](ArrayPropertyManager);
+    expect(result.propTyped).to.be.instanceOf(ArrayPropertyManager);
     expect(result.propTyped).to.have.length(1);
-    expect(result.propTyped[0]).to.be["instanceof"](PM);
+    expect(result.propTyped[0]).to.be.instanceOf(PM);
     obj = {};
     result.exportTo(obj);
-    return obj.should.be.deep.equal({
+    expect(obj).to.deep.equal({
       propTyped: [
         {
           prop1: 500

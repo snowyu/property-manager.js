@@ -1,5 +1,4 @@
 import { AdvancePropertyManager, defineProperties, toJsonSchema } from '../src/index.js';
-import { assert } from 'chai';
 
 class Address extends AdvancePropertyManager {
   constructor(options) {
@@ -65,7 +64,7 @@ describe('toJsonSchema', () => {
         }
       }
     };
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should handle various property types and attributes', () => {
@@ -96,7 +95,7 @@ describe('toJsonSchema', () => {
       required: ['productId'],
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should handle nested arrays of PropertyManagers', () => {
@@ -141,7 +140,7 @@ describe('toJsonSchema', () => {
       },
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should handle deeply nested PropertyManagers', () => {
@@ -197,7 +196,7 @@ describe('toJsonSchema', () => {
       },
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should exclude properties with exported: false or enumerable: false', () => {
@@ -221,7 +220,7 @@ describe('toJsonSchema', () => {
       },
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should exclude properties with no explicit type and no value', () => {
@@ -246,7 +245,7 @@ describe('toJsonSchema', () => {
       },
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 
   it('should handle properties with null or undefined default values', () => {
@@ -272,6 +271,6 @@ describe('toJsonSchema', () => {
       },
     };
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 });

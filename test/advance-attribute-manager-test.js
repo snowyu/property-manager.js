@@ -1,15 +1,7 @@
-import sinonChai from "sinon-chai";
-import sinon from "sinon";
-import chai from "chai";
-var assert = chai.assert;
-var expect = chai.expect;
-var should = chai.should();
-chai.use(sinonChai);
+import {inherits} from 'inherits-ex';
+import Manager from '../src/advance.js';
 
-import inherits from 'inherits-ex/lib/inherits';
-import Manager from '../src/advance';
-
-import test from './property-manager';
+import test from './property-manager.js';
 
 test('AdvancePropertyManager', Manager);
 
@@ -56,9 +48,12 @@ describe('AdvancePropertyManager Inherits', function() {
       b: 4,
       c: 5
     });
-    result.should.have.ownProperty('a', 3);
-    result.should.have.ownProperty('b', 4);
-    result.should.have.ownProperty('x', 78);
-    result.should.have.not.property('c');
+    expect(result.a).toBe(3);
+    expect(Object.hasOwn(result, 'a')).toBe(true);
+    expect(result.b).toBe(4);
+    expect(Object.hasOwn(result, 'b')).toBe(true);
+    expect(result.x).toBe(78);
+    expect(Object.hasOwn(result, 'x')).toBe(true);
+    expect(result).to.not.have.property('c');
   });
 });

@@ -1,5 +1,4 @@
 import { SimplePropertyManager, toJsonSchema } from '../src/index.js';
-import { assert } from 'chai';
 
 class SimplePerson extends SimplePropertyManager {
   constructor(options) {
@@ -35,6 +34,6 @@ describe('toJsonSchema for SimplePropertyManager', () => {
       delete schema.properties.defaultOptions;
     }
 
-    assert.deepEqual(schema, expectedSchema);
+    expect(schema).to.deep.equal(expectedSchema);
   });
 });

@@ -1,5 +1,4 @@
 import { AdvancePropertyManager, defineProperties, toUISchema } from '../src/index.js';
-import { assert } from 'chai';
 
 // Helper to sort object keys for consistent deepEqual comparison
 const sortObjectKeys = (obj) => {
@@ -47,7 +46,7 @@ describe('toUISchema', () => {
       },
     };
 
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should handle nested PropertyManagers and their uiSchema', () => {
@@ -85,7 +84,7 @@ describe('toUISchema', () => {
       },
     };
 
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should handle arrays of PropertyManagers and their uiSchema', () => {
@@ -129,7 +128,7 @@ describe('toUISchema', () => {
       },
     };
 
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should prioritize explicit uiSchema over derived properties', () => {
@@ -148,7 +147,7 @@ describe('toUISchema', () => {
       myProp: { "ui:readonly": true, "ui:widget": "password" },
     };
 
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should not include properties with exported: false or enumerable: false', () => {
@@ -165,6 +164,6 @@ describe('toUISchema', () => {
       visibleProp: {"ui:widget": "password"},
     };
 
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 });

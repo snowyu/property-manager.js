@@ -3,18 +3,13 @@
 
 [![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build Status][trvais]](http://travis-ci.org/snowyu/property-manager.js)
-[![Test Coverage][codeClimateTest]](https://codeclimate.com/github/snowyu/property-manager.js/coverage)
-[![Code Climate][codeClimate]](https://codeclimate.com/github/snowyu/property-manager.js)
+[![npm][npm]](https://npmjs.org/package/property-manager)
 [![downloads][downloads]](https://npmjs.org/package/property-manager)
 [![license][license]](https://npmjs.org/package/property-manager)
 
 [npm]:https://img.shields.io/npm/v/property-manager.svg
-[trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
-[codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
-[codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
 
 使得业务对象/类的属性更容易管理.
 
@@ -755,6 +750,34 @@ Output:
 **返回值**
 
 * `{schema: object, uiSchema: object}` - 一个包含 `schema` 和 `uiSchema` 的对象。
+
+## 开发
+
+### 构建
+
+项目使用 [tsup](https://tsup.egoist.dev/) 编译源代码。它会生成 ESM (`.js`) 和 CJS (`.cjs`) 两种格式的输出到 `lib/` 目录，同时生成 TypeScript 声明文件 (`.d.ts`)。
+
+```bash
+npm run build
+```
+
+### 测试
+
+测试使用 [vitest](https://vitest.dev/) 运行。所有测试文件位于 `test/` 目录。
+
+```bash
+# 运行一次测试
+npm test
+
+# 观察模式
+npm run test:watch
+```
+
+### 代码检查
+
+```bash
+npm run lint
+```
 
 ## Changes
 

@@ -1,44 +1,34 @@
-import sinonChai from "sinon-chai";
-import sinon from "sinon";
-import chai from "chai";
-var assert = chai.assert;
-var expect = chai.expect;
-var should = chai.should();
-chai.use(sinonChai);
+import {inherits} from 'inherits-ex';
+import { _extend as extend, defineProperty } from 'util-ex';
+import PropertyManager from '../src/ability.js';
+import Simple from '../src/simple.js';
+import Normal from '../src/normal.js';
+import Advance from '../src/advance.js';
+import testPropMan from './property-manager-es6.js';
 
-import inherits from 'inherits-ex/lib/inherits';
-import extend from 'util-ex/lib/_extend';
-import defineProperty from 'util-ex/lib/defineProperty';
-import PropertyManager from '../src/ability';
-import Simple from '../src/simple';
-import Normal from '../src/normal';
-import Advance from '../src/advance';
-import testPropMan from './property-manager-es6';
+function checkProperty(aClass) {
+  expect(aClass).toHaveProperty('defineProperties');
+  checkBasicProperty(aClass);
+}
+function checkBasicProperty(aClass) {
+  expect(aClass.prototype).toHaveProperty('assign');
+  expect(aClass.prototype).toHaveProperty('assignPropertyTo');
+  expect(aClass.prototype).toHaveProperty('initialize');
+  expect(aClass.prototype).toHaveProperty('getProperties');
+  expect(aClass.prototype).toHaveProperty('defineProperties');
+  expect(aClass.prototype).toHaveProperty('assign');
+}
+function checkIsSame(aClass, aManager) {
+  expect(aClass).to.have.property('defineProperties', aManager.defineProperties);
+  checkBasicIsSame(aClass, aManager);
+}
+function checkBasicIsSame(aClass, aManager) {
+  expect(aClass.prototype).to.have.property('getProperties', aManager.prototype.getProperties);
+  expect(aClass.prototype).to.have.property('assignPropertyTo', aManager.prototype.assignPropertyTo);
+  expect(aClass.prototype).to.have.property('defineProperties', aManager.prototype.defineProperties);
+}
 
 describe('PropertyManagerAbility ES6', function() {
-  var checkBasicIsSame, checkBasicProperty, checkIsSame, checkProperty;
-  checkProperty = function(aClass) {
-    aClass.should.have.ownProperty('defineProperties');
-    checkBasicProperty(aClass);
-  };
-  checkBasicProperty = function(aClass) {
-    aClass.prototype.should.have.ownProperty('assign');
-    aClass.prototype.should.have.ownProperty('assignPropertyTo');
-    aClass.prototype.should.have.ownProperty('initialize');
-    aClass.prototype.should.have.ownProperty('getProperties');
-    aClass.prototype.should.have.ownProperty('defineProperties');
-    aClass.prototype.should.have.ownProperty('assign');
-  };
-  checkIsSame = function(aClass, aManager) {
-    aClass.should.be.have.property('defineProperties', aManager.defineProperties);
-    checkBasicIsSame(aClass, aManager);
-  };
-  checkBasicIsSame = function(aClass, aManager) {
-    aClass.prototype.should.be.have.property('getProperties', aManager.prototype.getProperties);
-    aClass.prototype.should.be.have.property('assignPropertyTo', aManager.prototype.assignPropertyTo);
-    aClass.prototype.should.be.have.property('defineProperties', aManager.prototype.defineProperties);
-  };
-
   it('should choose simple manager to a class', function() {
     class A {
       constructor() {this.initialize.apply(this, arguments)}
@@ -59,7 +49,7 @@ describe('PropertyManagerAbility ES6', function() {
     });
 
     checkBasicProperty(A);
-    return checkBasicIsSame(A, Simple);
+    checkBasicIsSame(A, Simple);
   });
   it('should disable initialize method of simple manager to be executed', function() {
     class A {
@@ -80,7 +70,7 @@ describe('PropertyManagerAbility ES6', function() {
         title: 'good'
       }
     });
-    result.should.not.have.property('title');
+    expect(result).to.not.have.property('title');
   });
   it('should choose normal manager to a class', function() {
     class A {
@@ -110,7 +100,7 @@ describe('PropertyManagerAbility ES6', function() {
         title: 'good'
       }
     });
-    result.should.not.have.property('title');
+    expect(result).to.not.have.property('title');
   });
   it('should choose advance manager to a class', function() {
     class A {
@@ -141,7 +131,7 @@ describe('PropertyManagerAbility ES6', function() {
         title: 'good'
       }
     });
-    result.should.not.have.property('title');
+    expect(result).to.not.have.property('title');
   });
   it('should use nonExported1stChar options', function() {
     class A {
@@ -154,98 +144,67 @@ describe('PropertyManagerAbility ES6', function() {
 
     checkProperty(A);
     checkBasicIsSame(A, Normal);
-    A.prototype.should.be.have.property('nonExported1stChar', '_');
+    expect(A.prototype).to.have.property('nonExported1stChar', '_');
   });
-  it('should apply the simple ability to a class', function() {
-    class A {
-      // constructor() {this.initialize.apply(this, arguments)}
-    }
+});
 
+// Full testPropMan suites at describe level for vitest compatibility
+describe('PropertyManagerAbility ES6 - applied to class', function() {
+  describe('SimpleAbilityA', function() {
+    class A { constructor() {this.initialize.apply(this, arguments)} }
     PropertyManager(A, 'simple');
-
     checkBasicProperty(A);
     checkBasicIsSame(A, Simple);
     testPropMan('SimpleAbilityA', A);
   });
-  it('should apply the simple ability to a class with optionsPosition', function() {
-    class B {
-      // constructor() {this.initialize.apply(this, arguments)}
-    }
-
+  describe('SimpleAbilityB (optionsPosition=2)', function() {
+    class B { constructor() {this.initialize.apply(this, arguments)} }
     B.prototype.initialize = function(my, sec) {};
-
-    PropertyManager(B, {
-      optionsPosition: 2,
-      name: 'simple'
-    });
-
+    PropertyManager(B, { optionsPosition: 2, name: 'simple' });
     checkBasicProperty(B);
     checkBasicIsSame(B, Simple);
     testPropMan('SimpleAbilityB', B, 2);
   });
-  it('should apply the normal ability to a class', function() {
-    function A() {
-      // this.initialize.apply(this, arguments);
-    }
-
+  describe('NormalAbilityA', function() {
+    class A { constructor() {this.initialize.apply(this, arguments)} }
     PropertyManager(A);
-
     checkProperty(A);
     checkIsSame(A, Normal);
     testPropMan('NormalAbilityA', A);
   });
-  it('should apply the normal ability to a class with optionsPosition', function() {
-    class B {
-      constructor() {this.initialize.apply(this, arguments)}
-    }
-
+  describe('NormalAbilityB (optionsPosition=2)', function() {
+    class B { constructor() {this.initialize.apply(this, arguments)} }
     B.prototype.initialize = function(my1, sec1) {
       this.my = my1;
       this.sec = sec1;
     };
-
-    PropertyManager(B, {
-      optionsPosition: 2
-    });
-
+    PropertyManager(B, { optionsPosition: 2 });
     checkProperty(B);
     checkIsSame(B, Normal);
     const b = new B('hi', 1222);
-    b.should.have.property('my', 'hi');
-    b.should.have.property('sec', 1222);
+    expect(b).to.have.property('my', 'hi');
+    expect(b).to.have.property('sec', 1222);
     testPropMan('NormalAbilityB', B, 2);
   });
-  it('should apply the advance ability to a class', function() {
-    class A {
-      // constructor() {this.initialize.apply(this, arguments)}
-    }
-
+  describe('AdvanceAbilityA', function() {
+    class A { constructor() {this.initialize.apply(this, arguments)} }
     PropertyManager(A, 'advance');
-
     checkProperty(A);
     checkIsSame(A, Advance);
     testPropMan('advanceAbilityA', A);
   });
-  it('should apply the advance ability to a class with optionsPosition', function() {
-    class B {
-      constructor() {this.initialize.apply(this, arguments)}
-    }
-
+  describe('AdvanceAbilityB (optionsPosition=2)', function() {
+    class B { constructor() {this.initialize.apply(this, arguments)} }
     B.prototype.initialize = function(my1, sec1) {
       this.my = my1;
       this.sec = sec1;
     };
-
-    PropertyManager(B, {
-      optionsPosition: 2,
-      name: 'advance'
-    });
-
+    PropertyManager(B, { optionsPosition: 2, name: 'advance' });
     checkProperty(B);
     checkIsSame(B, Advance);
     const b = new B('hi', 1222);
-    b.should.have.property('my', 'hi');
-    b.should.have.property('sec', 1222);
+    expect(b).to.have.property('my', 'hi');
+    expect(b).to.have.property('sec', 1222);
     testPropMan('advanceAbilityB', B, 2);
   });
 });

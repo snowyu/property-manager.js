@@ -25,11 +25,12 @@
     "deserialization"
   ],
   "main": "./lib/index.cjs",
-  "module": "./src/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "source": "./src/index.js",
   "exports": {
     ".": {
-      "import": "./src/index.js",
+      "import": "./lib/index.js",
       "require": "./lib/index.cjs"
     }
   },
@@ -38,50 +39,41 @@
     "README.md",
     "LICENSE-MIT",
     "*.js",
-    "*.coffee",
     "*.json",
     "test",
     "src",
     "lib"
   ],
   "scripts": {
-    "build": "npm run build.cjs && npm run build.ts && npm run doc.md",
-    "build.cjs": "babel src --out-dir lib --config-file ./.babelrc && node scripts/fix-cjs.mjs",
-    "build.ts": "npx cpx 'src/**/*.d.ts' lib",
+    "build": "tsup && npm run doc.md",
     "build.ts.d": "tsc --declaration --emitDeclarationOnly --outDir types",
     "clean": "rm -fr web docs types lib",
     "doc": "typedoc --plugin none --out web ./src",
     "doc.md": "typedoc --plugin typedoc-plugin-markdown --out docs ./src",
-    "lint": "npx eslint --config .eslintrc.yml src",
+    "lint": "npx eslint src",
     "lint.fix": "npm run lint -- --fix",
     "release": "npm run clean && npm run build && git add docs && git ci -m 'docs: update API docs' && npx commit-and-tag-version -s",
     "release.alpha": "npm run release -- --prerelease alpha",
-    "test": "mocha"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "custom-ability": "^2.2.0",
+    "custom-ability": "^2.3.1",
     "deep-equal": "^2.2.3",
     "inherits-ex": "^2.2.2",
     "util-ex": "^2.7.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
-    "@babel/register": "^7.27.1",
-    "chai": "~5.2.1",
-    "cpx2": "^8.0.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-tsdoc": "^0.4.0",
-    "mocha": "~11.7.1",
     "prettier": "^3.6.2",
-    "sinon": "~21.0.0",
-    "sinon-chai": "~4.0.0",
+    "tsup": "^8.5.1",
     "typedoc": "^0.28.7",
     "typedoc-plugin-markdown": "^4.7.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^4.1.10"
   },
   "contributors": [
     {

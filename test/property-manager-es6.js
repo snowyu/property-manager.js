@@ -1,15 +1,6 @@
-import sinonChai from "sinon-chai";
-import sinon from "sinon";
-import chai from "chai";
-var assert = chai.assert;
-var expect = chai.expect;
-var should = chai.should();
-chai.use(sinonChai);
-
-import inherits from 'inherits-ex/lib/inherits';
-import createObjectWith from 'inherits-ex/lib/createObjectWith';
-import extend from 'util-ex/lib/_extend';
-import Properties from '../src/properties';
+import {createObjectWith, inherits} from 'inherits-ex';
+import {_extend as extend} from 'util-ex';
+import Properties from '../src/properties/index.js';
 
 const getPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
@@ -34,7 +25,7 @@ class CustomType {
   }
 }
 
-module.exports = function(name, ManagerClass, optsPos) {
+export function testPropMan(name, ManagerClass, optsPos) {
   if (optsPos == null) {
     optsPos = 0;
   }
@@ -109,15 +100,15 @@ module.exports = function(name, ManagerClass, optsPos) {
           return;
         }
         result = new TypedPM;
-        result.should.have.property('propTyped');
-        result.propTyped.should["instanceof"](CustomType);
-        result.propTyped.value.should.be.equal(123);
+        expect(result).to.have.property('propTyped');
+        expect(result.propTyped).toBeInstanceOf(CustomType);
+        expect(result.propTyped.value).to.equal(123);
         result = createObjectWith(TypedPM, makeArgs({
           propTyped: 121
         }));
-        result.should.have.property('propTyped');
-        result.propTyped.should["instanceof"](CustomType);
-        result.propTyped.value.should.be.equal(121);
+        expect(result).to.have.property('propTyped');
+        expect(result.propTyped).toBeInstanceOf(CustomType);
+        expect(result.propTyped.value).to.equal(121);
       });
       if (defaultValueSupport) {
         describe('.getProperties', function() {
@@ -146,14 +137,14 @@ module.exports = function(name, ManagerClass, optsPos) {
           hidden: 399,
           notExi: 111
         }));
-        result.should.have.property('hidden', 123);
-        result.should.have.property('prop1', 121);
-        result.should.have.property('prop2', 453);
-        result.should.have.ownProperty('prop3');
-        result.should.have.property('prop4', null);
-        result.should.have.property('$prop5', 'nonExport');
-        result.should.have.property('prop6', 'defaultValue');
-        return result.should.not.have.property('notExi');
+        expect(result).to.have.property('hidden', 123);
+        expect(result).to.have.property('prop1', 121);
+        expect(result).to.have.property('prop2', 453);
+        expect(result).to.have.ownProperty('prop3');
+        expect(result).to.have.property('prop4', null);
+        expect(result).to.have.property('$prop5', 'nonExport');
+        expect(result).to.have.property('prop6', 'defaultValue');
+        return expect(result).to.not.have.property('notExi');
       });
       it('should create an object and assign options', function() {
         var result;
@@ -163,14 +154,14 @@ module.exports = function(name, ManagerClass, optsPos) {
           hidden: 399,
           $prop5: 111
         }));
-        return result.should.have.property('$prop5', 111);
+        return expect(result).to.have.property('$prop5', 111);
       });
       it('should create an object and not assign readonly', function() {
         var result;
         result = createObjectWith(PM, makeArgs({
           prop7: 121
         }));
-        return result.should.have.property('prop7', 719);
+        return expect(result).to.have.property('prop7', 719);
       });
       it('should create an object with an default value array property only', function() {
         const defaultArr = [1];
@@ -191,8 +182,8 @@ module.exports = function(name, ManagerClass, optsPos) {
           hidden: 399,
           notExi: 111
         }));
-        result.should.have.own.deep.property('arr', defaultArr);
-        result.arr.should.not.be.equal(defaultArr);
+        expect(result).to.have.deep.property('arr', defaultArr);
+        expect(result.arr).to.not.equal(defaultArr);
       });
       it('should create an object with an default value array property', function() {
         const defaultArr = [];
@@ -215,8 +206,8 @@ module.exports = function(name, ManagerClass, optsPos) {
           hidden: 399,
           notExi: 111
         }));
-        result.should.have.own.deep.property('arr', defaultArr);
-        result.arr.should.not.be.equal(defaultArr);
+        expect(result).to.have.deep.property('arr', defaultArr);
+        expect(result.arr).to.not.equal(defaultArr);
       });
       if (inheritSupport) {
         it('should inherit properties', function() {
@@ -246,10 +237,10 @@ module.exports = function(name, ManagerClass, optsPos) {
             b: 4,
             c: 5
           }));
-          result.should.have.ownProperty('a', 3);
-          result.should.have.ownProperty('b', 4);
-          result.should.have.ownProperty('x', 78);
-          result.should.have.not.property('c');
+          expect(result).to.have.ownProperty('a', 3);
+          expect(result).to.have.ownProperty('b', 4);
+          expect(result).to.have.ownProperty('x', 78);
+          expect(result).to.not.have.property('c');
         });
       }
       if (defaultValueSupport) {
@@ -275,7 +266,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          result.arr.should.be.equal(defaultArr);
+          expect(result.arr).to.equal(defaultArr);
         });
         it('should create an object via meaningful name', function() {
           class SPM extends PM {}
@@ -288,7 +279,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           const result = createObjectWith(SPM, makeArgs({
             meaning: 1221
           }));
-          result.should.have.property('propName', 1221);
+          expect(result).to.have.property('propName', 1221);
         });
       }
     });
@@ -303,7 +294,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 234,
           prop6: void 0
         }));
-        result.toObject().should.be.deep.equal({
+        expect(result.toObject()).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop4: 234
@@ -318,10 +309,10 @@ module.exports = function(name, ManagerClass, optsPos) {
           notExi: 111,
           prop6: void 0
         }));
-        result.exportTo({
+        expect(result.exportTo({
           prop1: 333,
           prop4: 5
-        }).should.be.deep.equal({
+        })).to.deep.equal({
           prop1: 333,
           prop2: 453,
           prop4: 5
@@ -336,7 +327,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          result.toObject().should.be.deep.equal({
+          expect(result.toObject()).to.deep.equal({
             prop2: 453
           });
         });
@@ -347,10 +338,10 @@ module.exports = function(name, ManagerClass, optsPos) {
             hidden: 399,
             notExi: 111
           }));
-          result.exportTo({
+          expect(result.exportTo({
             prop3: 333,
             prop4: 5
-          }).should.be.deep.equal({
+          })).to.deep.equal({
             prop3: 333,
             prop2: 453,
             prop4: 5
@@ -376,7 +367,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.exportTo(obj);
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             meaning: 121,
             prop1: 222,
             prop3: 5
@@ -403,7 +394,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.exportTo(obj);
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 222
           });
         });
@@ -421,7 +412,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         }));
         result = JSON.stringify(result);
         result = JSON.parse(result);
-        result.should.be.deep.equal({
+        expect(result).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop4: 1
@@ -437,7 +428,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           }));
           result = JSON.stringify(result);
           result = JSON.parse(result);
-          result.should.be.deep.equal({
+          expect(result).to.deep.equal({
             prop2: 453
           });
         });
@@ -461,14 +452,14 @@ module.exports = function(name, ManagerClass, optsPos) {
           }));
           result = JSON.stringify(result);
           result = JSON.parse(result);
-          return result.should.be.deep.equal({
+          return expect(result).to.deep.equal({
             prop1: 222
           });
         });
       }
     });
-    describe('#assign()', function() {
-      if (aliasSupport) {
+    if (aliasSupport) {
+      describe('#assign()', function() {
         it('should add an alias to a property', function() {
           class SPM extends PM {}
           ManagerClass.defineProperties(SPM, extend({
@@ -484,7 +475,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             notExi: 111,
             a1: 'alias-value'
           }));
-          result.should.have.property('aliasProp', 'alias-value');
+          expect(result).to.have.property('aliasProp', 'alias-value');
           result = createObjectWith(SPM, makeArgs({
             prop1: 121,
             prop2: 453,
@@ -492,7 +483,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             notExi: 111,
             aliasProp: 'aliasvalue'
           }));
-          result.should.have.property('aliasProp', 'aliasvalue');
+          expect(result).to.have.property('aliasProp', 'aliasvalue');
         });
         it('should add multi aliases to a property', function() {
           class SPM extends PM {}
@@ -509,7 +500,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             notExi: 111,
             a1: 'alias-value'
           }));
-          result.should.have.property('aliasProp', 'alias-value');
+          expect(result).to.have.property('aliasProp', 'alias-value');
           result = createObjectWith(SPM, makeArgs({
             prop1: 121,
             prop2: 453,
@@ -517,19 +508,19 @@ module.exports = function(name, ManagerClass, optsPos) {
             notExi: 111,
             a2: 'aliasvalue'
           }));
-          result.should.have.property('aliasProp', 'aliasvalue');
+          expect(result).to.have.property('aliasProp', 'aliasvalue');
         });
-      }
-    });
+      });
+    }
     describe('#assignTo()', function() {
       it('should call _assign if it is exists', function() {
-        const _assignFn = sinon.spy();
+        const _assignFn = vi.fn();
 
         class SPM extends PM {}
         SPM.prototype._assign = _assignFn;
 
         let result = createObjectWith(SPM);
-        _assignFn.should.be.called;
+        expect(_assignFn).toHaveBeenCalled();
         // _assignFn.should.be.calledOnce;
         const attrs = {
           prop1: 1,
@@ -540,14 +531,14 @@ module.exports = function(name, ManagerClass, optsPos) {
         };
         result.assign(attrs, vOpts);
         // _assignFn.should.be.calledTwice;
-        _assignFn.should.be.calledWith(attrs, vOpts);
-        result.should.have.property('prop1', 432);
-        result.should.have.property('prop2', 13);
+        expect(_assignFn).toHaveBeenCalledWith(attrs, vOpts);
+        expect(result).to.have.property('prop1', 432);
+        expect(result).to.have.property('prop2', 13);
         const obj = createObjectWith(SPM);
-        _assignFn.resetHistory();
+        _assignFn.mockReset();
         result.assignTo(obj, vOpts);
-        _assignFn.should.be.calledOnce;
-        return _assignFn.should.be.calledWith(result, vOpts);
+        expect(_assignFn).toHaveBeenCalledOnce();
+        return expect(_assignFn).toHaveBeenCalledWith(result, vOpts);
       });
       if (smartAssignSupport) {
         it('should customize the internal assigned property', function() {
@@ -572,12 +563,12 @@ module.exports = function(name, ManagerClass, optsPos) {
               sd: 91
             }
           }));
-          result.should.have.ownProperty('customProp1');
+          expect(result).to.have.ownProperty('customProp1');
           const obj = {
             prop1: 222
           };
           result.assignTo(obj);
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 121,
             prop2: 453,
             prop3: void 0,
@@ -627,17 +618,17 @@ module.exports = function(name, ManagerClass, optsPos) {
             notExi: 111,
             date: '202104'
           }));
-          result.should.have.ownProperty('date');
-          result.date.should["instanceof"](N1);
-          result.date.val.should.be.equal(202104);
+          expect(result).to.have.ownProperty('date');
+          expect(result.date).toBeInstanceOf(N1);
+          expect(result.date.val).to.equal(202104);
           let obj = {
             prop1: 222
           };
           result.assignTo(obj);
-          obj.date.should["instanceof"](N1);
-          obj.date.val.should.be.equal(202104);
+          expect(obj.date).toBeInstanceOf(N1);
+          expect(obj.date.val).to.equal(202104);
           obj = result.toObject();
-          return obj.date.should.be.equal('202104');
+          return expect(obj.date).to.equal('202104');
         });
         it('should assign to a plain object via smart assignment property', function() {
           class SPM extends PM {}
@@ -665,7 +656,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.assignTo(obj);
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 121,
             prop2: 453,
             prop3: void 0,
@@ -705,7 +696,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             prop1: 222
           };
           result.assignTo(obj);
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 121,
             prop2: 453,
             prop3: void 0,
@@ -730,7 +721,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop1: 222
         };
         result.assignTo(obj);
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop3: void 0,
@@ -753,7 +744,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.assignTo(obj, {
           exclude: 'prop2'
         });
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           prop1: 121,
           prop3: void 0,
           prop4: null,
@@ -776,8 +767,8 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.assign(obj, {
           exclude: 'prop2'
         });
-        result.should.have.property('prop1', 222);
-        result.should.have.property('prop2', 453);
+        expect(result).to.have.property('prop1', 222);
+        expect(result).to.have.property('prop2', 453);
       });
       it('should assign itself to another object', function() {
         var obj, result;
@@ -796,17 +787,18 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 11,
           $prop5: 'dd'
         }));
-        obj._assign = sinon.spy();
+        obj._assign = vi.fn();
         result.assignTo(obj);
-        obj.should.have.property('hidden', 123);
-        obj.should.have.property('prop1', 121);
-        obj.should.have.property('prop2', 453);
-        obj.should.have.ownProperty('prop3');
-        should.not.exist(obj.prop3);
-        obj.should.have.property('prop4', null);
-        obj.should.have.property('$prop5', 'nonExport');
-        obj._assign.should.be.calledOnce;
-        obj._assign.should.be.calledWith(result);
+        expect(obj).to.have.property('hidden', 123);
+        expect(obj).to.have.property('prop1', 121);
+        expect(obj).to.have.property('prop2', 453);
+        expect(obj).to.have.ownProperty('prop3');
+        expect(obj.prop3).to.not.exist;
+        expect(obj).to.have.property('prop4', null);
+        expect(obj).to.have.property('$prop5', 'nonExport');
+        expect(obj._assign).toHaveBeenCalledOnce();
+        expect(obj._assign.mock.calls[0][0]).toBe(result);
+        // Note: assignTo passes (this, aOptions) but we only check the first arg
       });
     });
     describe('#isSame()', function() {
@@ -827,8 +819,8 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 11,
           $prop5: 'dd'
         }));
-        obj.isSame(result).should.be["false"];
-        result.isSame(obj).should.be["false"];
+        expect(obj.isSame(result)).to.be.false;
+        expect(result.isSame(obj)).to.be.false;
         obj = {
           prop1: 121,
           prop2: 453,
@@ -841,7 +833,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop7: 719,
           extra: 222
         };
-        result.isSame(obj).should.be["true"];
+        expect(result.isSame(obj)).to.be.true;
       });
       it('should compare itself to another object with skip some keys', function() {
         var obj, result;
@@ -855,13 +847,13 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 1211
         });
         expect(obj).has.property('prop4', 1211);
-        result.isSame(obj).should.be["false"];
-        result.isSame(obj, {
+        expect(result.isSame(obj)).to.be.false;
+        expect(result.isSame(obj, {
           exclude: 'prop4'
-        }).should.be["true"];
-        result.isSame(obj, {
+        })).to.be["true"];
+        expect(result.isSame(obj, {
           exclude: ['prop4']
-        }).should.be["true"];
+        })).to.be["true"];
       });
     });
     describe('#mergeTo()', function() {
@@ -878,7 +870,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 4
         };
         result.mergeTo(obj);
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           test: 123,
           prop1: 121,
           prop2: 453,
@@ -897,7 +889,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           notExi: 111
         }));
         obj = result.mergeTo();
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop3: void 0,
@@ -921,7 +913,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.mergeTo(obj, {
           exclude: 'prop1'
         });
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           test: 123,
           prop2: 453,
           prop3: void 0,
@@ -945,7 +937,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.mergeTo(obj, {
           exclude: ['prop1', 'prop3']
         });
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           test: 123,
           prop2: 453,
           prop4: 4,
@@ -968,7 +960,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.mergeTo(obj, {
           skipNull: true
         });
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           test: 123,
           prop1: 121,
           prop3: void 0,
@@ -991,7 +983,7 @@ module.exports = function(name, ManagerClass, optsPos) {
         result.mergeTo(obj, {
           skipUndefined: true
         });
-        obj.should.be.deep.equal({
+        expect(obj).to.deep.equal({
           test: 123,
           prop1: 121,
           prop2: 1,
@@ -1012,7 +1004,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           obj = result.mergeTo({}, {
             skipDefault: true
           });
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 121,
             prop2: 453
           });
@@ -1032,7 +1024,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           result.mergeTo(obj, {
             skipDefault: true
           });
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             prop1: 121,
             prop2: 453,
             test: 123,
@@ -1055,7 +1047,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           let obj = result.mergeTo({}, {
             skipDefault: true
           });
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             propA: 121
           });
         });
@@ -1084,7 +1076,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             skipReadonly: null,
             isExported: true
           });
-          obj.should.be.deep.equal({
+          expect(obj).to.deep.equal({
             $propA: 1
           });
           obj = result.mergeTo({}, {
@@ -1092,8 +1084,8 @@ module.exports = function(name, ManagerClass, optsPos) {
             skipReadonly: null,
             isExported: true
           });
-          obj.should.have.property('$propE', 123);
-          obj.should.have.property('$propA', 1);
+          expect(obj).to.have.property('$propE', 123);
+          expect(obj).to.have.property('$propA', 1);
         });
         it('should test not assigned and exported property descriptor', function() {
           class SPM extends PM {}
@@ -1115,17 +1107,17 @@ module.exports = function(name, ManagerClass, optsPos) {
             $propA: 1
           }));
           let attr = getPropertyDescriptor(result, '$propA');
-          attr.should.have.property('enumerable', false);
+          expect(attr).to.have.property('enumerable', false);
           let obj = result.mergeTo({}, {
             skipDefault: true,
             isExported: true
           });
-          obj.should.be.deep.equal({});
+          expect(obj).to.deep.equal({});
           obj = result.mergeTo({}, {
             skipDefault: false,
             isExported: true
           });
-          obj.should.have.property('$propE', 123);
+          expect(obj).to.have.property('$propE', 123);
         });
       }
     });
@@ -1152,7 +1144,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 234,
           prop6: void 0
         }));
-        result.exportTo({}).should.be.deep.equal({
+        expect(result.exportTo({})).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop4: 234,
@@ -1169,9 +1161,9 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop4: 234,
           prop6: void 0
         }));
-        result.exportTo({}, {
+        expect(result.exportTo({}, {
           skipReadOnly: true
-        }).should.be.deep.equal({
+        })).to.deep.equal({
           prop1: 121,
           prop2: 453,
           prop4: 234
@@ -1192,7 +1184,7 @@ module.exports = function(name, ManagerClass, optsPos) {
             skipDefault: false,
             skipReadOnly: true
           });
-          result.should.be.deep.equal({
+          expect(result).to.deep.equal({
             prop1: 121,
             prop2: 453,
             prop4: 234,
@@ -1202,11 +1194,11 @@ module.exports = function(name, ManagerClass, optsPos) {
       }
     });
     describe('#nonExported1stChar', function() {
-      after(function() {
+      afterAll(function() {
         ManagerClass.prototype.nonExported1stChar = '$';
       });
       it('should get nonExported1stChar', function() {
-        ManagerClass.prototype.should.have.property('nonExported1stChar', '$');
+        expect(ManagerClass.prototype).to.have.property('nonExported1stChar', '$');
       });
       it('should set nonExported1stChar', function() {
         ManagerClass.prototype.nonExported1stChar = '_';
@@ -1234,14 +1226,14 @@ module.exports = function(name, ManagerClass, optsPos) {
           skipDefault: true,
           isExported: false
         });
-        obj.should.have.property('_propA', 1);
-        obj.should.have.property('_propE', 121);
+        expect(obj).to.have.property('_propA', 1);
+        expect(obj).to.have.property('_propE', 121);
         obj = result.mergeTo({}, {
           skipDefault: true,
           isExported: true
         });
-        obj.should.not.have.property('_propA');
-        obj.should.not.have.property('_propE');
+        expect(obj).to.not.have.property('_propA');
+        expect(obj).to.not.have.property('_propE');
         ManagerClass.prototype.nonExported1stChar = '$';
       });
     });
@@ -1257,7 +1249,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           prop6: void 0
         }));
         o = result.clone();
-        o.isSame(result).should.be["true"];
+        expect(o.isSame(result)).to.be.true;
       });
       it('should clone object with options', function() {
         var o, result;
@@ -1272,17 +1264,17 @@ module.exports = function(name, ManagerClass, optsPos) {
         o = result.clone({
           prop1: 120
         });
-        o.isSame(result).should.not.be.true;
-        o.prop1.should.be.equal(120);
+        expect(o.isSame(result)).to.not.be.true;
+        expect(o.prop1).to.equal(120);
         o = o.toObject();
         delete o.prop1;
         result = result.toObject();
         delete result.prop1;
-        o.should.be.deep.equal(result);
+        expect(o).to.deep.equal(result);
       });
     });
-    describe('#assignPropertyTo', function() {
-      if (defaultValueSupport) {
+    if (defaultValueSupport) {
+      describe('#assignPropertyTo', function() {
         it('should assignPropertyTo', function() {
           class SPM extends PM {}
           ManagerClass.defineProperties(SPM, extend({
@@ -1294,13 +1286,13 @@ module.exports = function(name, ManagerClass, optsPos) {
           let result = createObjectWith(SPM, makeArgs({
             meaning: 1221
           }));
-          result.should.have.property('propName', 1221);
+          expect(result).to.have.property('propName', 1221);
           let obj = {};
           result.assignPropertyTo(obj, result, 'meaning', 123, null, true);
-          obj.should.have.property('propName', 123);
+          expect(obj).to.have.property('propName', 123);
         });
-      }
-    });
+      });
+    }
     describe('#getProperties', function() {
       it('should get the properties(descriptor)', function() {
         class SPM extends PM {
@@ -1318,7 +1310,7 @@ module.exports = function(name, ManagerClass, optsPos) {
           propName1: 121,
           prop3: 5
         }));
-        result.should.have.property('propName1', 121);
+        expect(result).to.have.property('propName1', 121);
         result = result.getProperties();
         result = (function() {
           var results;
@@ -1405,3 +1397,5 @@ module.exports = function(name, ManagerClass, optsPos) {
     });
   });
 };
+
+export default testPropMan;

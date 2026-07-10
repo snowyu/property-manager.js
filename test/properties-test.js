@@ -1,17 +1,6 @@
-import sinonChai from "sinon-chai";
-import sinon from "sinon";
-import chai from "chai";
-var assert = chai.assert;
-var expect = chai.expect;
-var should = chai.should();
-chai.use(sinonChai);
-
-import inherits from 'inherits-ex/lib/inherits';
-import createObjectWith from 'inherits-ex/lib/createObjectWith';
-import setPrototypeOf from 'inherits-ex/lib/setPrototypeOf';
-import extend from 'util-ex/lib/_extend';
-import defineProperty from 'util-ex/lib/defineProperty';
-import Properties from '../src/properties';
+import {inherits, createObjectWith, setPrototypeOf} from 'inherits-ex';
+import {_extend as extend, defineProperty} from 'util-ex';
+import Properties from '../src/properties/index.js';
 
 let fnType = null;
 
@@ -22,13 +11,13 @@ const FakeType = (function() {
     return ctor.apply(this, arguments);
   }
 
-  ctor = fnType = sinon.spy(function(type) {
+  ctor = fnType = vi.fn(function(type) {
     if (!(this instanceof FakeType)) {
       return createObjectWith(FakeType, arguments);
     }
   });
 
-  FakeType.prototype.isValid = sinon.spy(function() {
+  FakeType.prototype.isValid = vi.fn(function() {
     return this.valid;
   });
 
@@ -40,11 +29,11 @@ const FakeType = (function() {
 
 describe('Properties', function() {
   var classAttrs, classAttrsDetail;
-  before(function() {
+  beforeAll(function() {
     return Properties.prototype.Type = FakeType;
   });
-  after(function() {
-    fnType.resetHistory();
+  afterAll(function() {
+    fnType.mockReset();
     return delete Properties.prototype.Type;
   });
   classAttrs = {
@@ -131,7 +120,7 @@ describe('Properties', function() {
     var obj, result;
     result = Properties(classAttrs, '_');
     obj = {};
-    result.mergeTo(result, obj).should.be.deep.equal(classAttrsDetail);
+    expect(result.mergeTo(result, obj)).to.deep.equal(classAttrsDetail);
   });
   describe('#assignTo', function() {
     it('should assign properties to another', function() {
@@ -140,11 +129,11 @@ describe('Properties', function() {
       c = extend({}, classAttrsDetail);
       delete c.prop7;
       delete c.hidden;
-      result.assignTo({}, result).should.be.deep.equal(c);
+      expect(result.assignTo({}, result)).to.deep.equal(c);
       delete c.prop1;
-      result.assignTo({}, result, {
+      expect(result.assignTo({}, result, {
         exclude: 'prop1'
-      }).should.be.deep.equal(c);
+      })).to.deep.equal(c);
     });
     it('should assign exported properties to another', function() {
       var c, result;
@@ -154,10 +143,10 @@ describe('Properties', function() {
       delete c.hidden;
       delete c.prop1;
       delete c.prop7;
-      result.assignTo({}, result, {
+      expect(result.assignTo({}, result, {
         isExported: true,
         exclude: 'prop1'
-      }).should.be.deep.equal(c);
+      })).to.deep.equal(c);
     });
     it('should assign properties to another and skip exists', function() {
       var c, result;
@@ -166,11 +155,11 @@ describe('Properties', function() {
       delete c.prop7;
       delete c.hidden;
       c.prop2 = 1;
-      result.assignTo({
+      expect(result.assignTo({
         prop2: 1
       }, result, {
         skipExists: true
-      }).should.be.deep.equal(c);
+      })).to.deep.equal(c);
     });
   });
   it('should validate value of property via type', function() {
@@ -184,23 +173,23 @@ describe('Properties', function() {
       name: 'sff',
       message: 'hahha'
     });
-    should["throw"](result.assignTo.bind(result, {}, {
+    expect(() => result.assignTo({}, {
       test: 123
-    }));
+    })).to.throw();
     FakeType.prototype.valid = true;
-    result.assignTo({}, {
+    expect(result.assignTo({}, {
       test: 123
-    }).should.be.deep.equal({
+    })).to.deep.equal({
       test: 123
     });
   });
   it('should check isDefaultObject', function() {
     var obj, result;
     result = Properties(classAttrs, '_');
-    result.isDefaultObject({}).should.be["true"];
-    result.isDefaultObject({
+    expect(result.isDefaultObject({})).to.be.true;
+    expect(result.isDefaultObject({
       prop1: 431
-    }).should.be["false"];
+    })).to.be.false;
     obj = {
       p1: 432,
       prop2: "233",
@@ -208,9 +197,9 @@ describe('Properties', function() {
       _prop5: 'nonExport',
       prop6: 'defaultValue'
     };
-    result.isDefaultObject(obj).should.be["true"];
+    expect(result.isDefaultObject(obj)).to.be.true;
     obj.p1 = 431;
-    result.isDefaultObject(obj).should.be["false"];
+    expect(result.isDefaultObject(obj)).to.be.false;
   });
   it('should throw a hint error when clone object failed', function() {
     var DontClone, props, result;
@@ -334,7 +323,7 @@ describe('Properties', function() {
     });
     it('should call the setter when initilizing the property value', function() {
       var props, result, vAssignFn;
-      vAssignFn = sinon.spy(function(value, dest, src, name) {
+      vAssignFn = vi.fn(function(value, dest, src, name) {
         return value;
       });
       props = Properties({
@@ -347,13 +336,13 @@ describe('Properties', function() {
       result = {};
       props.initializeTo(result);
       expect(result.num).to.be.equal(1);
-      expect(vAssignFn).to.be.calledOnce;
+      expect(vAssignFn).toHaveBeenCalledOnce();
       result.num = 2;
-      expect(vAssignFn).to.be.calledTwice;
+      expect(vAssignFn).toHaveBeenCalledTimes(2);
     });
     it('should not clone object', function() {
       var props, result, vAssignFn;
-      vAssignFn = sinon.spy(function(value, dest, src, name) {
+      vAssignFn = vi.fn(function(value, dest, src, name) {
         return value;
       });
       props = Properties({
@@ -367,7 +356,7 @@ describe('Properties', function() {
       props.initializeTo(result);
       expect(result.o).to.be.equal(console);
       result.o = console;
-      expect(vAssignFn).to.be.calledTwice;
+      expect(vAssignFn).toHaveBeenCalledTimes(2);
     });
   });
   describe('#getValue()', function() {
@@ -437,7 +426,7 @@ describe('Properties', function() {
         }
       });
       obj = {};
-      result.mergeTo(result, obj).should.be.deep.equal({
+      expect(result.mergeTo(result, obj)).to.deep.equal({
         b: {
           value: 2,
           enumerable: true,

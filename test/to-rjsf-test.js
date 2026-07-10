@@ -1,5 +1,4 @@
 import { AdvancePropertyManager, defineProperties, toRjsf } from '../src/index.js';
-import { assert } from 'chai';
 
 // Helper to sort object keys for consistent deepEqual comparison
 const sortObjectKeys = (obj) => {
@@ -31,9 +30,9 @@ describe('toRjsf', () => {
 
     const rjsfOutput = toRjsf(MyModel);
 
-    assert.isObject(rjsfOutput);
-    assert.property(rjsfOutput, 'schema');
-    assert.property(rjsfOutput, 'uiSchema');
+    expect(rjsfOutput).to.be.an('object');
+    expect(rjsfOutput).to.have.property('schema');
+    expect(rjsfOutput).to.have.property('uiSchema');
   });
 
   it('should correctly combine schema and uiSchema for a simple model', () => {
@@ -65,8 +64,8 @@ describe('toRjsf', () => {
       age: { "ui:readonly": true },
     };
 
-    assert.deepEqual(sortObjectKeys(schema), sortObjectKeys(expectedSchema));
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(schema)).to.deep.equal(sortObjectKeys(expectedSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should correctly combine schema and uiSchema for nested models', () => {
@@ -116,8 +115,8 @@ describe('toRjsf', () => {
       },
     };
 
-    assert.deepEqual(sortObjectKeys(schema), sortObjectKeys(expectedSchema));
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(schema)).to.deep.equal(sortObjectKeys(expectedSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 
   it('should correctly combine schema and uiSchema for arrays of models', () => {
@@ -174,7 +173,7 @@ describe('toRjsf', () => {
       },
     };
 
-    assert.deepEqual(sortObjectKeys(schema), sortObjectKeys(expectedSchema));
-    assert.deepEqual(sortObjectKeys(uiSchema), sortObjectKeys(expectedUiSchema));
+    expect(sortObjectKeys(schema)).to.deep.equal(sortObjectKeys(expectedSchema));
+    expect(sortObjectKeys(uiSchema)).to.deep.equal(sortObjectKeys(expectedUiSchema));
   });
 });
