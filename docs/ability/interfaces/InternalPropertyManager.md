@@ -6,7 +6,7 @@
 
 # Interface: InternalPropertyManager
 
-Defined in: [src/ability.d.ts:71](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/ability.d.ts#L71)
+Defined in: [src/ability.d.ts:71](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/ability.d.ts#L71)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/ability.d.ts:71](https://github.com/snowyu/property-manager.js/
 
 > **new InternalPropertyManager**(`options`): [`AbstractPropertyManager`](../../abstract/classes/AbstractPropertyManager.md)
 
-Defined in: [src/ability.d.ts:72](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/ability.d.ts#L72)
+Defined in: [src/ability.d.ts:72](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/ability.d.ts#L72)
 
 #### Parameters
 
@@ -32,4 +32,4 @@ Defined in: [src/ability.d.ts:72](https://github.com/snowyu/property-manager.js/
 
 > **prototype**: [`AbstractPropertyManager`](../../abstract/classes/AbstractPropertyManager.md)
 
-Defined in: [src/ability.d.ts:73](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/ability.d.ts#L73)
+Defined in: [src/ability.d.ts:73](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/ability.d.ts#L73)

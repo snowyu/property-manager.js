@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.5](https://github.com/snowyu/property-manager.js/compare/v3.0.4...v3.0.5) (2026-07-04)
+
+
+### Bug Fixes
+
+* generate .cjs files for CJS require() compatibility under type:module ([269cae9](https://github.com/snowyu/property-manager.js/commit/269cae95d38053e7f263a5fde18d1e444509f6b8))
+
 ## [3.0.4](https://github.com/snowyu/property-manager.js/compare/v3.0.3...v3.0.4) (2026-04-04)
 
 

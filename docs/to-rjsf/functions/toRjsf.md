@@ -8,7 +8,7 @@
 
 > **toRjsf**(`pm`): `object`
 
-Defined in: [src/to-rjsf.js:9](https://github.com/snowyu/property-manager.js/blob/269cae95d38053e7f263a5fde18d1e444509f6b8/src/to-rjsf.js#L9)
+Defined in: [src/to-rjsf.js:9](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/to-rjsf.js#L9)
 
 Converts a PropertyManager instance's schema to RJSF compatible format.
 
