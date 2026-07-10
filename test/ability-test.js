@@ -4,6 +4,7 @@ import PropertyManager from '../src/ability.js';
 import Simple from '../src/simple.js';
 import Normal from '../src/normal.js';
 import Advance from '../src/advance.js';
+import Abstract from '../src/abstract.js';
 import testPropMan from './property-manager.js';
 
 function checkProperty(aClass) {
@@ -144,6 +145,47 @@ describe('PropertyManagerAbility', function() {
     checkProperty(A);
     checkBasicIsSame(A, Normal);
     expect(A.prototype).to.have.property('nonExported1stChar', '_');
+  });
+  it('should choose abstract manager to a class', function() {
+    function A() {
+      this.initialize.apply(this, arguments);
+    }
+
+    PropertyManager(A, 'abstract');
+
+    checkBasicProperty(A);
+    checkBasicIsSame(A, Abstract);
+  });
+  it('should use $assign with this.super when custom assign exists', function() {
+    function A() {
+      this.initialize.apply(this, arguments);
+    }
+    A.prototype.assign = function(src) {
+      this.customAssigned = true;
+      return this;
+    };
+
+    PropertyManager(A, 'simple');
+
+    const instance = new A({});
+    expect(instance).to.have.property('customAssigned', true);
+  });
+  it('should use $assign with this.super with Abstract', function() {
+    function A() {
+      this.initialize.apply(this, arguments);
+    }
+    A.prototype.assign = function(src) {
+      this.customAssigned = true;
+      return this;
+    };
+
+    PropertyManager(A, 'abstract');
+
+    checkBasicProperty(A);
+    checkBasicIsSame(A, Abstract);
+
+    const instance = new A({});
+    expect(instance).to.have.property('customAssigned', true);
   });
 });
 

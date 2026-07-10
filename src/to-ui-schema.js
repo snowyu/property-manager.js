@@ -1,4 +1,4 @@
-import { isFunction, isObject } from 'util-ex';
+import { isFunction } from 'util-ex';
 import { normalizeAttributes } from './to-json-schema.js';
 
 /**
@@ -86,8 +86,3 @@ export function toUISchema(pm) {
   return uiSchema;
 }
 
-function getUISchemaForType(itemType) {
-  if (itemType) {
-    let attrs = itemType.$attributes || itemType.getProperties
-  }
-}

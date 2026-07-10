@@ -273,4 +273,133 @@ describe('toJsonSchema', () => {
 
     expect(schema).to.deep.equal(expectedSchema);
   });
+
+  it('should handle array type with first item being an object that has $attributes', () => {
+    class NestedItem extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(NestedItem, {
+      id: { type: Number },
+      name: { type: String },
+    });
+
+    class Container extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(Container, {
+      items: { type: [NestedItem], value: [] },
+    });
+
+    const schema = toJsonSchema(Container);
+
+    expect(schema.properties.items).to.have.property('items');
+    expect(schema.properties.items.items.properties).to.have.property('id');
+    expect(schema.properties.items.items.properties).to.have.property('name');
+  });
+
+  it('should handle array type with non-$attributes item type', () => {
+    class Container extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(Container, {
+      // array of plain strings
+      tags: { type: [String] },
+      // array of numbers
+      scores: { type: [Number] },
+      // array of booleans
+      flags: { type: [Boolean] },
+      // array with non-standard type
+      customList: { type: [Array] },
+    });
+
+    const schema = toJsonSchema(Container);
+
+    expect(schema.properties.tags.type).to.equal('array');
+    expect(schema.properties.tags.items).to.deep.equal({ type: 'string' });
+    expect(schema.properties.scores.items).to.deep.equal({ type: 'number' });
+    expect(schema.properties.flags.items).to.deep.equal({ type: 'boolean' });
+  });
+
+  it('should handle normalizePropType with empty arrays and various item types', () => {
+    // Test empty array - should infer as [String]
+    class TestModel extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(TestModel, {
+      emptyArr: { value: [] },
+      objArr: { value: [{ a: 1 }] },
+      boolArr: { value: [true, false] },
+      numArr: { value: [1, 2, 3] },
+    });
+
+    const schema = toJsonSchema(TestModel);
+
+    expect(schema.properties.emptyArr.items).to.deep.equal({ type: 'string' });
+    expect(schema.properties.objArr.type).to.equal('array');
+    expect(schema.properties.boolArr.items).to.deep.equal({ type: 'boolean' });
+    expect(schema.properties.numArr.items).to.deep.equal({ type: 'number' });
+  });
+
+  it('should handle properties with $type notation for type inference', () => {
+    // This tests the $type unwrapping in normalizePropType
+    // When a type has a $type property (e.g., from ArrayPropertyManager), it gets unwrapped
+    class TestModel extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(TestModel, {
+      typedField: {
+        type: { $type: String },
+      },
+    });
+
+    const schema = toJsonSchema(TestModel);
+    // $type is extracted: _type = _type.$type = String, then getBasicType(String) = 'string'
+    expect(schema.properties.typedField.type).to.equal('string');
+  });
+
+  it('should handle nested Object type property with toSchemaProp', () => {
+    class TestModel extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    defineProperties(TestModel, {
+      data: { type: Object }, // Object type, prototype has no $attributes
+    });
+
+    const schema = toJsonSchema(TestModel);
+    expect(schema.properties.data.type).to.equal('object');
+  });
+
+  it('should handle property with type that is not basic and has no prototype.$attributes', () => {
+    class TestModel extends AdvancePropertyManager {
+      constructor(options) {
+        super(options);
+      }
+    }
+    // Custom type that is not a basic type but has no $attributes on prototype
+    class CustomType {}
+    defineProperties(TestModel, {
+      custom: { type: CustomType },
+    });
+
+    const schema = toJsonSchema(TestModel);
+    // getBasicType(CustomType) returns undefined
+    // No $attributes on prototype, so no typeString assigned to schemaProperty.type
+    // But the spread of prop includes the original type: CustomType which is in there
+    // The check is that schema doesn't have a recognized string type
+    expect(schema.properties.custom).to.not.have.property('default');
+    // The type exists but it's still CustomType (unrecognized)
+    expect(schema.properties.custom.type).to.equal(CustomType);
+  });
 });
