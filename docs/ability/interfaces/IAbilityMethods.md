@@ -6,7 +6,7 @@
 
 # Interface: IAbilityMethods
 
-Defined in: [src/ability.d.ts:3](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/ability.d.ts#L3)
+Defined in: [src/ability.d.ts:3](https://github.com/snowyu/property-manager.js/blob/1471bd5fc5061dd8d1eef6c1c572fda544919585/src/ability.d.ts#L3)
 
 ## Indexable
 

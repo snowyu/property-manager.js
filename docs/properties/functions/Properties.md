@@ -8,7 +8,7 @@
 
 > **Properties**(`aOptions`, `nonExported1stChar`): `any`
 
-Defined in: [src/properties/index.js:18](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/properties/index.js#L18)
+Defined in: [src/properties/index.js:18](https://github.com/snowyu/property-manager.js/blob/1471bd5fc5061dd8d1eef6c1c572fda544919585/src/properties/index.js#L18)
 
 Collection the advanced attribute descriptors
 

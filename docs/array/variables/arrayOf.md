@@ -8,7 +8,7 @@
 
 > `const` **arrayOf**: (`type`) => (`value`) => [`ArrayPropertyManager`](../classes/ArrayPropertyManager-1.md) = `ArrayPropertyManager.arrayOf`
 
-Defined in: [src/array.js:75](https://github.com/snowyu/property-manager.js/blob/a4165aa460f3661cfed38e259993ae481926bfa0/src/array.js#L75)
+Defined in: [src/array.js:75](https://github.com/snowyu/property-manager.js/blob/1471bd5fc5061dd8d1eef6c1c572fda544919585/src/array.js#L75)
 
 ## Parameters
 

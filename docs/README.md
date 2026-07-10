@@ -6,18 +6,15 @@
 
 [![Join the chat at https://gitter.im/snowyu/property-manager.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snowyu/property-manager.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build Status][trvais]](http://travis-ci.org/snowyu/property-manager.js)
-[![Test Coverage][codeClimateTest]](https://codeclimate.com/github/snowyu/property-manager.js/coverage)
-[![Code Climate][codeClimate]](https://codeclimate.com/github/snowyu/property-manager.js)
+[![npm][npm]](https://npmjs.org/package/property-manager)
 [![downloads][downloads]](https://npmjs.org/package/property-manager)
 [![license][license]](https://npmjs.org/package/property-manager)
+[![codecov][codecov]](https://codecov.io/gh/snowyu/property-manager.js)
 
 [npm]:https://img.shields.io/npm/v/property-manager.svg
-[trvais]:https://img.shields.io/travis/snowyu/property-manager.js/master.svg
 [downloads]:https://img.shields.io/npm/dm/property-manager.svg
 [license]:https://img.shields.io/npm/l/property-manager.svg
-[codeClimateTest]:https://codeclimate.com/github/snowyu/property-manager.js/badges/coverage.svg
-[codeClimate]:https://codeclimate.com/github/snowyu/property-manager.js/badges/gpa.svg
+[codecov]:https://img.shields.io/codecov/c/gh/snowyu/property-manager.js
 
 make it easier to manage the properties/attributes of your class.
 
@@ -759,6 +756,34 @@ Output:
 **Return Value**
 
 * `{schema: object, uiSchema: object}` - An object containing both the `schema` and `uiSchema`.
+
+## Development
+
+### Build
+
+The project uses [tsup](https://tsup.egoist.dev/) to compile the source code. It produces both ESM (`.js`) and CJS (`.cjs`) output in the `lib/` directory, along with TypeScript declaration files (`.d.ts`).
+
+```bash
+npm run build
+```
+
+### Test
+
+Tests are run with [vitest](https://vitest.dev/). All test files are located in the `test/` directory.
+
+```bash
+# Run tests once
+npm test
+
+# Watch mode
+npm run test:watch
+```
+
+### Lint
+
+```bash
+npm run lint
+```
 
 ## Changes
 
